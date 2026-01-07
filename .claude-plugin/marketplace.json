@@ -4,29 +4,38 @@
     "name": "narumi"
   },
   "metadata": {
-    "description": "Example marketplace for Claude Code plugin documentation",
+    "description": "Narumi's plugin marketplace for development tools",
     "version": "1.0.0"
   },
-  "plugins": [],
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
+  "plugins": [
+    {
+      "name": "python-code-quality",
+      "source": "./plugins/python-code-quality",
+      "description": "Python code quality hooks: auto-format with ruff, lint with ruff check, and type check with ty",
+      "version": "1.0.0",
+      "keywords": ["python", "ruff", "type-checking", "formatting", "linting"],
+      "hooks": {
+        "PreToolUse": [
           {
-            "type": "command",
-            "command": "uv run ruff format"
-          },
-          {
-            "type": "command",
-            "command": "uv run ruff check --fix"
-          },
-          {
-            "type": "command",
-            "command": "uv run ty check"
+            "matcher": "Edit|Write",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "uv run ruff format"
+              },
+              {
+                "type": "command",
+                "command": "uv run ruff check --fix"
+              },
+              {
+                "type": "command",
+                "command": "uv run ty check"
+              }
+            ]
           }
         ]
-      }
-    ]
-  }
+      },
+      "strict": false
+    }
+  ]
 }
