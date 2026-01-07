@@ -4,22 +4,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is a documentation repository for creating and distributing Claude Code plugin marketplaces. The main content is GUIDE.md, which provides comprehensive instructions for:
+This repository serves two purposes:
 
-- Creating plugin marketplace structures
-- Defining marketplace.json manifests
-- Hosting and distributing marketplaces
-- Configuring plugin sources (local paths, GitHub, Git URLs)
-- Testing and validation
+1. **Example Marketplace**: A working Claude Code plugin marketplace (`narumi-marketplace`) that demonstrates best practices
+2. **Documentation**: GUIDE.md provides comprehensive instructions for creating and distributing Claude Code plugin marketplaces
 
 ## Repository Structure
 
 ```
 .
-├── GUIDE.md          # Main documentation file (complete marketplace guide)
-├── README.md         # Minimal project readme
-├── LICENSE           # License file
-└── .gitignore        # Git ignore patterns
+├── .claude-plugin/
+│   └── marketplace.json       # Marketplace catalog (defines available plugins)
+├── skills/
+│   └── python-peewee/         # Skill plugin source directories
+│       └── SKILLS.md          # Skill content in markdown format
+├── GUIDE.md                   # Complete marketplace creation guide
+├── README.md                  # Installation and usage instructions
+├── CLAUDE.md                  # This file
+└── LICENSE
 ```
 
 ## Key Concepts
@@ -79,7 +81,44 @@ The `strict` field in plugin entries controls manifest requirements:
 
 This is key for simple plugin definitions vs. complex multi-component plugins.
 
-## Validating Documentation Changes
+## This Marketplace's Plugins
+
+This repository contains two example plugins:
+
+### 1. python-code-quality (hooks-based)
+- **Type**: Hooks plugin (no skill content, only PreToolUse hooks)
+- **Source**: `./plugins/python-code-quality` (currently not created - defined inline with `strict: false`)
+- **Purpose**: Automatically runs code quality tools before Edit/Write operations
+- **Hooks**:
+  - `uv run ruff format` - Code formatting
+  - `uv run ruff check --fix` - Linting with auto-fixes
+  - `uv run ty check` - Type checking
+- **Note**: Uses `strict: false` so all configuration is in marketplace.json
+
+### 2. python-peewee (skill-based)
+- **Type**: Skill plugin
+- **Source**: `./skills/python-peewee/SKILLS.md`
+- **Purpose**: Provides patterns for using Peewee ORM with DatabaseProxy
+- **Content**: Markdown-based skill with setup patterns, connection/transaction examples, and testing templates
+- **Note**: Uses `strict: false` so plugin.json is not required
+
+## Adding New Plugins
+
+When adding plugins to this marketplace:
+
+1. **For skills**: Create a directory in `skills/<plugin-name>/` with `SKILLS.md`
+2. **For hooks-only**: Define inline in marketplace.json with `strict: false`
+3. **Update marketplace.json**: Add plugin entry with name, source, description, version, keywords
+4. **Update README.md**: Document the new plugin in the "Available Plugins" section
+5. **Test locally**: Use `/plugin marketplace add .` then `/plugin install <name>@narumi-marketplace`
+
+## Validating Changes
+
+After editing marketplace.json or adding plugins:
+
+```shell
+/plugin validate .
+```
 
 After editing GUIDE.md, verify:
 - All JSON examples are syntactically valid
