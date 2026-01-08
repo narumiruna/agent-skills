@@ -651,84 +651,37 @@ See `assets/examples/full-presentation/` for complete working deck with diagrams
 
 ## Priority 2: Organization Improvements
 
-### 2.1 Refactor color-palettes.md ⚠️ **MEDIUM**
+### 2.1 Keep color-palettes.md Unified ✅ **DECISION**
 
-**Issue**: `color-palettes.md` (543 lines) combines two distinct use cases:
-- Part 1: Complete palette systems (7-role, for full slide design)
-- Part 2: SVG quick reference (simple color schemes for diagrams)
+**Initial Consideration**: Split `color-palettes.md` (543 lines) into two files: `complete-palettes.md` (7-role systems) and `svg-color-schemes.md` (quick schemes).
 
-**Problem**: Loading Part 1 unnecessarily includes Part 2 in context (~250 lines wasted).
+**Decision**: **Keep unified** in single `references/color-palettes.md` file.
 
-**Solution**: Split into two files by use case
+**Rationale**:
+1. **Color coherence is critical**: When designing presentations, colors for slides and SVGs must be considered together to maintain visual consistency
+2. **Core principle**: "Define one color palette and reuse it in slides and SVGs" - splitting the file works against this
+3. **Practical workflow**: Users typically need to reference both sections when creating full presentations
+4. **Cognitive load**: Keeping colors together reduces mental overhead of switching between files
 
-#### New Structure
+**Benefits of keeping unified**:
+- Single source of truth for all color decisions
+- Easier to ensure consistency across slides and diagrams
+- Users can quickly compare complete palettes with SVG schemes
+- Aligns with skill's core principle of unified design language
 
-```
-references/
-├── color-design/
-│   ├── workflow.md
-│   ├── strategies.md
-│   ├── complete-palettes.md      # Move Part 1 here (lines 1-218)
-│   └── output-template.md
-└── svg-illustration/
-    ├── core-rules.md
-    ├── svg-color-schemes.md        # Move Part 2 here (lines 219-543)
-    ├── pattern-examples.md
-    ├── embedding.md
-    └── troubleshooting.md
-```
-
-#### Update SKILL.md References
-
-**Before**:
-```markdown
-### Module 1: Color design
-Read in order:
-- `references/color-design/workflow.md`
-- `references/color-design/strategies.md`
-- `references/color-palettes.md` (use as a base or cross-check)
-- `references/color-design/output-template.md`
-
-### Module 3: SVG illustration
-Read in order:
-- `references/svg-illustration/core-rules.md`
-- `references/svg-illustration/pattern-examples.md`
-- `references/svg-illustration/embedding.md`
-- `references/svg-illustration/troubleshooting.md`
-```
-
-**After**:
-```markdown
-### Module 1: Color design
-Read in order:
-- `references/color-design/workflow.md`
-- `references/color-design/strategies.md`
-- `references/color-design/complete-palettes.md` (10 ready-to-use systems)
-- `references/color-design/output-template.md`
-
-### Module 3: SVG illustration
-Read in order:
-- `references/svg-illustration/core-rules.md`
-- `references/svg-illustration/svg-color-schemes.md` (quick color reference)
-- `references/svg-illustration/pattern-examples.md`
-- `references/svg-illustration/embedding.md`
-- `references/svg-illustration/troubleshooting.md`
-```
-
-**Benefits**:
-- Saves ~250 lines of context per module invocation
-- Clearer separation: complete systems vs quick schemes
-- Users get exactly what they need for their task
+**Token efficiency trade-off**: Yes, loading both sections when only one is needed costs ~250 lines of context. However, the benefits of maintaining color coherence outweigh this cost. In practice, most presentation tasks require considering both slides and diagrams together.
 
 ---
 
-### 2.2 Move Output Examples from SKILL.md ⚠️ **MEDIUM**
+### 2.2 Move Output Examples from SKILL.md ✅ **COMPLETED**
 
-**Issue**: Lines 113-161 of SKILL.md contain output format examples (48 lines).
+**Issue**: Lines 136-183 of SKILL.md contained output format examples (~48 lines).
 
-**Problem**: These are reference material, not core workflow. They inflate SKILL.md size.
+**Problem**: These are reference material, not core workflow guidance. They made SKILL.md less focused.
 
-**Solution**: Move to `references/output-examples.md`
+**Solution**: Moved to `references/output-examples.md` with expanded examples.
+
+**Implementation completed**:
 
 #### Create: `references/output-examples.md`
 
@@ -916,10 +869,18 @@ See [references/output-examples.md](references/output-examples.md) for complete 
 - **SVG**: `<svg viewBox="..." xmlns="...">` with proper sizing and consistency
 ```
 
+**Results**:
+- ✅ Created `references/output-examples.md` with comprehensive examples (400+ lines)
+- ✅ Reduced SKILL.md from 216 to 176 lines (-18%)
+- ✅ Included 2 complete color palette examples (dark + light)
+- ✅ Included 2 Marpit examples (minimal + full presentation)
+- ✅ Included 3 SVG examples (simple, architecture, flowchart)
+
 **Benefits**:
-- Reduces SKILL.md from 174 to ~130 lines
-- Examples still fully accessible via reference link
-- Keeps SKILL.md focused on workflow, not reference material
+- SKILL.md is now more focused on workflow and decision-making
+- Examples are expanded with detailed annotations and multiple variations
+- Users can reference examples without cluttering main workflow
+- Maintains easy discoverability through clear link
 
 ---
 

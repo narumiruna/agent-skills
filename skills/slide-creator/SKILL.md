@@ -135,52 +135,12 @@ Complex request -> add patterns and best-practices
 
 ## Output formats
 
-Color design:
-```
-## Color Strategy
-[Chosen strategy + reasoning]
+See [references/output-examples.md](references/output-examples.md) for complete examples with detailed annotations.
 
-## Color Palette
-* Background: #XXXXXX — [purpose]
-* Surface: #XXXXXX — [purpose]
-* Primary: #XXXXXX — [purpose]
-* Secondary: #XXXXXX — [purpose]
-* Accent: #XXXXXX — [purpose]
-* Text Primary: #XXXXXX — [purpose]
-* Text Secondary: #XXXXXX — [purpose]
-
-## Usage Guidelines
-[How to apply colors]
-
-## Validation Checklist
-- [ ] Contrast ratio >= 4.5:1
-- [ ] Palette limited to 5-7 colors
-- [ ] Colors work on projector
-```
-
-Marpit authoring:
-```markdown
----
-marp: true
-theme: default
----
-
-# Title Slide
-Subtitle
-
----
-
-## Content Slide
-- Point 1
-- Point 2
-```
-
-SVG illustration:
-```xml
-<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-  <!-- SVG content -->
-</svg>
-```
+**Quick reference**:
+- **Color design**: Strategy + 7-role palette + usage guidelines + validation checklist
+- **Marpit**: Frontmatter (`marp: true`) + slides separated by `---`
+- **SVG**: `<svg viewBox="..." xmlns="...">` with proper sizing and consistent colors
 
 ## Integration rules
 
