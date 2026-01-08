@@ -59,6 +59,267 @@ Result: Content fills the available space when scaled with `![w:600](...)`.
   - Light: `#E5E7EB`
   - Accent: `#2563EB`
 
+---
+
+## Design System
+
+### Color Palette & Psychology
+
+**Primary Color System (Modern Tech)**
+
+Use colors that convey the right emotion and meaning:
+
+```
+Primary (Trust, Stability):
+  - Deep Blue: #1e40af
+  - Usage: Main headings, primary actions, trust indicators
+
+Secondary (Innovation, Growth):
+  - Cyan Blue: #0891b2
+  - Usage: Supporting elements, links, secondary actions
+
+Accent Colors (Context-specific):
+  - Amber (Attention, Quality): #f59e0b
+    → Use for: warnings, code quality, important notices
+  - Emerald (Success, Skills): #10b981
+    → Use for: completed steps, success states, growth indicators
+  - Rose (Error, Critical): #e11d48
+    → Use for: errors, critical warnings
+  - Violet (Creative, Premium): #7c3aed
+    → Use for: premium features, creative tools
+
+Neutral Palette:
+  - Text Dark: #1e293b
+  - Text Mid: #475569
+  - Text Light: #94a3b8
+  - Background Light: #f8fafc
+  - Background Mid: #e2e8f0
+  - Border: #cbd5e1
+```
+
+**Color Combinations (Pre-tested)**
+
+Use these proven combinations for different contexts:
+
+1. **Tech/Professional**: Deep Blue + Cyan + Slate gray
+2. **Code Quality**: Amber + Orange + Yellow tints
+3. **Growth/Learning**: Emerald + Teal + Green tints
+4. **Process/Flow**: Blue → Cyan → Emerald (gradient progression)
+5. **Comparison**: Deep Blue vs Emerald (contrast)
+
+**Color Application Rules**
+
+- **Background cards**: Use tints (color at 10-20% opacity on white)
+- **Icons**: Use solid accent colors with 80-100% opacity
+- **Borders**: Use color at 60-80% opacity, 2-4px width
+- **Text on color**: Ensure WCAG AA contrast (4.5:1 minimum)
+- **Gradients**: Subtle, 10-20% lightness difference max
+
+### Shadow & Depth System
+
+Create visual hierarchy through layering:
+
+**Shadow Levels**
+
+```xml
+<!-- Level 1: Subtle elevation (cards, containers) -->
+<filter id="shadow-sm">
+  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+</filter>
+
+<!-- Level 2: Medium elevation (interactive elements) -->
+<filter id="shadow-md">
+  <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+</filter>
+
+<!-- Level 3: High elevation (modals, popups) -->
+<filter id="shadow-lg">
+  <feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity="0.2"/>
+</filter>
+```
+
+**Usage Guidelines**
+
+- **Background layer**: No shadow
+- **Card/Container layer**: shadow-sm
+- **Icon/Badge layer**: shadow-md (optional)
+- **Floating elements**: shadow-lg
+- **Avoid**: Shadows on text (reduces legibility)
+
+**Alternative to shadows (Marp-safe)**
+
+If filters are problematic, use stroke-based depth:
+
+```xml
+<!-- Outer glow effect with layered strokes -->
+<rect stroke="#1e40af" stroke-width="4" stroke-opacity="0.3" />
+<rect stroke="#1e40af" stroke-width="2" stroke-opacity="0.6" />
+<rect stroke="#1e40af" stroke-width="1" stroke-opacity="1" />
+```
+
+### Gradient Guidelines
+
+Use gradients sparingly for modern, polished look:
+
+**Linear Gradients (Subtle)**
+
+```xml
+<defs>
+  <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+  </linearGradient>
+</defs>
+```
+
+**When to use:**
+- Card backgrounds (very subtle, 5-10% lightness change)
+- Progress indicators (showing direction)
+- Accent highlights (small elements only)
+
+**When NOT to use:**
+- Text (always solid color)
+- Icons (keep simple)
+- Small elements < 100px (won't be visible)
+
+### Spacing & Grid System
+
+**8px Grid Base**
+
+All spacing, sizing, and positioning should align to 8px grid:
+
+```
+Spacing Scale:
+  - xs: 8px   (tight spacing)
+  - sm: 16px  (compact elements)
+  - md: 24px  (default spacing)
+  - lg: 32px  (section separation)
+  - xl: 48px  (major sections)
+  - 2xl: 64px (slide regions)
+```
+
+**Border Radius Scale**
+
+```
+Rounding:
+  - sm: 4px   (buttons, badges)
+  - md: 8px   (cards, small containers)
+  - lg: 12px  (large cards, containers)
+  - xl: 16px  (prominent containers)
+  - full: 50% (circles, pills)
+```
+
+**Stroke Width Scale**
+
+```
+Strokes:
+  - Hairline: 1px (subtle dividers)
+  - Regular: 2px  (standard borders)
+  - Medium: 3px   (emphasis borders)
+  - Bold: 4px     (primary borders, icons)
+  - Heavy: 6px    (call-to-action)
+```
+
+### Visual Hierarchy Principles
+
+**Create clear information hierarchy:**
+
+1. **Focal Point** (largest, highest contrast)
+   - Main title or key metric
+   - Size: 48-72px text or 120-200px icons
+   - Color: Primary or accent
+
+2. **Secondary Elements** (medium size, medium contrast)
+   - Subtitles, supporting text
+   - Size: 24-36px text or 60-100px icons
+   - Color: Secondary or neutral dark
+
+3. **Tertiary Elements** (smaller, lower contrast)
+   - Labels, captions, metadata
+   - Size: 16-20px text or 40-60px icons
+   - Color: Neutral mid
+
+4. **Background Elements** (largest, lowest contrast)
+   - Decorative shapes, patterns
+   - Color: Neutral light or tints
+
+**Contrast Rules**
+
+- Adjacent elements should differ by at least 2:1 in size OR color
+- Don't use size + color + position all at once (pick 2)
+- High contrast for important info, low contrast for supporting info
+
+### Icon & Illustration Style
+
+**Consistent Visual Language**
+
+Choose ONE style and stick to it:
+
+**Option A: Outline Style** (Recommended for technical content)
+- 3-4px strokes
+- Rounded caps and joins
+- Minimal fills
+- Clean, technical feel
+
+**Option B: Filled Style** (Better for quick recognition)
+- Solid fills with subtle borders (1-2px)
+- More visual weight
+- Friendly, approachable
+
+**Icon Design Rules**
+
+1. **Optical sizing**: Adjust visual weight, not just mathematical size
+   - Circles appear smaller than squares of same dimensions
+   - Thin elements need to be thicker for visibility
+
+2. **Consistent metaphors**: Use established visual language
+   - Code quality → magnifying glass, checkmark, shield
+   - Skills/Tools → wrench, gear, toolkit
+   - Flow/Process → arrows, connected nodes
+   - Marketplace → shopping bag, grid, network
+
+3. **Detail level matches scale**:
+   - Small icons (< 60px): 3-5 key shapes max
+   - Medium icons (60-120px): 5-8 shapes
+   - Large illustrations (> 120px): Add detail as needed
+
+4. **Alignment and balance**:
+   - Optically center icons (not mathematically)
+   - Balance visual weight across icon set
+
+### Typography Integration
+
+**When using text in SVG:**
+
+**Font Stack (System-safe)**
+
+```xml
+font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+```
+
+**Text Hierarchy**
+
+```xml
+<!-- Title / Hero -->
+<text font-size="48" font-weight="700" fill="#1e293b">
+
+<!-- Heading -->
+<text font-size="36" font-weight="600" fill="#1e293b">
+
+<!-- Body -->
+<text font-size="24" font-weight="400" fill="#475569">
+
+<!-- Caption / Label -->
+<text font-size="18" font-weight="400" fill="#64748b">
+```
+
+**Text Rendering**
+
+- Always set `text-anchor="middle"` or `text-anchor="start"` explicitly
+- Use `dominant-baseline="middle"` for vertical centering
+- Avoid small text (< 16px) - won't be legible on slides
+- Prefer concise labels over long sentences
+
 ### Technical Constraints
 
 - No external dependencies: no remote images, no external CSS, no external font loading

@@ -11,6 +11,220 @@ ALWAYS output **valid Marpit-compatible Markdown** that can be directly rendered
 
 ---
 
+## Design Principles for Effective Slides
+
+### Visual Design Fundamentals
+
+**Core Principle: Less is More**
+
+Effective slides prioritize clarity over completeness. Each slide should communicate ONE key idea.
+
+**Design Hierarchy (in order of importance):**
+
+1. **Clarity** - Can the audience understand at a glance?
+2. **Simplicity** - Remove everything non-essential
+3. **Consistency** - Use patterns that repeat across slides
+4. **Beauty** - Polish the visual presentation
+
+### Layout & Composition
+
+**Slide Real Estate Management**
+
+On a 16:9 slide, visual weight is distributed as:
+
+```
+┌─────────────────────────────────────┐
+│  [Safe Zone: 90% of slide]          │
+│                                     │
+│  ┌────────────────────────────┐    │
+│  │   [Primary Focus Area]      │    │
+│  │   Top-center or Center      │    │
+│  │   ~60% of attention         │    │
+│  └────────────────────────────┘    │
+│                                     │
+│  [Supporting Content: Bottom 20%]   │
+└─────────────────────────────────────┘
+```
+
+**Layout Patterns**
+
+1. **Centered Layout** (Title slides, emphasis)
+   - Use `<!-- _class: lead -->` for auto-centering
+   - Large heading + short subtitle
+   - Minimal text (< 15 words total)
+
+2. **Title + Content** (Most common)
+   - H1 title at top
+   - 3-5 bullet points in center
+   - Optional supporting visual (right side or below)
+
+3. **Two-Column Split** (Comparison, text + visual)
+   - Use HTML grid/flex layout
+   - Left: text (40-50% width)
+   - Right: visual (50-60% width)
+
+4. **Full-Visual** (Background image + overlay text)
+   - Use `backgroundImage:` directive
+   - Minimal text overlay
+   - Ensure text contrast
+
+**Visual Balance Rules**
+
+- **Rule of thirds**: Place important elements at 1/3 or 2/3 positions
+- **White space**: Minimum 15% of slide should be empty
+- **Alignment**: Pick one alignment (left/center/right) per slide
+- **Symmetry vs Asymmetry**: Symmetry = stable, asymmetry = dynamic
+
+### Typography Hierarchy
+
+**Font Size Scale (Default Theme)**
+
+```
+Hero/Title (lead slides):    64-80px
+H1 (slide titles):           42-48px
+H2 (section headers):        32-36px
+Body text (bullets):         24-28px
+Captions/footnotes:          18-20px
+```
+
+**Text Density Guidelines**
+
+- **Title slide**: 5-10 words max
+- **Content slide**: 20-40 words max (including bullets)
+- **Data slide**: Minimize text, let visual speak
+- **Section divider**: 3-7 words
+
+**Reading Patterns**
+
+People read in **F-pattern** or **Z-pattern**:
+- Place most important info top-left
+- Supporting info follows natural reading flow
+- Call-to-action goes bottom-right
+
+**Font Weight Usage**
+
+- **Bold (700)**: Titles, emphasis (use sparingly)
+- **Semibold (600)**: Headings
+- **Regular (400)**: Body text (most text)
+- **Light (300)**: Avoid (poor legibility on slides)
+
+### Color Psychology & Application
+
+**Theme-Based Color Guidance**
+
+Align colors with content meaning:
+
+- **Trust/Stability**: Blue shades → corporate, technical
+- **Energy/Attention**: Orange/Amber → warnings, highlights
+- **Growth/Success**: Green → progress, completion
+- **Innovation**: Cyan/Purple → creativity, forward-thinking
+- **Neutral/Professional**: Gray → background, supporting text
+
+**Color Usage Rules**
+
+1. **Background**: Always light or always dark (pick one)
+2. **Text**: High contrast with background (4.5:1 minimum)
+3. **Accent**: Use ONE accent color per slide (max 2)
+4. **Consistency**: Same colors for same meaning across deck
+
+**Default Theme Best Practices**
+
+```markdown
+---
+backgroundColor: #ffffff
+color: #1e293b
+---
+
+# Title in dark gray (#1e293b)
+
+**Emphasis** in same color, bold weight
+
+Key term in <mark style="background:#fef3c7;color:#92400e;">highlighted yellow</mark>
+```
+
+### Visual Rhythm & Pacing
+
+**Content Density Variation**
+
+Don't make every slide the same density:
+
+```
+Slide 1: Title (Low density) ●
+Slide 2: Content (Medium)    ●●●
+Slide 3: Content (Medium)    ●●●
+Slide 4: Visual (Low)        ●
+Slide 5: Content (High)      ●●●●●
+Slide 6: Section (Low)       ●
+```
+
+This creates visual "breathing room" and maintains attention.
+
+**Progressive Disclosure**
+
+For complex topics, break into sequence:
+
+```
+Slide 1: Introduce concept
+Slide 2: Show first component
+Slide 3: Add second component
+Slide 4: Complete picture
+```
+
+Better than cramming everything on one slide.
+
+**Slide Transitions (Conceptual)**
+
+While Marpit doesn't support animations, design slides to create narrative flow:
+
+- Use consistent positioning for recurring elements
+- Maintain color themes across related slides
+- Use section dividers to signal topic changes
+
+### Content Strategy
+
+**What Makes a Good Slide**
+
+✅ **Do:**
+- One clear message per slide
+- Use visuals to support (not decorate)
+- Keep bullets concise (< 10 words each)
+- Use specific examples over abstract concepts
+- Show data visually (charts > tables > text)
+
+❌ **Don't:**
+- Wall of text (> 50 words)
+- Tiny fonts (< 20px body text)
+- Low contrast text
+- Cluttered layouts (> 5 elements competing)
+- Mixing too many fonts or colors
+
+**Bullet Point Best Practices**
+
+```markdown
+# Good: Concise, Parallel Structure
+
+- Install marketplace from GitHub
+- Add plugins with single command
+- Start coding immediately
+
+# Bad: Verbose, Inconsistent
+
+- First, you need to install the marketplace by cloning from GitHub
+- Plugins can be added
+- Then start coding and enjoy the benefits
+```
+
+**Visual-to-Text Ratio**
+
+Aim for these ratios based on slide purpose:
+
+- **Explanation**: 60% text, 40% visual
+- **Demonstration**: 40% text, 60% visual
+- **Impact**: 20% text, 80% visual
+- **Transition**: 10% text, 90% visual (or solid color)
+
+---
+
 ## Required Document Structure
 
 Every Marpit document MUST start with a frontmatter block:
