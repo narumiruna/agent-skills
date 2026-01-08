@@ -1,5 +1,14 @@
 # Packaging with uv
 
+## Table of Contents
+
+- [Building Packages](#building-packages)
+- [Build Artifacts](#build-artifacts)
+- [Pre-publish Checklist](#pre-publish-checklist)
+- [Publishing](#publishing)
+- [Version Management](#version-management)
+- [Common Issues](#common-issues)
+
 Build and distribute Python packages using uv's built-in build tools.
 
 ## Building Packages

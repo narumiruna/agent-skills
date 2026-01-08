@@ -1,5 +1,10 @@
 # CLI and Logging Patterns
 
+## Table of Contents
+
+- [CLI with Typer](#cli-with-typer)
+- [Logging with Loguru](#logging-with-loguru)
+
 ## CLI with Typer
 
 **Installation:**

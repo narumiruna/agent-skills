@@ -5,11 +5,11 @@ description: Python project workflow and standards using Astral uv for environme
 
 # Python Project
 
-## Overview
+## Use this workflow
 
-Build and maintain Python 3.12+ projects with modern tooling and best practices. This skill covers project setup, dependency management, quality tools, CLI patterns, and packaging workflows.
+Build and maintain Python 3.12+ projects with modern tooling and best practices. Follow the steps below for project setup, dependency management, quality tools, CLI patterns, and packaging workflows.
 
-**Key Tools:**
+Key tools:
 - **uv**: Fast Python package installer and environment manager
 - **ruff**: Lightning-fast linter and formatter
 - **pytest**: Testing framework with coverage support
@@ -19,35 +19,35 @@ Build and maintain Python 3.12+ projects with modern tooling and best practices.
 
 For Python coding conventions, see the `python-conventions` skill.
 
-## Quick Start (New Project)
+## Set up a new project
 
-**1. Initialize project with Python 3.12+:**
+1. Initialize a project with Python 3.12+:
 
 ```bash
 uv init my-project --python 3.12
 cd my-project
 ```
 
-**2. Add runtime dependencies:**
+2. Add runtime dependencies:
 
 ```bash
 uv add loguru typer
 ```
 
-**3. Add development dependencies:**
+3. Add development dependencies:
 
 ```bash
 uv add --dev ruff pytest pytest-cov ty
 ```
 
-**4. Verify setup:**
+4. Verify the setup:
 
 ```bash
 uv run python -V
 # Should show Python 3.12+
 ```
 
-## Project Layout
+## Use a src/ layout
 
 Use a `src/` layout for better import clarity and testing isolation:
 
@@ -65,51 +65,50 @@ my-project/
 └── README.md
 ```
 
-**Benefits of src/ layout:**
-- Prevents accidentally importing from project directory
-- Forces installation for testing
-- Clearer separation between source and tests
+Benefits of a `src/` layout:
+- Prevent accidental imports from the project root
+- Force installation for testing
+- Keep source and tests separated
 
-## Dependency Management
+## Manage dependencies
 
-**Basic Operations:**
+Basic operations:
 - Add runtime dependency: `uv add <package>`
 - Add dev dependency: `uv add --dev <package>`
 - Add to named group: `uv add --group <name> <package>`
 - Run commands: `uv run <command>`
 - Sync dependencies: `uv sync`
 
-**Key Principles:**
-- Use `uv run <command>` instead of plain `python` or tool commands
-- Keep `pyproject.toml` as single source of truth
-- Use `--dev` for tools that aren't needed in production (ruff, pytest, ty, etc.)
-- Pin versions in production, use ranges during development
+Key principles:
+- Use `uv run <command>` instead of plain `python` or tool commands.
+- Keep `pyproject.toml` as the single source of truth.
+- Use `--dev` for tools that are not needed in production (ruff, pytest, ty).
+- Pin versions in production and use ranges during development.
 
-**Script Execution:**
-For detailed script patterns (inline metadata, `--no-project`, `--with` flags), see `references/uv-scripts.md`.
+Read `references/uv-scripts.md` for inline metadata, `--no-project`, and `--with` flags.
 
-## Quality Tools and Workflows
+## Run quality tools
 
-**Linting and Formatting (ruff):**
+Lint and format with ruff:
 ```bash
 uv run ruff check         # Check for issues
 uv run ruff check --fix   # Auto-fix issues
 uv run ruff format        # Format code
 ```
 
-**Type Checking (ty):**
+Type check with ty:
 ```bash
 uv run ty check          # Type check all code
 ```
 
-**Testing and Coverage (pytest):**
+Test with pytest and coverage:
 ```bash
 uv run pytest                                     # Run tests
 uv run pytest --cov=src --cov-report=term-missing # With coverage
 uv run pytest -v tests/test_specific.py           # Specific test file
 ```
 
-**Pre-commit Quality Gate:**
+Use this pre-commit quality gate:
 ```bash
 uv run ruff check --fix
 uv run ruff format
@@ -117,11 +116,11 @@ uv run ty check
 uv run pytest
 ```
 
-For detailed tool configuration and recommended settings, see `references/quality.md`.
+Read `references/quality.md` for tool configuration and recommended settings.
 
-## CLI and Logging Patterns
+## Build CLIs and logging
 
-**CLI with typer:**
+Use typer for CLIs:
 ```python
 import typer
 
@@ -137,7 +136,7 @@ if __name__ == "__main__":
     app()
 ```
 
-**Logging with loguru:**
+Use loguru for logging:
 ```python
 from loguru import logger
 
@@ -151,29 +150,29 @@ except Exception as err:
     logger.error("Failed to connect: {error}", error=err)
 ```
 
-For complete examples and advanced patterns, see `references/cli-logging.md`.
+Read `references/cli-logging.md` for complete examples and advanced patterns.
 
-## Packaging and Distribution
+## Package distributions
 
-**Build distribution packages:**
+Build distribution packages:
 ```bash
 uv build                 # Build wheel and sdist
 uv build --no-sources    # Build wheel only (for publish checks)
 ```
 
-Output in `dist/`:
+Check outputs in `dist/`:
 - `*.whl` - Wheel package
 - `*.tar.gz` - Source distribution
 
-For publish workflows and checks, see `references/packaging.md`.
+Read `references/packaging.md` for publish workflows and checks.
 
-## When to Read References
+## Read references when needed
 
-- **Script execution patterns**: `references/uv-scripts.md` - inline metadata, `--no-project`, `--with` flags
-- **Tool configuration**: `references/quality.md` - ruff/pytest/ty setup and pyproject.toml config
-- **CLI and logging**: `references/cli-logging.md` - typer and loguru examples
-- **Packaging details**: `references/packaging.md` - build outputs and publish workflows
-- **Coding style**: Use `python-conventions` skill for Python code conventions
+- Script execution patterns: `references/uv-scripts.md`
+- Tool configuration: `references/quality.md`
+- CLI and logging: `references/cli-logging.md`
+- Packaging details: `references/packaging.md`
+- Coding style: use the `python-conventions` skill
 
 ## References
 

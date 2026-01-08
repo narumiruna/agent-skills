@@ -1,5 +1,14 @@
 # Running Scripts with uv
 
+## Table of Contents
+
+- [Basic Usage](#basic-usage)
+- [Project vs. No-Project Mode](#project-vs-no-project-mode)
+- [One-off Dependencies](#one-off-dependencies)
+- [Inline Script Metadata (Recommended)](#inline-script-metadata-recommended)
+- [Python Version Selection](#python-version-selection)
+- [Common Patterns](#common-patterns)
+
 Use `uv run` for standalone scripts to automatically manage dependencies without manual venv setup.
 
 ## Basic Usage

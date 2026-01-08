@@ -1,8 +1,12 @@
 ---
 name: python-peewee
-description: Patterns for using Peewee ORM with DatabaseProxy and scoped connections/transactions.
+description: Patterns for using Peewee ORM with DatabaseProxy and scoped connections/transactions. Use when setting up DatabaseProxy, managing connection_context/atomic blocks, or writing tests with SQLite.
 ---
-## Setup
+# Python Peewee
+
+Use Peewee with DatabaseProxy and scoped connection/transaction patterns.
+
+## Set up
 
 ### DatabaseProxy & BaseModel
 
@@ -25,7 +29,7 @@ db = SqliteDatabase("app.db", pragmas={"foreign_keys": 1})
 db_proxy.initialize(db)
 ```
 
-## Connection & Transaction
+## Use connections and transactions
 
 ### Read (no transaction)
 
@@ -51,12 +55,10 @@ with db.connection_context():
         ...
 ```
 
-## When to Use
+Use `connection_context()` for scoped connections (open/close).
+Use `atomic()` for atomic writes (BEGIN/COMMIT/ROLLBACK).
 
-* **connection_context()** → scoped connection (open/close)
-* **atomic()** → atomic writes (BEGIN/COMMIT/ROLLBACK)
-
-## Testing (SQLite)
+## Test with SQLite
 
 ```python
 import pytest

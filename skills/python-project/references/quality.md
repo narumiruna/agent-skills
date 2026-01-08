@@ -1,5 +1,13 @@
 # Quality Tools (ruff, ty, pytest)
 
+## Table of Contents
+
+- [Type Checking with ty](#type-checking-with-ty)
+- [Linting and Formatting with ruff](#linting-and-formatting-with-ruff)
+- [Testing and Coverage with pytest](#testing-and-coverage-with-pytest)
+- [Pre-merge Quality Gate](#pre-merge-quality-gate)
+- [CI Configuration Example](#ci-configuration-example)
+
 Keep quality tools in dev dependencies and run via `uv run` for consistency.
 
 ## Type Checking with ty
