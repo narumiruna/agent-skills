@@ -10,6 +10,22 @@ Create clean, editable SVG illustrations that:
 - Embed reliably in **Marp/Marpit Markdown**
 - Look good in **HTML exports**
 - Optimize for common slide placement (centered, left/right aligned, backgrounds)
+- **Pass svglint validation** - Always validate SVG syntax after creation
+
+---
+
+## Standard Workflow
+
+**CRITICAL: Follow this workflow for every SVG you create:**
+
+1. **Design**: Plan layout, colors, and content
+2. **Create**: Write SVG code following these core rules
+3. **Validate**: Run `svglint file.svg` to check syntax
+4. **Fix**: Correct any errors (especially XML character escaping)
+5. **Test**: Embed in slide and verify rendering
+6. **Commit**: Only commit validated, working SVGs
+
+**Never skip validation.** XML syntax errors will break SVG rendering.
 
 ---
 
@@ -421,6 +437,7 @@ For icons, create them from SVG primitives (circles, rects, paths) rather than t
 3. **Simple, clear graphics**: Readable at slide scale
 4. **Proper namespace**: Always include `xmlns`
 5. **Responsive**: Let Marpit control sizing with `![width:XXX]`
+6. **Validate syntax**: Run `svglint file.svg` after creating each SVG
 
 ---
 

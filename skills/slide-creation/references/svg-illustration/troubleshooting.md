@@ -460,6 +460,62 @@ git push
 
 ---
 
+## SVG Validation Tools
+
+### svglint - Command-Line SVG Linter
+
+**Purpose:** Validate SVG syntax, check for common issues, and enforce best practices.
+
+**Installation:**
+```bash
+npm install -g svglint
+```
+
+**Usage:**
+```bash
+# Validate a single SVG file
+svglint path/to/your/file.svg
+
+# Validate with custom config
+svglint -C path/to/your/file.svg
+
+# Validate multiple files
+svglint path/to/diagrams/*.svg
+```
+
+**Common Issues Detected:**
+- Invalid XML characters (e.g., unescaped `&` must be `&amp;`)
+- Missing required attributes (`xmlns`, `viewBox`)
+- Malformed paths or shapes
+- Invalid color values
+- Incorrect attribute syntax
+
+**Example Error:**
+```
+x slides/assets/diagrams/three-plugins.svg
+  x valid char '&' is not expected.
+```
+
+**Fix:** Replace `&` with `&amp;` in text content:
+```xml
+<!-- Wrong -->
+<text>Auto lint & fix</text>
+
+<!-- Correct -->
+<text>Auto lint &amp; fix</text>
+```
+
+**Other XML Entities to Escape:**
+- `<` → `&lt;`
+- `>` → `&gt;`
+- `"` → `&quot;`
+- `'` → `&apos;`
+- `&` → `&amp;`
+
+**Best Practice:** Always run `svglint` before committing SVG files to catch syntax errors early.
+
+---
+
 ## Debugging Workflow
 
 1. **Open SVG directly in browser**
@@ -478,8 +534,9 @@ git push
    - Check network tab for failed loads
 
 4. **Validate SVG syntax**
-   - Use online validators
-   - Check XML well-formedness
+   - Use `svglint` for command-line validation: `svglint file.svg`
+   - Use online validators (https://validator.w3.org/)
+   - Check XML well-formedness and escape special characters
 
 5. **Simplify progressively**
    - Remove complex features one by one
@@ -491,13 +548,14 @@ git push
 
 When SVG isn't working, try:
 
+- [ ] **Validate syntax**: Run `svglint file.svg` to catch XML errors
 - [ ] Verify file path is correct
 - [ ] Add `xmlns="http://www.w3.org/2000/svg"`
 - [ ] Ensure viewBox and width/height are set
 - [ ] Remove external dependencies (fonts, images)
 - [ ] Check all content within safe margins (120px from edges)
 - [ ] Use system font stack for text
-- [ ] Validate XML syntax
+- [ ] **Escape special characters**: `&` → `&amp;`, `<` → `&lt;`, etc.
 - [ ] Test SVG file standalone in browser
 - [ ] Check browser console for errors
 - [ ] Simplify complex filters or effects
@@ -506,7 +564,9 @@ When SVG isn't working, try:
 
 ## Still Having Issues?
 
-1. **Validate SVG**: Use https://validator.w3.org/
+1. **Validate SVG**:
+   - Command-line: `svglint file.svg`
+   - Online: https://validator.w3.org/
 2. **Check Marp docs**: https://marpit.marp.app/
 3. **Simplify**: Start with basic shapes, add complexity gradually
 4. **Test standalone**: Open SVG directly in browser

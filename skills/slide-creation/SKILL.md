@@ -272,6 +272,14 @@ Subtitle
 </svg>
 ```
 
+**Validation Required:**
+After creating SVG, ALWAYS validate with svglint:
+```bash
+svglint path/to/file.svg
+```
+
+Fix any errors before using in slides (especially XML character escaping).
+
 (Optimized for Marpit embedding)
 
 ---
