@@ -4,15 +4,15 @@
 
   <defs>
     <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e3eaf2;stop-opacity:1" />
     </linearGradient>
     <filter id="shadow-sm">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
     </filter>
     <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0" />
+      <stop offset="0%" style="stop-color:#d0dce9;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#b8c9db;stop-opacity:0" />
     </radialGradient>
   </defs>
 

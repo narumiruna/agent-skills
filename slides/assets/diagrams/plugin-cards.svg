@@ -7,16 +7,16 @@
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
     </filter>
     <linearGradient id="quality-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffeaa7;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="skills-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#e8f1f8;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d6e9f5;stop-opacity:1" />
     </linearGradient>
     <radialGradient id="icon-glow-quality" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:0.5" />
-      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0" />
+      <stop offset="0%" style="stop-color:#ffd966;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#ffc933;stop-opacity:0" />
     </radialGradient>
     <radialGradient id="icon-glow-skills" cx="50%" cy="50%" r="50%">
       <stop offset="0%" style="stop-color:#4a7ba7;stop-opacity:0.3" />

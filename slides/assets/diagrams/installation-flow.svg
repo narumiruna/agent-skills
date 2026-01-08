@@ -10,7 +10,7 @@
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
     </filter>
     <linearGradient id="step1-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#dce9f4;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="step2-bg" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -18,8 +18,8 @@
       <stop offset="100%" style="stop-color:#c5dbed;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="step3-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:1" />
     </linearGradient>
   </defs>
 
@@ -29,7 +29,7 @@
     
     <!-- Step number badge -->
     <circle cx="64" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
-    <text x="64" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="64" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       1
     </text>
     
@@ -48,7 +48,7 @@
     
     <!-- Step number badge -->
     <circle cx="526" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
-    <text x="526" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="526" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       2
     </text>
     
@@ -67,7 +67,7 @@
     
     <!-- Step number badge -->
     <circle cx="988" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
-    <text x="988" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="988" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       3
     </text>
     

@@ -2,13 +2,13 @@
 marp: true
 theme: default
 paginate: true
-backgroundColor: #fef7cd
-color: #0f1f2e
+backgroundColor: #F6F8FB
+color: #0F1F2E
 ---
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #2a5f8f -->
-<!-- _color: #fef7cd -->
+<!-- _color: #ffffff -->
 
 # 🔌 narumi Marketplace
 
@@ -64,7 +64,7 @@ color: #0f1f2e
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #2a5f8f -->
-<!-- _color: #fef7cd -->
+<!-- _color: #ffffff -->
 
 # 兩大核心插件
 
@@ -142,7 +142,7 @@ color: #0f1f2e
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #2a5f8f -->
-<!-- _color: #fef7cd -->
+<!-- _color: #ffffff -->
 
 # 快速開始
 
@@ -210,7 +210,7 @@ Claude 自動獲得 Python 開發最佳實踐知識
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #2a5f8f -->
-<!-- _color: #fef7cd -->
+<!-- _color: #ffffff -->
 
 # 進階功能
 
@@ -315,7 +315,7 @@ marketplace/
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #2a5f8f -->
-<!-- _color: #fef7cd -->
+<!-- _color: #ffffff -->
 
 # 開始使用
 
