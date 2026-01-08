@@ -12,7 +12,7 @@
       "name": "python-code-quality",
       "source": "./plugins/python-code-quality",
       "description": "Python code quality hooks: auto-format with ruff, lint with ruff check, and type check with ty",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "keywords": ["python", "ruff", "type-checking", "formatting", "linting"],
       "hooks": {
         "PreToolUse": [
@@ -40,21 +40,26 @@
     {
       "name": "python-skills",
       "source": "./",
-      "description": "Comprehensive Python development toolkit: project workflow and standards (uv, ruff, pytest, ty, typer, loguru) and Peewee ORM patterns with DatabaseProxy. Use for Python 3.12+ project setup, dependency management, testing, type checking, CLI development, logging, and database ORM patterns.",
+      "description": "Python 3.12+ workflow and ORM toolkit: uv-based project setup, dependency management, ruff/ty/pytest quality gates, typer CLI and loguru logging patterns, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",
       "version": "0.0.1",
       "keywords": [
         "python",
+        "python-3.12",
         "uv",
         "ruff",
+        "ty",
         "pytest",
+        "pytest-cov",
         "typer",
         "loguru",
-        "ty",
         "peewee",
+        "databaseproxy",
         "orm",
-        "database",
-        "sql",
-        "project-setup"
+        "sqlite",
+        "cli",
+        "logging",
+        "project-setup",
+        "packaging"
       ],
       "skills": ["./skills/python-peewee", "./skills/python-project"],
       "strict": false
