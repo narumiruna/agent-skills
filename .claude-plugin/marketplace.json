@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Narumi's plugin marketplace for development tools",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
   "plugins": [
     {
       "name": "python-code-quality",
       "source": "./plugins/python-code-quality",
       "description": "Python code quality hooks: auto-format with ruff, lint with ruff check, and type check with ty",
-      "version": "1.0.0",
+      "version": "0.0.1",
       "keywords": ["python", "ruff", "type-checking", "formatting", "linting"],
       "hooks": {
         "PreToolUse": [
@@ -41,7 +41,7 @@
       "name": "python-skills",
       "source": "./",
       "description": "Comprehensive Python development toolkit: project workflow and standards (uv, ruff, pytest, ty, typer, loguru) and Peewee ORM patterns with DatabaseProxy. Use for Python 3.12+ project setup, dependency management, testing, type checking, CLI development, logging, and database ORM patterns.",
-      "version": "1.0.0",
+      "version": "0.0.1",
       "keywords": [
         "python",
         "uv",
