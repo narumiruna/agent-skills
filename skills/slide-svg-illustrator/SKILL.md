@@ -968,7 +968,11 @@ This gives users options without manual scaling.
 ## References
 
 See `references/` for:
-- Common diagram patterns with code examples
-- Color palette variations
+- [pattern-examples.md](references/pattern-examples.md) — Complete SVG templates for common diagrams
+- [color-palettes.md](references/color-palettes.md) — Curated color schemes for different contexts
 - Icon design guidelines
 - Troubleshooting embedding issues
+
+**Related Skills:**
+- [marpit-markdown/SKILL.md](../marpit-markdown/SKILL.md) — Authoring and structuring Marpit slides
+- [slide-color-design/SKILL.md](../slide-color-design/SKILL.md) — Designing accessible, consistent color palettes for slides

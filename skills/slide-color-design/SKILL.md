@@ -149,3 +149,11 @@ Do NOT include images unless explicitly requested.
 - Does not enforce brand guidelines unless provided
 
 If brand colors exist, adapt them into the system rather than replacing them.
+
+---
+
+## References
+
+- [marpit-markdown/SKILL.md](../marpit-markdown/SKILL.md) — Authoring and structuring Marpit slides
+- [slide-svg-illustrator/SKILL.md](../slide-svg-illustrator/SKILL.md) — Creating and embedding SVG diagrams/icons
+- [references/color-palettes.md](references/color-palettes.md) — Ready-to-use color palettes for different contexts

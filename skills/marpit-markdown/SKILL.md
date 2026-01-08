@@ -1059,3 +1059,7 @@ For detailed examples and advanced patterns, see:
 - `references/slide-patterns.md` - Common presentation structures
 - `references/themes-and-directives.md` - Styling and customization
 - `references/advanced-layouts.md` - Complex slide layouts
+
+**Related Skills:**
+- [slide-color-design](../slide-color-design/SKILL.md) — How to design accessible, consistent color palettes for slides
+- [slide-svg-illustrator](../slide-svg-illustrator/SKILL.md) — How to create and embed consistent SVG diagrams and icons
