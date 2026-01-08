@@ -22,6 +22,12 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 uv run scripts/init_presentation.py technical-dark my-deck.md "My Presentation" "John Doe"
 ```
 
+**Generate color palette from brand**:
+```bash
+uv run scripts/generate_palette.py brand "#FF6B35" light    # Light theme
+uv run scripts/generate_palette.py preset code-blue        # Use preset
+```
+
 **Available templates**:
 - `assets/templates/technical-dark.md` - Dark theme for code/technical content
 - `assets/templates/professional-light.md` - Light theme for business presentations
@@ -101,9 +107,9 @@ Draw a diagram:
 3. Reuse a palette from `references/color-palettes.md`.
 
 Design slide colors:
-1. Follow `references/color-design/workflow.md`.
-2. Select a strategy from `references/color-design/strategies.md`.
-3. Cross-check with `references/color-palettes.md`.
+1. Generate from brand: `uv run scripts/generate_palette.py brand "#BRAND" light`
+2. Or follow `references/color-design/workflow.md`.
+3. Or select preset from `references/color-palettes.md`.
 
 Write slides:
 1. Follow `references/marpit-authoring/syntax-guide.md`.
