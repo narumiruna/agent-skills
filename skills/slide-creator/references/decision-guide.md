@@ -21,7 +21,29 @@
 
 ## Module Selection Flowchart
 
-![Decision flowchart](decision-flowchart.svg)
+```
+User request
+    |
+    +-- Mentions "slides" or "deck" or "presentation"?
+    |       |
+    |       +-- Marpit authoring
+    |       |
+    |       +-- Also mentions "colors" or "theme" or "brand"?
+    |       |       |
+    |       |       +-- Add color design (run first)
+    |       |
+    |       +-- Also mentions "diagrams" or "flowchart" or "architecture"?
+    |               |
+    |               +-- Add SVG illustration
+    |
+    +-- Mentions "diagram" or "illustration" or "SVG" only?
+            |
+            +-- SVG illustration
+            |
+            +-- Needs custom colors?
+                    |
+                    +-- Add color design
+```
 
 ## Context Loading Strategy
 
