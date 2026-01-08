@@ -62,10 +62,10 @@
     {
       "name": "slides-skills",
       "source": "./",
-      "description": "Write presentation slides using Marpit-compatible Markdown. Includes slide structure, frontmatter, themes, directives, layout patterns, and authoring best practices.",
+      "description": "Complete Marp/Marpit presentation toolkit: write slides with Marpit-compatible Markdown and create slide-ready SVG illustrations optimized for HTML export. Includes slide structure, frontmatter, themes, directives, layout patterns, SVG authoring with smart sizing, and embedding best practices.",
       "version": "0.0.1",
-      "keywords": ["marpit", "marp", "slides", "presentation", "markdown", "frontmatter", "themes"],
-      "skills": ["./skills/marpit-markdown"],
+      "keywords": ["marpit", "marp", "slides", "presentation", "markdown", "svg", "illustration", "diagrams", "frontmatter", "themes"],
+      "skills": ["./skills/marpit-markdown", "./skills/slide-svg-illustrator"],
       "strict": false
     }
   ]
