@@ -1,5 +1,19 @@
 # Color Design Workflow
 
+## Table of Contents
+
+- [Core Goal](#core-goal)
+- [5-Step Workflow](#5-step-workflow)
+  - [Step 1 — Identify Context](#step-1-identify-context)
+  - [Step 2 — Choose Color Strategy](#step-2-choose-color-strategy)
+  - [Step 3 — Define Color Roles (Mandatory)](#step-3-define-color-roles-mandatory)
+  - [Step 4 — Specify Colors](#step-4-specify-colors)
+  - [Step 5 — Slide Usage Guidance](#step-5-slide-usage-guidance)
+- [Design Constraints](#design-constraints)
+- [Validation Checklist](#validation-checklist)
+- [What This Does NOT Do](#what-this-does-not-do)
+- [See Also](#see-also)
+
 Design clear, consistent, and presentation-safe color systems for slides.
 
 ## Core Goal

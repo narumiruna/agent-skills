@@ -1,5 +1,43 @@
 # Advanced Layouts
 
+## Table of Contents
+
+- [Split Layouts with Background Images](#split-layouts-with-background-images)
+  - [Left-Right Split (40/60)](#left-right-split-4060)
+  - [Right-Side Image](#right-side-image)
+  - [Vertical Split](#vertical-split)
+- [Multiple Background Images](#multiple-background-images)
+  - [Side-by-Side Comparison](#side-by-side-comparison)
+  - [Three-Image Layout](#three-image-layout)
+- [Table-Based Layouts](#table-based-layouts)
+  - [Two-Column Content](#two-column-content)
+  - [Three-Column Layout](#three-column-layout)
+- [Mixed Content Layouts](#mixed-content-layouts)
+  - [Code + Explanation](#code-explanation)
+  - [Image + Code](#image-code)
+- [List Layouts](#list-layouts)
+  - [Multi-Column Lists (Using Tables)](#multi-column-lists-using-tables)
+  - [Nested Lists with Emphasis](#nested-lists-with-emphasis)
+- [Quote Layouts](#quote-layouts)
+  - [Large Quote](#large-quote)
+  - [Quote with Context](#quote-with-context)
+- [Hero Section](#hero-section)
+- [Dashboard Layout](#dashboard-layout)
+- [Code Comparison](#code-comparison)
+- [Icon/Emoji Lists](#iconemoji-lists)
+- [Timeline Layout](#timeline-layout)
+- [Grid Layout (Pseudo)](#grid-layout-pseudo)
+- [Highlight Box Pattern](#highlight-box-pattern)
+- [Process Flow](#process-flow)
+- [Comparison Matrix](#comparison-matrix)
+- [Image Gallery](#image-gallery)
+- [Math-Heavy Slide](#math-heavy-slide)
+- [Mixed Media](#mixed-media)
+- [Full-Screen Image with Caption](#full-screen-image-with-caption)
+- [Source Code with Annotations](#source-code-with-annotations)
+- [Tips for Advanced Layouts](#tips-for-advanced-layouts)
+- [Troubleshooting](#troubleshooting)
+
 Complex slide structures and multi-column techniques for Marpit.
 
 ---

@@ -1,5 +1,42 @@
 # Color Palettes Reference
 
+## Table of Contents
+
+- [Part 1: Complete Palette Systems](#part-1-complete-palette-systems)
+  - [Dark Technical Palettes](#dark-technical-palettes)
+    - [1. Code-Focused Blue](#1-code-focused-blue)
+    - [2. Terminal Dark](#2-terminal-dark)
+    - [3. Midnight Professional](#3-midnight-professional)
+  - [Light Professional Palettes](#light-professional-palettes)
+    - [4. Clean Corporate](#4-clean-corporate)
+    - [5. Modern Minimal](#5-modern-minimal)
+    - [6. Warm Professional](#6-warm-professional)
+  - [Accent-Driven Palettes](#accent-driven-palettes)
+    - [7. Minimal with Teal Focus](#7-minimal-with-teal-focus)
+    - [8. Gray Scale with Red Accent](#8-gray-scale-with-red-accent)
+  - [Specialized Palettes](#specialized-palettes)
+    - [9. Data Visualization (Categorical)](#9-data-visualization-categorical)
+    - [10. Accessibility First (High Contrast)](#10-accessibility-first-high-contrast)
+  - [Usage Guidelines for Complete Systems](#usage-guidelines-for-complete-systems)
+- [Part 2: SVG Quick Reference](#part-2-svg-quick-reference)
+  - [Default Palette (Neutral + Blue)](#default-palette-neutral-blue)
+  - [Corporate Professional](#corporate-professional)
+  - [Creative & Modern](#creative-modern)
+  - [Minimal Monochrome](#minimal-monochrome)
+  - [Data Visualization](#data-visualization)
+  - [Academic / Scientific](#academic-scientific)
+  - [Dark Mode](#dark-mode)
+  - [Van Gogh Starry Night](#van-gogh-starry-night)
+  - [Pastel Soft](#pastel-soft)
+  - [High Contrast](#high-contrast)
+  - [Brand-Specific Template](#brand-specific-template)
+  - [Gradient Examples](#gradient-examples)
+  - [Semantic Color Usage](#semantic-color-usage)
+- [Universal Guidelines](#universal-guidelines)
+  - [Color Selection](#color-selection)
+  - [Tools for Palette Generation](#tools-for-palette-generation)
+  - [Quick Color Swaps](#quick-color-swaps)
+
 Comprehensive color palette reference for both complete slide design systems and quick SVG illustration colors.
 
 ---

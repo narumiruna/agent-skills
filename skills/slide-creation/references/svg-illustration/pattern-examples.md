@@ -1,5 +1,15 @@
 # Pattern Examples
 
+## Table of Contents
+
+- [Process Flow (5 Steps)](#process-flow-5-steps)
+- [Timeline (4 Milestones)](#timeline-4-milestones)
+- [Architecture Diagram (3-Tier)](#architecture-diagram-3-tier)
+- [Comparison (3 Columns)](#comparison-3-columns)
+- [KPI Dashboard](#kpi-dashboard)
+- [Icon Set (6 Icons)](#icon-set-6-icons)
+- [Tips for Adapting Patterns](#tips-for-adapting-patterns)
+
 Complete SVG examples for common slide diagram types.
 
 ---

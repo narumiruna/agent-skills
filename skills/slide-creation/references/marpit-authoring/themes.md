@@ -1,5 +1,39 @@
 # Themes and Directives Reference
 
+## Table of Contents
+
+- [Built-in Themes](#built-in-themes)
+  - [1. Default Theme](#1-default-theme)
+  - [2. Gaia Theme](#2-gaia-theme)
+  - [3. Uncover Theme](#3-uncover-theme)
+- [Global Directives (Frontmatter)](#global-directives-frontmatter)
+- [Local Directives (Per-Slide)](#local-directives-per-slide)
+  - [Background Color](#background-color)
+  - [Text Color](#text-color)
+  - [Hide Pagination](#hide-pagination)
+  - [Custom Class](#custom-class)
+- [Common Classes](#common-classes)
+  - [`lead`](#lead)
+  - [`invert`](#invert)
+  - [Combining Classes](#combining-classes)
+- [Image Sizing and Positioning](#image-sizing-and-positioning)
+  - [Background Image](#background-image)
+  - [Background Image with Styling](#background-image-with-styling)
+  - [Image Filters](#image-filters)
+- [Image as Background](#image-as-background)
+- [Color Keywords](#color-keywords)
+- [Custom Styling (Advanced)](#custom-styling-advanced)
+  - [Inline Custom CSS](#inline-custom-css)
+  - [Scoped Styles](#scoped-styles)
+- [Fragmentation (Build Animations)](#fragmentation-build-animations)
+- [Headers and Footers](#headers-and-footers)
+- [Common Directive Combinations](#common-directive-combinations)
+  - [Dark Title Slide](#dark-title-slide)
+  - [Image Split Layout](#image-split-layout)
+  - [Subtle Background](#subtle-background)
+- [Quick Reference Table](#quick-reference-table)
+- [Theme Selection Guide](#theme-selection-guide)
+
 Marpit styling options and customization techniques.
 
 ---

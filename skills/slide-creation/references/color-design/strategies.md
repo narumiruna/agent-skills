@@ -1,5 +1,35 @@
 # Color Strategy Guide
 
+## Table of Contents
+
+- [Strategy 1: Dark Technical](#strategy-1-dark-technical)
+  - [Overview](#overview)
+  - [Visual Characteristics](#visual-characteristics)
+  - [Best For](#best-for)
+  - [Avoid If](#avoid-if)
+  - [Color Role Guidelines](#color-role-guidelines)
+  - [Example Palette](#example-palette)
+  - [Tips](#tips)
+- [Strategy 2: Light Professional](#strategy-2-light-professional)
+  - [Overview](#overview)
+  - [Visual Characteristics](#visual-characteristics)
+  - [Best For](#best-for)
+  - [Avoid If](#avoid-if)
+  - [Color Role Guidelines](#color-role-guidelines)
+  - [Example Palette](#example-palette)
+  - [Tips](#tips)
+- [Strategy 3: Accent-Driven](#strategy-3-accent-driven)
+  - [Overview](#overview)
+  - [Visual Characteristics](#visual-characteristics)
+  - [Best For](#best-for)
+  - [Avoid If](#avoid-if)
+  - [Color Role Guidelines](#color-role-guidelines)
+  - [Example Palette](#example-palette)
+  - [Tips](#tips)
+- [Decision Matrix](#decision-matrix)
+- [Mixing Strategies (Advanced)](#mixing-strategies-advanced)
+- [See Also](#see-also)
+
 Three primary color strategies for slide design. Choose ONE based on context.
 
 ---

@@ -1,5 +1,23 @@
 # Common Slide Patterns
 
+## Table of Contents
+
+- [1. Title Slide (Opening)](#1-title-slide-opening)
+- [2. Agenda / Table of Contents](#2-agenda-table-of-contents)
+- [3. Problem → Solution](#3-problem-solution)
+- [4. Before / After Comparison](#4-before-after-comparison)
+- [5. Feature Showcase](#5-feature-showcase)
+- [6. Quote / Testimonial](#6-quote-testimonial)
+- [7. Key Takeaway](#7-key-takeaway)
+- [8. Pros and Cons](#8-pros-and-cons)
+- [9. Step-by-Step Process](#9-step-by-step-process)
+- [10. Data / Statistics](#10-data-statistics)
+- [11. Section Divider](#11-section-divider)
+- [12. Q&A / Thank You](#12-qa-thank-you)
+- [13. Diagram Placeholder](#13-diagram-placeholder)
+- [14. Code Example with Context](#14-code-example-with-context)
+- [15. Two-Column Concept](#15-two-column-concept)
+
 Quick reference for frequently used presentation structures.
 
 ---
