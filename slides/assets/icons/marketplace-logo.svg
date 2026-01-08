@@ -18,7 +18,6 @@
 
   <g id="main">
     <!-- Connection lines -->
-    <line x1="240" y1="200" x2="240" y2="200" stroke="#cbd5e1" stroke-width="3" opacity="0.6"/>
     <line x1="240" y1="200" x2="360" y2="200" stroke="#cbd5e1" stroke-width="3" opacity="0.6"/>
     
     <!-- Plugin 1 - Python (Code Quality) -->
