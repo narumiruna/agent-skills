@@ -16,9 +16,18 @@ This repository serves two purposes:
 ├── .claude-plugin/
 │   └── marketplace.json       # Marketplace catalog (defines available plugins)
 ├── skills/
+│   ├── marpit-markdown/       # Marpit/Marp slide authoring skill
+│   │   ├── SKILL.md
+│   │   └── references/
 │   ├── python-peewee/         # Peewee ORM skill
 │   │   └── SKILL.md
-│   └── python-project/        # Python project workflow skill
+│   ├── python-project/        # Python project workflow skill
+│   │   ├── SKILL.md
+│   │   └── references/
+│   ├── slide-color-design/    # Slide color design skill
+│   │   ├── SKILL.md
+│   │   └── references/
+│   └── slide-svg-illustrator/ # SVG illustration skill
 │       ├── SKILL.md
 │       └── references/
 ├── GUIDE.md                   # Complete marketplace creation guide
@@ -86,27 +95,77 @@ This is key for simple plugin definitions vs. complex multi-component plugins.
 
 ## This Marketplace's Plugins
 
-This repository contains two example plugins:
+This repository contains three example plugins:
 
 ### 1. python-code-quality (hooks-based)
-- **Type**: Hooks plugin (no skill content, only PreToolUse hooks)
-- **Source**: `./plugins/python-code-quality` (currently not created - defined inline with `strict: false`)
-- **Purpose**: Automatically runs code quality tools before Edit/Write operations
-- **Hooks**:
-  - `uv run ruff format` - Code formatting
-  - `uv run ruff check --fix` - Linting with auto-fixes
-  - `uv run ty check` - Type checking
-- **Note**: Uses `strict: false` so all configuration is in marketplace.json
 
-### 2. python-skills (multi-skill plugin)
-- **Type**: Skill plugin (contains multiple skills)
-- **Source**: `./` (root directory)
-- **Purpose**: Comprehensive Python development toolkit
-- **Skills**:
-  - `./skills/python-project` - Python 3.12+ project workflow and standards (uv, ruff, pytest, ty, typer, loguru)
-  - `./skills/python-peewee` - Peewee ORM patterns with DatabaseProxy and scoped connections/transactions
-- **Content**: Two complementary skills for Python development
-- **Note**: Uses `strict: false` so plugin.json is not required
+Location: `./plugins/python-code-quality`
+- Uses PreToolUse hooks to run code quality tools automatically
+- Runs before Edit/Write operations on Python files
+- No skills, only hooks
+- Inline definition with `strict: false`
+
+Commands executed:
+- `uv run ruff format` - Auto-format Python code
+- `uv run ruff check --fix` - Lint and auto-fix issues
+- `uv run ty check` - Type checking
+
+### 2. python-skills (multi-skill)
+
+Location: `./` (root)
+Skills: `./skills/python-peewee`, `./skills/python-project`
+
+**python-project skill**:
+- Modern Python tooling patterns (uv, ruff, pytest, ty, typer, loguru)
+- Project setup and dependency management
+- Testing, type checking, and linting workflows
+- CLI development with typer
+- Logging best practices with loguru
+
+**python-peewee skill**:
+- DatabaseProxy setup patterns
+- Connection context management
+- Atomic transaction examples
+- Testing patterns with SQLite
+- ORM best practices
+
+### 3. slide-skills (multi-skill, v0.0.3)
+
+Location: `./` (root)
+Skills: `./skills/marpit-markdown`, `./skills/slide-svg-illustrator`, `./skills/slide-color-design`
+
+**marpit-markdown skill**:
+- Marpit/Marp presentation slide authoring
+- Output-only skill: generates complete slide files
+- Supports default/gaia/uncover themes
+- Comprehensive references:
+  - Slide patterns (title, content, two-column, etc.)
+  - Themes and directives
+  - Advanced layouts and best practices
+- Mandatory frontmatter with theme specification
+
+**slide-svg-illustrator skill**:
+- SVG illustration authoring optimized for Marp HTML export
+- Smart sizing logic based on slide context
+- Multiple embedding methods:
+  - Centered illustrations
+  - Two-column layouts
+  - Full-background graphics
+- Comprehensive references:
+  - Pattern examples (process flows, timelines, architecture, comparisons)
+  - Color palettes (8 curated schemes)
+  - Troubleshooting common SVG issues
+- Theme-aware adjustments for default/gaia/uncover
+- HTML-first approach for GitHub Actions workflow
+
+**slide-color-design skill**:
+- Consistent color system design for presentations
+- Professional color scheme selection
+- Design principles and guidelines
+- Visual harmony and contrast management
+- References for color theory and application
+
+All three skills work together to provide a complete presentation creation toolkit.
 
 ## Adding New Plugins
 
