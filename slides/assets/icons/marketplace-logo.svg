@@ -1,29 +1,46 @@
 <svg viewBox="0 0 600 400" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
   <title>Marketplace Logo</title>
-  <desc>Claude Code plugin marketplace icon with three connected plugins</desc>
+  <desc>Claude Code plugin marketplace icon with three connected plugins in Van Gogh Starry Night palette</desc>
+
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F6F8FB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e3eaf2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow-sm">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#d0dce9;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#b8c9db;stop-opacity:0" />
+    </radialGradient>
+  </defs>
 
   <g id="bg">
-    <rect x="0" y="0" width="600" height="400" rx="20" fill="#e3f2fd" stroke="#1976d2" stroke-width="4"/>
+    <rect x="0" y="0" width="600" height="400" rx="20" fill="url(#bg-gradient)" stroke="#d4a574" stroke-width="3"/>
   </g>
 
   <g id="main">
-    <!-- Plugin 1 - Python -->
-    <circle cx="180" cy="200" r="60" fill="#42a5f5" stroke="#1565c0" stroke-width="4"/>
-    <path d="M 160 190 L 170 210 L 200 180" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Connection lines -->
+    <line x1="240" y1="200" x2="360" y2="200" stroke="#4a7ba7" stroke-width="2" opacity="0.4"/>
+    
+    <!-- Plugin 1 - Python (Code Quality) with star glow -->
+    <circle cx="180" cy="200" r="45" fill="url(#star-glow)"/>
+    <circle cx="180" cy="200" r="60" fill="#f4e5a0" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
+    <path d="M 160 190 L 170 210 L 200 180" stroke="#1e3a5f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
     <!-- Plugin 2 - Skills -->
-    <circle cx="300" cy="200" r="60" fill="#66bb6a" stroke="#2e7d32" stroke-width="4"/>
-    <rect x="280" y="180" width="40" height="40" rx="4" fill="white" stroke="none"/>
+    <circle cx="300" cy="200" r="60" fill="#2a5f8f" stroke="#1e3a5f" stroke-width="3" filter="url(#shadow-sm)"/>
+    <rect x="280" y="180" width="40" height="40" rx="4" fill="#fef7cd" stroke="none"/>
 
-    <!-- Plugin 3 - Slides -->
-    <circle cx="420" cy="200" r="60" fill="#ffa726" stroke="#e65100" stroke-width="4"/>
-    <rect x="405" y="185" width="30" height="8" rx="2" fill="white"/>
-    <rect x="405" y="196" width="30" height="8" rx="2" fill="white"/>
-    <rect x="405" y="207" width="20" height="8" rx="2" fill="white"/>
+    <!-- Plugin 3 - Marketplace -->
+    <circle cx="420" cy="200" r="60" fill="#4a7ba7" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
+    <path d="M 395 185 L 395 210 L 445 210 L 445 185 Z M 410 195 L 410 200 M 420 195 L 420 200 M 430 195 L 430 200" 
+          stroke="#fef7cd" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
   <g id="labels">
-    <text x="300" y="320" text-anchor="middle" font-size="36" font-weight="bold" fill="#1976d2" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+    <text x="300" y="320" text-anchor="middle" font-size="36" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       Plugin Marketplace
     </text>
   </g>

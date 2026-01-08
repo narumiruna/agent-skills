@@ -145,6 +145,72 @@ Muted:      #64748B  (slate-500)
 
 ---
 
+## Van Gogh Starry Night
+
+**Best for**: Artistic presentations, creative content, emotional storytelling
+
+**Inspired by Vincent van Gogh's "The Starry Night" (1889)**
+
+```
+Night Sky:     #1e3a5f  (deep prussian blue)
+Swirling Blue: #2a5f8f  (cobalt blue)
+Bright Star:   #f4e5a0  (pale gold)
+Moon Glow:     #fef7cd  (creamy yellow)
+Cypress Tree:  #1a4d2e  (dark forest green)
+Village Light: #d4a574  (warm ochre)
+Accent Blue:   #4a7ba7  (cerulean)
+Dark Stroke:   #0f1f2e  (midnight blue-black)
+```
+
+**Color Psychology:**
+- Deep blues evoke night, tranquility, and depth
+- Warm yellows/golds create contrast and hope
+- Swirling patterns suggest movement and emotion
+- Dark greens ground the composition
+
+**Usage:**
+```xml
+<!-- Starry night background with gradient -->
+<defs>
+  <linearGradient id="starry-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#0f1f2e;stop-opacity:1" />
+    <stop offset="50%" style="stop-color:#1e3a5f;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#2a5f8f;stop-opacity:1" />
+  </linearGradient>
+  
+  <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
+    <stop offset="70%" style="stop-color:#f4e5a0;stop-opacity:0.6" />
+    <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0" />
+  </radialGradient>
+</defs>
+
+<!-- Background -->
+<rect fill="url(#starry-bg)" width="100%" height="100%"/>
+
+<!-- Stars with glow effect -->
+<circle cx="300" cy="200" r="20" fill="url(#star-glow)"/>
+<circle cx="300" cy="200" r="8" fill="#fef7cd"/>
+
+<!-- Text in village light color -->
+<text fill="#d4a574" stroke="#0f1f2e" stroke-width="1">Artistic Content</text>
+```
+
+**Perfect for:**
+- Creative agency presentations
+- Art and design portfolios
+- Emotional storytelling
+- Night-themed content
+- Inspirational talks
+
+**Variations:**
+- Use swirling brush-like strokes (curved paths) for authenticity
+- Layer translucent blues for depth
+- Add circular/spiral patterns to mimic Van Gogh's style
+- Combine with textured effects for painterly feel
+
+---
+
 ## Pastel Soft
 
 **Best for**: Friendly, approachable content, design presentations

@@ -6,6 +6,55 @@ Create clean, editable SVG illustrations that embed reliably in **Marp/Marpit Ma
 
 ---
 
+## Core Principle: Visual Consistency
+
+**CRITICAL: All SVG assets in a presentation must follow a unified design system.**
+
+When creating multiple SVGs for the same presentation:
+
+1. **Use the SAME color palette** across all assets
+2. **Maintain consistent stroke widths** (e.g., 3px or 4px everywhere)
+3. **Apply uniform border radius** (e.g., 12px or 16px for all cards)
+4. **Use consistent shadow/depth system** (same filter definitions)
+5. **Keep icon style uniform** (all outlined OR all filled, not mixed)
+
+**Example: Consistent Design System**
+
+```xml
+<!-- Define ONCE, reuse everywhere -->
+<defs>
+  <!-- Standard shadow (use in ALL diagrams) -->
+  <filter id="shadow-sm">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
+  </filter>
+  
+  <!-- Primary gradient (use for all primary elements) -->
+  <linearGradient id="primary-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+  </linearGradient>
+</defs>
+
+<!-- Consistent styling -->
+<rect rx="16" fill="url(#primary-bg)" stroke="#0891b2" stroke-width="3" filter="url(#shadow-sm)"/>
+```
+
+**Common Inconsistency Mistakes:**
+
+❌ **Don't do this:**
+- `icon.svg` uses stroke-width="4" but `diagram.svg` uses stroke-width="2"
+- `card-1.svg` has rx="12" but `card-2.svg` has rx="8"
+- `flow.svg` uses #2563EB but `architecture.svg` uses #1e40af
+- Some SVGs have shadows, others don't
+
+✅ **Do this:**
+- ALL assets use stroke-width="3" consistently
+- ALL cards/containers use rx="16" consistently  
+- ALL assets use the SAME accent color (#0891b2)
+- ALL assets use the SAME shadow filter
+
+---
+
 ## Core Defaults
 
 ### Canvas Specifications
@@ -52,12 +101,22 @@ Result: Content fills the available space when scaled with `![w:600](...)`.
 
 ### Visual Style
 
-- Stroke width: **4px @ 1920×1080**, rounded caps/joins
-- Default palette:
-  - Dark: `#111827`
-  - Mid: `#6B7280`
-  - Light: `#E5E7EB`
-  - Accent: `#2563EB`
+- Stroke width: **3-4px** (use 3px for modern, clean look), rounded caps/joins
+- **Default palette: Van Gogh Starry Night (Recommended)**
+  - Night Sky: `#1e3a5f` (deep prussian blue)
+  - Swirling Blue: `#2a5f8f` (cobalt blue)
+  - Bright Star: `#f4e5a0` (pale gold)
+  - Moon Glow: `#fef7cd` (creamy yellow)
+  - Dark Stroke: `#0f1f2e` (midnight blue-black)
+  - Village Light: `#d4a574` (warm ochre)
+
+**Why Van Gogh Starry Night?**
+- Artistic yet professional
+- Distinctive color harmony
+- Evokes emotion and creativity
+- Works well for technical and creative content
+- Blues convey trust and depth
+- Golds add warmth and highlight important elements
 
 ---
 
@@ -65,35 +124,71 @@ Result: Content fills the available space when scaled with `![w:600](...)`.
 
 ### Color Palette & Psychology
 
-**Primary Color System (Modern Tech)**
+**Recommended Default: Van Gogh Starry Night**
 
-Use colors that convey the right emotion and meaning:
+Inspired by Vincent van Gogh's masterpiece, this palette combines emotional depth with professional credibility.
+
+```
+Primary Colors:
+  - Night Sky: #1e3a5f (deep prussian blue)
+    → Use for: Main backgrounds, primary containers, trust elements
+  
+  - Swirling Blue: #2a5f8f (cobalt blue)
+    → Use for: Section dividers, headers, active states
+  
+  - Bright Star: #f4e5a0 (pale gold)
+    → Use for: Highlights, icons, call-to-action elements
+  
+  - Moon Glow: #fef7cd (creamy yellow)
+    → Use for: Light backgrounds, subtle highlights, success states
+
+Supporting Colors:
+  - Dark Stroke: #0f1f2e (midnight blue-black)
+    → Use for: Text, borders, strong contrast
+  
+  - Village Light: #d4a574 (warm ochre)
+    → Use for: Secondary highlights, warm accents
+  
+  - Cypress Green: #1a4d2e (dark forest green)
+    → Use for: Alternative accents, nature/growth themes
+  
+  - Sky Accent: #4a7ba7 (cerulean)
+    → Use for: Links, interactive elements
+```
+
+**Color Application Examples:**
+
+```xml
+<!-- Card with Starry Night palette -->
+<defs>
+  <linearGradient id="starry-card" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#2a5f8f;stop-opacity:0.1" />
+    <stop offset="100%" style="stop-color:#1e3a5f;stop-opacity:0.15" />
+  </linearGradient>
+</defs>
+
+<rect fill="url(#starry-card)" stroke="#2a5f8f" stroke-width="3" rx="16"/>
+<circle fill="#f4e5a0"/>  <!-- Star/icon -->
+<text fill="#0f1f2e">Text</text>  <!-- Dark readable text -->
+```
+
+**Alternative: Modern Tech Palette (Secondary Option)**
+
+Use this for purely technical, corporate presentations:
 
 ```
 Primary (Trust, Stability):
   - Deep Blue: #1e40af
-  - Usage: Main headings, primary actions, trust indicators
-
-Secondary (Innovation, Growth):
   - Cyan Blue: #0891b2
-  - Usage: Supporting elements, links, secondary actions
 
 Accent Colors (Context-specific):
   - Amber (Attention, Quality): #f59e0b
-    → Use for: warnings, code quality, important notices
   - Emerald (Success, Skills): #10b981
-    → Use for: completed steps, success states, growth indicators
   - Rose (Error, Critical): #e11d48
-    → Use for: errors, critical warnings
-  - Violet (Creative, Premium): #7c3aed
-    → Use for: premium features, creative tools
 
 Neutral Palette:
   - Text Dark: #1e293b
-  - Text Mid: #475569
-  - Text Light: #94a3b8
   - Background Light: #f8fafc
-  - Background Mid: #e2e8f0
   - Border: #cbd5e1
 ```
 
@@ -109,42 +204,78 @@ Use these proven combinations for different contexts:
 
 **Color Application Rules**
 
-- **Background cards**: Use tints (color at 10-20% opacity on white)
+- **Background cards**: Use subtle gradients (see below) instead of flat colors
 - **Icons**: Use solid accent colors with 80-100% opacity
-- **Borders**: Use color at 60-80% opacity, 2-4px width
+- **Borders**: Use color at 60-80% opacity, 3-4px width (consistent)
 - **Text on color**: Ensure WCAG AA contrast (4.5:1 minimum)
-- **Gradients**: Subtle, 10-20% lightness difference max
+- **Gradients**: Subtle, 5-10% lightness difference for modern look
+
+**Recommended Gradient Pattern (Modern, Professional)**
+
+```xml
+<!-- For card backgrounds - subtle and professional -->
+<linearGradient id="card-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+  <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
+  <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+</linearGradient>
+
+<!-- Apply to card -->
+<rect fill="url(#card-bg)" stroke="#0891b2" stroke-width="3"/>
+```
+
+**Use gradients for:**
+- Card/container backgrounds (vertical, subtle)
+- Progress indicators
+- Section dividers
+
+**DON'T use gradients for:**
+- Text (always solid color)
+- Small icons (< 80px)
+- Borders/strokes
 
 ### Shadow & Depth System
 
 Create visual hierarchy through layering:
 
-**Shadow Levels**
+**Shadow Levels (Recommended for Presentations)**
 
 ```xml
-<!-- Level 1: Subtle elevation (cards, containers) -->
+<!-- Use THIS shadow consistently across ALL assets -->
 <filter id="shadow-sm">
-  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
-</filter>
-
-<!-- Level 2: Medium elevation (interactive elements) -->
-<filter id="shadow-md">
-  <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
-</filter>
-
-<!-- Level 3: High elevation (modals, popups) -->
-<filter id="shadow-lg">
-  <feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity="0.2"/>
+  <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
 </filter>
 ```
 
 **Usage Guidelines**
 
 - **Background layer**: No shadow
-- **Card/Container layer**: shadow-sm
-- **Icon/Badge layer**: shadow-md (optional)
-- **Floating elements**: shadow-lg
-- **Avoid**: Shadows on text (reduces legibility)
+- **Card/Container layer**: shadow-sm (ALWAYS use same filter ID)
+- **Icon/Badge layer**: Optional shadow-sm if floating
+- **Floating elements**: shadow-sm (keep consistent)
+- **Avoid**: Multiple shadow levels in same presentation (causes inconsistency)
+
+**⚠️ Consistency Rule:** 
+Define shadow filter ONCE per presentation, reuse the exact same `<filter>` definition in all SVG files.
+
+**Practical Implementation:**
+
+```xml
+<!-- In SVG #1: icon.svg -->
+<defs>
+  <filter id="shadow-sm">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
+  </filter>
+</defs>
+
+<!-- In SVG #2: diagram.svg -->
+<defs>
+  <filter id="shadow-sm">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
+  </filter>
+</defs>
+
+<!-- SAME definition = visual consistency -->
+```
 
 **Alternative to shadows (Marp-safe)**
 
