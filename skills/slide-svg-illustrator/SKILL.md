@@ -10,9 +10,44 @@ Create clean, editable SVG illustrations that embed reliably in **Marp/Marpit Ma
 
 ### Canvas Specifications
 
-- Slide baseline: **16:9, 1920×1080**
-- SVG canvas: `viewBox="0 0 1920 1080"` with explicit `width="1920"` `height="1080"`
-- Safe margins: **120px on each side** (keep key content inside)
+**CRITICAL: viewBox Must Match Content Bounds**
+
+The `viewBox` should tightly fit the actual content, not be arbitrarily sized. Empty space in the viewBox will scale proportionally, causing the actual content to appear tiny.
+
+**Wrong approach:**
+```xml
+<!-- Content only uses 600×400 area in center, rest is empty -->
+<svg viewBox="0 0 1920 1080" width="1920" height="1080">
+  <rect x="660" y="340" width="600" height="400" />
+</svg>
+```
+Result: Massive empty space around content when embedded.
+
+**Correct approach:**
+```xml
+<!-- viewBox matches actual content bounds -->
+<svg viewBox="0 0 600 400" width="600" height="400">
+  <rect x="0" y="0" width="600" height="400" />
+</svg>
+```
+Result: Content fills the available space when scaled with `![w:600](...)`.
+
+**Guidelines:**
+
+- **Determine content bounds first**: Calculate the bounding box of all visible elements
+- **Set viewBox to match**: `viewBox="0 0 {width} {height}"` where width/height fit the content
+- **Avoid 1920×1080 for small graphics**: Only use full canvas for actual full-slide backgrounds
+- **Common sizes**:
+  - Centered diagrams: 1200×675 or 1400×787 (maintains 16:9)
+  - Icons/badges: 200×200 to 600×400
+  - Two-column graphics: 720×405 to 800×450
+  - Plugin cards: 1440×300 (wide, short)
+  - Flow diagrams: 1320×200 (extra wide, short)
+
+**Slide baseline reference:** 16:9 aspect ratio, conceptually 1920×1080, but adjust viewBox to content.
+
+**Other specs:**
+- Safe margins: **120px on each side** when using full 1920×1080 canvas
 - Grid alignment: **8px**
 
 ### Visual Style
@@ -32,12 +67,85 @@ Create clean, editable SVG illustrations that embed reliably in **Marp/Marpit Ma
 
 ---
 
+## File Management and Organization
+
+### Standard Directory Structure
+
+All SVG files **MUST be saved to disk** using the Write tool. **NEVER embed SVG inline in Markdown.**
+
+**Standard structure:**
+```
+presentation-root/
+├── slides.md          # Main presentation file
+└── assets/
+    ├── diagrams/      # Process flows, architecture diagrams
+    ├── icons/         # Icon sets, badges
+    ├── charts/        # Data visualizations, graphs
+    ├── backgrounds/   # Full-slide background images
+    └── images/        # Other images (photos, screenshots)
+```
+
+**Key principle: On-demand creation** - Only create directories when needed (when saving the first file to that location).
+
+### Asset Classification Logic
+
+Use this decision tree to determine the correct subdirectory:
+
+| SVG Type | Subdirectory | Examples |
+|----------|--------------|----------|
+| Process flow, architecture, system diagram | `assets/diagrams/` | workflow, data-flow, system-architecture |
+| Icon, badge, logo, small graphic | `assets/icons/` | feature-icon, status-badge |
+| Chart, graph, data visualization | `assets/charts/` | bar-chart, pie-chart, timeline |
+| Full-slide background pattern/image | `assets/backgrounds/` | title-bg, section-bg |
+| Other images (not SVG you created) | `assets/images/` | photo, screenshot |
+
+**Default:** If uncertain, use `assets/diagrams/`
+
+### Naming Conventions
+
+Use descriptive, kebab-case names:
+- ✅ `marketplace-architecture.svg`
+- ✅ `python-workflow-diagram.svg`
+- ✅ `feature-comparison-chart.svg`
+- ✅ `plugin-icon.svg`
+- ❌ `diagram1.svg`, `img.svg`, `untitled.svg`, `new.svg`
+
+**Pattern:** `{descriptive-name}.svg` where the name clearly indicates what the SVG shows.
+
+### File Creation Workflow
+
+**CRITICAL:** Every SVG must be saved as a separate file:
+
+1. **Determine category** using the classification logic above
+2. **Infer meaningful filename** from context (or ask if unclear)
+3. **Check if directory exists** (conceptually - Write/Bash will handle it)
+4. **Create directory if needed** using `mkdir -p assets/{category}/`
+5. **Use Write tool** to save SVG to `assets/{category}/{name}.svg`
+6. **Provide embedding code** with correct relative path
+7. **Inform user** of the file path created
+
+**Example:**
+```
+User: "Create a marketplace architecture diagram"
+→ Category: diagrams (it's an architecture diagram)
+→ Filename: marketplace-architecture.svg
+→ Path: assets/diagrams/marketplace-architecture.svg
+→ Check: does assets/diagrams/ exist?
+→ If no: mkdir -p assets/diagrams/
+→ Write SVG to assets/diagrams/marketplace-architecture.svg
+→ Return embedding: ![w:1200](assets/diagrams/marketplace-architecture.svg)
+```
+
+---
+
 ## Output Contract
 
 Every response MUST include:
 
 1. **1–3 bullets**: intent + layout + recommended embed style
-2. **One SVG** in a single code block
+2. **File creation**: Use Bash to create directory (if needed) and Write tool to save SVG
+   - Report the file path to user
+   - Ensure path is relative from presentation root
 3. **One Marp embedding snippet** (choose the best option from below)
 
 ---
@@ -325,11 +433,13 @@ Use consistent stroke widths (4px) and border radius values.
 
 ### 5. Final Checks
 
+- [ ] **viewBox matches content bounds** (no excessive empty space)
 - [ ] No clipping of content outside viewBox
 - [ ] Legible at typical slide viewing size
 - [ ] Consistent alignment and spacing
 - [ ] All paths use 8px grid alignment
 - [ ] Colors follow palette guidelines
+- [ ] Test embedding: `![w:XXX](path)` displays content at intended size
 
 ---
 
@@ -343,13 +453,13 @@ Ensure consistent embedding in Marp HTML exports.
 
 ### Checklist
 
-- [ ] Ensure `viewBox` exists and matches content bounds
-- [ ] Normalize to 1920×1080 canvas for slide illustrations (keep original for icons)
+- [ ] **Ensure `viewBox` exists and matches content bounds** (no excessive empty space)
+- [ ] **Adjust viewBox to actual content size**, not arbitrary 1920×1080 unless truly full-slide
 - [ ] Remove editor metadata (Inkscape/Illustrator) if safe
 - [ ] Flatten styles if needed (avoid reliance on external CSS)
 - [ ] Replace problematic features with simpler primitives
 - [ ] Decide on text: editable `<text>` vs paths
-- [ ] Verify rendering in Marp preview
+- [ ] Verify rendering in Marp preview and check scaling behavior
 
 ---
 
@@ -426,17 +536,17 @@ Always structure responses like this:
 - Recommended placement (centered / left / right)
 - Suggested embed method (Option A/B/C)
 
-**SVG Code:**
-```xml
-<svg viewBox="0 0 1920 1080" width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
-  <!-- complete SVG here -->
-</svg>
+**File Creation:**
+```
+Created: assets/diagrams/marketplace-architecture.svg
 ```
 
 **Marp Embedding:**
 ```markdown
-<!-- chosen embedding snippet -->
+![w:1200](assets/diagrams/marketplace-architecture.svg)
 ```
+
+**Note:** The SVG file is saved to disk using Write tool. Do NOT output the raw SVG code to the user unless explicitly requested for debugging purposes.
 
 ---
 

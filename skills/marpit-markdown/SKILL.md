@@ -189,23 +189,83 @@ Directives starting with `_` apply only to the current slide.
 
 ---
 
-## Images
+## Working with Assets
 
-Use standard Markdown image syntax:
+### Asset Organization
+
+**Standard directory structure:**
+```
+presentation-root/
+├── slides.md          # Your presentation (this file)
+└── assets/
+    ├── diagrams/      # Process flows, architecture diagrams
+    ├── icons/         # Icon sets, badges
+    ├── charts/        # Data visualizations, graphs
+    ├── backgrounds/   # Full-slide background images
+    └── images/        # Other images (photos, screenshots)
+```
+
+**Key principle:** All media assets go in `assets/` subdirectories, organized by type.
+
+### Image References
+
+**ALWAYS use relative paths from the markdown file location:**
 
 ```markdown
-![Description](path/to/image.png)
+# Correct - relative paths from slides.md
+![Description](assets/diagram.svg)
+![w:1200](assets/diagrams/workflow.svg)
+![Icon](assets/icons/feature.svg)
+
+# Incorrect - absolute paths
+![Description](/home/user/assets/diagram.svg)
+![Description](/assets/diagram.svg)
 ```
 
 **Guidelines:**
 - Always provide meaningful alt text
-- Use relative paths when possible
-- Assume images are available unless told otherwise
-- For sizing, let the theme handle it (avoid HTML unless necessary)
+- Use relative paths (as shown above)
+- Assume assets exist if referenced in conversation
+- For sizing, use Marp's `w:` directive (e.g., `![w:1200](...)`)
 
 **Centered image:**
 ```markdown
-![center](image.png)
+![center w:1200](assets/diagrams/example.svg)
+```
+
+### Integration with slide-svg-illustrator
+
+When you need custom SVG illustrations, the `slide-svg-illustrator` skill will:
+
+1. **Create the SVG file** using Write tool
+2. **Save to correct location** (e.g., `assets/diagrams/workflow.svg`)
+3. **Return embedding code** with proper relative path
+
+**Your role:** Insert the provided embedding code into the Marpit document at the appropriate location.
+
+**Example workflow:**
+```
+User: "Create a workflow diagram for slide 2"
+→ slide-svg-illustrator creates assets/diagrams/workflow.svg
+→ slide-svg-illustrator returns: ![w:1200](assets/diagrams/workflow.svg)
+→ You insert this reference into slide 2 of the presentation
+```
+
+### Presentation File Location
+
+**Default filename:** `slides.md` in the presentation root directory.
+
+If the presentation file doesn't exist yet, create it using Write tool at the project root with proper frontmatter:
+
+```markdown
+---
+marp: true
+theme: default
+paginate: true
+---
+
+# Presentation Title
+...
 ```
 
 ---
