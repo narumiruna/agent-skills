@@ -27,7 +27,7 @@ When creating multiple SVGs for the same presentation:
   <filter id="shadow-sm">
     <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
   </filter>
-  
+
   <!-- Primary gradient (use for all primary elements) -->
   <linearGradient id="primary-bg" x1="0%" y1="0%" x2="0%" y2="100%">
     <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
@@ -49,7 +49,7 @@ When creating multiple SVGs for the same presentation:
 
 ✅ **Do this:**
 - ALL assets use stroke-width="3" consistently
-- ALL cards/containers use rx="16" consistently  
+- ALL cards/containers use rx="16" consistently
 - ALL assets use the SAME accent color (#0891b2)
 - ALL assets use the SAME shadow filter
 
@@ -132,26 +132,26 @@ Inspired by Vincent van Gogh's masterpiece, this palette combines emotional dept
 Primary Colors:
   - Night Sky: #1e3a5f (deep prussian blue)
     → Use for: Main backgrounds, primary containers, trust elements
-  
+
   - Swirling Blue: #2a5f8f (cobalt blue)
     → Use for: Section dividers, headers, active states
-  
+
   - Bright Star: #f4e5a0 (pale gold)
     → Use for: Highlights, icons, call-to-action elements
-  
+
   - Moon Glow: #fef7cd (creamy yellow)
     → Use for: Light backgrounds, subtle highlights, success states
 
 Supporting Colors:
   - Dark Stroke: #0f1f2e (midnight blue-black)
     → Use for: Text, borders, strong contrast
-  
+
   - Village Light: #d4a574 (warm ochre)
     → Use for: Secondary highlights, warm accents
-  
+
   - Cypress Green: #1a4d2e (dark forest green)
     → Use for: Alternative accents, nature/growth themes
-  
+
   - Sky Accent: #4a7ba7 (cerulean)
     → Use for: Links, interactive elements
 ```
@@ -254,7 +254,7 @@ Create visual hierarchy through layering:
 - **Floating elements**: shadow-sm (keep consistent)
 - **Avoid**: Multiple shadow levels in same presentation (causes inconsistency)
 
-**⚠️ Consistency Rule:** 
+**⚠️ Consistency Rule:**
 Define shadow filter ONCE per presentation, reuse the exact same `<filter>` definition in all SVG files.
 
 **Practical Implementation:**

@@ -23,7 +23,7 @@
   <g id="main">
     <!-- Connection lines -->
     <line x1="240" y1="200" x2="360" y2="200" stroke="#4a7ba7" stroke-width="2" opacity="0.4"/>
-    
+
     <!-- Plugin 1 - Python (Code Quality) with star glow -->
     <circle cx="180" cy="200" r="45" fill="url(#star-glow)"/>
     <circle cx="180" cy="200" r="60" fill="#f4e5a0" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
@@ -35,7 +35,7 @@
 
     <!-- Plugin 3 - Marketplace -->
     <circle cx="420" cy="200" r="60" fill="#4a7ba7" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
-    <path d="M 395 185 L 395 210 L 445 210 L 445 185 Z M 410 195 L 410 200 M 420 195 L 420 200 M 430 195 L 430 200" 
+    <path d="M 395 185 L 395 210 L 445 210 L 445 185 Z M 410 195 L 410 200 M 420 195 L 420 200 M 430 195 L 430 200"
           stroke="#fef7cd" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 

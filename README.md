@@ -38,6 +38,32 @@ Comprehensive Python development toolkit combining project workflow standards an
 
 **Type**: Skill plugin (provides Claude with Python development expertise)
 
+### slide-skills
+
+Complete Marp/Marpit presentation toolkit for creating professional slides.
+
+**Marpit Markdown** (`marpit-markdown` skill):
+- Marpit/Marp presentation slide authoring
+- Markdown-based slide creation
+- Theme support (default/gaia/uncover)
+- Slide directives and frontmatter
+- Layout patterns and best practices
+
+**SVG Illustrator** (`slide-svg-illustrator` skill):
+- Create slide-ready SVG illustrations
+- Optimized for Marp HTML export
+- Smart sizing for different contexts
+- Pattern examples (flows, timelines, architecture)
+- Color palettes and design principles
+
+**Color Design** (`slide-color-design` skill):
+- Consistent color systems for presentations
+- Professional color schemes
+- Design principles and guidelines
+- Visual harmony and contrast
+
+**Type**: Skill plugin (provides Claude with presentation design expertise)
+
 ## Installation
 
 ### Add this marketplace
@@ -60,6 +86,9 @@ Or for local testing:
 
 # Install Python development skills (includes project workflow + Peewee ORM)
 /plugin install python-skills@narumi
+
+# Install presentation slide creation skills
+/plugin install slide-skills@narumi
 ```
 
 ## Testing & Validation
@@ -85,7 +114,7 @@ Test locally before publishing:
 
 This marketplace demonstrates:
 - Hooks-based plugins (python-code-quality)
-- Multi-skill plugins (python-skills with multiple skills)
+- Multi-skill plugins (python-skills, slide-skills with multiple skills)
 - Using `strict: false` for inline plugin definitions
 - Organizing skills in `skills/` directory
 - Marketplace validation and testing

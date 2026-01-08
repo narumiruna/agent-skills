@@ -177,7 +177,7 @@ Dark Stroke:   #0f1f2e  (midnight blue-black)
     <stop offset="50%" style="stop-color:#1e3a5f;stop-opacity:1" />
     <stop offset="100%" style="stop-color:#2a5f8f;stop-opacity:1" />
   </linearGradient>
-  
+
   <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
     <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
     <stop offset="70%" style="stop-color:#f4e5a0;stop-opacity:0.6" />

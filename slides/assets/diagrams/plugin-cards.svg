@@ -27,17 +27,17 @@
   <g id="main">
     <!-- Python Code Quality Card -->
     <rect x="24" y="24" width="680" height="252" rx="16" fill="url(#quality-bg)" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
-    
+
     <!-- Icon with glow -->
     <circle cx="100" cy="130" r="40" fill="url(#icon-glow-quality)"/>
     <circle cx="100" cy="130" r="35" fill="#f4e5a0"/>
     <path d="M 88 123 L 95 138 L 112 113" stroke="#1e3a5f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    
+
     <!-- Title -->
     <text x="364" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       python-code-quality
     </text>
-    
+
     <!-- Description -->
     <text x="364" y="145" text-anchor="middle" font-size="30" fill="#0f1f2e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       ruff + ty 自動檢查
@@ -51,17 +51,17 @@
 
     <!-- Python Skills Card -->
     <rect x="736" y="24" width="680" height="252" rx="16" fill="url(#skills-bg)" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
-    
+
     <!-- Icon with glow -->
     <circle cx="812" cy="130" r="40" fill="url(#icon-glow-skills)"/>
     <circle cx="812" cy="130" r="35" fill="#2a5f8f"/>
     <rect x="797" y="115" width="30" height="30" rx="4" fill="#fef7cd"/>
-    
+
     <!-- Title -->
     <text x="1076" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       python-skills
     </text>
-    
+
     <!-- Description -->
     <text x="1076" y="145" text-anchor="middle" font-size="30" fill="#0f1f2e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       專案工作流 + ORM

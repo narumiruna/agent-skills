@@ -26,13 +26,13 @@
   <g id="main">
     <!-- Step 1: Add Marketplace -->
     <rect x="24" y="24" width="340" height="152" rx="16" fill="url(#step1-bg)" stroke="#4a7ba7" stroke-width="3" filter="url(#shadow-sm)"/>
-    
+
     <!-- Step number badge -->
     <circle cx="64" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
     <text x="64" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       1
     </text>
-    
+
     <text x="194" y="90" text-anchor="middle" font-size="30" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       Add
     </text>
@@ -45,13 +45,13 @@
 
     <!-- Step 2: Install Plugin -->
     <rect x="486" y="24" width="340" height="152" rx="16" fill="url(#step2-bg)" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
-    
+
     <!-- Step number badge -->
     <circle cx="526" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
     <text x="526" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       2
     </text>
-    
+
     <text x="656" y="90" text-anchor="middle" font-size="30" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       Install
     </text>
@@ -64,17 +64,17 @@
 
     <!-- Step 3: Start Coding -->
     <rect x="948" y="24" width="348" height="152" rx="16" fill="url(#step3-bg)" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
-    
+
     <!-- Step number badge -->
     <circle cx="988" cy="54" r="22" fill="#2a5f8f" filter="url(#shadow-sm)"/>
     <text x="988" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       3
     </text>
-    
+
     <text x="1122" y="82" text-anchor="middle" font-size="30" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       Start Coding
     </text>
-    
+
     <!-- Star symbol instead of emoji -->
     <circle cx="1122" cy="133" r="18" fill="#f4e5a0" stroke="#d4a574" stroke-width="2"/>
     <path d="M 1122 118 L 1126 128 L 1137 130 L 1129 138 L 1131 149 L 1122 144 L 1113 149 L 1115 138 L 1107 130 L 1118 128 Z" fill="#1e3a5f"/>
