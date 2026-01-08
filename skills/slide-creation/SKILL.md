@@ -1,6 +1,6 @@
 ---
 name: slide-creation
-description: Complete slide creation toolkit for Marp/Marpit presentations. Use when creating presentations, authoring slides, writing slide content, drawing diagrams, creating illustrations, designing slide color schemes, choosing presentation colors, designing slide themes, selecting background/text/accent colors, or any combination of these tasks. Covers Markdown authoring (Marpit/Marp), SVG illustration, and color design for technical presentations, PowerPoint, Keynote, architecture diagrams, and developer-focused decks.
+description: Complete Marp/Marpit presentation creation combining color design, Markdown slide authoring, and SVG diagrams. Use when (1) creating presentations or slides, (2) designing slide color schemes/themes/palettes, (3) drawing diagrams (flowcharts, architecture, timelines), (4) writing Marpit Markdown, or any combination of these tasks.
 ---
 
 # Slide Creation Toolkit
@@ -23,41 +23,15 @@ Each module can be used independently or together for complete presentations.
 
 **CRITICAL: All outputs (Markdown slides, SVG diagrams, color palettes) must follow consistent design principles.**
 
-### Visual Consistency
+### Visual Consistency: The Golden Rule
 
-**The Golden Rule**: Consistency from beginning to end is paramount.
+Establish a design system before starting and apply it uniformly:
 
-A presentation with inconsistent styling appears unprofessional and distracts from content. Before starting, establish a design system and apply it uniformly.
-
-**Apply across all modules**:
-
-1. **Color Palette**
-   - Choose ONE color palette and use it in slides, SVGs, and all design elements
-   - Maintain consistent text colors for similar content types
-   - Use the same accent color throughout
-
-2. **Spacing System**
-   - Use ONE standard gap size for layouts (e.g., 48px)
-   - Use ONE standard margin value (e.g., 32px)
-   - Maintain consistent padding across all elements
-
-3. **Visual Hierarchy**
-   - Primary focus elements must stand out clearly
-   - Secondary and tertiary elements should visually recede
-   - Use size, weight, and saturation to create hierarchy
-   - Not all elements deserve equal visual weight
-
-4. **Coherent Visual Language**
-   - Visually similar elements share coherent styling
-   - Use same fill logic (solid vs outlined) consistently
-   - Apply uniform emphasis rules throughout
-   - Don't differentiate similar components by changing hue—use brightness/saturation instead
-
-5. **Minimize Visual Noise**
-   - Avoid excessive decoration, borders, or competing emphasis cues
-   - Every visual element should serve a purpose
-   - Prefer solid fills over outlines or transparency
-   - Ensure one primary visual anchor per section
+1. **Color Palette** - Choose ONE palette for all slides, SVGs, and elements
+2. **Spacing System** - Use ONE gap size (e.g., 48px) and ONE margin (e.g., 32px) throughout
+3. **Visual Hierarchy** - Size, weight, and saturation create hierarchy—not all elements deserve equal emphasis
+4. **Coherent Visual Language** - Differentiate by brightness/saturation, not hue; consistent fill logic (solid vs outlined)
+5. **Minimize Visual Noise** - Every element serves a purpose; prefer solid fills; one primary anchor per section
 
 ---
 
@@ -66,12 +40,6 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 ### Module 1: Color Design
 
 **Purpose**: Design slide color systems (background, text, accents, semantic colors)
-
-**When to use**:
-- Creating or improving slide color palettes
-- Choosing presentation colors
-- Designing slide themes
-- Establishing visual hierarchy
 
 **Output**: Color palette specification with hex codes and usage guidelines
 
@@ -86,12 +54,6 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 
 **Purpose**: Write valid Marpit/Marp Markdown slides
 
-**When to use**:
-- Creating presentations
-- Authoring slide content
-- Structuring slide decks
-- Writing Marpit Markdown
-
 **Output**: Valid Marpit-compatible Markdown (.md file)
 
 **Core rule**: ALWAYS output valid Marpit Markdown that can be directly rendered. Do NOT explain syntax unless asked.
@@ -104,7 +66,7 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 
 **Key references**:
 - `references/marpit-authoring/syntax-guide.md` - Marpit syntax and directives
-- `references/marpit-authoring/slide-patterns.md` - Title, content, two-column, code slides
+- `references/marpit-authoring/patterns.md` - Title, content, two-column, code slides
 - `references/marpit-authoring/themes.md` - Default, Gaia, Uncover themes
 
 ---
@@ -112,12 +74,6 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 ### Module 3: SVG Illustration
 
 **Purpose**: Create SVG diagrams and illustrations for slides
-
-**When to use**:
-- Drawing diagrams (flowcharts, architecture, timelines)
-- Creating illustrations
-- Adding visual elements to slides
-- Designing icons or graphics
 
 **Output**: SVG XML code optimized for Marp HTML export
 
@@ -168,7 +124,7 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 - Document the palette for use in slides and diagrams
 
 **Step 2: Structure Slides**
-- Read `references/marpit-authoring/syntax-guide.md`
+- Read `references/marpit-authoring/syntax-guide.md` and `references/marpit-authoring/patterns.md`
 - Create slide outline using the established color palette
 - Apply consistent theme and directives
 - Use the colors defined in Step 1
@@ -344,7 +300,7 @@ references/
 │
 ├── marpit-authoring/
 │   ├── syntax-guide.md      - Marpit/Marp syntax fundamentals
-│   ├── slide-patterns.md    - Title, content, two-column, code patterns
+│   ├── patterns.md          - Title, content, two-column, code patterns
 │   ├── themes.md            - Default, Gaia, Uncover theme usage
 │   └── best-practices.md    - Consistency checklist and tips
 │
