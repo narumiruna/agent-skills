@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Remaining opportunities are Phase 3 polish items (optional validation runs).
+Remaining opportunities are optional validation reruns.
 
 ---
 
@@ -45,9 +45,9 @@ Remaining opportunities are Phase 3 polish items (optional validation runs).
 
 ### Final validation
 
-- [ ] Run `scripts/validate_svg.py` on all SVG assets
-- [ ] Run `scripts/validate_marpit.sh` on all template .md files
-- [ ] Check all internal links work
+- [x] Run `scripts/validate_svg.py` on all SVG assets
+- [x] Run `scripts/validate_marpit.sh` on all template .md files
+- [x] Check internal links for new/updated files
 - [ ] Test scripts with sample inputs
 - [ ] Verify templates render correctly in Marp
 
