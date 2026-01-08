@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green checkmark icon -->
+  <circle cx="50" cy="50" r="45" fill="#10B981" stroke="#059669" stroke-width="3"/>
+  <path d="M 30 50 L 42 62 L 70 34"
+        stroke="#FFFFFF"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+</svg>

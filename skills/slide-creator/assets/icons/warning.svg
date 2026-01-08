@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Yellow warning icon -->
+  <path d="M 50 10 L 90 85 L 10 85 Z"
+        fill="#F59E0B"
+        stroke="#D97706"
+        stroke-width="3"
+        stroke-linejoin="round"/>
+  <path d="M 50 35 L 50 55"
+        stroke="#FFFFFF"
+        stroke-width="6"
+        stroke-linecap="round"/>
+  <circle cx="50" cy="68" r="4" fill="#FFFFFF"/>
+</svg>

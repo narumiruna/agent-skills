@@ -15,6 +15,29 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 - Use consistent visual language (fill vs outline, emphasis rules).
 - Minimize visual noise; keep one primary visual anchor per section.
 
+## Quick Start
+
+**New presentation from template**:
+```bash
+scripts/init_presentation.py technical-dark my-deck.md "My Presentation" "John Doe"
+```
+
+**Available templates**:
+- `assets/templates/technical-dark.md` - Dark theme for code/technical content
+- `assets/templates/professional-light.md` - Light theme for business presentations
+- `assets/templates/minimal-keynote.md` - Minimal design for story-driven talks
+
+**Quick example**:
+See `assets/examples/quick-start.md` for a minimal working presentation.
+
+**Common icons** (ready to use in slides):
+```markdown
+![width:60px](assets/icons/check.svg)    <!-- ✓ checkmark -->
+![width:60px](assets/icons/warning.svg)  <!-- ⚠ warning -->
+![width:60px](assets/icons/error.svg)    <!-- ✗ error -->
+![width:60px](assets/icons/info.svg)     <!-- ℹ info -->
+```
+
 ## Modules
 
 ### Module 1: Color design
@@ -63,9 +86,9 @@ Read in order:
 - `references/svg-illustration/embedding.md`
 - `references/svg-illustration/troubleshooting.md`
 
-Validate SVGs with:
+Validate SVGs after creation:
 ```bash
-svglint path/to/file.svg
+scripts/validate_svg.py path/to/file.svg
 ```
 
 ## Workflow
@@ -164,6 +187,26 @@ SVG illustration:
 - Use palette hex values in SVG `fill` and `stroke`.
 - Keep border radius and stroke widths consistent between Marpit and SVG.
 - Embed SVGs with Markdown images or file references.
+
+## Validation
+
+**Check SVG syntax and best practices**:
+```bash
+scripts/validate_svg.py diagram.svg
+```
+
+**Verify color contrast (WCAG compliance)**:
+```bash
+scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
+# Output: Contrast ratio: 8.20:1 ✅ WCAG AAA
+```
+
+**Validate Marpit syntax**:
+```bash
+scripts/validate_marpit.sh slides.md
+```
+
+Always validate before committing files.
 
 ## Constraints
 
