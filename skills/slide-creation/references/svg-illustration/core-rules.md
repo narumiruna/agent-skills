@@ -237,6 +237,30 @@ See [embedding.md](embedding.md) for complete embedding guide.
 - Font size: 18-32px for readability
 - Font weight: 400 (normal), 600 (semi-bold), 700 (bold)
 - Keep text minimal—prefer Markdown text when possible
+- **NEVER use emoji in `<text>` elements** - emoji rendering is unreliable across SVG renderers
+
+### Emoji and Special Characters: Don't Use Them
+
+**CRITICAL: Avoid emoji in SVG text.** Emoji support in SVG is inconsistent across browsers, PDF exporters, and SVG viewers.
+
+**Wrong:**
+```xml
+<text x="100" y="100" font-size="48">🛡️</text>  <!-- May not render -->
+<text x="200" y="100" font-size="48">✓</text>    <!-- May not render -->
+```
+
+**Correct:**
+```xml
+<!-- Use simple geometric shapes instead -->
+<circle cx="100" cy="100" r="20" fill="#4ade80"/>
+<path d="M 95 100 L 98 103 L 105 96" stroke="white" stroke-width="2" fill="none"/>
+
+<!-- Or use standard ASCII characters -->
+<text x="100" y="100" font-size="24">OK</text>
+<text x="200" y="100" font-size="24">v</text>  <!-- lowercase v looks like checkmark -->
+```
+
+For icons, create them from SVG primitives (circles, rects, paths) rather than text characters. See [troubleshooting.md](troubleshooting.md#issue-emoji-not-rendering-in-svg) for detailed examples.
 
 ### Text Alignment
 

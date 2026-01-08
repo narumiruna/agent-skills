@@ -60,6 +60,12 @@ table td {
 
 ---
 
+## 📦 插件總覽
+
+![w:1400](assets/diagrams/three-plugins.svg)
+
+---
+
 ## 🛡️ python-code-quality
 
 **自動化程式碼品質檢查**
@@ -146,6 +152,12 @@ table td {
 # 快速安裝
 
 **三個簡單步驟**
+
+---
+
+## 🚀 安裝流程
+
+![w:1320](assets/diagrams/workflow-overview.svg)
 
 ---
 

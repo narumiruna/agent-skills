@@ -4,6 +4,49 @@ Common issues and solutions when embedding SVG in Marp slides.
 
 ---
 
+## Issue: Emoji Not Rendering in SVG
+
+**Symptoms:**
+- Emoji characters appear as boxes or blank spaces
+- Icons show correctly in editor but break in exports
+- Inconsistent rendering across different platforms
+
+**Cause:**
+Emoji in `<text>` elements are not reliably supported across SVG renderers. Different browsers, PDF exporters, and SVG viewers handle emoji differently or not at all.
+
+**Solution:**
+**NEVER use emoji in SVG `<text>` elements.** Use pure SVG paths and shapes instead.
+
+**Wrong:**
+```xml
+<text x="100" y="100" font-size="48">🛡️</text>
+<text x="200" y="100" font-size="48">🎓</text>
+<text x="300" y="100" font-size="48">🎨</text>
+```
+
+**Correct:**
+```xml
+<!-- Shield icon using SVG paths -->
+<path d="M 100 70 L 120 80 L 120 110 Q 120 120 100 130 Q 80 120 80 110 L 80 80 Z"
+      fill="none" stroke="#e8d7b0" stroke-width="3"/>
+
+<!-- Graduation cap using SVG shapes -->
+<rect x="90" y="95" width="40" height="8" rx="2" fill="#e8d7b0"/>
+<path d="M 110 95 L 80 85 L 110 75 L 140 85 Z" fill="#e8d7b0"/>
+
+<!-- Palette using circles and paths -->
+<circle cx="300" cy="85" r="4" fill="#e8d7b0"/>
+<circle cx="315" cy="85" r="4" fill="#e8d7b0"/>
+```
+
+**Best Practices:**
+- Create simple geometric icons from circles, rects, and paths
+- Use Unicode characters only for standard Latin text
+- Test SVG rendering in target export format (HTML, PDF)
+- Keep icon designs simple and recognizable at small sizes
+
+---
+
 ## Issue: SVG Not Rendering
 
 **Symptoms:**
