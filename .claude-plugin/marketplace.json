@@ -76,7 +76,11 @@
         "frontmatter",
         "themes"
       ],
-      "skills": ["./skills/marpit-markdown", "./skills/slide-svg-illustrator"],
+      "skills": [
+        "./skills/marpit-markdown",
+        "./skills/slide-svg-illustrator",
+        "./skills/slide-color-design"
+      ],
       "strict": false
     }
   ]
