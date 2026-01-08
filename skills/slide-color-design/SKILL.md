@@ -1,6 +1,6 @@
 ---
 name: slide-color-design
-description: Design consistent, presentation-ready color systems for slides. Use when creating or improving slide color palettes for technical presentations, Marp/Marpit slides, architecture diagrams, or developer-focused decks, including guidance on backgrounds, text, accents, and semantic color usage.
+description: Design consistent, presentation-ready color systems for slides. Use when creating or improving slide color palettes, choosing presentation colors, designing slide themes, selecting background/text/accent colors, or establishing visual hierarchy for technical presentations, Marp/Marpit slides, PowerPoint, Keynote, architecture diagrams, or developer-focused decks. Provides guidance on color strategy, contrast, accessibility, and semantic color usage.
 ---
 
 # Slide Color Design
@@ -36,19 +36,29 @@ If information is missing, make **explicit assumptions** and state them.
 
 ### Step 2 — Choose Color Strategy
 
-Select ONE primary strategy:
+Select ONE primary strategy based on context.
+
+**Decision guide:**
+- Code/diagrams dominant + technical audience → **Dark Technical**
+- Documentation-style + formal setting → **Light Professional**
+- Storytelling + emphasis needed → **Accent-Driven**
+
+**Strategies:**
 
 - **Dark Technical**
-  - Dark background, muted accents
-  - Best for code and diagrams
+  - Dark background (#1E1E1E - #2D2D2D), muted accents
+  - Best for: Code blocks, terminal output, system diagrams
+  - Avoid if: Printing required, bright room, non-technical audience
 
 - **Light Professional**
-  - Light background, restrained colors
-  - Best for documentation-style slides
+  - Light background (#FAFAFA - #FFFFFF), restrained colors
+  - Best for: Documentation-style slides, business presentations, formal settings
+  - Avoid if: Dark room, code-heavy content, casual audience
 
 - **Accent-Driven**
-  - Neutral base with strong highlight color
-  - Best for emphasis and storytelling
+  - Neutral base (white/light gray) with strong highlight color
+  - Best for: Emphasis and storytelling, keynotes, single-message slides
+  - Avoid if: Complex data, many competing elements
 
 Explain why this strategy fits the context.
 
@@ -106,30 +116,83 @@ Always output using this structure:
 
 ## Color Palette
 
-* Background: #XXXXXX
-* Surface: #XXXXXX
-* Primary: #XXXXXX
-* Secondary: #XXXXXX
-* Accent: #XXXXXX
-* Text Primary: #XXXXXX
-* Text Secondary: #XXXXXX
+* Background: #XXXXXX — [1-line purpose]
+* Surface: #XXXXXX — [1-line purpose]
+* Primary: #XXXXXX — [1-line purpose]
+* Secondary: #XXXXXX — [1-line purpose]
+* Accent: #XXXXXX — [1-line purpose]
+* Text Primary: #XXXXXX — [1-line purpose]
+* Text Secondary: #XXXXXX — [1-line purpose]
 * Semantic (optional): ...
 
 ## Usage Guidelines
 
-* Titles:
-* Body text:
-* Code blocks:
-* Diagrams:
-* Charts (if any):
+* Titles: [How to use colors for titles]
+* Body text: [How to use colors for body text]
+* Code blocks: [How to use colors for code]
+* Diagrams: [How to use colors for diagrams]
+* Charts (if any): [How to use colors for charts]
 
 ## Notes & Constraints
 
 * Accessibility considerations
 * Projector / recording notes
+
+## Validation Checklist
+
+- [ ] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
+- [ ] Accent color stands out clearly from primary
+- [ ] Palette limited to 5-7 colors maximum
+- [ ] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
+- [ ] Consistent color usage across all slide types
 ```
 
 Do NOT include images unless explicitly requested.
+
+---
+
+## Example Output
+
+**User request:** "Create a color palette for a technical architecture presentation"
+
+**Response:**
+
+## Color Strategy
+
+Dark Technical — chosen because the presentation focuses on system architecture diagrams with code snippets. The technical audience and diagram-heavy content benefit from a dark background that reduces eye strain and makes colored elements pop.
+
+## Color Palette
+
+* Background: `#1E1E1E` — Main slide background (dark gray, not pure black)
+* Surface: `#2D2D2D` — Diagram boxes and code blocks (slightly lighter than background)
+* Primary: `#569CD6` — Titles and main headings (VS Code blue, familiar to developers)
+* Secondary: `#4EC9B0` — Section dividers and icons (cyan accent for visual hierarchy)
+* Accent: `#F4BF75` — Important callouts and highlights (amber, limited use)
+* Text Primary: `#D4D4D4` — Body text (light gray for readability on dark)
+* Text Secondary: `#858585` — Captions and metadata (muted gray, less prominent)
+
+## Usage Guidelines
+
+* **Titles:** Primary (#569CD6) on Background, bold weight
+* **Body text:** Text Primary (#D4D4D4) on Background or Surface
+* **Code blocks:** Surface background with syntax highlighting using Primary/Secondary/Accent
+* **Diagrams:** Surface for boxes, Primary for connectors/arrows, Accent for highlights/warnings
+* **Charts:** Primary and Secondary as main colors, Accent for emphasis points
+
+## Notes & Constraints
+
+* All text contrasts exceed 7:1 for WCAG AAA accessibility
+* Tested on projector—colors remain distinct even in bright rooms
+* Amber accent used sparingly (max 5-10% of visual space) to maintain focus
+* Avoid pure white text to reduce eye strain in dark rooms
+
+## Validation Checklist
+
+- [x] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
+- [x] Accent color stands out clearly from primary
+- [x] Palette limited to 5-7 colors maximum
+- [x] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
+- [x] Consistent color usage across all slide types
 
 ---
 
