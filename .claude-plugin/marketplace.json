@@ -40,11 +40,10 @@
     {
       "name": "python-skills",
       "source": "./",
-      "description": "Python 3.12+ workflow and ORM toolkit: uv-based project setup, dependency management, ruff/ty/pytest quality gates, typer CLI and loguru logging patterns, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",
+      "description": "Python projects workflow and ORM toolkit: uv-based project setup, dependency management, ruff/ty/pytest quality gates, typer CLI and loguru logging patterns, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",
       "version": "0.0.1",
       "keywords": [
         "python",
-        "python-3.12",
         "uv",
         "ruff",
         "ty",

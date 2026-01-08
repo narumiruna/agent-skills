@@ -1,6 +1,6 @@
 ---
 name: python-project
-description: Python project workflow and standards using Astral uv for environments/dependencies, ty for type checking, typer for CLI, ruff for lint/format, pytest and pytest-cov for tests/coverage, and loguru for logging. Use for Python 3.12+ project setup, dependency management, CLI/logging patterns, type checking, testing, linting/formatting, and packaging guidance.
+description: Python project workflow and standards using Astral uv for environments/dependencies, ty for type checking, typer for CLI, ruff for lint/format, pytest and pytest-cov for tests/coverage, and loguru for logging. Use for Python project setup, dependency management, CLI/logging patterns, type checking, testing, linting/formatting, and packaging guidance.
 ---
 
 # Python Project
@@ -21,10 +21,10 @@ For Python coding conventions, see the `python-conventions` skill.
 
 ## Set up a new project
 
-1. Initialize a project with Python 3.12+:
+1. Initialize a project:
 
 ```bash
-uv init my-project --python 3.12
+uv init my-project
 cd my-project
 ```
 
@@ -44,7 +44,7 @@ uv add --dev ruff pytest pytest-cov ty
 
 ```bash
 uv run python -V
-# Should show Python 3.12+
+# Confirm the expected Python version
 ```
 
 ## Use a src/ layout
@@ -61,7 +61,6 @@ my-project/
 ├── tests/
 │   ├── __init__.py
 │   └── test_core.py
-├── pyproject.toml
 └── README.md
 ```
 
@@ -81,7 +80,6 @@ Basic operations:
 
 Key principles:
 - Use `uv run <command>` instead of plain `python` or tool commands.
-- Keep `pyproject.toml` as the single source of truth.
 - Use `--dev` for tools that are not needed in production (ruff, pytest, ty).
 - Pin versions in production and use ranges during development.
 

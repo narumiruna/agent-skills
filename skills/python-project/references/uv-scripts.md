@@ -30,7 +30,7 @@ uv run -m pytest
 ## Project vs. No-Project Mode
 
 **In Project Context:**
-- When `pyproject.toml` exists, `uv run` installs the current project first
+- When a project is present, `uv run` installs the current project first
 - Use for scripts that depend on your project code
 
 ```bash
@@ -72,7 +72,7 @@ Embed dependencies directly in the script for self-contained execution.
 **Initialize script with metadata:**
 
 ```bash
-uv init --script example.py --python 3.12
+uv init --script example.py --python <version>
 ```
 
 **Add dependencies to script:**
@@ -85,7 +85,7 @@ uv add --script example.py requests rich
 
 ```python
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=<min-version>"
 # dependencies = [
 #   "requests<3",
 #   "rich",
@@ -122,15 +122,14 @@ uv run example.py  # Dependencies auto-resolved from metadata
 **Specify Python version:**
 
 ```bash
-uv run --python 3.12 example.py
-uv run --python 3.11 example.py
+uv run --python <version> example.py
 ```
 
 **In inline metadata:**
 
 ```python
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=<min-version>"
 # dependencies = []
 # ///
 ```
@@ -160,7 +159,7 @@ uv run --with pytest --no-project test_utils.py
 ```python
 #!/usr/bin/env -S uv run
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=<min-version>"
 # dependencies = ["typer", "rich"]
 # ///
 

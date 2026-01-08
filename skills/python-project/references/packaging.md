@@ -6,7 +6,6 @@
 - [Build Artifacts](#build-artifacts)
 - [Pre-publish Checklist](#pre-publish-checklist)
 - [Publishing](#publishing)
-- [Version Management](#version-management)
 - [Common Issues](#common-issues)
 
 Build and distribute Python packages using uv's built-in build tools.
@@ -25,10 +24,10 @@ uv build
 uv build --no-sources
 ```
 
-**Build with specific Python version:**
+**Build with a specific Python version:**
 
 ```bash
-uv build --python 3.12
+uv build --python <version>
 ```
 
 ## Build Artifacts
@@ -57,42 +56,12 @@ Before publishing, verify:
 uv build --no-sources
 ```
 
-**2. Package metadata is correct:**
-```toml
-# pyproject.toml
-[project]
-name = "my-package"
-version = "1.0.0"
-description = "A short description"
-readme = "README.md"
-requires-python = ">=3.12"
-authors = [
-    {name = "Your Name", email = "you@example.com"}
-]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Programming Language :: Python :: 3.12",
-]
-dependencies = [
-    "requests>=2.31.0",
-]
-
-[project.urls]
-Homepage = "https://github.com/user/repo"
-Documentation = "https://docs.example.com"
-Repository = "https://github.com/user/repo"
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-```
-
-**3. Test installation from wheel:**
+**2. Test installation from wheel:**
 ```bash
 uv pip install dist/my_package-1.0.0-py3-none-any.whl
 ```
 
-**4. Verify package contents:**
+**3. Verify package contents:**
 ```bash
 unzip -l dist/my_package-1.0.0-py3-none-any.whl
 ```
@@ -114,33 +83,10 @@ uv publish --publish-url https://test.pypi.org/legacy/ --token $TEST_PYPI_TOKEN
 uv pip install --index-url https://test.pypi.org/simple/ my-package
 ```
 
-## Version Management
-
-**Update version in pyproject.toml:**
-```toml
-[project]
-version = "1.0.1"
-```
-
-**Or use dynamic versioning with hatch:**
-```toml
-[project]
-dynamic = ["version"]
-
-[tool.hatch.version]
-path = "src/my_package/__init__.py"
-```
-
-In `src/my_package/__init__.py`:
-```python
-__version__ = "1.0.1"
-```
-
 ## Common Issues
 
 **Missing files in wheel:**
 - Ensure `src/` layout is used
-- Check `pyproject.toml` includes correct package directories
 
 **Import errors after installation:**
 - Verify package name matches import name

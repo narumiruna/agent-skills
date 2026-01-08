@@ -42,36 +42,6 @@ uv run ruff check --fix     # Auto-fix safe issues
 uv run ruff format          # Format code
 ```
 
-**Recommended `pyproject.toml` Configuration:**
-
-```toml
-[tool.ruff]
-line-length = 100
-src = ["src"]
-target-version = "py312"
-
-[tool.ruff.lint]
-select = [
-    "E",      # pycodestyle errors
-    "F",      # pyflakes
-    "I",      # isort (import sorting)
-    "UP",     # pyupgrade (modern Python syntax)
-    "B",      # flake8-bugbear (common bugs)
-    "SIM",    # flake8-simplify
-    "C4",     # flake8-comprehensions
-    "DTZ",    # flake8-datetimez (timezone-aware datetime)
-    "T20",    # flake8-print (detect print statements)
-    "RET",    # flake8-return (return statement issues)
-]
-ignore = [
-    "E501",   # Line too long (handled by formatter)
-]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-```
-
 ## Testing and Coverage with pytest
 
 **Installation:**
@@ -101,33 +71,6 @@ uv run pytest -x
 
 # Run tests matching pattern
 uv run pytest -k "test_user"
-```
-
-**Recommended `pyproject.toml` Configuration:**
-
-```toml
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_functions = ["test_*"]
-addopts = [
-    "--strict-markers",
-    "--strict-config",
-    "-ra",  # Show summary of all test outcomes
-]
-
-[tool.coverage.run]
-source = ["src"]
-omit = ["*/tests/*"]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if TYPE_CHECKING:",
-    "raise AssertionError",
-    "raise NotImplementedError",
-]
 ```
 
 ## Pre-merge Quality Gate
@@ -172,7 +115,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Set up Python
-        run: uv python install 3.12
+        run: uv python install <version>
 
       - name: Install dependencies
         run: uv sync --all-extras --dev
