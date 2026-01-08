@@ -82,7 +82,7 @@
         "frontmatter",
         "themes"
       ],
-      "skills": ["./skills/slide-creation"],
+      "skills": ["./skills/slide-creator"],
       "strict": false
     }
   ]

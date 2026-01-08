@@ -21,7 +21,7 @@ This repository serves two purposes:
 │   ├── python-project/        # Python project workflow skill
 │   │   ├── SKILL.md
 │   │   └── references/
-│   └── slide-creation/        # Unified slide creation skill
+│   └── slide-creator/        # Unified slide creation skill
 │       ├── SKILL.md
 │       └── references/
 │           ├── color-design/       # Color system design
@@ -129,11 +129,11 @@ Skills: `./skills/python-peewee`, `./skills/python-project`
 ### 3. slide-skills (unified skill, v0.0.4)
 
 Location: `./` (root)
-Skills: `./skills/slide-creation` (unified skill with modular references)
+Skills: `./skills/slide-creator` (unified skill with modular references)
 
 **Architecture**: Progressive disclosure design with a lean SKILL.md (~250 lines) that loads references on-demand.
 
-**slide-creation skill**:
+**slide-creator skill**:
 - Unified presentation creation workflow: color design → slides → diagrams
 - Three integrated modules accessible via single entry point
 - Shared design principles ensure visual consistency across all outputs

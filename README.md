@@ -42,7 +42,7 @@ Comprehensive Python development toolkit combining project workflow standards an
 
 Complete Marp/Marpit presentation toolkit for creating professional slides with unified workflow from color design to final slides with diagrams.
 
-**Unified slide-creation skill** with three integrated modules:
+**Unified slide-creator skill** with three integrated modules:
 
 **Module 1: Color Design**
 - Design slide color systems (background, text, accents)

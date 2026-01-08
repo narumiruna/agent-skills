@@ -294,7 +294,7 @@ claude-marketplace/
 └── skills/
     ├── python-project/
     ├── python-peewee/
-    └── slide-creation/
+    └── slide-creator/
 ```
 
 ---
