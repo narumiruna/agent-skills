@@ -3,12 +3,11 @@ marp: true
 theme: default
 paginate: true
 backgroundColor: #1e3a5f
-color: #fef7cd
+color: #e8d7b0
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0f1f2e -->
-<!-- _color: #fef7cd -->
+<!-- _backgroundColor: #0a1520 -->
 
 # 🔌 Narumi's Claude Marketplace
 
@@ -27,38 +26,26 @@ color: #fef7cd
 
 ---
 
+<style scoped>
+table {
+  background-color: #0d2438;
+  color: #e8d7b0;
+}
+table th {
+  background-color: #0a1520;
+  color: #e8d7b0;
+}
+table td {
+  background-color: #0d2438;
+}
+</style>
+
 ## 🎯 核心價值
 
-<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:48px; margin-top:32px;">
-
-<div style="text-align:center; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
-
-### ⚡ 自動化
-
-自動執行程式碼檢查
-零配置即可使用
-
-</div>
-
-<div style="text-align:center; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
-
-### 📚 標準化
-
-統一開發工具與流程
-團隊協作更順暢
-
-</div>
-
-<div style="text-align:center; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
-
-### 🔧 可擴展
-
-輕鬆添加新技能
-自定義工作流程
-
-</div>
-
-</div>
+| ⚡ **自動化** | 📚 **標準化** | 🔧 **可擴展** |
+|:---:|:---:|:---:|
+| 自動執行程式碼檢查 | 統一開發工具與流程 | 輕鬆添加新技能 |
+| 零配置即可使用 | 團隊協作更順暢 | 自定義工作流程 |
 
 ---
 
@@ -90,17 +77,37 @@ color: #fef7cd
 - **ruff check --fix** - 智慧修復
 - **ty check** - 型別檢查
 
-### 執行時機
+### 執行時機a1520 -->
 
-在 Edit/Write 操作前自動執行
+# 兩大核心插件
 
-</div>
+**Code Quality + Development Skills**
+
+---
+
+## 📦 插件總覽
+
+![w:1400](assets/diagrams/plugin-cards.svg)
 
 ---
 
 ## 🛡️ python-code-quality
 
-<div style="margin-top:32px; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
+**自動化程式碼品質檢查**
+
+### 功能特色
+
+- **ruff format** - 自動格式化
+- **ruff check --fix** - 智慧修復
+- **ty check** - 型別檢查
+
+### 執行時機
+
+在 Edit/Write 操作前自動執行
+
+---
+
+## 🛡️ python-code-quality
 
 ### 技術架構
 
@@ -114,8 +121,6 @@ color: #fef7cd
 
 安裝即可使用，無需額外設定
 
-</div>
-
 ---
 
 ## 🎓 python-skills
@@ -123,10 +128,7 @@ color: #fef7cd
 **完整 Python 開發技能包**
 
 ### 包含兩大技能模組
-
-<div style="margin-top:32px; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
-
-**1. Python Project Workflow** (`python-project`)
+a1520Workflow** (`python-project`)
 - 現代工具鏈: uv, ruff, pytest, ty
 - CLI 開發: typer
 - 日誌系統: loguru
@@ -135,35 +137,6 @@ color: #fef7cd
 - DatabaseProxy 設定模式
 - 連線管理與交易處理
 - SQLite 測試範例
-
-</div>
-
----
-
-<!-- _class: lead -->
-<!-- _backgroundColor: #0f1f2e -->
-<!-- _color: #fef7cd -->
-
-# 快速開始
-
-**三步驟完成安裝**
-
----
-
-## 🚀 安裝步驟
-
-![w:1200](assets/diagrams/installation-flow.svg)
-
----
-
-## 步驟 1: 新增市場
-
-從 GitHub 安裝：
-
-```bash
-/plugin marketplace add narumi/claude-marketplace
-```
-
 本地測試：
 
 ```bash
@@ -193,7 +166,6 @@ color: #fef7cd
 插件安裝後自動啟用
 
 <div style="margin-top:32px; background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #f4e5a0;">
-
 ### 🎯 立即體驗
 
 - 編輯 Python 檔案 → 自動格式化 ✓
@@ -203,9 +175,6 @@ color: #fef7cd
 ### 📖 獲取幫助
 
 Claude 自動獲得 Python 開發最佳實踐知識
-
-</div>
-
 ---
 
 <!-- _class: lead -->
@@ -214,8 +183,7 @@ Claude 自動獲得 Python 開發最佳實踐知識
 
 # 進階功能
 
-**測試與自訂**
-
+**測試與自訂**a1520
 ---
 
 ## 🧪 測試與驗證
@@ -241,33 +209,28 @@ Claude 自動獲得 Python 開發最佳實踐知識
 
 ---
 
+<style scoped>
+table {
+  background-color: #0d2438;
+  color: #e8d7b0;
+}
+table th {
+  background-color: #0a1520;
+  color: #e8d7b0;
+}
+table td {
+  background-color: #0d2438;
+}
+</style>
+
 ## 🛠️ 自訂與擴展
 
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap:48px; margin-top:32px;">
-
-<div style="background: #0f1f2e; padding: 32px; border-radius: 16px; border-left: 6px solid #d4a574;">
-
-### 建立自己的插件
-
-- 參考 `GUIDE.md` 完整指南
-- 使用 `strict: false` 模式
-- 組織技能檔案於 `skills/` 目錄
-
-</div>
-
-<div style="background: #0f1f2e; padding: 32px; border-radius: 16px; border-left: 6px solid #d4a574;">
-
-### Multi-skill 插件
-
-`python-skills` 示範多技能整合
-
-### Hooks 插件範例
-
-`python-code-quality` 展示工具攔截
-
-</div>
-
-</div>
+| **建立自己的插件** | **範例展示** |
+|:---|:---|
+| • 參考 `GUIDE.md` 完整指南 | **Multi-skill 插件** |
+| • 使用 `strict: false` 模式 | `python-skills` 示範多技能整合 |
+| • 組織技能檔案於 `skills/` 目錄 | **Hooks 插件範例** |
+| | `python-code-quality` 展示工具攔截 |
 
 ---
 
@@ -285,15 +248,11 @@ marketplace/
     └── python-peewee/
 ```
 
-<div style="margin-top:32px; background: #0f1f2e; padding: 24px; border-radius: 12px; border-left: 6px solid #4a7ba7;">
-
 **關鍵原則**
 
 - 插件定義於 `plugins/` 目錄
 - 共享技能於 `skills/` 目錄
 - 每個插件獨立配置
-
-</div>
 
 ---
 
@@ -309,15 +268,11 @@ marketplace/
 - **[CLAUDE.md](CLAUDE.md)** - 開發者指南
 - **[README.md](README.md)** - 快速入門
 
-</div>
+**關鍵原則**
 
-<div style="background: #0f1f2e; padding: 32px; border-radius: 16px; border: 3px solid #4a7ba7;">
-
-### 範例展示
-
-- Hooks 插件實作
-- 多技能插件組織
-- Marketplace 驗證流程
+- 插件定義於 `plugins/` 目錄
+- 共享技能於 `skills/` 目錄
+- 每個插件獨立配置etplace 驗證流程
 
 </div>
 
@@ -327,16 +282,14 @@ marketplace/
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #0f1f2e -->
-<!-- _color: #fef7cd -->
+### 核心文檔
 
-# 開始使用
+- **[GUIDE.md](GUIDE.md)** - 建立市場完整指南
+- **[CLAUDE.md](CLAUDE.md)** - 開發者指南
+- **[README.md](README.md)** - 快速入門
 
-**提升你的 Python 開發體驗**
+### 範例展示
 
-```bash
-/plugin marketplace add narumi/claude-marketplace
-/plugin install python-code-quality@narumi
-/plugin install python-skills@narumi
-```
-
-**GitHub**: narumi/claude-marketplace
+- Hooks 插件實作
+- 多技能插件組織
+- Marketplace 驗證流程
