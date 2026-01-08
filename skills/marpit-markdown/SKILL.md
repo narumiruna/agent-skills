@@ -13,6 +13,97 @@ ALWAYS output **valid Marpit-compatible Markdown** that can be directly rendered
 
 ## Design Principles for Effective Slides
 
+### Visual Consistency: The Golden Rule
+
+**CRITICAL: Consistency from beginning to end is paramount.**
+
+A presentation with inconsistent styling appears unprofessional and distracts from content. Before starting, establish a design system and apply it uniformly.
+
+**Consistency Checklist:**
+
+1. **Color Palette**
+   - ✅ Choose ONE accent color for all section dividers
+   - ✅ Use the same background color throughout (or establish clear pattern)
+   - ✅ Maintain consistent text colors for similar content types
+   - ❌ Avoid: Different colors for each section divider (unless intentional theming)
+
+2. **Spacing System**
+   - ✅ Use ONE standard gap size for all grid layouts (e.g., 48px)
+   - ✅ Use ONE standard margin-top value (e.g., 32px)
+   - ✅ Maintain consistent padding around content blocks
+   - ❌ Avoid: Mixing 32px, 40px, 48px gaps randomly
+
+3. **Layout Patterns**
+   - ✅ Reuse the same grid template for similar content
+   - ✅ Keep two-column splits at same proportions (1fr 1fr or specific widths)
+   - ✅ Use consistent border radius, stroke width across all custom elements
+   - ❌ Avoid: Different layout structures for similar content types
+
+4. **Typography**
+   - ✅ Use consistent font weights (e.g., 700 for all section titles)
+   - ✅ Maintain heading hierarchy (H1 for titles, H2 for subtitles, H3 for sections)
+   - ✅ Keep emoji/icon usage consistent in position and style
+   - ❌ Avoid: Random font weight changes, inconsistent heading levels
+
+5. **Directives Usage**
+   - ✅ Apply `<!-- _class: lead -->` to ALL section dividers or NONE
+   - ✅ Use consistent background colors for lead slides
+   - ✅ Apply pagination consistently (show on all or hide on specific slides)
+   - ❌ Avoid: Some section dividers with lead class, others without
+
+**Practical Example:**
+
+```markdown
+<!-- GOOD: Consistent section dividers -->
+<!-- _class: lead -->
+<!-- _backgroundColor: #0891b2 -->
+<!-- _color: #ffffff -->
+# Section 1
+
+---
+<!-- ... content ... -->
+---
+
+<!-- _class: lead -->
+<!-- _backgroundColor: #0891b2 -->
+<!-- _color: #ffffff -->
+# Section 2
+
+<!-- BAD: Inconsistent colors -->
+<!-- _class: lead -->
+<!-- _backgroundColor: #0891b2 -->
+# Section 1
+
+<!-- _class: lead -->
+<!-- _backgroundColor: #7c3aed -->
+# Section 2
+
+<!-- _class: lead -->
+<!-- _backgroundColor: #10b981 -->
+# Section 3
+```
+
+**When to Break Consistency:**
+
+Only break consistency for intentional emphasis:
+- Final "thank you" or "contact" slide may use different color
+- Warning/alert slides may use red/orange intentionally
+- Before/after comparisons may use contrasting styles
+
+**Design System Template:**
+
+Before creating slides, define these constants:
+
+```markdown
+Design System:
+- Primary accent: #0891b2 (all section dividers)
+- Background: #f8fafc (all content slides)
+- Text color: #1e293b (all body text)
+- Grid gap: 48px (all layouts)
+- Margin-top: 32px (all spacing)
+- Border radius: 12px (all cards/containers)
+```
+
 ### Visual Design Fundamentals
 
 **Core Principle: Less is More**
@@ -124,18 +215,65 @@ Align colors with content meaning:
 
 1. **Background**: Always light or always dark (pick one)
 2. **Text**: High contrast with background (4.5:1 minimum)
-3. **Accent**: Use ONE accent color per slide (max 2)
-4. **Consistency**: Same colors for same meaning across deck
+3. **Accent**: Use ONE accent color consistently across ALL section dividers
+4. **Consistency**: Same colors for same meaning across entire deck
+
+**Modern Color Palette Example (Recommended: Van Gogh Starry Night)**
+
+Based on successful presentations, this palette provides artistic yet professional results:
+
+```markdown
+---
+backgroundColor: #fef7cd  (creamy yellow: warm, artistic)
+color: #0f1f2e           (midnight blue-black: strong contrast)
+---
+
+Section dividers (lead slides):
+<!-- _backgroundColor: #2a5f8f -->  (swirling blue: artistic, trust)
+<!-- _color: #fef7cd -->             (light text on dark background)
+
+Accent colors in content:
+- Primary: #2a5f8f (swirling blue)
+- Highlight: #f4e5a0 (bright star gold)
+- Success: #4a7ba7 (sky accent)
+- Warm: #d4a574 (village light)
+```
+
+**Why Van Gogh Starry Night Works:**
+- Distinctive and memorable
+- Artistic without sacrificing professionalism
+- Blues convey depth and trustworthiness
+- Golds add warmth and draw attention
+- Creates emotional connection with audience
+- Perfect for creative and technical content alike
+
+**Alternative: Modern Tech Palette (for purely corporate presentations)**
+
+```markdown
+---
+backgroundColor: #f8fafc  (slate-50: subtle, professional)
+color: #1e293b           (slate-800: readable, strong contrast)
+---
+
+Section dividers (lead slides):
+<!-- _backgroundColor: #0891b2 -->  (cyan-600: trust, modern)
+<!-- _color: #ffffff -->
+
+Accent colors in content:
+- Primary: #0891b2 (cyan-600)
+- Success: #10b981 (emerald-500)
+- Warning: #f59e0b (amber-500)
+```
 
 **Default Theme Best Practices**
 
 ```markdown
 ---
-backgroundColor: #ffffff
+backgroundColor: #f8fafc
 color: #1e293b
 ---
 
-# Title in dark gray (#1e293b)
+# Title in dark slate (#1e293b)
 
 **Emphasis** in same color, bold weight
 
@@ -243,9 +381,26 @@ paginate: true
 - `paginate` - Show page numbers (recommended: `true`)
 
 **Optional fields:**
-- `backgroundColor: #fff` - Custom background color
-- `color: #333` - Custom text color
+- `backgroundColor: #fff` - Custom background color (recommended: `#f8fafc` or `#fef7cd` for Starry Night)
+- `color: #333` - Custom text color (recommended: `#0f1f2e` for Starry Night)
 - `class: invert` - Apply global class to all slides
+
+**Recommended Frontmatter (Van Gogh Starry Night Theme):**
+
+```markdown
+---
+marp: true
+theme: default
+paginate: true
+backgroundColor: #fef7cd
+color: #0f1f2e
+---
+```
+
+**Why these colors?**
+- Background `#fef7cd` (creamy yellow) - soft, artistic, reduces eye strain
+- Text `#0f1f2e` (midnight blue-black) - excellent contrast, readable
+- Evokes Van Gogh's artistic style while maintaining professionalism
 
 ---
 
@@ -309,6 +464,206 @@ Final content
 ### Too deep
 #### Way too deep
 ```
+
+### 3. Content Overflow Prevention
+
+**CRITICAL: Slides have fixed vertical space (~1080px). Content must fit within viewport.**
+
+**Common Causes of Overflow:**
+
+1. **Too many bullets** (> 7 items)
+2. **Long code blocks** (> 15 lines)
+3. **Multiple sections with headings** (> 3 H3 headings)
+4. **Large images + text** (image + 5+ bullets)
+5. **Two-column layouts with unbalanced content**
+
+**How to Detect Overflow:**
+
+Check if your slide has:
+- Title (H2) = ~80px
+- Each bullet = ~40-50px
+- Each H3 heading = ~60px
+- Code block = ~30px per line
+- Grid/layout overhead = ~80px
+- Safe margin = ~100px
+
+**Example Calculation:**
+```
+H2 title:           80px
+margin-top:         32px
+3 × H3 headings:   180px (3 × 60px)
+12 × bullets:      480px (12 × 40px)
+Code block (7):    210px (7 × 30px)
+Grid overhead:      80px
+Safe margin:       100px
+----------------------------
+TOTAL:            1162px ❌ OVERFLOW! (> 1080px)
+```
+
+**Solutions:**
+
+**Solution 1: Split into Multiple Slides**
+```markdown
+<!-- BEFORE: Overflowing slide -->
+## 🛠️ Configuration
+
+### Section A
+- Point 1
+- Point 2
+- Point 3
+
+### Section B
+- Point 4
+- Point 5
+
+### Section C
+```python
+# 15 lines of code
+```
+
+<!-- AFTER: Split into 2 slides -->
+## 🛠️ Configuration - Part 1
+
+### Section A
+- Point 1
+- Point 2
+- Point 3
+
+### Section B
+- Point 4
+- Point 5
+
+---
+
+## 🛠️ Configuration - Part 2
+
+### Section C
+```python
+# 15 lines of code
+```
+```
+
+**Solution 2: Reduce Content Density**
+```markdown
+<!-- BEFORE: Too dense -->
+## Features
+
+### Category A
+- Feature 1 with long description
+- Feature 2 with long description
+- Feature 3 with long description
+
+### Category B
+- Feature 4 with long description
+- Feature 5 with long description
+
+<!-- AFTER: Concise -->
+## Features
+
+### Category A
+- Feature 1: Auto-format
+- Feature 2: Smart fixes
+- Feature 3: Type checks
+
+### Category B
+- Feature 4: Integration
+- Feature 5: Workflows
+```
+
+**Solution 3: Use Smaller Font Sizes (Last Resort)**
+```markdown
+<div style="font-size: 0.9em;">
+
+## Content Here
+
+- Slightly smaller text
+- Fits more content
+
+</div>
+```
+
+**⚠️ Warning:** Only use smaller fonts if splitting slides is not possible. Readability should never be compromised.
+
+**Solution 4: Optimize Two-Column Layouts**
+```markdown
+<!-- BEFORE: One column too long -->
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:48px;">
+<div>
+### Left
+- 10 bullets (overflows!)
+</div>
+<div>
+### Right
+- 3 bullets
+</div>
+</div>
+
+<!-- AFTER: Balanced or split -->
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:48px;">
+<div>
+### Left
+- 5 bullets
+</div>
+<div>
+### Right
+- 5 bullets
+</div>
+</div>
+```
+
+**Solution 5: Code Block Management**
+```markdown
+<!-- BEFORE: Too long -->
+```python
+# 25 lines of code that overflow the slide
+```
+
+<!-- AFTER: Show essential parts only -->
+```python
+# Key function (simplified)
+def main():
+    setup()
+    process()
+    cleanup()
+```
+
+**Or split across slides:**
+
+Slide 1: Show setup
+Slide 2: Show processing
+Slide 3: Show cleanup
+```
+
+**Best Practices to Prevent Overflow:**
+
+1. **Rule of thumb: Max content per slide**
+   - H2 title + 5-7 bullets = ✅ Safe
+   - H2 title + 2 × H3 + 8 bullets total = ✅ Safe
+   - H2 title + 3 × H3 + 12 bullets + code = ❌ Overflow
+
+2. **Visual estimation**
+   - If content takes more than 3/4 of your editor screen, it will likely overflow
+
+3. **Test early**
+   - Preview slides frequently during creation
+   - Check the most content-heavy slides first
+
+4. **Progressive disclosure**
+   - Don't put everything on one slide
+   - Break complex topics into 2-3 slides
+   - Use section dividers between major topics
+
+5. **Content hierarchy**
+   - Only use H3 when absolutely necessary
+   - Prefer H2 + bullets over H2 + H3 + bullets
+
+**Quick Checklist Before Finalizing:**
+
+- [ ] No slide has more than 10 bullets
+- [ ] No code block exceeds 12 lines
+- [ ] Two-column layouts are balanced
+- [ ] No more than 3 H3 headings per slide
+- [ ] Each slide previews without scrolling
 
 ---
 
@@ -375,12 +730,111 @@ Author Name · Date
 ### Section Divider
 
 ```markdown
-<!-- _class: lead invert -->
+<!-- _class: lead -->
+<!-- _backgroundColor: #0891b2 -->
+<!-- _color: #ffffff -->
 
 # Section Title
 
-Brief description or transition text
+**Brief description or transition text**
 ```
+
+**Consistency Note:** Use the SAME background color for ALL section dividers throughout your presentation.
+
+---
+
+### Two-Column Layout (Grid)
+
+**Standard Pattern with Consistent Spacing:**
+
+```markdown
+## Feature Comparison
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:48px; margin-top:32px;">
+
+<div>
+
+### Feature Set A
+
+- Automatic formatting
+- Smart fixes
+- Type checking
+
+### Use Cases
+
+Best for small teams
+
+</div>
+
+<div>
+
+### Feature Set B
+
+- Full integration
+- Custom workflows
+- Advanced patterns
+
+### Use Cases
+
+Best for large projects
+
+</div>
+
+</div>
+```
+
+**Key Consistency Rules:**
+- Always use `gap:48px` for two-column layouts
+- Always use `margin-top:32px` for spacing below headers
+- Use `1fr 1fr` for equal columns or specific widths (e.g., `1fr 2fr`)
+- Maintain same structure across all two-column slides
+
+---
+
+### Three-Column Layout (Grid)
+
+**Standard Pattern:**
+
+```markdown
+## Core Values
+
+<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:48px; margin-top:32px;">
+
+<div style="text-align:center;">
+
+### ⚡ Speed
+
+Fast execution
+Zero config
+
+</div>
+
+<div style="text-align:center;">
+
+### 📚 Standards
+
+Unified tools
+Team sync
+
+</div>
+
+<div style="text-align:center;">
+
+### 🔧 Flexible
+
+Easy additions
+Custom flows
+
+</div>
+
+</div>
+```
+
+**Key Consistency Rules:**
+- Use `repeat(3, 1fr)` for three equal columns
+- Use `gap:48px` consistently (never mix with 32px or 40px)
+- Use `text-align:center` for icon/emoji + text combinations
+- Keep content length similar across all three columns
 
 ---
 

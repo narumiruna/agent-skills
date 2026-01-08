@@ -2,13 +2,13 @@
 marp: true
 theme: default
 paginate: true
-backgroundColor: #f8fafc
-color: #1e293b
+backgroundColor: #fef7cd
+color: #0f1f2e
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0891b2 -->
-<!-- _color: #ffffff -->
+<!-- _backgroundColor: #2a5f8f -->
+<!-- _color: #fef7cd -->
 
 # 🔌 narumi Marketplace
 
@@ -63,8 +63,8 @@ color: #1e293b
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0891b2 -->
-<!-- _color: #ffffff -->
+<!-- _backgroundColor: #2a5f8f -->
+<!-- _color: #fef7cd -->
 
 # 兩大核心插件
 
@@ -141,8 +141,8 @@ color: #1e293b
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0891b2 -->
-<!-- _color: #ffffff -->
+<!-- _backgroundColor: #2a5f8f -->
+<!-- _color: #fef7cd -->
 
 # 快速開始
 
@@ -209,8 +209,8 @@ Claude 自動獲得 Python 開發最佳實踐知識
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0891b2 -->
-<!-- _color: #ffffff -->
+<!-- _backgroundColor: #2a5f8f -->
+<!-- _color: #fef7cd -->
 
 # 進階功能
 
@@ -253,10 +253,6 @@ Claude 自動獲得 Python 開發最佳實踐知識
 - 使用 `strict: false` 模式
 - 組織技能檔案於 `skills/` 目錄
 
-### Hooks 插件範例
-
-`python-code-quality` 展示如何攔截工具操作
-
 </div>
 
 <div>
@@ -265,7 +261,19 @@ Claude 自動獲得 Python 開發最佳實踐知識
 
 `python-skills` 示範多技能整合
 
-### 目錄結構
+### Hooks 插件範例
+
+`python-code-quality` 展示工具攔截
+
+</div>
+
+</div>
+
+---
+
+## 📂 目錄結構
+
+**Marketplace 標準組織**
 
 ```
 marketplace/
@@ -277,9 +285,11 @@ marketplace/
     └── python-peewee/
 ```
 
-</div>
+**關鍵原則**
 
-</div>
+- 插件定義於 `plugins/` 目錄
+- 共享技能於 `skills/` 目錄
+- 每個插件獨立配置
 
 ---
 
@@ -304,8 +314,8 @@ marketplace/
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #0891b2 -->
-<!-- _color: #ffffff -->
+<!-- _backgroundColor: #2a5f8f -->
+<!-- _color: #fef7cd -->
 
 # 開始使用
 

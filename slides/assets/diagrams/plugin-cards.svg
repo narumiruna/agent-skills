@@ -1,75 +1,75 @@
 <svg viewBox="0 0 1440 300" width="1440" height="300" xmlns="http://www.w3.org/2000/svg">
   <title>Plugin Cards</title>
-  <desc>Two plugin cards showing python-code-quality and python-skills</desc>
+  <desc>Two plugin cards showing python-code-quality and python-skills in Van Gogh Starry Night palette</desc>
 
   <defs>
     <filter id="shadow-sm">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
     </filter>
     <linearGradient id="quality-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fffbeb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0.6" />
     </linearGradient>
     <linearGradient id="skills-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f0fdf4;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#4a7ba7;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#2a5f8f;stop-opacity:0.2" />
     </linearGradient>
     <radialGradient id="icon-glow-quality" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0" />
+      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0" />
     </radialGradient>
     <radialGradient id="icon-glow-skills" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#34d399;stop-opacity:0" />
+      <stop offset="0%" style="stop-color:#4a7ba7;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#2a5f8f;stop-opacity:0" />
     </radialGradient>
   </defs>
 
   <g id="main">
     <!-- Python Code Quality Card -->
-    <rect x="24" y="24" width="680" height="252" rx="16" fill="url(#quality-bg)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow-sm)"/>
+    <rect x="24" y="24" width="680" height="252" rx="16" fill="url(#quality-bg)" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
     
     <!-- Icon with glow -->
     <circle cx="100" cy="130" r="40" fill="url(#icon-glow-quality)"/>
-    <circle cx="100" cy="130" r="35" fill="#f59e0b"/>
-    <path d="M 88 123 L 95 138 L 112 113" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="130" r="35" fill="#f4e5a0"/>
+    <path d="M 88 123 L 95 138 L 112 113" stroke="#1e3a5f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     
     <!-- Title -->
-    <text x="364" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#b45309" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="364" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       python-code-quality
     </text>
     
     <!-- Description -->
-    <text x="364" y="145" text-anchor="middle" font-size="30" fill="#78716c" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="364" y="145" text-anchor="middle" font-size="30" fill="#0f1f2e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       ruff + ty 自動檢查
     </text>
 
     <!-- Badge -->
-    <rect x="270" y="180" width="188" height="40" rx="20" fill="#f59e0b" opacity="0.15"/>
-    <text x="364" y="207" text-anchor="middle" font-size="24" font-weight="600" fill="#92400e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <rect x="270" y="180" width="188" height="40" rx="20" fill="#d4a574" opacity="0.25"/>
+    <text x="364" y="207" text-anchor="middle" font-size="24" font-weight="600" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       程式碼品質
     </text>
 
     <!-- Python Skills Card -->
-    <rect x="736" y="24" width="680" height="252" rx="16" fill="url(#skills-bg)" stroke="#10b981" stroke-width="3" filter="url(#shadow-sm)"/>
+    <rect x="736" y="24" width="680" height="252" rx="16" fill="url(#skills-bg)" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
     
     <!-- Icon with glow -->
     <circle cx="812" cy="130" r="40" fill="url(#icon-glow-skills)"/>
-    <circle cx="812" cy="130" r="35" fill="#10b981"/>
-    <rect x="797" y="115" width="30" height="30" rx="4" fill="white"/>
+    <circle cx="812" cy="130" r="35" fill="#2a5f8f"/>
+    <rect x="797" y="115" width="30" height="30" rx="4" fill="#fef7cd"/>
     
     <!-- Title -->
-    <text x="1076" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#065f46" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="1076" y="90" text-anchor="middle" font-size="38" font-weight="700" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       python-skills
     </text>
     
     <!-- Description -->
-    <text x="1076" y="145" text-anchor="middle" font-size="30" fill="#78716c" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="1076" y="145" text-anchor="middle" font-size="30" fill="#0f1f2e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       專案工作流 + ORM
     </text>
 
     <!-- Badge -->
-    <rect x="1000" y="180" width="152" height="40" rx="20" fill="#10b981" opacity="0.15"/>
-    <text x="1076" y="207" text-anchor="middle" font-size="24" font-weight="600" fill="#064e3b" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <rect x="1000" y="180" width="152" height="40" rx="20" fill="#2a5f8f" opacity="0.2"/>
+    <text x="1076" y="207" text-anchor="middle" font-size="24" font-weight="600" fill="#1e3a5f" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
       開發標準
     </text>
   </g>
