@@ -4,6 +4,93 @@ Guidelines for creating professional, consistent, and effective slide presentati
 
 ---
 
+## HTML Usage Policy
+
+**CRITICAL: Avoid HTML in Marpit slides whenever possible.**
+
+### Why Avoid HTML
+
+1. **Security** - HTML is disabled by default in Marp for security reasons
+   - Requires explicit enablement: VS Code "Marp: Enable HTML" setting or `--html` CLI flag
+   - Protects against potential XSS attacks in collaborative environments
+
+2. **Portability** - Raw HTML breaks viewing in other Markdown editors
+   - GitHub, GitLab, editors without Marp will show raw `<div>` tags
+   - Reduces document reusability and sharing capability
+
+3. **Maintainability** - Pure Markdown is easier to edit and version control
+   - Clear diff history in git
+   - No mixing of HTML/CSS concerns with content
+   - Easier for non-technical collaborators
+
+4. **Philosophy** - Marpit is designed for Markdown-first authoring
+   - Goes against the "separation of concerns" principle
+   - Defeats the purpose of using a Markdown-based tool
+
+### Recommended Alternatives to HTML
+
+**Instead of `<div>` layouts:**
+- Use tables for simple multi-column content
+- Use `![bg left:40%]()` or `![bg right:40%]()` for split layouts
+- Create custom theme CSS with class-based styling
+- Use background images with text overlay
+
+**Instead of inline styles:**
+- Use directives: `backgroundColor`, `backgroundImage`, `color`
+- Define styles in `<style scoped>` for page-specific tweaks
+- Create custom theme CSS for reusable styles
+- Use `class` directive to apply theme-defined styles
+
+**Example (Bad - using HTML):**
+```markdown
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div style="background: #333; padding: 20px;">
+    Content
+  </div>
+</div>
+```
+
+**Example (Good - using Marpit features):**
+```markdown
+<!-- _backgroundColor: #333 -->
+
+| Column 1 | Column 2 |
+|----------|----------|
+| Content  | Content  |
+```
+
+Or with background split:
+```markdown
+![bg right:40%](image.png)
+
+# Content on the left
+With text and lists
+```
+
+### When HTML is Acceptable
+
+Only use HTML when:
+1. **No Marpit alternative exists** for the required layout
+2. **Visual complexity justifies** the maintenance cost
+3. **You control the rendering environment** (not for sharing)
+4. **You document** the HTML requirement clearly
+
+Even then, prefer `<style scoped>` over inline `<div>` structures.
+
+### HTML Enablement (If Required)
+
+**VS Code:**
+1. Open Settings (Ctrl/Cmd + ,)
+2. Search "Marp: Enable HTML"
+3. Check the option
+
+**Marp CLI:**
+```bash
+marp slides.md --html -o output.html
+```
+
+---
+
 ## Design Principles
 
 ### Visual Consistency: The Golden Rule

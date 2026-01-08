@@ -96,6 +96,12 @@ A presentation with inconsistent styling appears unprofessional and distracts fr
 
 **Core rule**: ALWAYS output valid Marpit Markdown that can be directly rendered. Do NOT explain syntax unless asked.
 
+**CRITICAL: Avoid HTML in Marpit slides**:
+- Use pure Marpit directives and Markdown syntax only
+- HTML requires manual enablement (security risk, breaks portability)
+- Prefer: directives (`backgroundColor`, `backgroundImage`), tables, `![bg]()` syntax
+- Only use HTML if absolutely no Marpit alternative exists
+
 **Key references**:
 - `references/marpit-authoring/syntax-guide.md` - Marpit syntax and directives
 - `references/marpit-authoring/slide-patterns.md` - Title, content, two-column, code slides
