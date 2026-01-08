@@ -29,7 +29,7 @@ color: #1e293b
 
 ## 🎯 核心價值
 
-<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:32px; margin-top:40px;">
+<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:48px; margin-top:32px;">
 
 <div style="text-align:center;">
 
@@ -63,7 +63,7 @@ color: #1e293b
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #1e40af -->
+<!-- _backgroundColor: #0891b2 -->
 <!-- _color: #ffffff -->
 
 # 兩大核心插件
@@ -124,7 +124,7 @@ color: #1e293b
 
 ### 包含兩大技能模組
 
-<div style="margin-top:24px;">
+<div style="margin-top:32px;">
 
 **1. Python Project Workflow** (`python-project`)
 - 現代工具鏈: uv, ruff, pytest, ty
@@ -141,7 +141,7 @@ color: #1e293b
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #10b981 -->
+<!-- _backgroundColor: #0891b2 -->
 <!-- _color: #ffffff -->
 
 # 快速開始
@@ -209,7 +209,7 @@ Claude 自動獲得 Python 開發最佳實踐知識
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #7c3aed -->
+<!-- _backgroundColor: #0891b2 -->
 <!-- _color: #ffffff -->
 
 # 進階功能
@@ -243,7 +243,7 @@ Claude 自動獲得 Python 開發最佳實踐知識
 
 ## 🛠️ 自訂與擴展
 
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap:40px; margin-top:32px;">
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:48px; margin-top:32px;">
 
 <div>
 
