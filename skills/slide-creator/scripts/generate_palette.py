@@ -6,11 +6,10 @@
 # ///
 """Generate slide color palettes from brand colors or strategies."""
 
-from colorsys import rgb_to_hls, hls_to_rgb
-from typing import Any, cast
+from colorsys import hls_to_rgb, rgb_to_hls
+from typing import Annotated, Any, cast
 
 import typer  # type: ignore[import-untyped]
-from typing_extensions import Annotated
 
 app = typer.Typer(
     help="Generate and manage color palettes for slides and SVG illustrations",
