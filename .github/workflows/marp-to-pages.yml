@@ -28,54 +28,16 @@ jobs:
       - name: Copy images directory (if exists)
         run: if [[ -d img ]]; then cp -R img build/img; fi
 
+      - name: Copy slide assets (non-Markdown)
+        run: |
+          cp -rf examples/slides/ build/docs/
+
       - name: Marp Build
         uses: docker://marpteam/marp-cli:latest
         with:
-          # args: slides/slides.md -o build/index.html
-          args: --allow-local-files -I examples/slides -o build/docs/
+          args: -I examples/slides -o build/docs/
         env:
           MARP_USER: root:root
-
-      - name: Copy slide assets (non-Markdown)
-        run: |
-          # Marp Build runs in a Docker container and may leave root-owned files in `build/docs/`.
-          # Ensure the runner user can write before copying assets.
-          sudo chown -R "$(id -u)":"$(id -g)" build/docs || true
-
-          # Marp CLI references local assets (svg/png/etc.) by relative path in HTML,
-          # but it does not copy those assets into the output directory.
-          rsync -a \
-            --exclude='*.md' \
-            --exclude='*.MD' \
-            --exclude='*.markdown' \
-            --exclude='*.MARKDOWN' \
-            examples/slides/ build/docs/
-
-      # - name: Marp Build (README.pdf)
-      #   uses: docker://marpteam/marp-cli:latest
-      #   with:
-      #     args: README.md --allow-local-files -o build/README.pdf
-      #   env:
-      #     MARP_USER: root:root
-
-      # - name: Marp Build (README.pptx)
-      #   uses: docker://marpteam/marp-cli:latest
-      #   with:
-      #     args: README.md --allow-local-files -o build/README.pptx
-      #   env:
-      #     MARP_USER: root:root
-
-      # - name: Check if docs folder exists
-      #   id: docs-folder-exists
-      #   run: bash -c "[[ -d docs ]] ; echo \"has_docs=\$?\" >> \"$GITHUB_OUTPUT\""
-
-      # - name: Marp Build (docs folder, if exists)
-      #   if: steps.docs-folder-exists.outputs.has_docs == '0'
-      #   uses: docker://marpteam/marp-cli:latest
-      #   with:
-      #     args: -I docs/ -o build/docs/
-      #   env:
-      #     MARP_USER: root:root
 
       - name: Deploy preview
         if: ${{ github.event_name == 'pull_request' }}
