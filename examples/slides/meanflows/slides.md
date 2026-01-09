@@ -53,7 +53,7 @@ style: |
 ---
 
 <!-- _class: lead -->
-![bg opacity:0.22](assets/title-meanflows.svg)
+![bg opacity:0.22](./title-meanflows.svg)
 
 # Mean Flows
 **Structure-preserving dynamics for probability transport**

@@ -62,7 +62,7 @@ table td {
 
 ## 📦 Plugin overview
 
-![w:1400](assets/diagrams/three-plugins.svg)
+![w:1400](diagrams/three-plugins.svg)
 
 ---
 
@@ -157,7 +157,7 @@ One workflow: from color design to a final deck with diagrams
 
 ## 🚀 Installation workflow
 
-![w:1320](assets/diagrams/workflow-overview.svg)
+![w:1320](diagrams/workflow-overview.svg)
 
 ---
 
