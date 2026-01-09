@@ -36,16 +36,9 @@ jobs:
         env:
           MARP_USER: root:root
 
-      # - name: Copy slide assets (non-Markdown)
-      #   run: |
-      #     # Marp CLI references local assets (svg/png/etc.) by relative path in HTML,
-      #     # but it does not copy those assets into the output directory.
-      #     rsync -a \
-      #       --exclude='*.md' \
-      #       --exclude='*.MD' \
-      #       --exclude='*.markdown' \
-      #       --exclude='*.MARKDOWN' \
-      #       examples/slides/ build/docs/
+      - name: Copy slide assets
+        run: |
+          cp -rf examples/slides/ build/docs/
 
       # - name: Marp Build (README.pdf)
       #   uses: docker://marpteam/marp-cli:latest
