@@ -67,7 +67,7 @@
       "name": "slide-skills",
       "source": "./",
       "description": "End-to-end Marp/Marpit slide toolkit: design consistent color systems, author render-ready Marpit Markdown, and create SVG diagrams/illustrations. Includes palettes, layout patterns, themes, authoring rules, SVG sizing/embedding guidance, and reference TOCs for fast navigation.",
-      "version": "0.0.6",
+      "version": "0.0.7",
       "keywords": [
         "marpit",
         "marp",
