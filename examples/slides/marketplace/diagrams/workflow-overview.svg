@@ -27,9 +27,9 @@
     <circle cx="190" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
     <text x="190" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">1</text>
 
-    <text x="190" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">加入市場</text>
-    <text x="190" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Add Marketplace</text>
-    <text x="190" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">GitHub 或本地</text>
+    <text x="190" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Add Marketplace</text>
+    <text x="190" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">GitHub or local</text>
+    <text x="190" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Connect your repo</text>
   </g>
 
   <!-- Arrow 1 -->
@@ -41,9 +41,9 @@
     <circle cx="590" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
     <text x="590" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">2</text>
 
-    <text x="590" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">安裝插件</text>
-    <text x="590" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Install Plugins</text>
-    <text x="590" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">選擇需要的插件</text>
+    <text x="590" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Install Plugins</text>
+    <text x="590" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Choose what you need</text>
+    <text x="590" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Install by name</text>
   </g>
 
   <!-- Arrow 2 -->
@@ -55,11 +55,11 @@
     <circle cx="990" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
     <text x="990" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">3</text>
 
-    <text x="990" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">開始使用</text>
-    <text x="990" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Start Using</text>
-    <text x="990" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">自動啟用 ✓</text>
+    <text x="990" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Start Using</text>
+    <text x="990" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Auto-enabled</text>
+    <text x="990" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Ready immediately</text>
   </g>
 
   <!-- Bottom tagline -->
-  <text x="660" y="270" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.6" font-style="italic">三個簡單步驟，立即提升開發效率</text>
+  <text x="660" y="270" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.6" font-style="italic">Three simple steps to boost productivity</text>
 </svg>

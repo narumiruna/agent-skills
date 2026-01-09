@@ -4,6 +4,7 @@ theme: gaia
 paginate: true
 size: 16:9
 math: katex
+title: Mean Flows - Structure-preserving dynamics for probability transport
 style: |
   :root {
     --bg: #F7F4EF;
@@ -28,11 +29,11 @@ style: |
     letter-spacing: 0.4px;
   }
 
-	  h1 { font-size: 58px; }
-	  h2 { font-size: 40px; }
+  h1 { font-size: 58px; }
+  h2 { font-size: 40px; }
 
-	  strong { color: var(--accent); }
-	  em { color: var(--accent-2); }
+  strong { color: var(--accent); }
+  em { color: var(--accent-2); }
 
   blockquote {
     border-left: 6px solid var(--accent);
@@ -41,14 +42,14 @@ style: |
   }
 
   .muted { color: var(--muted); }
-	  .pill {
-	    background: var(--highlight);
-	    padding: 2px 10px;
-	    border-radius: 999px;
-	    font-weight: 600;
-	  }
-	  .tight li { margin: 0.12em 0; }
-	  .small { font-size: 0.85em; }
+  .pill {
+    background: var(--highlight);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .tight li { margin: 0.12em 0; }
+  .small { font-size: 0.85em; }
 ---
 
 <!-- _class: lead -->
@@ -77,7 +78,7 @@ Researcher-level overview
 
 # MeanFlow (2025) paper
 
-Average-velocity training for one-step generation
+Average-velocity training for one-step generation <https://arxiv.org/abs/2505.13447>
 
 ---
 
@@ -89,8 +90,6 @@ Average-velocity training for one-step generation
 - **Claim:** self-contained training (no distillation or curriculum)
 - **Result:** FID 3.43 with 1-NFE on ImageNet 256x256 (from scratch)
 - **DOI:** 10.48550/arXiv.2505.13447
-
-<https://arxiv.org/abs/2505.13447>
 
 ---
 
