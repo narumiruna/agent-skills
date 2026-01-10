@@ -46,7 +46,7 @@ Fix:
 3. Run SVG validation:
 
 ```bash
-uv run scripts/validate_svg.py diagrams/flow.svg
+svglint diagrams/flow.svg
 ```
 
 ## Text Contrast Fails in Export

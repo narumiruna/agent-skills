@@ -118,7 +118,7 @@ Read in order:
 
 Validate SVGs after creation:
 ```bash
-uv run scripts/validate_svg.py path/to/file.svg
+svglint path/to/file.svg
 ```
 
 ## Workflow
@@ -191,7 +191,7 @@ Common cross-cutting issues:
 
 **Check SVG syntax and best practices**:
 ```bash
-uv run scripts/validate_svg.py diagram.svg
+svglint diagram.svg
 ```
 
 **Verify color contrast (WCAG compliance)**:
