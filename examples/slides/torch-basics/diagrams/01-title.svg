@@ -15,6 +15,7 @@
       .title { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 86px; font-weight: 780; letter-spacing: -0.6px; fill: #E7ECF5; }
       .subtitle { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 34px; font-weight: 520; fill: #A7B0C2; }
       .label { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 22px; font-weight: 560; fill: #A7B0C2; letter-spacing: 0.3px; }
+      .kicker { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 22px; font-weight: 650; fill: #A7B0C2; letter-spacing: 0.3px; }
       .pill { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 24px; font-weight: 650; fill: #E7ECF5; }
       .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
     ]]></style>
@@ -57,5 +58,5 @@
     </g>
   </g>
 
-  <text class="label" x="140" y="842" dominant-baseline="hanging">examples/slides/torch-basics</text>
+  <text class="kicker" x="140" y="842" dominant-baseline="hanging">examples/slides/torch-basics</text>
 </svg>
