@@ -2,6 +2,8 @@
 
 A comprehensive introduction to machine learning concepts with Mermaid diagrams.
 
+[GitHub Pages](https://narumiruna.github.io/claude-marketplace/slides/ml-basics/slides.html)
+
 ## Contents
 
 **17 slides** covering fundamental ML concepts:
