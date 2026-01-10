@@ -1,0 +1,8 @@
+stateDiagram-v2
+    Processing : Processing order
+    Processing : Validating payment
+    Processing : Updating inventory
+
+    [*] --> Processing
+    Processing --> Complete
+    Complete --> [*]

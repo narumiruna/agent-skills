@@ -1,0 +1,16 @@
+gantt
+    title Project Timeline
+    dateFormat YYYY-MM-DD
+
+    section Planning
+    Requirements    :a1, 2024-01-01, 7d
+    Design         :a2, after a1, 5d
+
+    section Development
+    Backend        :b1, 2024-01-15, 14d
+    Frontend       :b2, after b1, 10d
+    Testing        :b3, after b2, 7d
+
+    section Deployment
+    Staging        :c1, after b3, 3d
+    Production     :c2, after c1, 2d

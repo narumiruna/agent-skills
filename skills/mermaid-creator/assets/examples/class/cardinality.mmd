@@ -1,0 +1,4 @@
+classDiagram
+    Customer "1" --> "*" Order
+    Order "*" --> "1..*" OrderItem
+    OrderItem "*" --> "1" Product

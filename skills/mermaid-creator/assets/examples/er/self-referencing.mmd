@@ -1,0 +1,15 @@
+erDiagram
+    EMPLOYEE {
+        int id PK
+        string name
+        int manager_id FK
+    }
+
+    CATEGORY {
+        int id PK
+        string name
+        int parent_id FK
+    }
+
+    EMPLOYEE ||--o{ EMPLOYEE : manages
+    CATEGORY ||--o{ CATEGORY : "parent of"

@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant A
+    participant B
+
+    rect rgb(200, 220, 250)
+        A->>B: Request
+        B-->>A: Response
+    end
+
+    rect rgba(0, 255, 0, 0.1)
+        Note over A,B: Success scenario
+    end

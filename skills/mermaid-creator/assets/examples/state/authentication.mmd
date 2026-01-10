@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> LoggedOut
+
+    LoggedOut --> Authenticating : login_attempt
+
+    state Authenticating {
+        [*] --> Validating
+        Validating --> CheckingMFA : credentials_valid
+        Validating --> Failed : credentials_invalid
+        CheckingMFA --> Verified : mfa_success
+        CheckingMFA --> Failed : mfa_failed
+    }
+
+    Authenticating --> LoggedIn : Verified
+    Authenticating --> LoggedOut : Failed
+
+    LoggedIn --> LoggedOut : logout
+    LoggedIn --> LoggedOut : session_timeout

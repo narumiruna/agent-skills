@@ -1,0 +1,27 @@
+erDiagram
+    DOCTOR {
+        int id PK
+        string name
+    }
+
+    PATIENT {
+        int id PK
+        string name
+    }
+
+    MEDICATION {
+        int id PK
+        string name
+    }
+
+    PRESCRIPTION {
+        int doctor_id FK
+        int patient_id FK
+        int medication_id FK
+        date prescribed_date
+        string dosage
+    }
+
+    DOCTOR ||--o{ PRESCRIPTION : prescribes
+    PATIENT ||--o{ PRESCRIPTION : receives
+    MEDICATION ||--o{ PRESCRIPTION : "prescribed as"

@@ -1,0 +1,22 @@
+gitGraph
+    commit id: "Initial commit"
+    commit id: "Add login"
+
+    branch feature/payment
+    checkout feature/payment
+    commit id: "Payment gateway"
+    commit id: "Tests"
+
+    checkout main
+    branch feature/notifications
+    checkout feature/notifications
+    commit id: "Email service"
+
+    checkout main
+    merge feature/payment tag: "v1.1.0"
+    commit id: "Hotfix"
+
+    checkout feature/notifications
+    commit id: "SMS support"
+    checkout main
+    merge feature/notifications tag: "v1.2.0"

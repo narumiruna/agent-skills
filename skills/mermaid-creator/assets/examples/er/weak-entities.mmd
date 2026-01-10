@@ -1,0 +1,14 @@
+erDiagram
+    ORDER {
+        int id PK
+        date order_date
+    }
+
+    ORDER_LINE {
+        int order_id FK
+        int line_number
+        int product_id FK
+        int quantity
+    }
+
+    ORDER ||--|{ ORDER_LINE : contains

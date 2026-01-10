@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant User
+    participant API
+
+    loop Every 5 seconds
+        User->>API: Poll for updates
+        API-->>User: Data
+    end
+
+    alt Successful case
+        API->>User: Success
+    else Failure case
+        API->>User: Error
+    end
+
+    opt Optional flow
+        User->>API: Optional action
+    end

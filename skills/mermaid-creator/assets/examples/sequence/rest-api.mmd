@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Client
+    participant API
+    participant Auth
+    participant DB
+
+    Client->>+API: POST /api/login
+    API->>+Auth: Validate credentials
+    Auth->>+DB: Query user
+    DB-->>-Auth: User data
+    Auth-->>-API: Token
+    API-->>-Client: 200 OK + Token
+
+    Client->>+API: GET /api/data (with token)
+    API->>Auth: Verify token
+    Auth-->>API: Valid
+    API->>+DB: Fetch data
+    DB-->>-API: Results
+    API-->>-Client: 200 OK + Data

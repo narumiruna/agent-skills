@@ -1,0 +1,10 @@
+stateDiagram-v2
+    [*] --> Input
+    Input --> Validate
+
+    state Validate <<choice>>
+    Validate --> Success : valid
+    Validate --> Error : invalid
+
+    Success --> [*]
+    Error --> Input : retry

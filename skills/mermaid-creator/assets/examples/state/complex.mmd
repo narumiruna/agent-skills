@@ -1,0 +1,22 @@
+stateDiagram-v2
+    [*] --> Initialized
+
+    Initialized --> Ready : config_loaded
+
+    state Ready {
+        [*] --> Idle
+        Idle --> Busy : task_received
+        Busy --> Idle : task_complete
+        Busy --> Error : task_failed
+
+        state Error {
+            [*] --> Retrying
+            Retrying --> Idle : retry_success
+            Retrying --> Failed : retry_limit
+        }
+
+        Failed --> Idle : reset
+    }
+
+    Ready --> Shutdown : stop_signal
+    Shutdown --> [*]

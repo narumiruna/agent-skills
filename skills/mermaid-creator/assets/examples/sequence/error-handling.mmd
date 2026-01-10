@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Client
+    participant Server
+    participant DB
+
+    Client->>+Server: Request
+    Server->>+DB: Query
+
+    alt Success
+        DB-->>Server: Data
+        Server-->>Client: 200 OK
+    else Database Error
+        DB--xServer: Connection failed
+        Server-->>Client: 503 Service Unavailable
+    else Validation Error
+        Server-->>Client: 400 Bad Request
+    end
+
+    deactivate DB
+    deactivate Server

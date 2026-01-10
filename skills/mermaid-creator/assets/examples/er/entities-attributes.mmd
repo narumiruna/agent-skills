@@ -1,0 +1,14 @@
+erDiagram
+    CUSTOMER {
+        int id PK
+        string name
+        string email UK
+        date created_at
+    }
+
+    ORDER {
+        int id PK
+        int customer_id FK
+        date order_date
+        decimal total
+    }

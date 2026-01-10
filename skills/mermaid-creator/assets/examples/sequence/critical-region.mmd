@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant Client
+    participant Server
+
+    critical Establish connection
+        Client->>Server: Connect
+        Server-->>Client: ACK
+    option Connection timeout
+        Server-->>Client: Timeout error
+    end

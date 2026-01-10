@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor User
+    participant App
+    participant AuthServer
+    participant ResourceServer
+
+    User->>App: Click Login
+    App->>AuthServer: Authorization Request
+    AuthServer->>User: Login Page
+    User->>AuthServer: Credentials
+    AuthServer->>AuthServer: Validate
+    AuthServer-->>App: Authorization Code
+    App->>AuthServer: Exchange Code for Token
+    AuthServer-->>App: Access Token
+    App->>ResourceServer: API Request + Token
+    ResourceServer-->>App: Protected Resource
+    App-->>User: Display Data

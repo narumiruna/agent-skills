@@ -1,0 +1,7 @@
+stateDiagram-v2
+    state "Waiting for Input" as waiting
+    state "Processing Data" as processing
+
+    [*] --> waiting
+    waiting --> processing : received
+    processing --> waiting : complete

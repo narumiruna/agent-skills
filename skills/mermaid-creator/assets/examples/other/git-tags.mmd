@@ -1,0 +1,18 @@
+gitGraph
+    commit id: "Setup project"
+    commit id: "Add README" tag: "v0.1.0"
+
+    branch develop
+    checkout develop
+    commit id: "Feature A"
+
+    branch feature/auth
+    checkout feature/auth
+    commit id: "Login page"
+    commit id: "Auth logic"
+
+    checkout develop
+    merge feature/auth
+
+    checkout main
+    merge develop tag: "v1.0.0"

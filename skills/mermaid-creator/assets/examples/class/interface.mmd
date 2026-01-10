@@ -1,0 +1,19 @@
+classDiagram
+    class Drawable {
+        <<interface>>
+        +draw()
+    }
+
+    class Resizable {
+        <<interface>>
+        +resize(width, height)
+    }
+
+    class Circle {
+        +int radius
+        +draw()
+        +resize(width, height)
+    }
+
+    Drawable <|.. Circle
+    Resizable <|.. Circle

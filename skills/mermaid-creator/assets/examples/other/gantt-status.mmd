@@ -1,0 +1,14 @@
+gantt
+    title Task Status Example
+    dateFormat YYYY-MM-DD
+
+    section Completed
+    Task 1         :done, t1, 2024-01-01, 5d
+    Task 2         :done, t2, after t1, 3d
+
+    section In Progress
+    Task 3         :active, t3, after t2, 4d
+
+    section Planned
+    Task 4         :t4, after t3, 6d
+    Task 5         :crit, t5, after t4, 5d

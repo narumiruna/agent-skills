@@ -1,0 +1,31 @@
+classDiagram
+    class User {
+        +String username
+        +String email
+        -String passwordHash
+        +login()
+        +logout()
+    }
+
+    class Post {
+        +String title
+        +String content
+        +DateTime createdAt
+        +publish()
+    }
+
+    class Comment {
+        +String text
+        +DateTime createdAt
+        +edit()
+    }
+
+    class Category {
+        +String name
+        +String description
+    }
+
+    User "1" --> "*" Post : creates
+    Post "1" --> "*" Comment : has
+    User "1" --> "*" Comment : writes
+    Post "*" --> "*" Category : belongs to

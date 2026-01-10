@@ -1,0 +1,21 @@
+classDiagram
+    class Car {
+        -Engine engine
+        -List~Wheel~ wheels
+        +start()
+    }
+
+    class Engine {
+        +int horsepower
+        +start()
+    }
+
+    class Wheel {
+        +int diameter
+    }
+
+    %% Composition: Engine cannot exist without Car
+    Car *-- Engine
+
+    %% Aggregation: Wheels can exist independently
+    Car o-- Wheel

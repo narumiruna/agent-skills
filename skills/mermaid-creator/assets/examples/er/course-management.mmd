@@ -1,0 +1,41 @@
+erDiagram
+    STUDENT {
+        int id PK
+        string name
+        string email UK
+        date enrollment_date
+    }
+
+    COURSE {
+        int id PK
+        string code UK
+        string title
+        int credits
+    }
+
+    INSTRUCTOR {
+        int id PK
+        string name
+        string email UK
+        string department
+    }
+
+    ENROLLMENT {
+        int student_id FK
+        int course_id FK
+        date enrolled_at
+        string grade
+        string status
+    }
+
+    SECTION {
+        int id PK
+        int course_id FK
+        int instructor_id FK
+        string semester
+        int capacity
+    }
+
+    STUDENT }o--o{ COURSE : enrolls
+    INSTRUCTOR ||--o{ SECTION : teaches
+    COURSE ||--o{ SECTION : "offered as"

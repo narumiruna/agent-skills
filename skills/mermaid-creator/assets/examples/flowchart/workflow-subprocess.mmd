@@ -1,0 +1,9 @@
+flowchart TD
+    A[Receive Order] --> B[[Validate Order]]
+    B --> C{Valid?}
+    C -->|Yes| D[[Process Payment]]
+    C -->|No| E[Reject Order]
+    D --> F{Payment OK?}
+    F -->|Yes| G[[Ship Order]]
+    F -->|No| H[Cancel Order]
+    G --> I[Complete]

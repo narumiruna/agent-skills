@@ -1,0 +1,11 @@
+C4Context
+    title System Context for Online Banking
+
+    Person(customer, "Customer", "Banking customer")
+    System(banking, "Online Banking", "Allows customers to manage accounts")
+    System_Ext(email, "Email System", "Sends notifications")
+    System_Ext(mainframe, "Mainframe", "Legacy banking system")
+
+    Rel(customer, banking, "Uses")
+    Rel(banking, email, "Sends emails")
+    Rel(banking, mainframe, "Reads/writes data")

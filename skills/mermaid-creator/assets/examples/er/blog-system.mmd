@@ -1,0 +1,42 @@
+erDiagram
+    USER {
+        int id PK
+        string username UK
+        string email UK
+        string password_hash
+        datetime created_at
+    }
+
+    POST {
+        int id PK
+        int user_id FK
+        string title
+        text content
+        datetime published_at
+        boolean is_published
+    }
+
+    COMMENT {
+        int id PK
+        int post_id FK
+        int user_id FK
+        text content
+        datetime created_at
+    }
+
+    CATEGORY {
+        int id PK
+        string name UK
+        string slug UK
+    }
+
+    TAG {
+        int id PK
+        string name UK
+    }
+
+    USER ||--o{ POST : writes
+    USER ||--o{ COMMENT : writes
+    POST ||--o{ COMMENT : has
+    POST }o--o{ CATEGORY : "belongs to"
+    POST }o--o{ TAG : "tagged with"

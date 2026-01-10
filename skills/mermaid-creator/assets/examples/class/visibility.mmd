@@ -1,0 +1,10 @@
+classDiagram
+    class BankAccount {
+        +String accountNumber
+        -double balance
+        #String ownerName
+        ~int transactionCount
+        +deposit(amount)
+        +withdraw(amount)
+        -calculateInterest()
+    }

@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> Off
+    Off --> On : power_on
+    On --> Off : power_off
+    On --> Standby : idle_timeout
+    Standby --> On : activity
+    Standby --> Off : power_off

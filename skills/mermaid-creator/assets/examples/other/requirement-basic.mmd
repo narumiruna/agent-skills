@@ -1,0 +1,25 @@
+requirementDiagram
+    requirement UserAuth {
+        id: 1
+        text: System shall authenticate users
+        risk: high
+        verifymethod: test
+    }
+
+    requirement DataEncryption {
+        id: 2
+        text: Data shall be encrypted at rest
+        risk: high
+        verifymethod: inspection
+    }
+
+    element LoginPage {
+        type: interface
+    }
+
+    element Database {
+        type: system
+    }
+
+    LoginPage - satisfies -> UserAuth
+    Database - satisfies -> DataEncryption

@@ -1,0 +1,33 @@
+erDiagram
+    USER {
+        int id PK
+        string username UK
+        string email UK
+        boolean is_active
+    }
+
+    ROLE {
+        int id PK
+        string name UK
+        string description
+    }
+
+    PERMISSION {
+        int id PK
+        string name UK
+        string resource
+        string action
+    }
+
+    USER_ROLE {
+        int user_id FK
+        int role_id FK
+    }
+
+    ROLE_PERMISSION {
+        int role_id FK
+        int permission_id FK
+    }
+
+    USER }o--o{ ROLE : "has"
+    ROLE }o--o{ PERMISSION : "grants"

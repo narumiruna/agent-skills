@@ -1,0 +1,53 @@
+erDiagram
+    CUSTOMER {
+        int id PK
+        string email UK
+        string name
+        string phone
+    }
+
+    ORDER {
+        int id PK
+        int customer_id FK
+        datetime order_date
+        decimal total_amount
+        string status
+    }
+
+    ORDER_ITEM {
+        int id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+        decimal price
+    }
+
+    PRODUCT {
+        int id PK
+        string sku UK
+        string name
+        decimal price
+        int stock_quantity
+    }
+
+    CATEGORY {
+        int id PK
+        string name UK
+        int parent_id FK
+    }
+
+    ADDRESS {
+        int id PK
+        int customer_id FK
+        string street
+        string city
+        string postal_code
+        string country
+    }
+
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER ||--o{ ADDRESS : has
+    ORDER ||--|{ ORDER_ITEM : contains
+    PRODUCT ||--o{ ORDER_ITEM : "ordered in"
+    PRODUCT }o--|| CATEGORY : "belongs to"
+    CATEGORY ||--o{ CATEGORY : "parent of"
