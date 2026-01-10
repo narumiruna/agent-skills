@@ -1,0 +1,15 @@
+flowchart LR
+    A[Collect Data] --> B[Data Preparation]
+    B --> C{Data Quality?}
+    C -->|Good| D[Split Data]
+    C -->|Poor| B
+    D --> E[Train Model]
+    E --> F[Evaluate Model]
+    F --> G{Performance OK?}
+    G -->|No| H[Tune Hyperparameters]
+    H --> E
+    G -->|Yes| I[Deploy Model]
+    I --> J[Monitor Performance]
+    J --> K{Drift Detected?}
+    K -->|Yes| A
+    K -->|No| J
