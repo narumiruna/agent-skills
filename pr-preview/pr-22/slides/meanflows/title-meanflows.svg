@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Abstract illustration of probability transport with flow lines from a source distribution to a target distribution">
+  <defs>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1D6A6A" stop-opacity="0.9" />
+      <stop offset="55%" stop-color="#E2C391" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#C65A2E" stop-opacity="0.9" />
+    </linearGradient>
+
+    <radialGradient id="blob-teal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1D6A6A" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#1D6A6A" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="blob-orange" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C65A2E" stop-opacity="0.26" />
+      <stop offset="100%" stop-color="#C65A2E" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="shadow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#2F2A27" flood-opacity="0.12" />
+    </filter>
+
+    <marker id="arrow" viewBox="0 0 16 12" refX="14" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M 0 0 L 16 6 L 0 12" fill="none" stroke="#2F2A27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" />
+    </marker>
+  </defs>
+
+  <!-- Subtle structure lines -->
+  <g opacity="0.14" stroke="#2F2A27" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M 140 140 C 420 60, 820 80, 1460 200" />
+    <path d="M 120 760 C 520 860, 980 820, 1500 700" />
+    <path d="M 240 280 C 560 220, 980 260, 1360 360" />
+    <path d="M 260 640 C 600 700, 980 660, 1320 560" />
+  </g>
+
+  <!-- Source / target diffusion blobs -->
+  <g filter="url(#shadow-sm)">
+    <circle cx="420" cy="520" r="190" fill="url(#blob-teal)" />
+    <circle cx="1180" cy="400" r="210" fill="url(#blob-orange)" />
+  </g>
+
+  <!-- Flow lines -->
+  <g stroke="url(#flow)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.78">
+    <path d="M 510 510 C 690 330, 900 610, 1110 430" marker-end="url(#arrow)" />
+    <path d="M 500 540 C 720 420, 900 520, 1140 410" marker-end="url(#arrow)" />
+    <path d="M 520 560 C 720 640, 940 450, 1150 360" marker-end="url(#arrow)" />
+    <path d="M 470 480 C 700 240, 940 350, 1200 340" marker-end="url(#arrow)" />
+    <path d="M 460 600 C 700 760, 950 700, 1220 520" marker-end="url(#arrow)" />
+    <path d="M 520 450 C 760 300, 980 520, 1220 460" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- A single "mean" trajectory -->
+  <path d="M 500 520 C 760 420, 940 480, 1210 410" stroke="#2F2A27" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.32" />
+
+  <!-- Endpoint samples -->
+  <g>
+    <!-- Left cluster -->
+    <g fill="#1D6A6A" opacity="0.88" stroke="#2F2A27" stroke-width="2">
+      <circle cx="350" cy="500" r="9" />
+      <circle cx="390" cy="560" r="7" />
+      <circle cx="440" cy="520" r="8" />
+      <circle cx="470" cy="590" r="6" />
+      <circle cx="400" cy="470" r="6" />
+      <circle cx="455" cy="465" r="7" />
+      <circle cx="330" cy="545" r="6" />
+      <circle cx="375" cy="525" r="5" />
+      <circle cx="430" cy="600" r="5" />
+      <circle cx="480" cy="525" r="5" />
+    </g>
+
+    <!-- Right cluster -->
+    <g fill="#C65A2E" opacity="0.88" stroke="#2F2A27" stroke-width="2">
+      <circle cx="1115" cy="420" r="9" />
+      <circle cx="1160" cy="380" r="7" />
+      <circle cx="1205" cy="440" r="8" />
+      <circle cx="1235" cy="360" r="6" />
+      <circle cx="1260" cy="410" r="6" />
+      <circle cx="1180" cy="330" r="7" />
+      <circle cx="1135" cy="350" r="6" />
+      <circle cx="1210" cy="395" r="5" />
+      <circle cx="1280" cy="450" r="5" />
+      <circle cx="1170" cy="455" r="5" />
+    </g>
+  </g>
+</svg>
