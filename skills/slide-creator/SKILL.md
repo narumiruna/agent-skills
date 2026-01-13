@@ -49,8 +49,10 @@ uv run scripts/generate_palette.py svg-show default        # Show SVG palette de
 - `assets/templates/technical-dark.md` - Dark theme for code/technical content
 - `assets/templates/professional-light.md` - Light theme for business presentations
 - `assets/templates/minimal-keynote.md` - Minimal design for story-driven talks
+- `assets/templates/with-bg-images.md` - Template showcasing bg syntax for images
 
 **Examples** (learning references - study patterns and copy techniques):
+- `assets/examples/with-bg-syntax.md` - Shows all bg syntax patterns (full-page, split, comparison)
 - `assets/examples/with-diagrams.md` - Shows inline SVG diagram integration
 - `assets/examples/with-palette.md` - Shows custom palette application
 - `assets/examples/full-presentation.md` - Shows all features combined (architecture + charts + code)

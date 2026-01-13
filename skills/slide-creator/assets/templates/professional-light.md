@@ -50,7 +50,7 @@ Your Name · Date
 
 ## Process Overview
 
-![width:1000px](diagrams/workflow.svg)
+![bg fit](diagrams/workflow.svg)
 
 **Three-step process**: Streamlined approach to success
 
