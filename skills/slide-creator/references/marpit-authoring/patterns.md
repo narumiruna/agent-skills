@@ -17,6 +17,9 @@
 - [13. Diagram Placeholder](#13-diagram-placeholder)
 - [14. Code Example with Context](#14-code-example-with-context)
 - [15. Two-Column Concept](#15-two-column-concept)
+- [16. Image with Text (Split Layout)](#16-image-with-text-split-layout)
+- [17. Full-Page Image](#17-full-page-image)
+- [18. Multiple Image Comparison](#18-multiple-image-comparison)
 
 Quick reference for frequently used presentation structures.
 
@@ -262,3 +265,97 @@ async def fetch_data(url):
 ```
 
 Note: True two-column layout depends on theme support. This uses table syntax as fallback.
+
+---
+
+## 16. Image with Text (Split Layout)
+
+**Text on left, image on right:**
+
+```markdown
+![bg right fit](diagrams/architecture-diagram.svg)
+
+# System Architecture
+
+**Key Components:**
+- Frontend: React + TypeScript
+- Backend: Python FastAPI
+- Database: PostgreSQL
+- Cache: Redis
+
+**Benefits:** Scalable, maintainable, performant
+```
+
+**Image on left, text on right:**
+
+```markdown
+![bg left fit](diagrams/workflow.svg)
+
+# Process Flow
+
+The diagram shows our three-stage pipeline:
+
+1. **Ingestion** - Data collection
+2. **Processing** - Transformation
+3. **Output** - Results delivery
+```
+
+**Custom split ratio (60/40):**
+
+```markdown
+![bg left:60% fit](diagrams/detailed-view.svg)
+
+# Architecture Details
+
+More space for the diagram (60%), less for text (40%).
+```
+
+---
+
+## 17. Full-Page Image
+
+**Background image filling entire slide:**
+
+```markdown
+![bg fit](diagrams/pretrip-checklist.svg)
+
+# Optional Overlay Title
+Optional text overlays on the image
+```
+
+**Without text (pure image slide):**
+
+```markdown
+![bg fit](diagrams/complex-system.svg)
+```
+
+**With centered caption:**
+
+```markdown
+<!-- _class: lead -->
+![bg fit](diagrams/key-concept.svg)
+
+# Key Concept
+```
+
+---
+
+## 18. Multiple Image Comparison
+
+**Side-by-side comparison:**
+
+```markdown
+![bg left:50% fit](diagrams/before.svg)
+![bg right:50% fit](diagrams/after.svg)
+
+# Before → After
+```
+
+**Vertical stacking:**
+
+```markdown
+![bg vertical fit](diagrams/header.svg)
+![bg fit](diagrams/main-content.svg)
+
+# Layered View
+```

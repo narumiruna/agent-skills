@@ -19,12 +19,14 @@ Tech Talk · 2026-01-09
 
 ## System Architecture
 
-![width:800px](../diagrams/example-architecture.svg)
+![bg right fit](../diagrams/example-architecture.svg)
 
 **Key components**:
 - Frontend: React + TypeScript
 - Backend: Node.js + Express
 - Database: PostgreSQL
+
+*Diagram on right, text on left*
 
 ---
 

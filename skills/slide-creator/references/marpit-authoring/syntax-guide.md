@@ -248,36 +248,72 @@ const greet = () => {
 
 ## Images
 
-### Basic Image
+**IMPORTANT: Prefer `bg` (background) syntax for all images to avoid manual size adjustments.**
+
+### Background Images (Recommended)
+
+Use background syntax to automatically size and position images:
 
 ```markdown
-![Alt text](image.png)
+# Full-page background (entire slide)
+![bg fit](diagrams/architecture.svg)
+
+# Right-side image (split layout)
+![bg right fit](diagrams/workflow.svg)
+
+# Left-side image (split layout)
+![bg left fit](diagrams/concept.svg)
+
+# Custom width split
+![bg right:40% fit](diagrams/detail.svg)  # Image takes 40% on right
+![bg left:60% fit](diagrams/main.svg)     # Image takes 60% on left
 ```
 
-### Image with Size
+**Key benefits of `bg` syntax:**
+- `fit` modifier auto-scales images to fill available space
+- No manual width/height adjustments needed
+- Consistent sizing across slides
+- Better for responsive layouts
+
+### Split Layout Patterns
+
+**Text on left, image on right:**
+```markdown
+![bg right fit](diagrams/city-venice.svg)
+
+# Feature Description
+
+- Point 1
+- Point 2
+- Point 3
+```
+
+**Image on left, text on right:**
+```markdown
+![bg left fit](diagrams/concept.svg)
+
+# Explanation
+
+Content appears on the right side.
+```
+
+**Full-page image with optional overlay text:**
+```markdown
+![bg fit](diagrams/pretrip-checklist.svg)
+
+# Optional Title
+Text will overlay on the image
+```
+
+### Regular Images (Avoid if possible)
+
+Only use for small inline images (icons, logos):
 
 ```markdown
-![width:600px](image.png)
-![height:400px](image.png)
-![w:300px h:200px](image.png)
+![width:60px](icon.svg)  # Small icon only
 ```
 
-### Image Positioning
-
-```markdown
-![bg](background.jpg)          # Full background
-![bg right:40%](sidebar.jpg)   # Background on right 40%
-![bg left](left-bg.jpg)         # Background on left
-```
-
-### SVG Images
-
-```markdown
-![width:800px](diagram.svg)
-
-<!-- Or inline base64 -->
-![width:600px](data:image/svg+xml;base64,PHN2ZyB4bW...)
-```
+**Do NOT use regular syntax for diagrams or large images** - use `bg` instead.
 
 ---
 
@@ -559,9 +595,10 @@ marp: true
 code here
 ```
 
-# Images
-![width:600px](img.png)
-![bg](background.jpg)
+# Images (prefer bg syntax)
+![bg fit](full-page.svg)
+![bg right fit](side-image.svg)
+![bg left:60% fit](main-image.svg)
 
 # Directives
 <!-- _class: lead -->

@@ -9,6 +9,7 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 
 ## Core rules
 
+- **Use `bg` (background) syntax for all images** - Reduces manual resizing with `fit` modifier
 - Define one color palette and reuse it in slides and SVGs.
 - Define one spacing system and reuse it everywhere.
 - Enforce visual hierarchy with size, weight, and saturation.
@@ -48,8 +49,10 @@ uv run scripts/generate_palette.py svg-show default        # Show SVG palette de
 - `assets/templates/technical-dark.md` - Dark theme for code/technical content
 - `assets/templates/professional-light.md` - Light theme for business presentations
 - `assets/templates/minimal-keynote.md` - Minimal design for story-driven talks
+- `assets/templates/with-bg-images.md` - Template showcasing bg syntax for images
 
 **Examples** (learning references - study patterns and copy techniques):
+- `assets/examples/with-bg-syntax.md` - Shows all bg syntax patterns (full-page, split, comparison)
 - `assets/examples/with-diagrams.md` - Shows inline SVG diagram integration
 - `assets/examples/with-palette.md` - Shows custom palette application
 - `assets/examples/full-presentation.md` - Shows all features combined (architecture + charts + code)
@@ -90,6 +93,7 @@ Output: valid Marpit-compatible Markdown (.md).
 
 Rules:
 - Output directly renderable Marpit Markdown.
+- **Always use `bg` syntax for images** (e.g., `![bg right fit](image.svg)`)
 - Avoid HTML; use Marpit directives and Markdown only.
 - Use HTML only if no Marpit alternative exists.
 

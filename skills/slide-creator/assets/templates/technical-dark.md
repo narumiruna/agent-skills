@@ -47,7 +47,7 @@ def hello_world():
 
 ## Diagram Example
 
-![width:900px](diagrams/architecture.svg)
+![bg fit](diagrams/architecture.svg)
 
 **Architecture overview**: System components and data flow
 
