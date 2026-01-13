@@ -406,6 +406,57 @@ def authenticate(username, password):
 ```
 ````
 
+### Image Usage
+
+**CRITICAL: Always use `bg` (background) syntax for diagrams and large images.**
+
+**Why use `bg` syntax:**
+- Automatic sizing with `fit` modifier - no manual adjustments
+- Consistent appearance across slides
+- Better split layouts with proper text positioning
+- Reduces maintenance when images change
+
+**Good - bg syntax with split layout**:
+```markdown
+![bg right fit](diagrams/architecture.svg)
+
+# System Architecture
+
+- Component A
+- Component B
+- Component C
+```
+
+**Good - full-page background**:
+```markdown
+![bg fit](diagrams/detailed-workflow.svg)
+
+# Optional Overlay Title
+```
+
+**Acceptable - small icons only**:
+```markdown
+![width:40px](icons/check.svg) Feature enabled
+```
+
+**Bad - regular syntax for diagrams**:
+```markdown
+![width:800px](diagrams/architecture.svg)
+<!-- Manual sizing required, inconsistent across slides -->
+```
+
+**Split layout patterns**:
+- `![bg right fit]` - Image on right, text on left
+- `![bg left fit]` - Image on left, text on right  
+- `![bg right:40% fit]` - Image takes 40% on right
+- `![bg left:60% fit]` - Image takes 60% on left
+
+**When to use each:**
+- **Diagram with explanation**: Split layout (`![bg right/left fit]`)
+- **Full-page diagram**: Full background (`![bg fit]`)
+- **Icon/logo inline**: Regular syntax only for very small images (`width:40px`)
+- **Comparison**: Side-by-side (`![bg left:50% fit]` + `![bg right:50% fit]`)
+
 ---
 
 ## Visual Hierarchy

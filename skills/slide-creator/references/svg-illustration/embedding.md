@@ -3,23 +3,15 @@
 ## Table of Contents
 
 - [Embedding Methods](#embedding-methods)
-  - [Method 1: External File (Recommended for development)](#method-1-external-file-recommended-for-development)
+  - [Method 0: Background Syntax (Preferred)](#method-0-background-syntax-preferred)
+  - [Method 1: External File (Legacy - for small inline images only)](#method-1-external-file-legacy-for-small-inline-images-only)
   - [Method 2: Inline Base64 (Recommended for production)](#method-2-inline-base64-recommended-for-production)
   - [Method 3: Inline SVG XML (Not recommended)](#method-3-inline-svg-xml-not-recommended)
-- [Sizing Methods](#sizing-methods)
-  - [Fixed Width](#fixed-width)
-  - [Fixed Height](#fixed-height)
-  - [Both Width and Height](#both-width-and-height)
-  - [Percentage Width (in layouts)](#percentage-width-in-layouts)
 - [Placement Patterns](#placement-patterns)
-  - [Pattern 1: Centered on Slide](#pattern-1-centered-on-slide)
-- [Architecture Overview](#architecture-overview)
-  - [Pattern 2: Two-Column with SVG](#pattern-2-two-column-with-svg)
-- [Process Flow](#process-flow)
-  - [Pattern 3: Full-Slide Background](#pattern-3-full-slide-background)
-  - [Pattern 4: Background Positioning](#pattern-4-background-positioning)
-  - [Pattern 5: Multiple SVGs](#pattern-5-multiple-svgs)
-- [Component Comparison](#component-comparison)
+  - [Pattern 1: Full-Page Background (Most Common)](#pattern-1-full-page-background-most-common)
+  - [Pattern 2: Split Layout - Text and Image](#pattern-2-split-layout-text-and-image)
+  - [Pattern 3: Multiple Images Comparison](#pattern-3-multiple-images-comparison)
+  - [Pattern 4: Legacy Centered on Slide (Avoid)](#pattern-4-legacy-centered-on-slide-avoid)
 - [Responsive Considerations](#responsive-considerations)
   - [Maintain Aspect Ratio](#maintain-aspect-ratio)
   - [Percentage Widths](#percentage-widths)
@@ -34,12 +26,9 @@
   - [Issue 4: SVG Not Showing](#issue-4-svg-not-showing)
   - [Issue 5: Base64 Too Long](#issue-5-base64-too-long)
 - [Best Practices](#best-practices)
-  - [1. Size Appropriately](#1-size-appropriately)
+  - [1. Use bg syntax by default](#1-use-bg-syntax-by-default)
   - [2. Consistent Sizing Within Presentation](#2-consistent-sizing-within-presentation)
   - [3. Use Alt Text](#3-use-alt-text)
-  - [4. Group Related SVGs](#4-group-related-svgs)
-- [System Components](#system-components)
-  - [5. Center Large Graphics](#5-center-large-graphics)
 - [Production Workflow](#production-workflow)
   - [Development Phase](#development-phase)
   - [Distribution Phase](#distribution-phase)
@@ -55,7 +44,40 @@ Complete guide for embedding SVG illustrations in Marp/Marpit Markdown presentat
 
 ## Embedding Methods
 
-### Method 1: External File (Recommended for development)
+**RECOMMENDED: Use `bg` (background) syntax for most images to avoid manual sizing.**
+
+### Method 0: Background Syntax (Preferred)
+
+**Use `bg` syntax with `fit` modifier for automatic sizing:**
+
+```markdown
+# Full-page background
+![bg fit](diagram.svg)
+
+# Split layout - image on right
+![bg right fit](architecture.svg)
+
+# Split layout - image on left
+![bg left fit](workflow.svg)
+
+# Custom split ratio
+![bg right:40% fit](detail.svg)
+```
+
+**Pros**:
+- `fit` modifier auto-scales images perfectly
+- No manual width/height adjustments needed
+- Consistent sizing across slides
+- Better for split layouts with text
+
+**Cons**:
+- Less control over exact positioning (but rarely needed)
+
+**This should be your default choice for diagrams and illustrations.**
+
+---
+
+### Method 1: External File (Legacy - for small inline images only)
 
 Save SVG as separate file and reference:
 
@@ -69,8 +91,11 @@ Save SVG as separate file and reference:
 - Faster iteration during development
 
 **Cons**:
+- **Manual sizing required** - must specify width/height
+- Inconsistent across slides if not careful
 - Requires managing separate files
-- May need bundling for distribution
+
+**Use only for**: Small inline icons (e.g., `![width:40px](icon.svg)`)
 
 ---
 
@@ -169,28 +194,30 @@ Embed SVG XML directly in Markdown:
 
 ## Placement Patterns
 
-### Pattern 1: Centered on Slide
+**Prefer `bg` syntax for all these patterns.**
+
+### Pattern 1: Full-Page Background (Most Common)
 
 ```markdown
-## Architecture Overview
+![bg fit](architecture.svg)
 
-![width:1000px](architecture.svg)
+# Optional Overlay Title
 
-Key components and their interactions.
+Optional text overlays on the image.
 ```
 
-**Result**: SVG centered horizontally, text above and below.
+**Result**: SVG fills entire slide, auto-sized with `fit`.
 
-**Typical widths**: 800-1200px
+**When to use**: Showing a complete diagram without much text.
 
 ---
 
-### Pattern 2: Two-Column with SVG
+### Pattern 2: Split Layout - Text and Image
+
+**Image on right, text on left:**
 
 ```markdown
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
-
-<div>
+![bg right fit](process-flow.svg)
 
 ## Process Flow
 
@@ -198,79 +225,65 @@ Key components and their interactions.
 2. Load configuration
 3. Start services
 4. Monitor health
-
-</div>
-
-<div>
-
-![width:100%](process-flow.svg)
-
-</div>
-
-</div>
 ```
 
-**Result**: Text on left, SVG on right (or vice versa).
-
-**SVG sizing**: Use `width:100%` to fill column.
-
----
-
-### Pattern 3: Full-Slide Background
+**Image on left, text on right:**
 
 ```markdown
----
+![bg left fit](architecture.svg)
 
-![bg](background-pattern.svg)
+# System Architecture
 
-# Title on Background
-
-Content appears over SVG background.
-
----
+Explanation of the architecture appears on the right side.
 ```
 
-**Result**: SVG fills entire slide as background.
-
-**SVG requirements**:
-- ViewBox: `0 0 1920 1080` (full slide dimensions)
-- Use subtle colors (don't overpower text)
-- Ensure text remains readable
-
----
-
-### Pattern 4: Background Positioning
+**Custom split ratio:**
 
 ```markdown
-![bg right:40%](side-graphic.svg)
+![bg left:60% fit](main-diagram.svg)
 
-# Main Content
+# Details
 
-Text appears on left, SVG on right 40% of slide.
+Diagram takes 60%, text takes 40%.
 ```
 
-**Options**:
-- `![bg right:40%](...)` - Right side, 40% width
-- `![bg left:30%](...)` - Left side, 30% width
-- `![bg vertical](...)` - Stacked vertically
+**Result**: Side-by-side layout with automatic image sizing.
+
+**When to use**: Explaining a diagram with text.
 
 ---
 
-### Pattern 5: Multiple SVGs
+### Pattern 3: Multiple Images Comparison
 
 ```markdown
-## Component Comparison
+![bg left:50% fit](before.svg)
+![bg right:50% fit](after.svg)
 
-<div style="display: flex; gap: 32px; justify-content: center;">
-
-![width:350px](component-a.svg)
-![width:350px](component-b.svg)
-![width:350px](component-c.svg)
-
-</div>
+# Before → After
 ```
 
-**Result**: Three SVGs side-by-side.
+**Result**: Two images side-by-side.
+
+**When to use**: Comparisons, before/after.
+
+---
+
+### Pattern 4: Legacy Centered on Slide (Avoid)
+
+**Only use for small inline images:**
+
+```markdown
+## Architecture Overview
+
+![width:60px](icon.svg) Component A
+![width:60px](icon.svg) Component B
+```
+
+**Use bg syntax instead for diagrams:**
+
+```markdown
+![bg fit](architecture.svg)
+```
 
 ---
 
@@ -390,56 +403,37 @@ See [troubleshooting.md](troubleshooting.md) for more issues and solutions.
 
 ## Best Practices
 
-### 1. Size Appropriately
+### 1. Use bg syntax by default
+
+**ALWAYS prefer `bg` syntax for diagrams and illustrations:**
 
 ```markdown
-<!-- Small icon/badge -->
-![width:200px](icon.svg)
+<!-- DO THIS -->
+![bg fit](diagram.svg)
+![bg right fit](architecture.svg)
 
-<!-- Medium diagram -->
+<!-- NOT THIS (unless it's a tiny icon) -->
 ![width:800px](diagram.svg)
+```
 
-<!-- Large centerpiece -->
-![width:1200px](architecture.svg)
+**Exceptions**: Only use regular syntax for very small inline icons:
+```markdown
+![width:40px](check-icon.svg) Feature enabled
 ```
 
 ### 2. Consistent Sizing Within Presentation
 
-If one architecture diagram is 1000px wide, make all architecture diagrams 1000px wide.
+When using `bg fit`, sizing is automatic and consistent. No manual adjustments needed!
 
 ### 3. Use Alt Text
 
 ```markdown
-![width:800px Microservices architecture diagram](architecture.svg)
+![bg fit Microservices architecture diagram](architecture.svg)
 ```
 
 **Benefits**:
 - Accessibility
 - Fallback description if SVG doesn't load
-
-### 4. Group Related SVGs
-
-```markdown
-## System Components
-
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
-
-![width:100%](api-gateway.svg)
-![width:100%](service-mesh.svg)
-![width:100%](database.svg)
-
-</div>
-```
-
-### 5. Center Large Graphics
-
-```markdown
-<div style="text-align: center;">
-
-![width:1000px](large-diagram.svg)
-
-</div>
-```
 
 ---
 
@@ -498,34 +492,37 @@ Use CSS custom properties for theming:
 ### Syntax Cheatsheet
 
 ```markdown
-<!-- External file -->
-![width:800px](diagram.svg)
+<!-- PREFERRED: bg syntax with fit -->
+![bg fit](full-page.svg)
+![bg right fit](side-image.svg)
+![bg left fit](main-diagram.svg)
+![bg right:40% fit](detail.svg)
 
-<!-- Base64 inline -->
-![width:800px](data:image/svg+xml;base64,PHN2Zy4uLg==)
+<!-- Comparison -->
+![bg left:50% fit](before.svg)
+![bg right:50% fit](after.svg)
 
-<!-- Background -->
-![bg](background.svg)
-![bg right:40%](side.svg)
+<!-- LEGACY: Only for small inline icons -->
+![width:40px](icon.svg)
 
-<!-- In column -->
-<div style="width: 50%;">
-![width:100%](diagram.svg)
-</div>
+<!-- External file (for development) -->
+![bg fit](diagram.svg)
 
-<!-- Multiple -->
-![width:400px](a.svg) ![width:400px](b.svg)
+<!-- Base64 inline (for distribution) -->
+![bg fit](data:image/svg+xml;base64,PHN2Zy4uLg==)
 ```
 
 ### Sizing Guidelines
 
-| SVG Type | Recommended Width | Notes |
-|----------|------------------|-------|
-| Icon/Badge | 150-300px | Small, simple |
-| Diagram | 600-1000px | Medium complexity |
-| Architecture | 1000-1400px | Large, detailed |
-| Full-slide BG | 1920×1080 (viewBox) | Background only |
-| Two-column | 100% (in column) | Responsive |
+| Use Case | Recommended Syntax | Notes |
+|----------|-------------------|-------|
+| Full-page diagram | `![bg fit]` | Auto-sized, fills slide |
+| Split layout | `![bg right/left fit]` | Auto-sized, 50/50 split |
+| Custom split | `![bg right:40% fit]` | Image takes specified % |
+| Small inline icon | `![width:40px]` | Only for tiny images |
+| Comparison | `![bg left:50% fit]` + `![bg right:50% fit]` | Side-by-side |
+
+**Rule of thumb**: If it's a diagram or illustration, use `bg fit` syntax.
 
 ---
 

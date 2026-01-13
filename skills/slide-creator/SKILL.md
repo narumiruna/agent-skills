@@ -9,6 +9,7 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 
 ## Core rules
 
+- **Use `bg` (background) syntax for all images** - Reduces manual resizing with `fit` modifier
 - Define one color palette and reuse it in slides and SVGs.
 - Define one spacing system and reuse it everywhere.
 - Enforce visual hierarchy with size, weight, and saturation.
@@ -90,6 +91,7 @@ Output: valid Marpit-compatible Markdown (.md).
 
 Rules:
 - Output directly renderable Marpit Markdown.
+- **Always use `bg` syntax for images** (e.g., `![bg right fit](image.svg)`)
 - Avoid HTML; use Marpit directives and Markdown only.
 - Use HTML only if no Marpit alternative exists.
 
