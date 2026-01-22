@@ -1,5 +1,7 @@
 # Notes
 
+Use original-language names unless the user requests otherwise.
+
 ## Evidence Blocks
 
 ### [Place Name]
@@ -18,4 +20,3 @@
 - Consistency: X/10 [evidence]
 - Risk: X/10 [evidence]
 - Total: XX/50
-

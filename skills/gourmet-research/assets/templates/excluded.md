@@ -1,5 +1,7 @@
 # Excluded
 
+Use original-language names unless the user requests otherwise.
+
 ## Hard Exclusion
 - [Place] - [reason] - [sources]
 
