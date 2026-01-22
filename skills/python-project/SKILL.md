@@ -83,7 +83,7 @@ Key principles:
 - Use `--dev` for tools that are not needed in production (ruff, pytest, ty).
 - Pin versions in production and use ranges during development.
 
-Read `references/uv-scripts.md` for inline metadata, `--no-project`, and `--with` flags.
+Use the `uv-scripts` skill for inline metadata, `--no-project`, and `--with` flags.
 
 ## Run quality tools
 
@@ -166,7 +166,7 @@ Read `references/packaging.md` for publish workflows and checks.
 
 ## Read references when needed
 
-- Script execution patterns: `references/uv-scripts.md`
+- Script execution patterns: `uv-scripts` skill
 - Tool configuration: `references/quality.md`
 - CLI and logging: `references/cli-logging.md`
 - Packaging details: `references/packaging.md`
@@ -174,7 +174,7 @@ Read `references/packaging.md` for publish workflows and checks.
 
 ## References
 
-- `references/uv-scripts.md` - Running scripts with uv
+- `uv-scripts` - Running scripts with uv
 - `references/quality.md` - Ruff, pytest, and ty configuration
 - `references/cli-logging.md` - Typer and loguru patterns
 - `references/packaging.md` - Build and publish workflows

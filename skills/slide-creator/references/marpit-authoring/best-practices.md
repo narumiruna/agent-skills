@@ -447,7 +447,7 @@ def authenticate(username, password):
 
 **Split layout patterns**:
 - `![bg right fit]` - Image on right, text on left
-- `![bg left fit]` - Image on left, text on right  
+- `![bg left fit]` - Image on left, text on right
 - `![bg right:40% fit]` - Image takes 40% on right
 - `![bg left:60% fit]` - Image takes 60% on left
 

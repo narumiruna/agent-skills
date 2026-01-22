@@ -5,7 +5,7 @@ Quick validation script for skills - minimal version
 
 import sys
 import re
-import yaml
+import yaml  # type: ignore[import-not-found]
 from pathlib import Path
 
 
