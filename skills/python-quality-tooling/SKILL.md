@@ -53,3 +53,4 @@ uv run pytest --cov=src --cov-report=term-missing
 ## References
 
 - `references/quality.md` - Full command set and CI example
+- `references/quality.md` - Prek install and usage notes (prefer `uv tool install prek`)

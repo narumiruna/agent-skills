@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+- [prek (pre-commit runner)](#prek-pre-commit-runner)
 - [Type Checking with ty](#type-checking-with-ty)
 - [Linting and Formatting with ruff](#linting-and-formatting-with-ruff)
 - [Testing and Coverage with pytest](#testing-and-coverage-with-pytest)
@@ -9,6 +10,22 @@
 - [CI Configuration Example](#ci-configuration-example)
 
 Keep quality tools in dev dependencies and run via `uv run` for consistency.
+
+## prek (pre-commit runner)
+
+**Install (preferred):**
+
+```bash
+uv tool install prek
+```
+
+**Usage:**
+
+```bash
+prek run -a        # Run all hooks on the repo
+prek run <hook>    # Run a specific hook
+prek install       # Install git hooks
+```
 
 ## Type Checking with ty
 
