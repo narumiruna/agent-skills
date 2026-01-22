@@ -208,3 +208,5 @@ __marimo__/
 
 # Claude
 .claude/settings.local.json
+
+notes/
