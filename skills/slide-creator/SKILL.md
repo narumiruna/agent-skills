@@ -1,6 +1,6 @@
 ---
 name: slide-creator
-description: Complete slide creation toolkit for Marp/Marpit presentations. Use when creating presentations, authoring slides, writing slide content, drawing diagrams, creating illustrations, designing slide color schemes, choosing presentation colors, designing slide themes, selecting background/text/accent colors, or any combination of these tasks. Covers Markdown authoring (Marpit/Marp), SVG illustration, and color design for technical presentations, PowerPoint, Keynote, architecture diagrams, and developer-focused decks.
+description: Use when creating slide decks with Marp/Marpit Markdown (marp), including authoring slide content, designing slide color schemes, and building SVG diagrams or illustrations for the deck.
 ---
 
 # Slide Creation Toolkit
