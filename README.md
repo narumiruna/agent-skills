@@ -74,12 +74,12 @@ Complete Marp/Marpit presentation toolkit for creating professional slides with 
 
 From GitHub:
 ```shell
-/plugin marketplace add narumi/claude-marketplace
+/plugin marketplace add narumi/agent-skills
 ```
 
 Or for local testing:
 ```shell
-/plugin marketplace add ./path/to/claude-marketplace
+/plugin marketplace add ./path/to/agent-skills
 ```
 
 ### Install plugins

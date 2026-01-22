@@ -2,7 +2,7 @@
 
 A comprehensive introduction to machine learning concepts with Mermaid diagrams.
 
-[GitHub Pages](https://narumiruna.github.io/claude-marketplace/slides/ml-basics/slides.html)
+[GitHub Pages](https://narumiruna.github.io/agent-skills/slides/ml-basics/slides.html)
 
 ## Contents
 
