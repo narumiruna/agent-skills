@@ -16,6 +16,40 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 - Use consistent visual language (fill vs outline, emphasis rules).
 - Minimize visual noise; keep one primary visual anchor per section.
 
+## Start here (task entry)
+
+Pick one task and follow the exact reading path:
+
+- **Color palette only** → `references/color-design/workflow.md` → `references/color-design/strategies.md` → `references/color-design/output-template.md`
+- **Slides only (no diagrams)** → `references/marpit-authoring/syntax-guide.md` → `references/marpit-authoring/patterns.md`
+- **Diagram only** → `references/svg-illustration/core-rules.md` → `references/svg-illustration/pattern-examples.md`
+- **Slides + diagrams** → `references/marpit-authoring/syntax-guide.md` → `references/svg-illustration/core-rules.md`
+- **Full deck (colors + slides + diagrams)** → Color workflow → Marpit authoring → SVG illustration
+
+## One-page quick reference
+
+**Minimal steps (fast path)**:
+1. Pick a palette (or generate from brand).
+2. Draft slides in Marpit.
+3. Add SVG diagrams if needed.
+4. Validate output.
+
+**Common commands**:
+```bash
+uv run scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author"
+uv run scripts/generate_palette.py list
+uv run scripts/generate_palette.py show code-blue
+uv run scripts/generate_palette.py brand "#FF6B35" light
+uv run scripts/generate_palette.py svg-show default
+svglint diagram.svg
+bash scripts/validate_marpit.sh slides.md
+```
+
+**Outputs**:
+- **Color design**: strategy + 7-role palette + usage guidelines + validation checklist
+- **Marpit**: `marp: true` frontmatter + slides separated by `---`
+- **SVG**: `<svg viewBox="..." xmlns="...">` with consistent sizing/colors
+
 ## Quick Start
 
 ### Two Ways to Start
@@ -64,6 +98,14 @@ uv run scripts/generate_palette.py svg-show default        # Show SVG palette de
 ![width:60px](assets/icons/error.svg)    <!-- ✗ error -->
 ![width:60px](assets/icons/info.svg)     <!-- ℹ info -->
 ```
+
+## Quick index (where to look)
+
+- **Color design**: `references/color-design/workflow.md`, `references/color-design/strategies.md`, `references/color-design/output-template.md`
+- **Marpit authoring**: `references/marpit-authoring/syntax-guide.md`, `references/marpit-authoring/patterns.md`, `references/marpit-authoring/advanced-layouts.md`
+- **SVG illustration**: `references/svg-illustration/core-rules.md`, `references/svg-illustration/pattern-examples.md`, `references/svg-illustration/embedding.md`
+- **Decision guide**: `references/decision-guide.md`
+- **Output examples**: `references/output-examples.md`
 
 ## Modules
 
