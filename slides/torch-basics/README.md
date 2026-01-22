@@ -2,7 +2,7 @@
 
 A small Marp deck where **every slide is a full 16:9 SVG** (no Markdown layout content).
 
-[GitHub Pages](https://narumiruna.github.io/claude-marketplace/slides/torch-basics/slides.html)
+[GitHub Pages](https://narumiruna.github.io/agent-skills/slides/torch-basics/slides.html)
 
 ## Build
 

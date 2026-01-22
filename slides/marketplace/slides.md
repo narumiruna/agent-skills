@@ -166,13 +166,13 @@ One workflow: from color design to a final deck with diagrams
 **Add from GitHub**
 
 ```bash
-/plugin marketplace add narumi/claude-marketplace
+/plugin marketplace add narumi/agent-skills
 ```
 
 **Local testing**
 
 ```bash
-/plugin marketplace add ./path/to/claude-marketplace
+/plugin marketplace add ./path/to/agent-skills
 ```
 
 ---
@@ -286,7 +286,7 @@ Plugins activate immediately after installation
 **Standard directory layout**
 
 ```
-claude-marketplace/
+agent-skills/
 ├── plugins/
 │   ├── python-code-quality/
 │   ├── python-skills/
@@ -323,6 +323,6 @@ claude-marketplace/
 
 **Working Marketplace + Learning Resource**
 
-🔗 **github.com/narumiruna/claude-marketplace**
+🔗 **github.com/narumiruna/agent-skills**
 
 Install useful plugins | Learn to build your own marketplace
