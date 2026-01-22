@@ -26,6 +26,20 @@ Template-first workflow for traceable, comparable, auditable food recommendation
 6. **Publish**: Update `top-places.md` and `excluded.md` to match decisions.
 7. **Verify**: Ensure no `inbox` statuses remain and required sections exist.
 
+## Ranking Retrieval (When user asks for “highest score”)
+Before extracting any “top N” list, **confirm the scope**:
+- **Geography**: Okinawa *prefecture* vs *main island only* vs *specific subarea*.
+- **Category**: overall vs cuisine category.
+- **Source URL**: must match the user’s intent exactly.
+
+**Checklist (must pass):**
+1. URL matches the requested scope (prefecture vs category).
+2. If “main island only” is required, exclude island subareas (A4705/A4706).
+3. Page title confirms the intended ranking.
+4. Language modal handled so list items actually render.
+
+If static scraping fails or content is blocked, **use Playwright** to load the page, close the language modal (日本語), and then extract items.
+
 ## Evidence & Negative Review Rules
 - Sources must include: **Maps + local reviews + guide/editorial + official channel** (where available).
 - **Negative review analysis is conditional**: perform a focused negative review pass when risk signals appear in any source.
@@ -90,6 +104,7 @@ Thresholds:
 - Skipping `inbox.md` and dumping raw ideas into candidates.
 - Translating place names instead of using the original language.
 - Using only one review platform.
+- Pulling the wrong ranking scope (category vs overall, islands included).
 - Changing scores without updating candidates/top-places/excluded.
 - Ignoring unclear hours or reservation policies.
 
@@ -100,6 +115,7 @@ Thresholds:
 | "Inbox is optional; I can put everything in candidates." | `inbox.md` keeps raw capture separate and reduces noise. |
 | "There aren’t 4 sources; I’ll guess." | Use `unknown` and mark `evidence: limited`. Never guess. |
 | "I’ll translate names for clarity." | Keep original-language names unless the user asks. |
+| "This ranking page is close enough." | Scope mismatch invalidates the answer. Confirm URL and geography. |
 | "Negative reviews are optional." | Required when risk signals appear. |
 
 ## Red Flags — Stop and Fix
