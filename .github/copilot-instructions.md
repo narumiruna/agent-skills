@@ -1,2 +1,0 @@
-- MUST read ../CLAUDE.md
-- WHEN creating or modifying a skill, ALWAYS read ./claude/skills/skill-creator/SKILL.md
