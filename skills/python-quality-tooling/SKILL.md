@@ -19,12 +19,15 @@ Use ruff, ty, and pytest consistently through uv. Core principle: one repeatable
 | Type check | `uv run ty check` |
 | Test | `uv run pytest` |
 | Coverage | `uv run pytest --cov=src --cov-report=term-missing` |
+| Full gate (prek) | `prek run -a` |
+| Install git hooks (prek) | `prek install` |
 
 ## Workflow
 
 - Install tools as dev deps (see `python-uv-project-setup`).
 - Run all checks before commit.
 - Keep CI aligned with local commands.
+- If the repo uses prek, prefer `prek run -a` as the single quality gate.
 
 ## Example
 
@@ -39,11 +42,13 @@ uv run pytest --cov=src --cov-report=term-missing
 ## Common Mistakes
 
 - Running tools outside uv (drifts from project env).
+- Skipping `prek run -a` when a repo standardizes on prek.
 - Running only one tool and calling it done.
 
 ## Red Flags
 
 - Direct `ruff`/`pytest` invocations without `uv run`.
+- Mixing `pre-commit` and `prek` commands in the same repo.
 
 ## References
 
