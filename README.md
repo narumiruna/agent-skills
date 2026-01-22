@@ -24,12 +24,24 @@ Python code quality hooks that automatically run before Edit/Write operations:
 
 Comprehensive Python development toolkit combining project workflow standards and ORM patterns:
 
-**Python Project Workflow** (`python-project` skill):
-- Modern tooling: uv, ruff, pytest, ty, typer, loguru
-- Project setup and dependency management
-- Testing, type checking, and linting patterns
-- CLI development with typer
-- Logging best practices with loguru
+**Python Modern Tooling** (`python-modern-tooling` umbrella):
+- Routes requests to focused skills for setup, quality, CLI, logging, packaging
+
+**uv Project Setup** (`python-uv-project-setup`):
+- Project and script setup with uv
+- Dependency management and `uv run` rules
+
+**Quality Tooling** (`python-quality-tooling`):
+- ruff, ty, pytest, coverage, CI gate patterns
+
+**CLI with Typer** (`python-cli-typer`):
+- Typer command patterns and structure
+
+**Logging** (`python-logging`):
+- stdlib logging vs loguru guidance
+
+**Packaging with uv** (`python-packaging-uv`):
+- Build and publish workflows
 
 **Peewee ORM Patterns** (`python-peewee` skill):
 - DatabaseProxy setup patterns

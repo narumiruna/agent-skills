@@ -22,7 +22,20 @@ This repository serves two purposes:
 ├── skills/
 │   ├── python-peewee/         # Peewee ORM skill
 │   │   └── SKILL.md
-│   ├── python-project/        # Python project workflow skill
+│   ├── python-modern-tooling/ # Umbrella routing skill
+│   │   └── SKILL.md
+│   ├── python-uv-project-setup/ # uv setup and run rules
+│   │   └── SKILL.md
+│   ├── python-quality-tooling/ # ruff/ty/pytest workflows
+│   │   ├── SKILL.md
+│   │   └── references/
+│   ├── python-cli-typer/      # Typer CLI patterns
+│   │   ├── SKILL.md
+│   │   └── references/
+│   ├── python-logging/        # stdlib logging and loguru guidance
+│   │   ├── SKILL.md
+│   │   └── references/
+│   ├── python-packaging-uv/   # uv build/publish workflows
 │   │   ├── SKILL.md
 │   │   └── references/
 │   └── slide-creator/        # Unified slide creation skill
@@ -120,14 +133,27 @@ Commands executed:
 ### 2. python-skills (multi-skill)
 
 Location: `./` (root)
-Skills: `./skills/python-peewee`, `./skills/python-project`
+Skills: `./skills/python-peewee`, `./skills/python-modern-tooling`, `./skills/python-uv-project-setup`, `./skills/python-quality-tooling`, `./skills/python-cli-typer`, `./skills/python-logging`, `./skills/python-packaging-uv`
 
-**python-project skill**:
-- Modern Python tooling patterns (uv, ruff, pytest, ty, typer, loguru)
-- Project setup and dependency management
-- Testing, type checking, and linting workflows
-- CLI development with typer
-- Logging best practices with loguru
+**python-modern-tooling skill**:
+- Umbrella routing to focused Python tooling skills
+- Chooses the right workflow for setup, quality, CLI, logging, packaging
+
+**python-uv-project-setup skill**:
+- uv-based setup for projects and scripts
+- Dependency management and `uv run` execution rules
+
+**python-quality-tooling skill**:
+- ruff/ty/pytest quality gates and CI patterns
+
+**python-cli-typer skill**:
+- Typer CLI patterns and structure
+
+**python-logging skill**:
+- stdlib logging vs loguru guidance
+
+**python-packaging-uv skill**:
+- Build and publish workflows with uv
 
 **python-peewee skill**:
 - DatabaseProxy setup patterns

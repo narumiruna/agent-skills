@@ -93,12 +93,14 @@ Combines project workflow standards with ORM patterns
 
 ## 🎓 python-skills (1/2)
 
-**Python Project Workflow** (`python-project` skill)
+**Python Modern Tooling** (`python-modern-tooling` umbrella)
 
-- Modern toolchain: uv, ruff, pytest, ty, typer, loguru
-- Project setup and dependency management
-- Testing, type checking, linting patterns
-- CLI development best practices
+- Routes requests to focused skills
+- Setup & run rules (uv)
+- Quality gates (ruff/ty/pytest)
+- CLI patterns (Typer)
+- Logging guidance (stdlib vs loguru)
+- Packaging workflows (uv)
 
 ---
 
@@ -292,7 +294,12 @@ agent-skills/
 │   ├── python-skills/
 │   └── slide-skills/
 └── skills/
-    ├── python-project/
+    ├── python-modern-tooling/
+    ├── python-uv-project-setup/
+    ├── python-quality-tooling/
+    ├── python-cli-typer/
+    ├── python-logging/
+    ├── python-packaging-uv/
     ├── python-peewee/
     └── slide-creator/
 ```
