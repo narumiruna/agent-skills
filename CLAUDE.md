@@ -225,10 +225,16 @@ After modifying marketplace.json or plugins:
 
 ### Working with Skills During Development
 
-Use `scripts/sync_skills.sh` to sync skills to `~/.codex/skills/` for rapid testing without reinstalling plugins:
+Use the Makefile to sync skills to `~/.codex/skills/` for rapid testing without reinstalling plugins (requires `stow`):
 
 ```shell
-./scripts/sync_skills.sh
+make sync
+```
+
+Remove the synced skills when you are done:
+
+```shell
+make clean
 ```
 
 This is useful when iterating on skill content (SKILL.md and references/) without going through the full plugin installation flow.

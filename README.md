@@ -102,6 +102,20 @@ Validate the marketplace structure:
 /plugin validate .
 ```
 
+## Development: Sync Skills for Codex
+
+Use the Makefile to sync skills into `~/.codex/skills/` during development (requires `stow`):
+
+```shell
+make sync
+```
+
+Remove the synced skills when finished:
+
+```shell
+make clean
+```
+
 Test locally before publishing:
 ```shell
 /plugin marketplace add .
