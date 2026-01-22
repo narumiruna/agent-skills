@@ -118,6 +118,31 @@ Read `references/quality.md` for tool configuration and recommended settings.
 
 ## Build CLIs and logging
 
+## Choose logging vs loguru
+
+Prefer `logging` for stable, maintainable, ecosystem-friendly setups; prefer `loguru` for speed, convenience, and low cognitive load.
+
+Use `logging` when:
+- Large or long-lived projects, libraries, or frameworks
+- Needs tight integration with Sentry/Datadog/OpenTelemetry
+- Needs clear levels, logger tree, and handler architecture
+- Wants control via `dictConfig`, environment variables, or infra
+
+Use `loguru` when:
+- Small projects, CLI tools, scripts, prototypes
+- Wants zero config and colored output
+- Does not want to manage handlers/formatters/filters
+- Team is not comfortable with logging
+
+Avoid:
+- For a reusable library, do not force loguru
+- For deep logging ecosystem integration, do not use only loguru
+
+Common compromise:
+- External/public interfaces use `logging`
+- Internal tools or CLI use `loguru`
+- Or: loguru sinks into logging to keep the logging ecosystem
+
 Use typer for CLIs:
 ```python
 import typer
@@ -148,7 +173,7 @@ except Exception as err:
     logger.error("Failed to connect: {error}", error=err)
 ```
 
-Read `references/cli-logging.md` for complete examples and advanced patterns.
+Read `references/cli.md`, `references/loguru.md`, and `references/logging.md` for complete examples and advanced patterns.
 
 ## Package distributions
 
@@ -168,7 +193,9 @@ Read `references/packaging.md` for publish workflows and checks.
 
 - Script execution patterns: `uv-scripts` skill
 - Tool configuration: `references/quality.md`
-- CLI and logging: `references/cli-logging.md`
+- CLI patterns: `references/cli.md`
+- Loguru logging patterns: `references/loguru.md`
+- Stdlib logging patterns: `references/logging.md`
 - Packaging details: `references/packaging.md`
 - Coding style: use the `python-conventions` skill
 
@@ -176,5 +203,7 @@ Read `references/packaging.md` for publish workflows and checks.
 
 - `uv-scripts` - Running scripts with uv
 - `references/quality.md` - Ruff, pytest, and ty configuration
-- `references/cli-logging.md` - Typer and loguru patterns
+- `references/cli.md` - Typer CLI patterns
+- `references/loguru.md` - Loguru logging patterns
+- `references/logging.md` - Python stdlib logging patterns
 - `references/packaging.md` - Build and publish workflows
