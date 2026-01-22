@@ -116,6 +116,17 @@ Remove the synced skills when finished:
 make clean
 ```
 
+Install stow:
+
+```shell
+# Linux (Debian/Ubuntu)
+sudo apt update
+sudo apt install -y stow
+
+# macOS (using Homebrew)
+brew install stow
+```
+
 Test locally before publishing:
 ```shell
 /plugin marketplace add .
