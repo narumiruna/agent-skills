@@ -106,6 +106,7 @@ uv run scripts/generate_palette.py svg-show default        # Show SVG palette de
 - **SVG illustration**: `references/svg-illustration/core-rules.md`, `references/svg-illustration/pattern-examples.md`, `references/svg-illustration/embedding.md`
 - **Decision guide**: `references/decision-guide.md`
 - **Output examples**: `references/output-examples.md`
+- **Preview workflow**: `references/preview-workflow.md`
 
 ## Modules
 
