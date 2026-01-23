@@ -81,3 +81,4 @@ This marketplace demonstrates:
 - Using `strict: false` for inline plugin definitions
 - Organizing skills in `skills/` directory
 - Marketplace validation and testing
+- Entry skills for faster routing in multi-skill bundles
