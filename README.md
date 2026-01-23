@@ -13,6 +13,7 @@ This repository serves two purposes:
 
 - `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
 - `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
+- `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations
 
 ## Installation
 
@@ -35,6 +36,9 @@ Install plugins:
 
 # Install presentation slide creation skills
 /plugin install slide-skills@narumi
+
+# Install gourmet research workflow skills
+/plugin install gourmet-research@narumi
 ```
 
 ### Codex (local skills)
