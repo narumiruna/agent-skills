@@ -241,6 +241,12 @@ Common cross-cutting issues:
 svglint diagram.svg
 ```
 
+**Visual verification (required after any SVG/image change)**:
+1. Run Marp preview/export for the target deck (or the smallest deck that imports the SVG).
+2. Confirm the SVG renders in Marpit (see `references/troubleshooting-common.md#svg-not-rendering-in-marpit`).
+3. Render the slide with Playwright (or equivalent) and capture a screenshot.
+4. Review the screenshot in slide context before stating visual impact or completion.
+
 **Verify color contrast (WCAG compliance)**:
 ```bash
 uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
