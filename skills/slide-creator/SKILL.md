@@ -33,6 +33,11 @@ bash skills/slide-creator/scripts/validate_marpit.sh slides.md
 
 ## Start here (task entry)
 
+**Entry skills (fast routing)**:
+- `marp-authoring` → Marp/Marpit authoring rules, layouts, themes
+- `slide-color-design` → palette workflow and color roles
+- `svg-illustration` → SVG diagram rules, patterns, embedding
+
 Pick one task and follow the exact reading path:
 
 - **Color palette only** → `references/color-design/workflow.md` → `references/color-design/strategies.md` → `references/color-design/output-template.md`
