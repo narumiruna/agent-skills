@@ -28,6 +28,7 @@ Use ruff, ty, and pytest consistently through uv. Core principle: one repeatable
 - Run all checks before commit.
 - Keep CI aligned with local commands.
 - If the repo uses prek, prefer `prek run -a` as the single quality gate.
+- Pytest tests MUST be function-based (no class-based tests or `unittest.TestCase`).
 
 ## Example
 
@@ -49,6 +50,7 @@ uv run pytest --cov=src --cov-report=term-missing
 
 - Direct `ruff`/`pytest` invocations without `uv run`.
 - Mixing `pre-commit` and `prek` commands in the same repo.
+- Class-based pytest tests (`class Test*`) or `unittest.TestCase` usage.
 
 ## References
 
