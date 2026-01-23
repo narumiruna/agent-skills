@@ -50,8 +50,6 @@ This repository hosts my personal agent skills, packaged for use in Codex or Cla
 │       ├── SKILL.md
 │       ├── assets/
 │       └── references/
-├── scripts/
-│   └── sync_skills.sh        # Development: sync skills to ~/.codex/skills/
 ├── examples/slides/          # Live slide examples (built by CI)
 │   ├── marketplace/          # Marketplace demo presentation
 │   └── meanflows/            # Meanflows methodology presentation
