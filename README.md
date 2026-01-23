@@ -1,13 +1,6 @@
-# narumi
+# Agent Skills
 
-A working example of a Claude Code plugin marketplace with development tools and comprehensive documentation.
-
-## About This Repository
-
-This repository serves two purposes:
-
-1. **Working Marketplace**: Install plugins for Python development (code quality hooks, project workflow standards, and ORM patterns)
-2. **Documentation & Examples**: Learn how to create and operate a plugin marketplace from this repository
+This repo hosts my personal agent skills, packaged so they can be used in Codex or Claude Code.
 
 ## Available Plugins
 

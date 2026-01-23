@@ -1,13 +1,10 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance for using this repository's agent skills in Codex or Claude Code.
 
 ## Repository Purpose
 
-This repository serves two purposes:
-
-1. **Example Marketplace**: A working Claude Code plugin marketplace (`narumi`) that demonstrates best practices
-2. **Documentation**: This repository documents marketplace structure and workflows
+This repository hosts my personal agent skills, packaged for use in Codex or Claude Code.
 
 ## Repository Structure
 
