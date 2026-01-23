@@ -10,11 +10,21 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 ## Core rules
 
 - **Use `bg` (background) syntax for all images** - Reduces manual resizing with `fit` modifier
-- Define one color palette and reuse it in slides and SVGs.
-- Define one spacing system and reuse it everywhere.
-- Enforce visual hierarchy with size, weight, and saturation.
-- Use consistent visual language (fill vs outline, emphasis rules).
+- Define one 7-role color palette and reuse it in slides and SVGs.
+- Define one spacing unit (e.g., 8px or 16px) and reuse it across layouts.
+- Define text hierarchy tiers (title/section/body) with sizes and weights; use them consistently.
+- For SVGs, use one stroke width and one corner radius across shapes.
+
+## Design guidance (non-enforceable)
+
+- Aim for clear visual hierarchy with size, weight, and saturation.
+- Prefer one visual language (fill vs outline, emphasis rules).
 - Minimize visual noise; keep one primary visual anchor per section.
+
+## Working directory
+
+All paths and commands in this skill assume you are running from `skills/slide-creator/`.
+If running from the repo root, prefix paths with `skills/slide-creator/`.
 
 ## Start here (task entry)
 
