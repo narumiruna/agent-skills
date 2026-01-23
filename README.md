@@ -82,9 +82,9 @@ Complete Marp/Marpit presentation toolkit for creating professional slides with 
 
 ## Installation
 
-### Add this marketplace
+### Claude Code (marketplace)
 
-From GitHub:
+Add this marketplace:
 ```shell
 /plugin marketplace add narumi/agent-skills
 ```
@@ -94,8 +94,7 @@ Or for local testing:
 /plugin marketplace add ./path/to/agent-skills
 ```
 
-### Install plugins
-
+Install plugins:
 ```shell
 # Install code quality hooks
 /plugin install python-code-quality@narumi
@@ -114,9 +113,19 @@ Validate the marketplace structure:
 /plugin validate .
 ```
 
-## Development: Sync Skills for Codex
+### Codex (local skills)
 
-Use the Makefile to sync skills into `~/.codex/skills/` during development (requires `stow`):
+Install `stow` (required):
+```shell
+# Linux (Debian/Ubuntu)
+sudo apt update
+sudo apt install -y stow
+
+# macOS (using Homebrew)
+brew install stow
+```
+
+Sync skills into `~/.codex/skills/` using the Makefile:
 
 ```shell
 make sync
@@ -126,17 +135,6 @@ Remove the synced skills when finished:
 
 ```shell
 make clean
-```
-
-Install stow:
-
-```shell
-# Linux (Debian/Ubuntu)
-sudo apt update
-sudo apt install -y stow
-
-# macOS (using Homebrew)
-brew install stow
 ```
 
 Test locally before publishing:
