@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#0A1634"/>
+    </linearGradient>
+    <filter id="shadow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <style><![CDATA[
+      .h1 { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 64px; font-weight: 760; letter-spacing: -0.4px; fill: #E7ECF5; }
+      .body { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 26px; font-weight: 520; fill: #A7B0C2; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 22px; fill: #E7ECF5; }
+      .kicker { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 22px; font-weight: 650; fill: #A7B0C2; letter-spacing: 0.3px; }
+      .code-bg { fill: #121A33; stroke: #2B3558; stroke-width: 3; }
+      .card { fill: #0F1730; stroke: #2B3558; stroke-width: 3; }
+      .accent { fill: #EE4C2C; }
+      .accent2 { fill: #35C9C5; }
+    ]]></style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <g transform="translate(140 110)">
+    <text class="kicker" x="0" y="0" dominant-baseline="hanging">FOUNDATION</text>
+    <text class="h1" x="0" y="50" dominant-baseline="hanging">Tensors</text>
+    <text class="body" x="0" y="132" dominant-baseline="hanging">Multi-dimensional arrays with dtype and device awareness</text>
+  </g>
+
+  <!-- left: concepts -->
+  <g transform="translate(140 270)" filter="url(#shadow-sm)">
+    <rect class="card" x="0" y="0" width="650" height="520" rx="28"/>
+    <g transform="translate(48 54)">
+      <g transform="translate(0 0)">
+        <circle cx="14" cy="16" r="10" class="accent"/>
+        <text class="body" x="40" y="0" dominant-baseline="hanging">Shape: <tspan class="mono">x.shape</tspan></text>
+      </g>
+      <g transform="translate(0 70)">
+        <circle cx="14" cy="16" r="10" class="accent2"/>
+        <text class="body" x="40" y="0" dominant-baseline="hanging">Dtype: <tspan class="mono">float32</tspan>, <tspan class="mono">int64</tspan>, ...</text>
+      </g>
+      <g transform="translate(0 140)">
+        <circle cx="14" cy="16" r="10" fill="#2563EB"/>
+        <text class="body" x="40" y="0" dominant-baseline="hanging">Device: <tspan class="mono">cpu</tspan> vs <tspan class="mono">cuda</tspan></text>
+      </g>
+      <g transform="translate(0 210)">
+        <circle cx="14" cy="16" r="10" fill="#F59E0B"/>
+        <text class="body" x="40" y="0" dominant-baseline="hanging">Indexing + slicing</text>
+      </g>
+      <g transform="translate(0 280)">
+        <circle cx="14" cy="16" r="10" fill="#10B981"/>
+        <text class="body" x="40" y="0" dominant-baseline="hanging">Broadcasting rules</text>
+      </g>
+
+      <g transform="translate(0 378)">
+        <rect class="code-bg" x="0" y="0" width="554" height="104" rx="18"/>
+        <text class="mono" x="22" y="18" dominant-baseline="hanging">x = torch.randn(3, 4)</text>
+        <text class="mono" x="22" y="48" dominant-baseline="hanging">y = x.mean(dim=0)</text>
+        <text class="mono" x="22" y="78" dominant-baseline="hanging">z = x @ y</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- right: visual -->
+  <g transform="translate(830 270)" filter="url(#shadow-sm)">
+    <rect class="card" x="0" y="0" width="630" height="520" rx="28"/>
+    <g transform="translate(52 64)">
+      <text class="kicker" x="0" y="0" dominant-baseline="hanging">EXAMPLE: 2D TENSOR</text>
+
+      <g transform="translate(0 70)">
+        <rect x="0" y="0" width="526" height="310" rx="22" fill="#121A33" stroke="#2B3558" stroke-width="3"/>
+        <g transform="translate(34 34)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="26" fill="#E7ECF5">
+          <text x="0" y="0" dominant-baseline="hanging">[[ 0.12, -0.88,  1.03,  0.42],</text>
+          <text x="0" y="40" dominant-baseline="hanging"> [ 0.51,  0.09, -0.14, -1.20],</text>
+          <text x="0" y="80" dominant-baseline="hanging"> [-0.33,  0.77,  0.02,  0.66]]</text>
+        </g>
+        <g transform="translate(0 0)" opacity="0.75">
+          <path d="M0 155H526" stroke="#2B3558" stroke-width="2"/>
+          <path d="M263 0V310" stroke="#2B3558" stroke-width="2"/>
+        </g>
+      </g>
+
+      <g transform="translate(0 410)">
+        <rect x="0" y="0" width="526" height="80" rx="22" fill="#0F1730" stroke="#2B3558" stroke-width="3"/>
+        <text class="body" x="22" y="18" dominant-baseline="hanging">Shape: <tspan class="mono">[3, 4]</tspan></text>
+        <text class="body" x="290" y="18" dominant-baseline="hanging">Dtype: <tspan class="mono">float32</tspan></text>
+      </g>
+    </g>
+  </g>
+
+  <text class="kicker" x="140" y="842" dominant-baseline="hanging">examples/slides/torch-basics</text>
+</svg>

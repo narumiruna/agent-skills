@@ -1,0 +1,93 @@
+<svg viewBox="0 0 1320 200" width="1320" height="200" xmlns="http://www.w3.org/2000/svg">
+  <title>Installation Flow - Van Gogh Starry Night Theme</title>
+  <desc>Three-step installation process with progressive emphasis</desc>
+
+  <defs>
+    <!-- Arrow with golden color -->
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#f4e5a0"/>
+    </marker>
+
+    <filter id="shadow-sm">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Starry night gradient -->
+    <linearGradient id="card-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1f2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5f8f;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Star glow -->
+    <radialGradient id="star-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fef7cd;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#f4e5a0;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#f4e5a0;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <g id="main">
+    <!-- Step 1: Add Marketplace -->
+    <rect x="24" y="24" width="340" height="152" rx="16" fill="url(#card-bg)" stroke="#4a7ba7" stroke-width="3" filter="url(#shadow-sm)"/>
+
+    <!-- Step number badge -->
+    <circle cx="64" cy="54" r="24" fill="#4a7ba7" stroke="#f4e5a0" stroke-width="2"/>
+    <text x="64" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      1
+    </text>
+
+    <text x="194" y="90" text-anchor="middle" font-size="30" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      Add
+    </text>
+    <text x="194" y="128" text-anchor="middle" font-size="30" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      Marketplace
+    </text>
+
+    <!-- Arrow 1 -->
+    <path d="M 384 100 L 466 100" stroke="#f4e5a0" stroke-width="5" marker-end="url(#arrow)" fill="none" stroke-linecap="round"/>
+
+    <!-- Step 2: Install Plugin - More saturated -->
+    <rect x="486" y="24" width="340" height="152" rx="16" fill="url(#card-bg)" stroke="#2a5f8f" stroke-width="3" filter="url(#shadow-sm)"/>
+
+    <!-- Step number badge -->
+    <circle cx="526" cy="54" r="24" fill="#2a5f8f" stroke="#f4e5a0" stroke-width="2"/>
+    <text x="526" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      2
+    </text>
+
+    <text x="656" y="90" text-anchor="middle" font-size="30" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      Install
+    </text>
+    <text x="656" y="128" text-anchor="middle" font-size="30" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      Plugin
+    </text>
+
+    <!-- Arrow 2 -->
+    <path d="M 846 100 L 928 100" stroke="#f4e5a0" stroke-width="5" marker-end="url(#arrow)" fill="none" stroke-linecap="round"/>
+
+    <!-- Step 3: Start Coding - Warmest color for completion -->
+    <rect x="948" y="24" width="348" height="152" rx="16" fill="url(#card-bg)" stroke="#d4a574" stroke-width="3" filter="url(#shadow-sm)"/>
+
+    <!-- Step number badge with warm village light color -->
+    <circle cx="988" cy="54" r="24" fill="#d4a574" stroke="#f4e5a0" stroke-width="2"/>
+    <text x="988" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#0f1f2e" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      3
+    </text>
+
+    <text x="1122" y="82" text-anchor="middle" font-size="30" font-weight="700" fill="#fef7cd" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+      Start Coding
+    </text>
+
+    <!-- Star symbol with glow -->
+    <circle cx="1122" cy="133" r="22" fill="url(#star-glow)"/>
+    <path d="M 1122 116 L 1126 128 L 1139 130 L 1130 139 L 1132 152 L 1122 146 L 1112 152 L 1114 139 L 1105 130 L 1118 128 Z" fill="#fef7cd" stroke="#f4e5a0" stroke-width="1"/>
+
+    <!-- Decorative stars -->
+    <circle cx="50" cy="180" r="8" fill="url(#star-glow)"/>
+    <circle cx="50" cy="180" r="3" fill="#fef7cd"/>
+
+    <circle cx="1280" cy="40" r="10" fill="url(#star-glow)"/>
+    <circle cx="1280" cy="40" r="3" fill="#fef7cd"/>
+  </g>
+</svg>
