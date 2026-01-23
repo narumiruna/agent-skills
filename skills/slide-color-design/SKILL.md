@@ -24,6 +24,9 @@ Thin entry skill for slide color work. Core principle: route directly to the col
 ## Example
 Prompt: "Need a light palette from a brand color." → Read `workflow.md`, then `strategies.md`, then `output-template.md`.
 
+## Assets
+- `assets/examples/` - Palette example outputs
+
 ## Common Mistakes
 - Skimming the slide-creator overview instead of the color workflow
 - Jumping into Marp authoring before defining palette roles

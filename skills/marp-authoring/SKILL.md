@@ -25,6 +25,11 @@ Thin entry skill for Marp/Marpit authoring. Core principle: route directly to th
 ## Example
 Prompt: "Need a split layout with a code block." → Read `syntax-guide.md`, then `advanced-layouts.md`.
 
+## Assets
+- `assets/templates/` - Starter Marp templates
+- `assets/examples/` - Slide examples and patterns
+- `assets/icons/` - Common slide icons
+
 ## Common Mistakes
 - Skimming slide-creator overview instead of authoring references
 - Opening color or SVG modules for authoring-only tasks

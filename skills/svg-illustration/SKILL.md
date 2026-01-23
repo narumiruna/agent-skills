@@ -24,6 +24,9 @@ Thin entry skill for SVG diagrams. Core principle: go straight to SVG rules and 
 ## Example
 Prompt: "Need an architecture diagram with clean sizing." → Read `core-rules.md`, then `pattern-examples.md`.
 
+## Assets
+- `assets/examples/` - SVG diagram examples
+
 ## Common Mistakes
 - Reading Marp authoring before SVG rules when only diagrams are needed
 - Skimming slide-creator overview instead of SVG references
