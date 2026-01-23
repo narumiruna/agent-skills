@@ -63,7 +63,13 @@
         "frontmatter",
         "themes"
       ],
-      "skills": ["./skills/slide-creator", "./skills/mermaid-creator"],
+      "skills": [
+        "./skills/slide-creator",
+        "./skills/marp-authoring",
+        "./skills/slide-color-design",
+        "./skills/svg-illustration",
+        "./skills/mermaid-creator"
+      ],
       "strict": false
     }
   ]
