@@ -16,7 +16,7 @@ Navigation hub for slide-creator reference files. Use this to pick the smallest 
 - **Write slides (no diagrams)** → `marpit-authoring/syntax-guide.md` → `marpit-authoring/patterns.md`
 - **Make a diagram (SVG)** → `svg-illustration/core-rules.md` → `svg-illustration/pattern-examples.md`
 - **Preview slides** → `preview-workflow.md`
-- **Troubleshoot issues** → `troubleshooting-common.md` and module-specific troubleshooting
+- **Troubleshoot issues** → `troubleshooting-common.md` then module-specific troubleshooting
 
 ## Module References
 

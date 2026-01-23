@@ -60,10 +60,7 @@ svglint diagram.svg
 bash scripts/validate_marpit.sh slides.md
 ```
 
-**Outputs**:
-- **Color design**: strategy + 7-role palette + usage guidelines + validation checklist
-- **Marpit**: `marp: true` frontmatter + slides separated by `---`
-- **SVG**: `<svg viewBox="..." xmlns="...">` with consistent sizing/colors
+**Output summary**: See **Output formats** and `references/output-examples.md` for full templates.
 
 ## Quick Start
 
