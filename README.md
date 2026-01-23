@@ -11,74 +11,9 @@ This repository serves two purposes:
 
 ## Available Plugins
 
-### python-code-quality
-
-Python code quality hooks that automatically run before Edit/Write operations:
-- `uv run ruff format` - Auto-format code
-- `uv run ruff check --fix` - Lint and auto-fix issues
-- `uv run ty check` - Type checking
-
-**Type**: Hooks plugin (PreToolUse)
-
-### python-skills
-
-Comprehensive Python development toolkit combining project workflow standards and ORM patterns:
-
-**Python Modern Tooling** (`python-modern-tooling` umbrella):
-- Routes requests to focused skills for setup, quality, CLI, logging, packaging
-
-**uv Project Setup** (`python-uv-project-setup`):
-- Project and script setup with uv
-- Dependency management and `uv run` rules
-
-**Quality Tooling** (`python-quality-tooling`):
-- ruff, ty, pytest, coverage, CI gate patterns
-
-**CLI with Typer** (`python-cli-typer`):
-- Typer command patterns and structure
-
-**Logging** (`python-logging`):
-- stdlib logging vs loguru guidance
-
-**Packaging with uv** (`python-packaging-uv`):
-- Build and publish workflows
-
-**Peewee ORM Patterns** (`python-peewee` skill):
-- DatabaseProxy setup patterns
-- Connection context and atomic transaction examples
-- Testing patterns with SQLite
-
-**Type**: Skill plugin (provides Claude with Python development expertise)
-
-### slide-skills
-
-Complete Marp/Marpit presentation toolkit for creating professional slides with unified workflow from color design to final slides with diagrams.
-
-**Unified slide-creator skill** with three integrated modules:
-
-**Module 1: Color Design**
-- Design slide color systems (background, text, accents)
-- Three strategies: Dark Technical, Light Professional, Accent-Driven
-- 10 ready-to-use color palettes
-- Step-by-step workflow with validation checklist
-
-**Module 2: Marpit Authoring**
-- Write valid Marpit/Marp Markdown slides
-- Theme support (default/gaia/uncover)
-- Slide patterns (title, content, two-column, code)
-- Directives, frontmatter, and best practices
-- Visual consistency guidelines
-
-**Module 3: SVG Illustration**
-- Create slide-ready SVG diagrams and illustrations
-- Smart sizing logic for different contexts
-- Pattern examples (flowcharts, timelines, architecture)
-- Optimized for Marp HTML export
-- Embedding methods and troubleshooting
-
-**Architecture**: Progressive disclosure design - loads only needed modules/references based on task complexity.
-
-**Type**: Skill plugin (provides Claude with end-to-end presentation creation expertise)
+- `python-code-quality` - Hooks plugin for ruff format/lint + ty checks (PreToolUse)
+- `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
+- `slide-skills` - Skill bundle for Marp/Marpit slide creation (color, authoring, SVG)
 
 ## Installation
 
@@ -108,7 +43,15 @@ Install plugins:
 
 ### Codex (local skills)
 
-Install `stow` (required):
+Codex does not support marketplaces. Use one of the following:
+
+Option A: Copy skills directly into `~/.codex/skills/`:
+```shell
+cp -R ./skills/* ~/.codex/skills/
+```
+
+Option B: Use `stow` to create symlinks (recommended for development).
+Install `stow`:
 ```shell
 # Linux (Debian/Ubuntu)
 sudo apt update
