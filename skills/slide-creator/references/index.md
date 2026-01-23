@@ -12,11 +12,9 @@ Navigation hub for slide-creator reference files. Use this to pick the smallest 
 
 ## Pick by Task
 
-- **Design slide colors** → `../../slide-color-design/references/index.md`
-- **Write slides (no diagrams)** → `../../marp-authoring/references/index.md`
-- **Make a diagram (SVG)** → `../../svg-illustration/references/index.md`
-- **Preview slides** → `../../marp-authoring/references/preview-workflow.md`
-- **Troubleshoot issues** → `troubleshooting-common.md` then module-specific troubleshooting
+- **Design slide colors** → `slide-color-design`
+- **Write slides (no diagrams)** → `marp-authoring`
+- **Make a diagram (SVG)** → `svg-illustration`
 
 ## Module References
 
@@ -26,7 +24,7 @@ Navigation hub for slide-creator reference files. Use this to pick the smallest 
 
 ## Validation and Preview
 
-- **Preview workflow**: `../../marp-authoring/references/preview-workflow.md`
+- **Preview workflow**: `marp-authoring` → `references/preview-workflow.md`
 - **Common troubleshooting**: `troubleshooting-common.md`
 
 ## Examples and Outputs

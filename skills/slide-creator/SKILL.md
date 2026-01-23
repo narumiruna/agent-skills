@@ -117,8 +117,6 @@ See **Common commands** (above) for palette and SVG helpers.
 - **Marpit authoring**: `marp-authoring`
 - **SVG illustration**: `svg-illustration`
 - **Decision guide**: `references/decision-guide.md`
-- **Output examples**: `references/output-examples.md`
-- **Preview workflow**: `marp-authoring` → `references/preview-workflow.md`
 
 ## Modules
 
