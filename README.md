@@ -106,13 +106,6 @@ Install plugins:
 /plugin install slide-skills@narumi
 ```
 
-## Testing & Validation
-
-Validate the marketplace structure:
-```shell
-/plugin validate .
-```
-
 ### Codex (local skills)
 
 Install `stow` (required):
@@ -135,13 +128,6 @@ Remove the synced skills when finished:
 
 ```shell
 make clean
-```
-
-Test locally before publishing:
-```shell
-/plugin marketplace add .
-/plugin list
-/plugin install python-skills@narumi
 ```
 
 ## Documentation
