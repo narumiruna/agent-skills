@@ -93,6 +93,7 @@ Checklist:
 
 ## See Also
 
+- [index.md](index.md) - Reference navigation hub
 - [svg-illustration/troubleshooting.md](svg-illustration/troubleshooting.md) - SVG-specific issues
 - [marpit-authoring/best-practices.md](marpit-authoring/best-practices.md) - Marpit consistency
 - [color-design/workflow.md](color-design/workflow.md#validation-checklist) - Color validation

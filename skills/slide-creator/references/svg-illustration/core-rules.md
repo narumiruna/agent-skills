@@ -522,6 +522,7 @@ For icons, create them from SVG primitives (circles, rects, paths) rather than t
 
 ## See Also
 
+- [../index.md](../index.md) - Reference navigation hub
 - [pattern-examples.md](pattern-examples.md) - Common diagram patterns
 - [../color-palettes.md](../color-palettes.md) - Ready-to-use color schemes
 - [embedding.md](embedding.md) - How to embed in Marpit slides

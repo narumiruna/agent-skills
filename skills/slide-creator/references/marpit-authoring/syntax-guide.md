@@ -610,6 +610,7 @@ code here
 
 ## See Also
 
+- [../index.md](../index.md) - Reference navigation hub
 - [patterns.md](patterns.md) - Common slide patterns and layouts
 - [themes.md](themes.md) - Theme-specific features
 - [advanced-layouts.md](advanced-layouts.md) - Complex layout techniques

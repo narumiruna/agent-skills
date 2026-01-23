@@ -120,5 +120,6 @@ Example: "Create a tech talk with diagrams"
 
 ## See Also
 
+- [index.md](index.md) - Reference navigation hub
 - [SKILL.md](../SKILL.md) - Core workflow and module overview
 - [output-examples.md](output-examples.md) - Expected outputs for each module

@@ -110,6 +110,7 @@ See **Common commands** (above) for palette and SVG helpers.
 
 ## Quick index (where to look)
 
+- **Reference hub**: `references/index.md`
 - **Color design**: `references/color-design/workflow.md`, `references/color-design/strategies.md`, `references/color-design/output-template.md`
 - **Marpit authoring**: `references/marpit-authoring/syntax-guide.md`, `references/marpit-authoring/patterns.md`, `references/marpit-authoring/advanced-layouts.md`
 - **SVG illustration**: `references/svg-illustration/core-rules.md`, `references/svg-illustration/pattern-examples.md`, `references/svg-illustration/embedding.md`

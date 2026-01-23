@@ -2,33 +2,18 @@
 
 Complete examples of expected outputs for each module.
 
+## Table of Contents
+
+- [Color Design Output](#color-design-output)
+- [Marpit Authoring Output](#marpit-authoring-output)
+- [SVG Illustration Output](#svg-illustration-output)
+- [See Also](#see-also)
+
 ---
 
 ## Color Design Output
 
-### Format Structure
-
-```markdown
-## Color Strategy
-[Chosen strategy + reasoning]
-
-## Color Palette
-* Background: #XXXXXX — [purpose]
-* Surface: #XXXXXX — [purpose]
-* Primary: #XXXXXX — [purpose]
-* Secondary: #XXXXXX — [purpose]
-* Accent: #XXXXXX — [purpose]
-* Text Primary: #XXXXXX — [purpose]
-* Text Secondary: #XXXXXX — [purpose]
-
-## Usage Guidelines
-[How to apply colors]
-
-## Validation Checklist
-- [ ] Contrast ratio >= 4.5:1
-- [ ] Palette limited to 5-7 colors
-- [ ] Colors work on projector
-```
+Format structure: see `color-design/output-template.md`.
 
 ### Example 1: Dark Technical Palette
 
@@ -448,6 +433,11 @@ Your feedback is appreciated
         stroke="#2E75B6" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
 </svg>
 ```
+
+## See Also
+
+- `index.md` - Reference navigation hub
+- `color-design/output-template.md` - Color design format template
 
 ---
 

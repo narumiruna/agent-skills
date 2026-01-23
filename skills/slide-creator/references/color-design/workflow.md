@@ -197,6 +197,7 @@ If brand colors exist, adapt them into the system rather than replacing them.
 
 ## See Also
 
+- [../index.md](../index.md) - Reference navigation hub
 - [strategies.md](strategies.md) - Detailed strategy explanations
 - [../color-palettes.md](../color-palettes.md) - Comprehensive color reference
 - [output-template.md](output-template.md) - Complete output example

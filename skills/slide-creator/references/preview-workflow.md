@@ -2,6 +2,14 @@
 
 Use this workflow to preview Marp slides in server mode and review specific pages with Playwright.
 
+## Table of Contents
+
+- [Preconditions](#preconditions)
+- [Full workflow](#full-workflow)
+- [Playwright page navigation](#playwright-page-navigation)
+- [Troubleshooting](#troubleshooting)
+- [See Also](#see-also)
+
 ## Preconditions
 
 - `marp` CLI installed
@@ -51,6 +59,9 @@ If you cannot use the `#N` hash, send ArrowRight N-1 times:
 
 ## Troubleshooting
 
-- If the server fails to bind a port (EPERM), rerun with elevated permissions.
-- If Playwright blocks `file://`, use server mode URLs.
-- If assets 404, ensure you are in server mode and the deck is opened via `/slides.md`.
+See `troubleshooting-common.md` for preview and asset issues.
+
+## See Also
+
+- `index.md` - Reference navigation hub
+- `troubleshooting-common.md` - Common preview issues
