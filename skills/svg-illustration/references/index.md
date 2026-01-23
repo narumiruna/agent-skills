@@ -9,3 +9,7 @@ Navigation hub for SVG illustration references.
 - **Embedding in slides** → `embedding.md`
 - **Troubleshooting** → `troubleshooting.md`
 - **Output examples** → `output-examples.md`
+
+## Assets
+
+- **Examples** → `../assets/examples/`

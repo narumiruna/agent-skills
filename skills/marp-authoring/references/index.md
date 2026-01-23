@@ -11,3 +11,9 @@ Navigation hub for Marp/Marpit authoring references.
 - **Best practices** → `best-practices.md`
 - **Preview workflow** → `preview-workflow.md`
 - **Output examples** → `output-examples.md`
+
+## Assets
+
+- **Templates** → `../assets/templates/`
+- **Examples** → `../assets/examples/`
+- **Icons** → `../assets/icons/`

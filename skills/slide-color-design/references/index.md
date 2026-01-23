@@ -9,3 +9,7 @@ Navigation hub for slide color design references.
 - **Output format** → `color-design/output-template.md`
 - **Palette index** → `color-palettes.md`
 - **Output examples** → `output-examples.md`
+
+## Assets
+
+- **Examples** → `../assets/examples/`

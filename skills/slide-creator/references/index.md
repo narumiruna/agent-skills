@@ -24,7 +24,7 @@ Navigation hub for slide-creator reference files. Use this to pick the smallest 
 
 ## Validation and Preview
 
-- **Preview workflow**: `marp-authoring` → `references/preview-workflow.md`
+- **Preview workflow**: `marp-authoring`
 - **Common troubleshooting**: `troubleshooting-common.md`
 
 ## Examples and Outputs
