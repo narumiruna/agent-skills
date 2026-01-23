@@ -12,7 +12,7 @@ This repository serves two purposes:
 ## Available Plugins
 
 - `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
-- `slide-skills` - Skill bundle for Marp/Marpit slide creation (color, authoring, SVG) with entry skills for faster routing
+- `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
 
 ## Installation
 
