@@ -242,10 +242,18 @@ svglint diagram.svg
 ```
 
 **Visual verification (required after any SVG/image change)**:
-1. Run Marp preview/export for the target deck (or the smallest deck that imports the SVG).
-2. Confirm the SVG renders in Marpit (see `references/troubleshooting-common.md#svg-not-rendering-in-marpit`).
-3. Render the slide with Playwright (or equivalent) and capture a screenshot.
-4. Review the screenshot in slide context before stating visual impact or completion.
+1. Ensure prerequisites are installed:
+   - `marp` CLI
+   - `svglint` (install via `npm install -g svglint` if missing)
+   - Playwright with Chromium
+2. Identify which slide page includes the updated SVG (avoid screenshotting the wrong page).
+3. Run Marp preview for the target deck (or the smallest deck that imports the SVG).
+   - If preview fails or assets 404, follow `references/troubleshooting-common.md#svg-not-rendering-in-marpit`.
+   - If you hit EPERM or bind errors, set `--host 127.0.0.1` and an explicit `--port`.
+4. Render the exact slide page in a browser.
+5. Capture a Playwright screenshot of that page.
+6. Review the screenshot in slide context before stating visual impact or completion.
+7. Stop the Marp server when done.
 
 **Verify color contrast (WCAG compliance)**:
 ```bash
