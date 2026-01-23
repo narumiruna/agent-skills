@@ -94,6 +94,6 @@ Checklist:
 ## See Also
 
 - [index.md](index.md) - Reference navigation hub
-- [../../svg-illustration/references/troubleshooting.md](../../svg-illustration/references/troubleshooting.md) - SVG-specific issues
-- [../../marp-authoring/references/best-practices.md](../../marp-authoring/references/best-practices.md) - Marpit consistency
-- [color-design/workflow.md](color-design/workflow.md#validation-checklist) - Color validation
+- `svg-illustration` - SVG-specific issues
+- `marp-authoring` - Marp consistency and best practices
+- `slide-color-design` - Color validation checklist
