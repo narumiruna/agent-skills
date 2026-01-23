@@ -13,10 +13,10 @@
 
 | User Request | Modules Needed | Primary References |
 |--------------|----------------|-------------------|
-| "Create a slide deck" | Marpit authoring | ../../marp-authoring/references/syntax-guide.md, ../../marp-authoring/references/patterns.md |
-| "Design slide colors" | Color design | ../../slide-color-design/references/color-design/workflow.md, ../../slide-color-design/references/color-design/strategies.md, ../../slide-color-design/references/color-palettes.md |
-| "Draw a diagram" | SVG illustration | ../../svg-illustration/references/core-rules.md, ../../slide-color-design/references/color-palettes.md |
-| "Create presentation with brand colors" | Color design -> Marpit | ../../slide-color-design/references/color-design/workflow.md, ../../marp-authoring/references/patterns.md |
+| "Create a slide deck" | Marpit authoring | marp-authoring |
+| "Design slide colors" | Color design | slide-color-design |
+| "Draw a diagram" | SVG illustration | svg-illustration |
+| "Create presentation with brand colors" | Color design -> Marpit | slide-color-design -> marp-authoring |
 | "Build tech talk with diagrams" | All three modules | Core rules from each, load details as needed |
 
 ## Module Selection Flowchart
@@ -54,8 +54,8 @@ Load:
 - One module primary reference
 
 Example: "Draw a workflow diagram"
-- Read: `../../svg-illustration/references/core-rules.md`
-- Read: `../../slide-color-design/references/color-palettes.md` for palette selection
+- Use `svg-illustration`
+- Use `slide-color-design` for palette selection
 - Skip patterns and troubleshooting unless needed
 
 ### For Medium Requests (Deck + few diagrams)
@@ -65,9 +65,9 @@ Load:
 - Patterns and best practices for the module(s)
 
 Example: "Create a 10-slide technical presentation with 2 diagrams"
-- Read: `../../slide-color-design/references/color-design/workflow.md` -> `../../slide-color-design/references/color-design/strategies.md`
-- Read: `../../marp-authoring/references/syntax-guide.md` -> `../../marp-authoring/references/patterns.md`
-- Read: `../../svg-illustration/references/core-rules.md`
+- Use `slide-color-design`
+- Use `marp-authoring`
+- Use `svg-illustration`
 
 ### For Complex Requests (Branded deck, many diagrams)
 
@@ -81,7 +81,7 @@ Example: "Create a full conference deck with brand colors"
 
 ## When to Load Advanced References
 
-### `../../marp-authoring/references/advanced-layouts.md`
+### `marp-authoring` (advanced layouts)
 
 Load when:
 - User requests complex layouts or mixed content
@@ -90,7 +90,7 @@ Load when:
 Skip when:
 - Simple bullet lists and code blocks
 
-### `../../svg-illustration/references/pattern-examples.md`
+### `svg-illustration` (pattern examples)
 
 Load when:
 - User requests specific diagram types
@@ -99,7 +99,7 @@ Load when:
 Skip when:
 - Creating simple shapes or icons
 
-### `../../slide-color-design/references/color-palettes.md`
+### `slide-color-design` (color palettes)
 
 Load when:
 - User wants recommendations or pre-made systems
