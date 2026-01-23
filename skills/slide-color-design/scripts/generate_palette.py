@@ -426,7 +426,7 @@ def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> s
         output.append("\n## Validation\n")
         output.append("Check contrast ratios:")
         output.append(
-            f"```bash\nuv run scripts/check_contrast.py '{palette['Text Primary']}' '{palette['Background']}'\n```"
+            f"```bash\nuv run skills/slide-color-design/scripts/check_contrast.py '{palette['Text Primary']}' '{palette['Background']}'\n```"
         )
 
     return "\n".join(output)
@@ -460,11 +460,11 @@ def list_palettes() -> str:
     output.append("\n## Usage\n")
     output.append("Show details for a specific palette:")
     output.append("```bash")
-    output.append("uv run scripts/generate_palette.py show <palette-name>")
+    output.append("uv run skills/slide-color-design/scripts/generate_palette.py show <palette-name>")
     output.append("```\n")
     output.append("Example:")
     output.append("```bash")
-    output.append("uv run scripts/generate_palette.py show code-blue")
+    output.append("uv run skills/slide-color-design/scripts/generate_palette.py show code-blue")
     output.append("```")
 
     return "\n".join(output)
@@ -482,12 +482,12 @@ def list_svg_palettes() -> str:
     output.append("\n## Usage\n")
     output.append("Show details for a specific SVG palette:")
     output.append("```bash")
-    output.append("uv run scripts/generate_palette.py svg-show <palette-name>")
+    output.append("uv run skills/slide-color-design/scripts/generate_palette.py svg-show <palette-name>")
     output.append("```\n")
     output.append("Example:")
     output.append("```bash")
-    output.append("uv run scripts/generate_palette.py svg-show default")
-    output.append("uv run scripts/generate_palette.py svg-show creative")
+    output.append("uv run skills/slide-color-design/scripts/generate_palette.py svg-show default")
+    output.append("uv run skills/slide-color-design/scripts/generate_palette.py svg-show creative")
     output.append("```")
 
     return "\n".join(output)

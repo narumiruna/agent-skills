@@ -29,7 +29,7 @@ This presentation uses the **Light Professional** strategy:
 * Text Primary: `#2C2C2C` — Body text
 * Text Secondary: `#666666` — Captions
 
-Generated using: `uv run scripts/generate_palette.py show clean-corporate`
+Generated using: `uv run skills/slide-color-design/scripts/generate_palette.py show clean-corporate`
 
 ---
 

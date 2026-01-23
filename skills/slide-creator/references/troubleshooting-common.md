@@ -57,7 +57,7 @@ Fix:
 1. Check contrast ratio:
 
 ```bash
-uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
+uv run skills/slide-color-design/scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
 ```
 
 2. Aim for 7:1 (AAA) when possible.

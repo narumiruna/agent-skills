@@ -23,13 +23,8 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 
 ## Working directory
 
-All paths and commands in this skill assume you are running from `skills/slide-creator/`.
-If running from the repo root, prefix paths with `skills/slide-creator/`.
-
-Example (from repo root):
-```bash
-bash skills/slide-creator/scripts/validate_marpit.sh slides.md
-```
+This umbrella skill does not own module assets or scripts.
+Use the focused skills (`marp-authoring`, `slide-color-design`, `svg-illustration`) for paths and commands.
 
 ## Start here (task entry)
 
@@ -49,23 +44,17 @@ Pick one task and follow the exact reading path:
 ## One-page quick reference
 
 **Minimal steps (fast path)**:
-1. Pick a palette (or generate from brand).
-2. Draft slides in Marp (via `marp-authoring`).
-3. Add SVG diagrams if needed (via `svg-illustration`).
-4. Validate output.
+1. Pick a palette → `slide-color-design`.
+2. Draft slides → `marp-authoring`.
+3. Add SVG diagrams → `svg-illustration`.
+4. Validate via the module skills.
 
 **Common commands**:
-```bash
-uv run scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author"
-uv run scripts/generate_palette.py list
-uv run scripts/generate_palette.py show code-blue
-uv run scripts/generate_palette.py brand "#FF6B35" light
-uv run scripts/generate_palette.py svg-show default
-svglint diagram.svg
-bash scripts/validate_marpit.sh slides.md
-```
+- `slide-color-design` → palette scripts
+- `marp-authoring` → Marp validation/preview
+- `svg-illustration` → SVG linting
 
-**Output summary**: See **Output formats** and `references/output-examples.md` for full templates.
+**Output summary**: Use module-specific output examples via the entry skills.
 
 ## Quick Start
 
@@ -73,42 +62,31 @@ bash scripts/validate_marpit.sh slides.md
 
 **Option 1: Use scripts** (automated):
 ```bash
-uv run scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author"
+uv run skills/marp-authoring/scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author"
 ```
 
 **Option 2: Work manually** (full control):
-- Copy a template from `assets/templates/` → customize
+- Copy a template from `marp-authoring` → `assets/templates/` → customize
 - Design colors via `slide-color-design`
 - Write slides via `marp-authoring`
 - Add diagrams via `svg-illustration`
 
-**Study examples first**: Read `assets/examples/` to see working presentations before starting.
+**Study examples first**: Read `marp-authoring` → `assets/examples/` to see working presentations before starting.
 
 ### Script Commands
 
-**Browse and generate color palettes**:
-See **Common commands** (above) for palette and SVG helpers.
+Use `slide-color-design` for palette scripts and outputs.
 
 **Templates** (starting points - copy and fill in your content):
-- `assets/templates/minimal.md` - Bare minimum structure (5 slides)
-- `assets/templates/technical-dark.md` - Dark theme for code/technical content
-- `assets/templates/professional-light.md` - Light theme for business presentations
-- `assets/templates/minimal-keynote.md` - Minimal design for story-driven talks
-- `assets/templates/with-bg-images.md` - Template showcasing bg syntax for images
+- Use `marp-authoring` → `assets/templates/`.
 
 **Examples** (learning references - study patterns and copy techniques):
-- `assets/examples/with-bg-syntax.md` - Shows all bg syntax patterns (full-page, split, comparison)
-- `assets/examples/with-diagrams.md` - Shows inline SVG diagram integration
-- `assets/examples/with-palette.md` - Shows custom palette application
-- `assets/examples/full-presentation.md` - Shows all features combined (architecture + charts + code)
+- `marp-authoring` → `assets/examples/` for slide patterns.
+- `svg-illustration` → `assets/examples/` for diagram examples.
+- `slide-color-design` → `assets/examples/` for palette examples.
 
 **Common icons** (ready to use in slides):
-```markdown
-![width:60px](assets/icons/check.svg)    <!-- ✓ checkmark -->
-![width:60px](assets/icons/warning.svg)  <!-- ⚠ warning -->
-![width:60px](assets/icons/error.svg)    <!-- ✗ error -->
-![width:60px](assets/icons/info.svg)     <!-- ℹ info -->
-```
+- `marp-authoring` → `assets/icons/`.
 
 ## Quick index (where to look)
 
@@ -168,12 +146,10 @@ Complex request -> add patterns and best-practices
 
 ## Output formats
 
-See [references/output-examples.md](references/output-examples.md) for entry points to module-specific examples.
-
-**Quick reference**:
-- **Color design**: `slide-color-design` → `references/output-examples.md`
-- **Marpit**: `marp-authoring` → `references/output-examples.md`
-- **SVG**: `svg-illustration` → `references/output-examples.md`
+Use the focused skills for module-specific output formats:
+- `slide-color-design` → `references/output-examples.md`
+- `marp-authoring` → `references/output-examples.md`
+- `svg-illustration` → `references/output-examples.md`
 
 ## Integration rules
 
@@ -197,12 +173,10 @@ See `marp-authoring`, `slide-color-design`, and `svg-illustration` for module-sp
 
 ## Quick check (minimal)
 
-Run in this order:
-```bash
-bash scripts/validate_marpit.sh slides.md
-svglint path/to/diagram.svg
-uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
-```
+Use module-specific quick checks:
+- `marp-authoring` → validation/preview workflow
+- `svg-illustration` → SVG lint checks
+- `slide-color-design` → contrast checks
 
 ## Validation
 
@@ -211,18 +185,7 @@ Use the module-specific validation guides:
 - `svg-illustration` → `references/troubleshooting.md`
 - `slide-color-design` → `references/color-design/workflow.md` (validation checklist)
 
-**Verify color contrast (WCAG compliance)**:
-```bash
-uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
-# Output: Contrast ratio: 11.25:1 ✅ WCAG AAA
-```
-
-**Validate Marpit syntax**:
-```bash
-bash scripts/validate_marpit.sh slides.md
-```
-
-Always validate before committing files.
+Always validate before committing files using the focused skills.
 
 ## Constraints
 

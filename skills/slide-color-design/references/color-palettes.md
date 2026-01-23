@@ -14,27 +14,27 @@ Use the palette generation script to browse and retrieve palette details:
 
 **List all available palettes:**
 ```bash
-uv run scripts/generate_palette.py list
+uv run skills/slide-color-design/scripts/generate_palette.py list
 ```
 
 **Show details for a specific palette:**
 ```bash
-uv run scripts/generate_palette.py show <palette-name>
+uv run skills/slide-color-design/scripts/generate_palette.py show <palette-name>
 ```
 
 **Examples:**
 ```bash
 # List all palettes grouped by category
-uv run scripts/generate_palette.py list
+uv run skills/slide-color-design/scripts/generate_palette.py list
 
 # Show Code-Focused Blue palette
-uv run scripts/generate_palette.py show code-blue
+uv run skills/slide-color-design/scripts/generate_palette.py show code-blue
 
 # Show Modern Minimal palette
-uv run scripts/generate_palette.py show modern-minimal
+uv run skills/slide-color-design/scripts/generate_palette.py show modern-minimal
 
 # Show Data Visualization palette
-uv run scripts/generate_palette.py show data-viz
+uv run skills/slide-color-design/scripts/generate_palette.py show data-viz
 ```
 
 ### Palette Categories
@@ -69,10 +69,10 @@ uv run scripts/generate_palette.py show data-viz
 **Generate from brand color:**
 ```bash
 # Generate light theme from brand color
-uv run scripts/generate_palette.py brand "#2E75B6" light
+uv run skills/slide-color-design/scripts/generate_palette.py brand "#2E75B6" light
 
 # Generate dark theme from brand color
-uv run scripts/generate_palette.py brand "#569CD6" dark
+uv run skills/slide-color-design/scripts/generate_palette.py brand "#569CD6" dark
 ```
 
 ---
@@ -87,27 +87,27 @@ Use the palette generation script to browse and retrieve SVG palette details:
 
 **List all available SVG palettes:**
 ```bash
-uv run scripts/generate_palette.py svg-list
+uv run skills/slide-color-design/scripts/generate_palette.py svg-list
 ```
 
 **Show details for a specific SVG palette:**
 ```bash
-uv run scripts/generate_palette.py svg-show <palette-name>
+uv run skills/slide-color-design/scripts/generate_palette.py svg-show <palette-name>
 ```
 
 **Examples:**
 ```bash
 # List all SVG palettes
-uv run scripts/generate_palette.py svg-list
+uv run skills/slide-color-design/scripts/generate_palette.py svg-list
 
 # Show Default palette
-uv run scripts/generate_palette.py svg-show default
+uv run skills/slide-color-design/scripts/generate_palette.py svg-show default
 
 # Show Creative & Modern palette
-uv run scripts/generate_palette.py svg-show creative
+uv run skills/slide-color-design/scripts/generate_palette.py svg-show creative
 
 # Show Dark Mode palette
-uv run scripts/generate_palette.py svg-show dark-mode
+uv run skills/slide-color-design/scripts/generate_palette.py svg-show dark-mode
 ```
 
 ### SVG Palette List

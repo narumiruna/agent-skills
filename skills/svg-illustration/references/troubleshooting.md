@@ -447,7 +447,7 @@ git push
 
 **Fix:** Use relative paths from markdown file
 ```markdown
-![w:1200](./assets/diagram.svg)
+![w:1200](assets/diagram.svg)
 ```
 
 ---
