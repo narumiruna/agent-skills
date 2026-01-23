@@ -16,10 +16,10 @@ Thin entry skill for slide color work. Core principle: route directly to the col
 ## Quick Reference
 | Goal | Read |
 | --- | --- |
-| End-to-end workflow | skills/slide-creator/references/color-design/workflow.md |
-| Strategy selection | skills/slide-creator/references/color-design/strategies.md |
-| Output format | skills/slide-creator/references/color-design/output-template.md |
-| Palette index | skills/slide-creator/references/color-palettes.md |
+| End-to-end workflow | references/color-design/workflow.md |
+| Strategy selection | references/color-design/strategies.md |
+| Output format | references/color-design/output-template.md |
+| Palette index | references/color-palettes.md |
 
 ## Example
 Prompt: "Need a light palette from a brand color." → Read `workflow.md`, then `strategies.md`, then `output-template.md`.

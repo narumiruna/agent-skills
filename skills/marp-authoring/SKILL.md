@@ -16,11 +16,11 @@ Thin entry skill for Marp/Marpit authoring. Core principle: route directly to th
 ## Quick Reference
 | Goal | Read |
 | --- | --- |
-| Syntax & directives | skills/slide-creator/references/marpit-authoring/syntax-guide.md |
-| Layout patterns | skills/slide-creator/references/marpit-authoring/patterns.md |
-| Complex layouts | skills/slide-creator/references/marpit-authoring/advanced-layouts.md |
-| Themes | skills/slide-creator/references/marpit-authoring/themes.md |
-| QA checklist | skills/slide-creator/references/marpit-authoring/best-practices.md |
+| Syntax & directives | references/syntax-guide.md |
+| Layout patterns | references/patterns.md |
+| Complex layouts | references/advanced-layouts.md |
+| Themes | references/themes.md |
+| QA checklist | references/best-practices.md |
 
 ## Example
 Prompt: "Need a split layout with a code block." → Read `syntax-guide.md`, then `advanced-layouts.md`.

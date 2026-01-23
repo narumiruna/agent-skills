@@ -59,9 +59,9 @@ If you cannot use the `#N` hash, send ArrowRight N-1 times:
 
 ## Troubleshooting
 
-See `troubleshooting-common.md` for preview and asset issues.
+See `../../slide-creator/references/troubleshooting-common.md` for preview and asset issues.
 
 ## See Also
 
 - `index.md` - Reference navigation hub
-- `troubleshooting-common.md` - Common preview issues
+- `../../slide-creator/references/troubleshooting-common.md` - Common preview issues

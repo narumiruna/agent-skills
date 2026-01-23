@@ -206,7 +206,7 @@ Use sparingly—only for elements that need depth.
 
 ### Use Established Palettes
 
-Always use colors from the slide's color palette (see [../color-palettes.md](../color-palettes.md)).
+Always use colors from the slide's color palette (see [../../slide-color-design/references/color-palettes.md](../../slide-color-design/references/color-palettes.md)).
 
 **Common palettes for SVG**:
 
@@ -224,7 +224,7 @@ Always use colors from the slide's color palette (see [../color-palettes.md](../
 - Background: `#FFFFFF`
 - Stroke: `#2C2C2C`
 
-See [../color-palettes.md](../color-palettes.md) for more options including Van Gogh Starry Night palette.
+See [../../slide-color-design/references/color-palettes.md](../../slide-color-design/references/color-palettes.md) for more options including Van Gogh Starry Night palette.
 
 ---
 
@@ -524,6 +524,6 @@ For icons, create them from SVG primitives (circles, rects, paths) rather than t
 
 - [../index.md](../index.md) - Reference navigation hub
 - [pattern-examples.md](pattern-examples.md) - Common diagram patterns
-- [../color-palettes.md](../color-palettes.md) - Ready-to-use color schemes
+- [../../slide-color-design/references/color-palettes.md](../../slide-color-design/references/color-palettes.md) - Ready-to-use color schemes
 - [embedding.md](embedding.md) - How to embed in Marpit slides
 - [troubleshooting.md](troubleshooting.md) - Common issues and fixes

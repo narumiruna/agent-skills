@@ -12,21 +12,21 @@ Navigation hub for slide-creator reference files. Use this to pick the smallest 
 
 ## Pick by Task
 
-- **Design slide colors** → `color-design/workflow.md` → `color-design/strategies.md` → `color-design/output-template.md`
-- **Write slides (no diagrams)** → `marpit-authoring/syntax-guide.md` → `marpit-authoring/patterns.md`
-- **Make a diagram (SVG)** → `svg-illustration/core-rules.md` → `svg-illustration/pattern-examples.md`
-- **Preview slides** → `preview-workflow.md`
+- **Design slide colors** → `../../slide-color-design/references/index.md`
+- **Write slides (no diagrams)** → `../../marp-authoring/references/index.md`
+- **Make a diagram (SVG)** → `../../svg-illustration/references/index.md`
+- **Preview slides** → `../../marp-authoring/references/preview-workflow.md`
 - **Troubleshoot issues** → `troubleshooting-common.md` then module-specific troubleshooting
 
 ## Module References
 
-- **Color design**: `color-design/workflow.md`, `color-design/strategies.md`, `color-design/output-template.md`, `color-palettes.md`
-- **Marpit authoring**: `marpit-authoring/syntax-guide.md`, `marpit-authoring/patterns.md`, `marpit-authoring/advanced-layouts.md`, `marpit-authoring/themes.md`, `marpit-authoring/best-practices.md`
-- **SVG illustration**: `svg-illustration/core-rules.md`, `svg-illustration/pattern-examples.md`, `svg-illustration/embedding.md`, `svg-illustration/troubleshooting.md`
+- **Color design**: `../../slide-color-design/references/index.md`
+- **Marpit authoring**: `../../marp-authoring/references/index.md`
+- **SVG illustration**: `../../svg-illustration/references/index.md`
 
 ## Validation and Preview
 
-- **Preview workflow**: `preview-workflow.md`
+- **Preview workflow**: `../../marp-authoring/references/preview-workflow.md`
 - **Common troubleshooting**: `troubleshooting-common.md`
 
 ## Examples and Outputs

@@ -40,18 +40,18 @@ bash skills/slide-creator/scripts/validate_marpit.sh slides.md
 
 Pick one task and follow the exact reading path:
 
-- **Color palette only** → `references/color-design/workflow.md` → `references/color-design/strategies.md` → `references/color-design/output-template.md`
-- **Slides only (no diagrams)** → `references/marpit-authoring/syntax-guide.md` → `references/marpit-authoring/patterns.md`
-- **Diagram only** → `references/svg-illustration/core-rules.md` → `references/svg-illustration/pattern-examples.md`
-- **Slides + diagrams** → `references/marpit-authoring/syntax-guide.md` → `references/svg-illustration/core-rules.md`
-- **Full deck (colors + slides + diagrams)** → Color workflow → Marpit authoring → SVG illustration
+- **Color palette only** → `slide-color-design`
+- **Slides only (no diagrams)** → `marp-authoring`
+- **Diagram only** → `svg-illustration`
+- **Slides + diagrams** → `marp-authoring` → `svg-illustration`
+- **Full deck (colors + slides + diagrams)** → `slide-color-design` → `marp-authoring` → `svg-illustration`
 
 ## One-page quick reference
 
 **Minimal steps (fast path)**:
 1. Pick a palette (or generate from brand).
-2. Draft slides in Marpit.
-3. Add SVG diagrams if needed.
+2. Draft slides in Marp (via `marp-authoring`).
+3. Add SVG diagrams if needed (via `svg-illustration`).
 4. Validate output.
 
 **Common commands**:
@@ -78,9 +78,9 @@ uv run scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author
 
 **Option 2: Work manually** (full control):
 - Copy a template from `assets/templates/` → customize
-- Design colors following `references/color-design/workflow.md`
-- Write slides following `references/marpit-authoring/syntax-guide.md`
-- Add diagrams following `references/svg-illustration/core-rules.md`
+- Design colors via `slide-color-design`
+- Write slides via `marp-authoring`
+- Add diagrams via `svg-illustration`
 
 **Study examples first**: Read `assets/examples/` to see working presentations before starting.
 
@@ -113,93 +113,41 @@ See **Common commands** (above) for palette and SVG helpers.
 ## Quick index (where to look)
 
 - **Reference hub**: `references/index.md`
-- **Color design**: `references/color-design/workflow.md`, `references/color-design/strategies.md`, `references/color-design/output-template.md`
-- **Marpit authoring**: `references/marpit-authoring/syntax-guide.md`, `references/marpit-authoring/patterns.md`, `references/marpit-authoring/advanced-layouts.md`
-- **SVG illustration**: `references/svg-illustration/core-rules.md`, `references/svg-illustration/pattern-examples.md`, `references/svg-illustration/embedding.md`
+- **Color design**: `slide-color-design`
+- **Marpit authoring**: `marp-authoring`
+- **SVG illustration**: `svg-illustration`
 - **Decision guide**: `references/decision-guide.md`
 - **Output examples**: `references/output-examples.md`
-- **Preview workflow**: `references/preview-workflow.md`
+- **Preview workflow**: `marp-authoring` → `references/preview-workflow.md`
 
 ## Modules
 
-### Module 1: Color design
+Use the focused skills for module-specific rules and references:
 
-Design slide color systems (background, text, accents, semantic colors).
-
-Output: color palette specification with hex codes and usage guidelines.
-
-Browse available palettes:
-See **Common commands** (above) for palette and SVG helpers.
-
-Read in order:
-- `references/color-design/workflow.md`
-- `references/color-design/strategies.md`
-- `references/color-palettes.md` (index of palettes; use script to view details)
-- `references/color-design/output-template.md` (match the format)
-
-### Module 2: Marpit authoring
-
-Write valid Marpit/Marp Markdown slides.
-
-Output: valid Marpit-compatible Markdown (.md).
-
-Rules:
-- Output directly renderable Marpit Markdown.
-- **Always use `bg` syntax for images** (e.g., `![bg right fit](image.svg)`)
-- Avoid HTML; use Marpit directives and Markdown only.
-- Use HTML only if no Marpit alternative exists.
-
-Read in order:
-- `references/marpit-authoring/syntax-guide.md`
-- `references/marpit-authoring/patterns.md`
-- Use `references/marpit-authoring/advanced-layouts.md` only for multi-column, split, or asymmetric layouts.
-- `references/marpit-authoring/themes.md`
-- `references/marpit-authoring/best-practices.md` (use for quality checks)
-
-### Module 3: SVG illustration
-
-Create SVG diagrams and illustrations for slides.
-
-Output: SVG XML optimized for Marp HTML export.
-
-Rules:
-- Create clean, editable SVGs with predictable sizing.
-- Match slide colors and spacing.
-
-Read in order:
-- `references/svg-illustration/core-rules.md`
-- `references/svg-illustration/pattern-examples.md`
-- `references/svg-illustration/embedding.md`
-- `references/svg-illustration/troubleshooting.md`
-
-Validate SVGs after creation:
-```bash
-svglint path/to/file.svg
-```
+- **Color design** → `slide-color-design`
+- **Marpit authoring** → `marp-authoring`
+- **SVG illustration** → `svg-illustration`
 
 ## Workflow
 
 ### Single tasks
 
 Draw a diagram:
-1. Read `references/svg-illustration/core-rules.md`.
-2. Use `references/svg-illustration/pattern-examples.md` for layouts.
-3. Choose colors: see **Common commands** (above).
+1. Use `svg-illustration` for core rules and patterns.
+2. Choose colors via `slide-color-design` or existing palette.
 
 Design slide colors:
-1. Browse palettes: see **Common commands** (above).
-2. Or follow `references/color-design/workflow.md` for custom design.
+1. Use `slide-color-design` for workflow and templates.
 
 Write slides:
-1. Follow `references/marpit-authoring/syntax-guide.md`.
-2. Use `references/marpit-authoring/patterns.md` for layouts.
-3. Apply a palette from the color module.
+1. Use `marp-authoring` for syntax and layout patterns.
+2. Apply a palette from `slide-color-design`.
 
 ### Full presentation
 
 1. Establish a palette with the color module.
-2. Outline slides and author in Marpit.
-3. Add diagrams with the SVG module.
+2. Outline slides and author via `marp-authoring`.
+3. Add diagrams via `svg-illustration`.
 4. Keep palette, spacing, and hierarchy consistent.
 
 ## Decision guide
@@ -208,10 +156,10 @@ See [references/decision-guide.md](references/decision-guide.md) for a flowchart
 
 Quick rules:
 ```
-Slides or deck -> Marpit authoring
-Slides + colors -> Color design -> Marpit authoring
-Slides + diagrams -> Marpit authoring + SVG illustration
-Diagram only -> SVG illustration
+Slides or deck -> marp-authoring
+Slides + colors -> slide-color-design -> marp-authoring
+Slides + diagrams -> marp-authoring + svg-illustration
+Diagram only -> svg-illustration
 ```
 
 Scale reference loading:
@@ -222,12 +170,12 @@ Complex request -> add patterns and best-practices
 
 ## Output formats
 
-See [references/output-examples.md](references/output-examples.md) for complete examples with detailed annotations.
+See [references/output-examples.md](references/output-examples.md) for entry points to module-specific examples.
 
 **Quick reference**:
-- **Color design**: Strategy + 7-role palette + usage guidelines + validation checklist
-- **Marpit**: Frontmatter (`marp: true`) + slides separated by `---`
-- **SVG**: `<svg viewBox="..." xmlns="...">` with proper sizing and consistent colors
+- **Color design**: `slide-color-design` → `references/output-examples.md`
+- **Marpit**: `marp-authoring` → `references/output-examples.md`
+- **SVG**: `svg-illustration` → `references/output-examples.md`
 
 ## Integration rules
 
@@ -239,16 +187,15 @@ See [references/output-examples.md](references/output-examples.md) for complete 
 
 Common cross-cutting issues:
 - [references/troubleshooting-common.md](references/troubleshooting-common.md)
-- [references/svg-illustration/troubleshooting.md](references/svg-illustration/troubleshooting.md)
+- [svg-illustration](../svg-illustration/SKILL.md) → `references/troubleshooting.md`
 
 ## Common mistakes
 
-- Mixing `bg` and non-`bg` image syntax in the same deck.
 - Using absolute paths instead of relative paths for assets.
 - Using multiple palettes across one deck or between slides and SVGs.
-- Changing stroke width or corner radius between SVG shapes.
-- Skipping `svglint` before embedding SVGs.
-- Using advanced layouts for simple single-column slides.
+- Skipping validation checks (Marp, SVG lint, contrast).
+
+See `marp-authoring`, `slide-color-design`, and `svg-illustration` for module-specific mistakes.
 
 ## Quick check (minimal)
 
@@ -261,24 +208,10 @@ uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
 
 ## Validation
 
-**Check SVG syntax and best practices**:
-```bash
-svglint diagram.svg
-```
-
-**Visual verification (required after any SVG/image change)**:
-1. Ensure prerequisites are installed:
-   - `marp` CLI
-   - `svglint` (install via `npm install -g svglint` if missing)
-   - Playwright with Chromium
-2. Identify which slide page includes the updated SVG (avoid screenshotting the wrong page).
-3. Run Marp preview for the target deck (or the smallest deck that imports the SVG).
-   - If preview fails or assets 404, follow `references/troubleshooting-common.md#svg-not-rendering-in-marpit`.
-   - If you hit EPERM or bind errors, set `--host 127.0.0.1` and an explicit `--port`.
-4. Render the exact slide page in a browser.
-5. Capture a Playwright screenshot of that page.
-6. Review the screenshot in slide context before stating visual impact or completion.
-7. Stop the Marp server when done.
+Use the module-specific validation guides:
+- `marp-authoring` → `references/preview-workflow.md`
+- `svg-illustration` → `references/troubleshooting.md`
+- `slide-color-design` → `references/color-design/workflow.md` (validation checklist)
 
 **Verify color contrast (WCAG compliance)**:
 ```bash

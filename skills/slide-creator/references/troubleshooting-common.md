@@ -20,7 +20,7 @@ Fix:
 2. Use darker backgrounds for light rooms (#1E1E1E instead of #2D2D2D).
 3. Test on the actual projector when possible.
 4. Avoid pure white (#FFFFFF) and pure black (#000000).
-5. Prefer high-contrast palettes from `references/color-palettes.md`.
+5. Prefer high-contrast palettes from `../../slide-color-design/references/color-palettes.md`.
 
 ## SVG Not Rendering in Marpit
 
@@ -94,6 +94,6 @@ Checklist:
 ## See Also
 
 - [index.md](index.md) - Reference navigation hub
-- [svg-illustration/troubleshooting.md](svg-illustration/troubleshooting.md) - SVG-specific issues
-- [marpit-authoring/best-practices.md](marpit-authoring/best-practices.md) - Marpit consistency
+- [../../svg-illustration/references/troubleshooting.md](../../svg-illustration/references/troubleshooting.md) - SVG-specific issues
+- [../../marp-authoring/references/best-practices.md](../../marp-authoring/references/best-practices.md) - Marpit consistency
 - [color-design/workflow.md](color-design/workflow.md#validation-checklist) - Color validation

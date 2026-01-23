@@ -16,10 +16,10 @@ Thin entry skill for SVG diagrams. Core principle: go straight to SVG rules and 
 ## Quick Reference
 | Goal | Read |
 | --- | --- |
-| Core rules | skills/slide-creator/references/svg-illustration/core-rules.md |
-| Pattern examples | skills/slide-creator/references/svg-illustration/pattern-examples.md |
-| Embedding in slides | skills/slide-creator/references/svg-illustration/embedding.md |
-| Troubleshooting | skills/slide-creator/references/svg-illustration/troubleshooting.md |
+| Core rules | references/core-rules.md |
+| Pattern examples | references/pattern-examples.md |
+| Embedding in slides | references/embedding.md |
+| Troubleshooting | references/troubleshooting.md |
 
 ## Example
 Prompt: "Need an architecture diagram with clean sizing." → Read `core-rules.md`, then `pattern-examples.md`.
