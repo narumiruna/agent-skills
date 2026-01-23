@@ -80,6 +80,28 @@
         "./skills/mermaid-creator"
       ],
       "strict": false
+    },
+    {
+      "name": "gourmet-research",
+      "source": "./",
+      "description": "Evidence-based gourmet research workflow for cities: template-first discovery, multi-source verification, 50-point scoring, and auditable top picks.",
+      "version": "0.0.1",
+      "keywords": [
+        "food",
+        "gourmet",
+        "research",
+        "restaurants",
+        "cafes",
+        "desserts",
+        "evidence",
+        "scoring",
+        "travel",
+        "city-guides"
+      ],
+      "skills": [
+        "./skills/gourmet-research"
+      ],
+      "strict": false
     }
   ]
 }
