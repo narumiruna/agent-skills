@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repository serves two purposes:
 
 1. **Example Marketplace**: A working Claude Code plugin marketplace (`narumi`) that demonstrates best practices
-2. **Documentation**: GUIDE.md provides comprehensive instructions for creating and distributing Claude Code plugin marketplaces
+2. **Documentation**: This repository documents marketplace structure and workflows
 
 ## Repository Structure
 
@@ -36,19 +36,29 @@ This repository serves two purposes:
 │   ├── python-packaging-uv/   # uv build/publish workflows
 │   │   ├── SKILL.md
 │   │   └── references/
-│   └── slide-creator/        # Unified slide creation skill
+│   ├── slide-creator/        # Umbrella slide skill
+│   │   ├── SKILL.md
+│   │   └── references/       # Cross-module indexes and guides
+│   ├── marp-authoring/       # Marp authoring skill
+│   │   ├── SKILL.md
+│   │   ├── assets/
+│   │   ├── references/
+│   │   └── scripts/
+│   ├── slide-color-design/   # Slide color design skill
+│   │   ├── SKILL.md
+│   │   ├── assets/
+│   │   ├── references/
+│   │   └── scripts/
+│   └── svg-illustration/     # SVG illustration skill
 │       ├── SKILL.md
+│       ├── assets/
 │       └── references/
-│           ├── color-design/       # Color system design
-│           ├── marpit-authoring/   # Marpit Markdown slides
-│           └── svg-illustration/   # SVG diagrams
 ├── scripts/
 │   └── sync_skills.sh        # Development: sync skills to ~/.codex/skills/
 ├── examples/slides/          # Live slide examples (built by CI)
 │   ├── marketplace/          # Marketplace demo presentation
 │   └── meanflows/            # Meanflows methodology presentation
 ├── build/                    # Generated: Marp HTML output (gitignored)
-├── GUIDE.md                  # Complete marketplace creation guide
 ├── README.md                 # Installation and usage instructions
 ├── CLAUDE.md                 # This file
 └── LICENSE
@@ -82,14 +92,7 @@ The following names are blocked for official Anthropic use:
 
 ## Documentation Guidelines
 
-When editing GUIDE.md:
-
-1. **Maintain the structure**: Steps, examples, schema tables, and troubleshooting sections follow a specific pattern
-2. **Use theme={null}**: Code blocks use `theme={null}` attribute for documentation rendering
-3. **Include working examples**: All JSON examples should be valid and complete
-4. **Cross-reference related sections**: Use relative links to other sections
-5. **Keep schema tables accurate**: Required/optional fields must match actual implementation
-6. **Validation commands**: Reference both CLI (`claude plugin validate`) and in-app (`/plugin validate`) commands
+Keep documentation concise, consistent, and aligned with actual repository structure.
 
 ## Technical Details
 
@@ -147,57 +150,28 @@ Skills: `./skills/python-peewee`, `./skills/python-modern-tooling`, `./skills/py
 - Testing patterns with SQLite
 - ORM best practices
 
-### 2. slide-skills (unified skill, v0.0.4)
+### 2. slide-skills (multi-skill bundle)
 
 Location: `./` (root)
-Skills: `./skills/slide-creator` (unified skill with modular references)
+Skills: `./skills/slide-creator`, `./skills/marp-authoring`, `./skills/slide-color-design`, `./skills/svg-illustration`, `./skills/mermaid-creator`
 
-**Architecture**: Progressive disclosure design with a lean SKILL.md (~250 lines) that loads references on-demand.
+**Architecture**: Umbrella + focused skills for clear boundaries.
 
-**slide-creator skill**:
-- Unified presentation creation workflow: color design → slides → diagrams
-- Three integrated modules accessible via single entry point
-- Shared design principles ensure visual consistency across all outputs
+**slide-creator** (umbrella):
+- Cross-module workflow and consistency rules
+- Routes to focused skills for details
 
-**Module 1: Color Design** (`references/color-design/`):
-- 5-step workflow for designing slide color systems
-- Three strategies: Dark Technical, Light Professional, Accent-Driven
-- 10 ready-to-use palettes with contrast validation
-- Output templates and examples
-- References:
-  - `workflow.md` - Complete color design process
-  - `strategies.md` - Strategy selection guide
-  - `palettes.md` - 10 tested color palettes
-  - `output-template.md` - Example outputs
+**marp-authoring**:
+- Marp/Marpit authoring rules and layouts
+- Templates, examples, icons, preview workflow
 
-**Module 2: Marpit Authoring** (`references/marpit-authoring/`):
-- Valid Marpit/Marp Markdown slide creation
-- Theme support (default/gaia/uncover)
-- Slide patterns, directives, frontmatter
-- Visual consistency and best practices
-- References:
-  - `syntax-guide.md` - Marpit syntax fundamentals
-  - `patterns.md` - Common slide patterns
-  - `themes.md` - Theme-specific features
-  - `best-practices.md` - Consistency guidelines
-  - `advanced-layouts.md` - Complex layouts
+**slide-color-design**:
+- Palette workflows and output templates
+- Palette scripts and examples
 
-**Module 3: SVG Illustration** (`references/svg-illustration/`):
-- Create slide-ready SVG diagrams and illustrations
-- Smart sizing logic for different contexts
-- Optimized for Marp HTML export
-- Pattern examples and troubleshooting
-- References:
-  - `core-rules.md` - SVG basics and sizing
-  - `embedding.md` - Embedding methods
-  - `pattern-examples.md` - Flowcharts, timelines, architecture
-  - `color-palettes.md` - SVG-specific colors
-  - `troubleshooting.md` - Common issues
-
-**Benefits of unified architecture**:
-- Progressive disclosure: Load only needed modules (saves ~30% context for complex tasks)
-- Unified design principles: Visual consistency written once, applied everywhere
-- Clear workflow: Guided sequence from color → slides → diagrams
+**svg-illustration**:
+- SVG rules, patterns, embedding, troubleshooting
+- Diagram examples
 - Modular yet cohesive: Each module can be used independently or together
 
 ## Adding New Plugins

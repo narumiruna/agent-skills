@@ -7,7 +7,7 @@ A working example of a Claude Code plugin marketplace with development tools and
 This repository serves two purposes:
 
 1. **Working Marketplace**: Install plugins for Python development (code quality hooks, project workflow standards, and ORM patterns)
-2. **Documentation & Examples**: Learn how to create your own plugin marketplace (see [GUIDE.md](GUIDE.md))
+2. **Documentation & Examples**: Learn how to create and operate a plugin marketplace from this repository
 
 ## Available Plugins
 
@@ -71,7 +71,6 @@ make clean
 
 ## Documentation
 
-- **[GUIDE.md](GUIDE.md)** - Complete guide for creating and distributing Claude Code plugin marketplaces
 - **[CLAUDE.md](CLAUDE.md)** - Developer guidance for working with this repository
 
 ## Learn More
