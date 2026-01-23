@@ -17,8 +17,6 @@ This repository serves two purposes:
 │   └── marketplace.json       # Marketplace catalog (defines available plugins)
 ├── .github/workflows/
 │   └── marp-to-pages.yml     # CI workflow: builds slides → GitHub Pages
-├── plugins/
-│   └── python-code-quality/  # Hooks-based plugin (inline definition)
 ├── skills/
 │   ├── python-peewee/         # Peewee ORM skill
 │   │   └── SKILL.md
@@ -117,20 +115,7 @@ This is key for simple plugin definitions vs. complex multi-component plugins.
 
 This repository contains three example plugins:
 
-### 1. python-code-quality (hooks-based)
-
-Location: `./plugins/python-code-quality`
-- Uses PreToolUse hooks to run code quality tools automatically
-- Runs before Edit/Write operations on Python files
-- No skills, only hooks
-- Inline definition with `strict: false`
-
-Commands executed:
-- `uv run ruff format` - Auto-format Python code
-- `uv run ruff check --fix` - Lint and auto-fix issues
-- `uv run ty check` - Type checking
-
-### 2. python-skills (multi-skill)
+### 1. python-skills (multi-skill)
 
 Location: `./` (root)
 Skills: `./skills/python-peewee`, `./skills/python-modern-tooling`, `./skills/python-uv-project-setup`, `./skills/python-quality-tooling`, `./skills/python-cli-typer`, `./skills/python-logging`, `./skills/python-packaging-uv`
@@ -162,7 +147,7 @@ Skills: `./skills/python-peewee`, `./skills/python-modern-tooling`, `./skills/py
 - Testing patterns with SQLite
 - ORM best practices
 
-### 3. slide-skills (unified skill, v0.0.4)
+### 2. slide-skills (unified skill, v0.0.4)
 
 Location: `./` (root)
 Skills: `./skills/slide-creator` (unified skill with modular references)

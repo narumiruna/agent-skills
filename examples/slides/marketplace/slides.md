@@ -66,21 +66,6 @@ table td {
 
 ---
 
-## 🛡️ python-code-quality
-
-**Automated code-quality checks**
-
-Automatically runs before Edit/Write actions:
-- `uv run ruff format` - Auto-format
-- `uv run ruff check --fix` - Lint + auto-fix
-- `uv run ty check` - Type checking
-
-**Plugin type**: Hooks Plugin (PreToolUse)
-
-**Highlights**: Zero config; works immediately after install
-
----
-
 ## 🎓 python-skills
 
 **Comprehensive Python development toolkit**
@@ -184,9 +169,6 @@ One workflow: from color design to a final deck with diagrams
 Pick the plugins you need:
 
 ```bash
-# Code-quality hook
-/plugin install python-code-quality@narumi
-
 # Python dev skills (project workflow + Peewee ORM)
 /plugin install python-skills@narumi
 
@@ -227,16 +209,6 @@ Plugins activate immediately after installation
 # Learn and extend
 
 **What this marketplace demonstrates**
-
----
-
-## 📚 Example: Hooks plugin
-
-**python-code-quality demonstrates PreToolUse hooks**
-
-- Automatically intercepts file operations to run tools
-- Runs quality checks before Edit/Write
-- Shows how to build an automated workflow
 
 ---
 
@@ -290,7 +262,6 @@ Plugins activate immediately after installation
 ```
 agent-skills/
 ├── plugins/
-│   ├── python-code-quality/
 │   ├── python-skills/
 │   └── slide-skills/
 └── skills/

@@ -9,35 +9,6 @@
   },
   "plugins": [
     {
-      "name": "python-code-quality",
-      "source": "./plugins/python-code-quality",
-      "description": "Python code quality hooks: auto-format with ruff, lint with ruff check, and type check with ty",
-      "version": "0.0.2",
-      "keywords": ["python", "ruff", "type-checking", "formatting", "linting"],
-      "hooks": {
-        "PreToolUse": [
-          {
-            "matcher": "Edit|Write",
-            "hooks": [
-              {
-                "type": "command",
-                "command": "uv run ruff format"
-              },
-              {
-                "type": "command",
-                "command": "uv run ruff check --fix"
-              },
-              {
-                "type": "command",
-                "command": "uv run ty check"
-              }
-            ]
-          }
-        ]
-      },
-      "strict": false
-    },
-    {
       "name": "python-skills",
       "source": "./",
       "description": "Modern Python tooling and ORM toolkit: uv-based setup and run rules, quality gates (ruff/ty/pytest), Typer CLI patterns, logging guidance, uv packaging workflows, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",

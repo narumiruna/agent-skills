@@ -11,7 +11,6 @@ This repository serves two purposes:
 
 ## Available Plugins
 
-- `python-code-quality` - Hooks plugin for ruff format/lint + ty checks (PreToolUse)
 - `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
 - `slide-skills` - Skill bundle for Marp/Marpit slide creation (color, authoring, SVG)
 
@@ -31,9 +30,6 @@ Or for local testing:
 
 Install plugins:
 ```shell
-# Install code quality hooks
-/plugin install python-code-quality@narumi
-
 # Install Python development skills (includes project workflow + Peewee ORM)
 /plugin install python-skills@narumi
 
@@ -81,7 +77,6 @@ make clean
 ## Learn More
 
 This marketplace demonstrates:
-- Hooks-based plugins (python-code-quality)
 - Multi-skill plugins (python-skills, slide-skills with multiple skills)
 - Using `strict: false` for inline plugin definitions
 - Organizing skills in `skills/` directory
