@@ -4,9 +4,6 @@
 
 - [Issue: Emoji Not Rendering in SVG](#issue-emoji-not-rendering-in-svg)
 - [Issue: SVG Not Rendering](#issue-svg-not-rendering)
-  - [1. Incorrect File Path](#1-incorrect-file-path)
-  - [2. Missing `xmlns` Attribute](#2-missing-xmlns-attribute)
-  - [3. External Dependencies](#3-external-dependencies)
 - [Issue: SVG Clipped or Cropped](#issue-svg-clipped-or-cropped)
   - [1. Content Outside ViewBox](#1-content-outside-viewbox)
   - [2. Missing ViewBox](#2-missing-viewbox)
@@ -44,6 +41,7 @@
 - [Debugging Workflow](#debugging-workflow)
 - [Quick Fixes Checklist](#quick-fixes-checklist)
 - [Still Having Issues?](#still-having-issues)
+- [See Also](#see-also)
 
 Common issues and solutions when embedding SVG in Marp slides.
 
@@ -94,59 +92,8 @@ Emoji in `<text>` elements are not reliably supported across SVG renderers. Diff
 
 ## Issue: SVG Not Rendering
 
-**Symptoms:**
-- Blank space where SVG should appear
-- Broken image icon
-- SVG works locally but not in HTML export
-
-**Causes & Solutions:**
-
-### 1. Incorrect File Path
-
-**Problem:** Path doesn't match actual file location
-
-**Fix:**
-```markdown
-<!-- Wrong -->
-![w:1200](diagram.svg)
-
-<!-- Correct -->
-![w:1200](assets/diagram.svg)
-```
-
-Verify file structure:
-```
-presentation/
-├── slides.md
-└── assets/
-    └── diagram.svg
-```
-
-### 2. Missing `xmlns` Attribute
-
-**Problem:** SVG missing XML namespace declaration
-
-**Fix:**
-```xml
-<!-- Wrong -->
-<svg viewBox="0 0 1920 1080">
-
-<!-- Correct -->
-<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
-```
-
-### 3. External Dependencies
-
-**Problem:** SVG references external resources
-
-**Fix:** Embed all resources inline
-```xml
-<!-- Wrong: external image -->
-<image href="http://example.com/image.png" />
-
-<!-- Correct: data URI or remove -->
-<image href="data:image/png;base64,..." />
-```
+See `../troubleshooting-common.md#svg-not-rendering-in-marpit` for shared checks
+(paths, `xmlns`, and external dependencies).
 
 ---
 
@@ -594,10 +541,7 @@ x slides/assets/diagrams/three-plugins.svg
 When SVG isn't working, try:
 
 - [ ] **Validate syntax**: Run `svglint file.svg` to catch XML errors
-- [ ] Verify file path is correct
-- [ ] Add `xmlns="http://www.w3.org/2000/svg"`
 - [ ] Ensure viewBox and width/height are set
-- [ ] Remove external dependencies (fonts, images)
 - [ ] Check all content within safe margins (120px from edges)
 - [ ] Use system font stack for text
 - [ ] **Escape special characters**: `&` → `&amp;`, `<` → `&lt;`, etc.
@@ -616,3 +560,8 @@ When SVG isn't working, try:
 3. **Simplify**: Start with basic shapes, add complexity gradually
 4. **Test standalone**: Open SVG directly in browser
 5. **Compare working example**: Use pattern examples from this skill
+
+## See Also
+
+- `../index.md` - Reference navigation hub
+- `../troubleshooting-common.md` - Common SVG rendering issues
