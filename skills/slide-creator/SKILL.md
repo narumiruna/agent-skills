@@ -26,6 +26,11 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 All paths and commands in this skill assume you are running from `skills/slide-creator/`.
 If running from the repo root, prefix paths with `skills/slide-creator/`.
 
+Example (from repo root):
+```bash
+bash skills/slide-creator/scripts/validate_marpit.sh slides.md
+```
+
 ## Start here (task entry)
 
 Pick one task and follow the exact reading path:
@@ -80,13 +85,7 @@ uv run scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author
 ### Script Commands
 
 **Browse and generate color palettes**:
-```bash
-uv run scripts/generate_palette.py list                    # List all slide palettes
-uv run scripts/generate_palette.py show code-blue          # Show palette details
-uv run scripts/generate_palette.py brand "#FF6B35" light   # Generate from brand color
-uv run scripts/generate_palette.py svg-list                # List SVG quick palettes
-uv run scripts/generate_palette.py svg-show default        # Show SVG palette details
-```
+See **Common commands** (above) for palette and SVG helpers.
 
 **Templates** (starting points - copy and fill in your content):
 - `assets/templates/minimal.md` - Bare minimum structure (5 slides)
@@ -127,10 +126,7 @@ Design slide color systems (background, text, accents, semantic colors).
 Output: color palette specification with hex codes and usage guidelines.
 
 Browse available palettes:
-```bash
-uv run scripts/generate_palette.py list       # All slide palettes
-uv run scripts/generate_palette.py svg-list   # SVG quick palettes
-```
+See **Common commands** (above) for palette and SVG helpers.
 
 Read in order:
 - `references/color-design/workflow.md`
@@ -153,7 +149,7 @@ Rules:
 Read in order:
 - `references/marpit-authoring/syntax-guide.md`
 - `references/marpit-authoring/patterns.md`
-- `references/marpit-authoring/advanced-layouts.md` (use for complex layouts)
+- Use `references/marpit-authoring/advanced-layouts.md` only for multi-column, split, or asymmetric layouts.
 - `references/marpit-authoring/themes.md`
 - `references/marpit-authoring/best-practices.md` (use for quality checks)
 
@@ -185,13 +181,11 @@ svglint path/to/file.svg
 Draw a diagram:
 1. Read `references/svg-illustration/core-rules.md`.
 2. Use `references/svg-illustration/pattern-examples.md` for layouts.
-3. Choose colors: `uv run scripts/generate_palette.py svg-show default`
+3. Choose colors: see **Common commands** (above).
 
 Design slide colors:
-1. Browse palettes: `uv run scripts/generate_palette.py list`
-2. View details: `uv run scripts/generate_palette.py show code-blue`
-3. Or generate from brand: `uv run scripts/generate_palette.py brand "#BRAND" light`
-4. Or follow `references/color-design/workflow.md` for custom design.
+1. Browse palettes: see **Common commands** (above).
+2. Or follow `references/color-design/workflow.md` for custom design.
 
 Write slides:
 1. Follow `references/marpit-authoring/syntax-guide.md`.
@@ -243,6 +237,24 @@ See [references/output-examples.md](references/output-examples.md) for complete 
 Common cross-cutting issues:
 - [references/troubleshooting-common.md](references/troubleshooting-common.md)
 - [references/svg-illustration/troubleshooting.md](references/svg-illustration/troubleshooting.md)
+
+## Common mistakes
+
+- Mixing `bg` and non-`bg` image syntax in the same deck.
+- Using absolute paths instead of relative paths for assets.
+- Using multiple palettes across one deck or between slides and SVGs.
+- Changing stroke width or corner radius between SVG shapes.
+- Skipping `svglint` before embedding SVGs.
+- Using advanced layouts for simple single-column slides.
+
+## Quick check (minimal)
+
+Run in this order:
+```bash
+bash scripts/validate_marpit.sh slides.md
+svglint path/to/diagram.svg
+uv run scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
+```
 
 ## Validation
 
