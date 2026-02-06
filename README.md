@@ -57,13 +57,16 @@ brew install stow
 Sync skills into `~/.codex/skills/` using the Makefile:
 
 ```shell
-make sync
+just
+
+# or
+just sync
 ```
 
 Remove the synced skills when finished:
 
 ```shell
-make clean
+just clean
 ```
 
 ## Documentation
