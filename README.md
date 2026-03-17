@@ -69,10 +69,6 @@ Remove the synced skills when finished:
 just clean
 ```
 
-## Documentation
-
-- **[CLAUDE.md](CLAUDE.md)** - Developer guidance for working with this repository
-
 ## Learn More
 
 This marketplace demonstrates:
