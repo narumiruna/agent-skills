@@ -282,9 +282,9 @@ agent-skills/
 **Learn how to build your own marketplace**
 
 **Core docs**
-- **[GUIDE.md](GUIDE.md)** - Full guide to creating and publishing a Claude Code plugin marketplace
-- **[CLAUDE.md](CLAUDE.md)** - Developer guidelines
-- **[README.md](README.md)** - Quick start and installation instructions
+- **[AGENTS.md](../../../AGENTS.md)** - Developer guidelines
+- **[CONSTITUTION.md](../../../CONSTITUTION.md)** - Core principles and constraints
+- **[README.md](../../../README.md)** - Quick start and installation instructions
 
 **Implementation showcases**
 - Hooks plugin (PreToolUse)

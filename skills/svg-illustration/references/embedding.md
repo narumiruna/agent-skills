@@ -531,4 +531,4 @@ Use CSS custom properties for theming:
 - [core-rules.md](core-rules.md) - SVG creation basics
 - [pattern-examples.md](pattern-examples.md) - Common diagram patterns
 - [troubleshooting.md](troubleshooting.md) - Solving embedding issues
-- [../marpit-authoring/syntax-guide.md](../marpit-authoring/syntax-guide.md) - Marpit image syntax
+- [../../marp-authoring/references/syntax-guide.md](../../marp-authoring/references/syntax-guide.md) - Marpit image syntax
