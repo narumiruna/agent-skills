@@ -25,14 +25,31 @@ Use this skill when the user:
 - Wants systematic reasoning (problem -> method -> result -> interpretation)
 - Requests academic, technical, or experimental explanations
 
+## When NOT to use
+
+Do NOT use this skill when:
+
+- The task is simple explanation or Q&A
+- The user asks for tutorials or step-by-step guides
+- The task is brainstorming or ideation
+- No clear "method -> result" structure exists
+
 ## Heuristic (quick decision rule)
 
-Use IMRaD if there is:
+Use IMRaD only if ALL are present:
 
-- A question
-- A method to answer it
-- Observable results
-- Need for interpretation
+- A clearly defined question or problem
+- A describable method or approach
+- Observable or derivable results
+- A need to interpret those results
+
+## Handling Incomplete Inputs
+
+If the input lacks explicit methods or results, the agent MUST:
+
+- Infer a reasonable method
+- State assumptions explicitly in Methods
+- Generate logically consistent Results
 
 ## Output Requirements
 
@@ -74,13 +91,15 @@ Constraint:
 
 Constraint:
 
-- No explanation of meaning
+- No interpretation, explanation, or implication
+- Only describe observations or outputs
 
 ### 4. Discussion
 
 - Interpret results
 - Explain implications and significance
 - Compare with expectations or prior knowledge
+- Explicitly answer the research question from Introduction
 - Mention limitations and possible next steps
 
 ## Style Constraints
