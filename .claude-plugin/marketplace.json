@@ -84,18 +84,22 @@
     {
       "name": "writing-skills",
       "source": "./",
-      "description": "Structured writing skills for standardized technical and research-style outputs.",
-      "version": "0.0.1",
+      "description": "IMRaD pipeline skills for structure detection, recomposition, and quality review.",
+      "version": "0.0.2",
       "keywords": [
         "writing",
         "imrad",
         "research",
         "analysis",
         "structure",
-        "technical-writing"
+        "technical-writing",
+        "review",
+        "diagnostic"
       ],
       "skills": [
-        "./skills/imrad-writer"
+        "./skills/imrad-structure-detector",
+        "./skills/imrad-recomposer",
+        "./skills/imrad-reviewer"
       ],
       "strict": false
     },
