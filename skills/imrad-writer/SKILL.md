@@ -7,7 +7,7 @@ description: Use when producing research-style outputs that should follow IMRaD 
 
 ## Purpose
 
-Generate outputs strictly following the IMRaD structure:
+Generate outputs using the IMRaD structure by default:
 
 - Introduction
 - Methods
@@ -49,7 +49,10 @@ If the input lacks explicit methods or results, the agent MUST:
 
 - Infer a reasonable method
 - State assumptions explicitly in Methods
-- Generate logically consistent Results
+- Generate logically consistent, explicitly scoped Results based on those assumptions
+
+The agent MUST NOT fabricate empirical evidence.
+If actual results are unavailable, the Results section MUST label them explicitly as inferred, hypothetical, expected, or simulated.
 
 ## Output Requirements
 
@@ -78,6 +81,7 @@ Constraint:
 - Describe approach, methodology, or process
 - Include assumptions, tools, or data sources
 - Ensure reproducibility when applicable
+- Include assumptions explicitly when the input is incomplete
 
 Constraint:
 
@@ -125,20 +129,18 @@ User input:
 Expected structure:
 
 ## Introduction
-
-...
+Explain the concurrency problem in file writes and define the research question.
 
 ## Methods
-
-...
+Examine async execution, shared-state access, and file write behavior under concurrent calls.
 
 ## Results
-
-...
+- Async allows concurrent scheduling
+- It does not prevent multiple writers from targeting the same key
+- Without locking, last-write-wins behavior remains possible
 
 ## Discussion
-
-...
+Interpret why async changes execution style but does not solve cross-process or shared-resource race conditions.
 
 ## Failure Modes (MUST avoid)
 
