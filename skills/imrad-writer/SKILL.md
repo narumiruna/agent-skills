@@ -32,27 +32,38 @@ Do NOT use this skill when:
 - The task is simple explanation or Q&A
 - The user asks for tutorials or step-by-step guides
 - The task is brainstorming or ideation
-- No clear "method -> result" structure exists
+- No clear "method -> result" structure exists and one cannot be reasonably inferred
 
 ## Heuristic (quick decision rule)
 
 Use IMRaD only if ALL are present:
 
 - A clearly defined question or problem
-- A describable method or approach
-- Observable or derivable results
+- A describable method or approach exists or can be reasonably inferred
+- Observable or derivable results exist or can be explicitly scoped as inferred, hypothetical, expected, or simulated
 - A need to interpret those results
 
 ## Handling Incomplete Inputs
 
 If the input lacks explicit methods or results, the agent MUST:
 
-- Infer a reasonable method
+- Infer a reasonable method only when the task is analytical or design-oriented
 - State assumptions explicitly in Methods
-- Generate logically consistent, explicitly scoped Results based on those assumptions
+- Generate logically consistent Results based on those assumptions
+- Label non-empirical results explicitly as inferred, hypothetical, expected, or simulated
 
-The agent MUST NOT fabricate empirical evidence.
-If actual results are unavailable, the Results section MUST label them explicitly as inferred, hypothetical, expected, or simulated.
+## Truthfulness Constraints
+
+The agent MUST NOT fabricate empirical data, experiments, citations, or observations.
+
+If actual results are unavailable, the Results section MUST present only:
+
+- Inferred results
+- Hypothetical results
+- Expected results
+- Simulated results
+
+Such results MUST be labeled explicitly.
 
 ## Output Requirements
 
