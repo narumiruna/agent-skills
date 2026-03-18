@@ -6,6 +6,7 @@ This repo hosts my personal agent skills, packaged so they can be used in Codex 
 
 - `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
 - `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
+- `writing-skills` - Structured writing toolkit for IMRaD-formatted research and technical outputs
 - `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations
 
 ## Installation
@@ -29,6 +30,9 @@ Install plugins:
 
 # Install presentation slide creation skills
 /plugin install slide-skills@narumi
+
+# Install IMRaD writing skills
+/plugin install writing-skills@narumi
 
 # Install gourmet research workflow skills
 /plugin install gourmet-research@narumi

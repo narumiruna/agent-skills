@@ -82,6 +82,24 @@
       "strict": false
     },
     {
+      "name": "writing-skills",
+      "source": "./",
+      "description": "Structured writing skills for standardized technical and research-style outputs.",
+      "version": "0.0.1",
+      "keywords": [
+        "writing",
+        "imrad",
+        "research",
+        "analysis",
+        "structure",
+        "technical-writing"
+      ],
+      "skills": [
+        "./skills/imrad-writer"
+      ],
+      "strict": false
+    },
+    {
       "name": "gourmet-research",
       "source": "./",
       "description": "Evidence-based gourmet research workflow for cities: template-first discovery, multi-source verification, 50-point scoring, and auditable top picks.",
