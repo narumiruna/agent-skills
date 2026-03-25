@@ -1,13 +1,13 @@
 ---
-name: python-modern-tooling
-description: Use when choosing the right modern Python tooling workflow for a project or script (uv setup, quality tools, CLI, logging, packaging) or when unsure which Python tooling skill applies.
+name: python
+description: Use when working with Python. This is the umbrella entry skill that routes to focused Python skills (uv setup, quality tools, CLI, logging, packaging).
 ---
 
-# Python Modern Tooling
+# Python
 
 ## Overview
 
-Route requests to the narrowest skill that matches the task. Core principle: keep the umbrella lean and delegate details.
+Use this skill whenever the task involves Python, then route requests to the narrowest focused skill. Core principle: keep the umbrella lean and delegate details.
 
 ## Quick Reference
 
