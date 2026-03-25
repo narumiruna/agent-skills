@@ -78,7 +78,7 @@ Combines project workflow standards with ORM patterns
 
 ## 🎓 python-skills (1/2)
 
-**Python Modern Tooling** (`python-modern-tooling` umbrella)
+**Python** (`python` umbrella)
 
 - Routes requests to focused skills
 - Setup & run rules (uv)
@@ -265,7 +265,7 @@ agent-skills/
 │   ├── python-skills/
 │   └── slide-skills/
 └── skills/
-    ├── python-modern-tooling/
+    ├── python/
     ├── python-uv-project-setup/
     ├── python-quality-tooling/
     ├── python-cli-typer/
@@ -283,7 +283,6 @@ agent-skills/
 
 **Core docs**
 - **[AGENTS.md](../../../AGENTS.md)** - Developer guidelines
-- **[CONSTITUTION.md](../../../CONSTITUTION.md)** - Core principles and constraints
 - **[README.md](../../../README.md)** - Quick start and installation instructions
 
 **Implementation showcases**
