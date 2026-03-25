@@ -1,6 +1,6 @@
 ---
 name: gourmet-research
-description: Use when creating or updating evidence-based gourmet research outputs for cities (restaurants/cafes/desserts) that require multi-source evidence, standardized scoring, and structured city folders.
+description: Use when creating or updating city-based gourmet research outputs that require multi-source evidence, standardized scoring, and structured audit files.
 ---
 
 # Gourmet Research

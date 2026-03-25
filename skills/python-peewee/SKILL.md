@@ -1,6 +1,6 @@
 ---
 name: python-peewee
-description: Patterns for using Peewee ORM with DatabaseProxy and scoped connections/transactions. Use when setting up DatabaseProxy, managing connection_context/atomic blocks, or writing tests with SQLite.
+description: Use when working with Peewee ORM patterns, especially DatabaseProxy setup, scoped connection/transaction handling, and SQLite-based tests.
 ---
 # Python Peewee
 

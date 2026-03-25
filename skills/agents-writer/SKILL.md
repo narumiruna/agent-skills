@@ -1,6 +1,6 @@
 ---
 name: "agents-writer"
-description: "Use when creating or updating `AGENTS.md`."
+description: "Use when creating or updating AGENTS.md contributor guidelines for this repository."
 ---
 
 # AGENTS.md Contributor Guide

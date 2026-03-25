@@ -1,6 +1,6 @@
 ---
 name: mermaid-creator
-description: Create Mermaid diagrams for technical documentation, system design, and data modeling. Use when creating flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, git graphs, or any other Mermaid-supported diagram type. Supports both creating new diagrams from descriptions and converting diagrams to SVG format for embedding in presentations or documents.
+description: Use when creating or converting Mermaid diagrams (for example flowcharts, sequence diagrams, ER diagrams, and Gantt charts), including exporting to SVG for docs or slides.
 ---
 
 # Mermaid Creator
