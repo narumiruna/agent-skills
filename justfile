@@ -1,6 +1,6 @@
 sync_flags := "--restow -v"
 clean_flags := "--delete -v"
-target := env('HOME') + "/.codex/skills"
+target := env('HOME') + "/.agents/skills"
 
 [default]
 sync:
