@@ -12,7 +12,7 @@
       "name": "python-skills",
       "source": "./",
       "description": "Modern Python tooling and ORM toolkit: uv-based setup and run rules, quality gates (ruff/ty/pytest), Typer CLI patterns, logging guidance, uv packaging workflows, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "keywords": [
         "python",
         "uv",
@@ -30,12 +30,11 @@
         "sqlite",
         "cli",
         "quality",
-        "project-setup",
-        "modern-tooling"
+        "project-setup"
       ],
       "skills": [
         "./skills/python-peewee",
-        "./skills/python-modern-tooling",
+        "./skills/python",
         "./skills/python-uv-project-setup",
         "./skills/python-quality-tooling",
         "./skills/python-cli-typer",
