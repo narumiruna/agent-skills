@@ -1,0 +1,65 @@
+<svg viewBox="0 0 1320 280" width="1320" height="280" xmlns="http://www.w3.org/2000/svg">
+  <title>Installation Workflow</title>
+  <desc>Three-step process: Add Marketplace → Install Plugins → Start Using</desc>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e8d7b0" />
+    </marker>
+
+    <linearGradient id="step-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2438;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a1520;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Step 1 -->
+  <g id="step-1">
+    <rect x="20" y="40" width="340" height="200" rx="16" fill="url(#step-bg)" stroke="#1e3a5f" stroke-width="3"/>
+    <circle cx="190" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
+    <text x="190" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">1</text>
+
+    <text x="190" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Add Marketplace</text>
+    <text x="190" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">GitHub or local</text>
+    <text x="190" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Connect your repo</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <line x1="360" y1="140" x2="420" y2="140" stroke="#e8d7b0" stroke-width="3" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- Step 2 -->
+  <g id="step-2">
+    <rect x="420" y="40" width="340" height="200" rx="16" fill="url(#step-bg)" stroke="#1e3a5f" stroke-width="3"/>
+    <circle cx="590" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
+    <text x="590" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">2</text>
+
+    <text x="590" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Install Plugins</text>
+    <text x="590" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Choose what you need</text>
+    <text x="590" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Install by name</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <line x1="760" y1="140" x2="820" y2="140" stroke="#e8d7b0" stroke-width="3" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- Step 3 (highlighted) -->
+  <g id="step-3">
+    <rect x="820" y="40" width="340" height="200" rx="16" fill="url(#step-bg)" stroke="#e8d7b0" stroke-width="3" filter="url(#glow)"/>
+    <circle cx="990" cy="90" r="28" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="2"/>
+    <text x="990" y="102" font-family="system-ui, -apple-system" font-size="28" font-weight="bold" text-anchor="middle" fill="#e8d7b0">3</text>
+
+    <text x="990" y="150" font-family="system-ui, -apple-system" font-size="22" font-weight="bold" text-anchor="middle" fill="#e8d7b0">Start Using</text>
+    <text x="990" y="180" font-family="system-ui, -apple-system" font-size="16" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Auto-enabled</text>
+    <text x="990" y="210" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.7">Ready immediately</text>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="660" y="270" font-family="system-ui, -apple-system" font-size="14" text-anchor="middle" fill="#e8d7b0" opacity="0.6" font-style="italic">Three simple steps to boost productivity</text>
+</svg>

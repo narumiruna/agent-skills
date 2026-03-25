@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1400 320" width="1400" height="320" xmlns="http://www.w3.org/2000/svg">
+  <title>Two Core Plugins</title>
+  <desc>Visual overview of python-skills and slide-skills</desc>
+
+  <defs>
+    <!-- Shadow filter -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Card gradient -->
+    <linearGradient id="card-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2438;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a1520;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Plugin 1: python-skills -->
+  <g id="plugin-1">
+    <rect x="120" y="30" width="520" height="260" rx="16" fill="url(#card-bg)" stroke="#1e3a5f" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Graduation cap icon -->
+    <circle cx="260" cy="120" r="40" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="3"/>
+    <rect x="244" y="118" width="32" height="7" rx="2" fill="#e8d7b0"/>
+    <path d="M 260 118 L 236 110 L 260 102 L 284 110 Z" fill="#e8d7b0"/>
+    <rect x="258" y="125" width="4" height="12" fill="#e8d7b0"/>
+    <circle cx="260" cy="140" r="4" fill="#e8d7b0"/>
+
+    <!-- Title -->
+    <text x="420" y="135" font-family="system-ui, -apple-system" font-size="30" font-weight="bold" text-anchor="middle" fill="#e8d7b0">python-skills</text>
+
+    <!-- Description -->
+    <text x="420" y="175" font-family="system-ui, -apple-system" font-size="17" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Skill Plugin</text>
+  </g>
+
+  <!-- Plugin 2: slide-skills -->
+  <g id="plugin-2">
+    <rect x="760" y="30" width="520" height="260" rx="16" fill="url(#card-bg)" stroke="#1e3a5f" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Palette icon -->
+    <circle cx="900" cy="120" r="40" fill="#1e3a5f" stroke="#e8d7b0" stroke-width="3"/>
+    <path d="M 900 100 Q 888 100 880 108 Q 872 116 872 128 Q 872 138 878 142 L 900 142 Q 912 142 920 134 Q 928 126 928 114 Q 928 106 920 102 Z" fill="none" stroke="#e8d7b0" stroke-width="3"/>
+    <circle cx="888" cy="116" r="3.5" fill="#e8d7b0"/>
+    <circle cx="900" cy="112" r="3.5" fill="#e8d7b0"/>
+    <circle cx="912" cy="116" r="3.5" fill="#e8d7b0"/>
+    <circle cx="896" cy="128" r="3.5" fill="#e8d7b0"/>
+    <circle cx="910" cy="128" r="3.5" fill="#e8d7b0"/>
+
+    <!-- Title -->
+    <text x="1040" y="135" font-family="system-ui, -apple-system" font-size="30" font-weight="bold" text-anchor="middle" fill="#e8d7b0">slide-skills</text>
+
+    <!-- Description -->
+    <text x="1040" y="175" font-family="system-ui, -apple-system" font-size="17" text-anchor="middle" fill="#e8d7b0" opacity="0.8">Skill Plugin</text>
+  </g>
+</svg>
