@@ -1,6 +1,6 @@
 ---
 name: python
-description: Use when working with Python. This is the umbrella entry skill that routes to focused Python skills (uv setup, quality tools, CLI, logging, packaging).
+description: Use when a task involves Python and you need routing to focused Python skills (uv setup, quality tooling, CLI, logging, or packaging).
 ---
 
 # Python

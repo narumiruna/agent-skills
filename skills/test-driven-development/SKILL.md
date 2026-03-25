@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Use this skill for non-trivial code changes, including bug fixes, new features, behavior changes, data transformations, and business logic changes. Write a failing test first, make the smallest passing change, then refactor safely.
+description: Use when implementing non-trivial code changes that should follow TDD (write a failing test first, make the smallest passing change, then refactor safely).
 ---
 
 # TDD Policy
