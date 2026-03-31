@@ -14,18 +14,22 @@ Use this skill whenever the task involves Python, then route requests to the nar
 | Need | Use this skill |
 | --- | --- |
 | Init project, add deps, run commands | `python-uv-project-setup` |
+| Standalone scripts with inline metadata | `uv-scripts` |
 | Lint/format/type-check/test/CI | `python-quality-tooling` |
 | Build a CLI with Typer | `python-cli-typer` |
 | Choose/configure logging or loguru | `python-logging` |
 | Build/publish packages with uv | `python-packaging-uv` |
+| Peewee ORM, DatabaseProxy, SQLite tests | `python-peewee` |
 
 ## Routing Rules
 
 - If the task mentions install, dependency, run, or missing package: use `python-uv-project-setup`.
+- If the task mentions standalone scripts, inline script metadata, or `uv run --with`: use `uv-scripts`.
 - If the task mentions ruff, ty, pytest, coverage, or CI: use `python-quality-tooling`.
 - If the task mentions CLI, commands, Typer: use `python-cli-typer`.
 - If the task mentions logging, loguru, handlers, formatters: use `python-logging`.
 - If the task mentions packaging, build, publish, dist: use `python-packaging-uv`.
+- If the task mentions Peewee, ORM, DatabaseProxy, or SQLite models: use `python-peewee`.
 
 ## Example
 
