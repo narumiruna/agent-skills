@@ -18,7 +18,13 @@ Build and distribute Python packages using uv's built-in build tools.
 uv build
 ```
 
-**Build wheel only (faster, recommended for most cases):**
+**Build wheel only:**
+
+```bash
+uv build --wheel
+```
+
+**Build for release (ignore `[tool.uv.sources]` local path overrides):**
 
 ```bash
 uv build --no-sources

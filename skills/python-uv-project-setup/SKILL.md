@@ -38,7 +38,8 @@ uv add --dev ruff pytest pytest-cov ty
 
 ### Script setup (single file)
 
-If you are working with a script, still install with uv and run via uv:
+For standalone scripts with their own dependencies, use the `uv-scripts` skill.
+For scripts inside a project, install with uv and run via uv:
 
 ```bash
 uv add fastapi

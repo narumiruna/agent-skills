@@ -14,7 +14,8 @@ Use uv build and publish commands to produce wheels/sdists and ship to PyPI. Cor
 | Task | Command |
 | --- | --- |
 | Build wheel+sdist | `uv build` |
-| Build wheel only | `uv build --no-sources` |
+| Build wheel only | `uv build --wheel` |
+| Build for release (ignore local path overrides) | `uv build --no-sources` |
 | Publish to PyPI | `uv publish --token $PYPI_TOKEN` |
 | Publish to Test PyPI | `uv publish --publish-url https://test.pypi.org/legacy/ --token $TEST_PYPI_TOKEN` |
 
