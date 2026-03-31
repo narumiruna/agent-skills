@@ -1,0 +1,30 @@
+graph TD
+    ML[Machine Learning] --> SL[Supervised Learning]
+    ML --> UL[Unsupervised Learning]
+    ML --> RL[Reinforcement Learning]
+
+    SL --> CLS[Classification]
+    SL --> REG[Regression]
+
+    CLS --> BC[Binary Classification]
+    CLS --> MC[Multi-class Classification]
+
+    REG --> LR[Linear Regression]
+    REG --> PR[Polynomial Regression]
+
+    UL --> CLU[Clustering]
+    UL --> DR[Dimensionality Reduction]
+
+    CLU --> KM[K-Means]
+    CLU --> HC[Hierarchical]
+
+    DR --> PCA[PCA]
+    DR --> TSNE[t-SNE]
+
+    RL --> MB[Model-Based]
+    RL --> MF[Model-Free]
+
+    style ML fill:#4A90E2,stroke:#333,color:#fff
+    style SL fill:#7CB342,stroke:#333,color:#fff
+    style UL fill:#FB8C00,stroke:#333,color:#fff
+    style RL fill:#E53935,stroke:#333,color:#fff
