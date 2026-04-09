@@ -4,7 +4,7 @@ This repo hosts my personal agent skills, packaged so they can be used in Codex 
 
 ## Available Plugins
 
-- `python-skills` - Skill bundle for modern Python workflows and Peewee ORM patterns
+- `python-skills` - Unified Python skill with focused extensions for CLI, logging, and Peewee
 - `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
 - `writing-skills` - IMRaD pipeline toolkit: structure detection, recomposition, and review
 - `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations
@@ -25,7 +25,7 @@ Or for local testing:
 
 Install plugins:
 ```shell
-# Install Python development skills (includes project workflow + Peewee ORM)
+# Install Python development skills (includes unified uv workflow + Peewee ORM)
 /plugin install python-skills@narumi
 
 # Install presentation slide creation skills
@@ -76,7 +76,7 @@ just clean
 ## Learn More
 
 This marketplace demonstrates:
-- Multi-skill plugins (python-skills, slide-skills with multiple skills)
+- Multi-skill plugins (python-skills uses one main Python skill plus focused extensions; slide-skills uses multiple focused skills)
 - Using `strict: false` for inline plugin definitions
 - Organizing skills in `skills/` directory
 - Marketplace validation and testing
