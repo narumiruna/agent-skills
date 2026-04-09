@@ -11,8 +11,8 @@
     {
       "name": "python-skills",
       "source": "./",
-      "description": "Unified Python skill plus focused extensions: uv-based project setup and command execution, standalone scripts with inline metadata, quality gates (ruff/ty/pytest), uv packaging workflows, Typer CLI patterns, logging guidance, and Peewee DatabaseProxy/SQLite testing.",
-      "version": "0.0.5",
+      "description": "Modern Python tooling and ORM toolkit: uv-based setup and run rules, standalone script authoring with inline metadata, quality gates (ruff/ty/pytest), Typer CLI patterns, logging guidance, uv packaging workflows, plus Peewee DatabaseProxy connection/transaction usage and SQLite testing.",
+      "version": "0.0.4",
       "keywords": [
         "python",
         "uv",
@@ -37,8 +37,12 @@
       "skills": [
         "./skills/python-peewee",
         "./skills/python",
+        "./skills/python-uv-project-setup",
+        "./skills/uv-scripts",
+        "./skills/python-quality-tooling",
         "./skills/python-cli-typer",
-        "./skills/python-logging"
+        "./skills/python-logging",
+        "./skills/python-packaging-uv"
       ],
       "strict": false
     },
