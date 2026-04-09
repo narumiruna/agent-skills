@@ -1,13 +1,13 @@
 sync_flags := "--restow -v"
 clean_flags := "--delete -v"
-target := env('HOME') + "/.agents/skills"
+target := env('HOME') + "/.codex/skills"
 
 # Default behavior: show available recipes instead of mutating state.
 [default]
 list:
     @just --list
 
-# Install (symlink) local skills into ~/.agents/skills.
+# Install (symlink) local skills into ~/.codex/skills.
 install:
     mkdir -p {{ target }}
     stow {{ sync_flags }} -t {{ target }} skills
