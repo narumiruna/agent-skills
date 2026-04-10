@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/env bash \"$(git rev-parse --show-toplevel)/.codex/hooks/stop-prek-run-a.sh\"",
+            "statusMessage": "Running prek run -a",
+            "timeout": 1800
+          }
+        ]
+      }
+    ]
+  }
+}
