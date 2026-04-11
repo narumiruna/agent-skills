@@ -130,7 +130,32 @@ if "production database" in payload["prompt"].lower():
     print(json.dumps({"decision": "block", "reason": "Ask for explicit confirmation first."}))
 ```
 
-## Stop: force one more pass
+## Stop: wrap an existing validation command with `codhc`
+
+`hooks.json`
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uvx codhc ruff check --fix",
+            "statusMessage": "Running Ruff fixes",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Use this pattern when the hook only needs to run an existing command and turn its exit status into a valid `Stop` hook response.
+
+## Stop: custom continuation reason with a script
 
 ```python
 #!/usr/bin/env python3
@@ -145,4 +170,6 @@ print(json.dumps({"decision": "block", "reason": "Run one more pass over failing
 
 - Start with one event per file until behavior is proven.
 - Prefer repo-local paths resolved from `git rev-parse --show-toplevel`.
+- Prefer `codhc` for simple `Stop` hooks that only wrap an existing check command.
+- Prefer a custom script when the hook must inspect the payload or compute its own response text.
 - Keep hook output machine-readable; ad hoc logs often make the event look broken.

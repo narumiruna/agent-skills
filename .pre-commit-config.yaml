@@ -18,7 +18,7 @@ repos:
       - id: ruff
         args: [--fix]
       - id: ruff-format
-  - repo: https://github.com/narumiruna/ty-pre-commit
-    rev: v0.0.25
-    hooks:
-      - id: ty-check
+  # - repo: https://github.com/narumiruna/ty-pre-commit
+  #   rev: v0.0.25
+  #   hooks:
+  #     - id: ty-check
