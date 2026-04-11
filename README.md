@@ -1,6 +1,6 @@
 # Agent Skills
 
-This repo hosts my personal agent skills, packaged so they can be used in Codex or Claude Code.
+This repo hosts my personal agent skills.
 
 ## Available Plugins
 
@@ -10,33 +10,6 @@ This repo hosts my personal agent skills, packaged so they can be used in Codex 
 - `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations
 
 ## Installation
-
-### Claude Code (marketplace)
-
-Add this marketplace:
-```shell
-/plugin marketplace add narumi/agent-skills
-```
-
-Or for local testing:
-```shell
-/plugin marketplace add ./path/to/agent-skills
-```
-
-Install plugins:
-```shell
-# Install Python development skills (includes project workflow + Peewee ORM)
-/plugin install python-skills@narumi
-
-# Install presentation slide creation skills
-/plugin install slide-skills@narumi
-
-# Install IMRaD writing skills
-/plugin install writing-skills@narumi
-
-# Install gourmet research workflow skills
-/plugin install gourmet-research@narumi
-```
 
 ### Codex (local skills)
 

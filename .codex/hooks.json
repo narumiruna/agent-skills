@@ -5,9 +5,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/env bash \"$(git rev-parse --show-toplevel)/.codex/hooks/stop-prek-run-a.sh\"",
+            "command": "uvx codhc prek run -a",
             "statusMessage": "Running prek run -a",
-            "timeout": 1800
+            "timeout": 30
           }
         ]
       }
