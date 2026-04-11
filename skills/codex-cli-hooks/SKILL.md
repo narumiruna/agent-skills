@@ -32,6 +32,8 @@ Treat hooks as workflow guardrails, not absolute enforcement. Current runtime su
    /usr/bin/python3 "$(git rev-parse --show-toplevel)/.codex/hooks/pre_tool_use.py"
    ```
    Do not assume Codex started from the repo root.
+6. Choose between a custom script and `codhc`.
+   Write a custom hook script when the hook must inspect payload fields, branch on runtime state, or emit event-specific JSON. Prefer `uvx codhc <command...>` when the hook only needs to run an existing CLI check and map its exit status into a Codex-compatible response, especially for `Stop`.
 
 ## Event Selection
 
@@ -57,6 +59,9 @@ Read `references/events.md` before implementing event-specific stdout formats or
 - Expect concurrent execution when multiple command hooks match the same event.
 - Assume every hook receives one JSON object on `stdin`.
 - Validate stdout shape per event. Some events accept plain text, some ignore it, and `Stop` requires JSON.
+- Use `uvx codhc <command...>` for simple `Stop`-hook validation commands such as `ruff`, `pytest`, or project-specific check scripts.
+- Write a custom hook script instead of `codhc` when the hook must read payload fields, compute custom continuation reasons, or produce non-`Stop` event shapes.
+- Pass `codhc` commands as argv, not a single shell string. Use `uvx codhc ruff check --fix`, not `uvx codhc "ruff check --fix"`.
 - Prefer `systemMessage` or hook-specific structured output over ad hoc print debugging.
 - Treat unsupported fields as fail-open. Parsed does not mean enforced.
 
@@ -67,6 +72,8 @@ Read `references/events.md` before implementing event-specific stdout formats or
 - Hooks do not currently intercept MCP, Write, WebSearch, or other non-shell tools.
 - `PostToolUse` cannot undo side effects from a command that already ran.
 - `PreToolUse` is useful for policy guardrails, not a hard security boundary.
+- `codhc` is a thin command wrapper, not a general hook framework or policy engine.
+- `codhc` is most useful for `Stop` hooks that wrap an existing command; do not treat it as the default solution for every hook event.
 
 ## Debugging Checklist
 
