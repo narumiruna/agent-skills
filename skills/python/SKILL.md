@@ -1,13 +1,13 @@
 ---
 name: python
-description: Use when a task involves Python and you need routing to focused Python skills (uv setup, quality tooling, CLI, logging, or packaging).
+description: Use when a task involves Python and you need routing to focused Python skills (uv setup, scripts, quality tooling, CLI, logging, packaging, or Peewee).
 ---
 
 # Python
 
 ## Overview
 
-Use this skill whenever the task involves Python, then route requests to the narrowest focused skill. Core principle: keep the umbrella lean and delegate details.
+Use this skill whenever the task involves Python, then route to the narrowest focused skill or skills. Core principle: keep this umbrella lean, make routing explicit, and let focused skills carry implementation details.
 
 ## Quick Reference
 
@@ -23,13 +23,23 @@ Use this skill whenever the task involves Python, then route requests to the nar
 
 ## Routing Rules
 
-- If the task mentions install, dependency, run, or missing package: use `python-uv-project-setup`.
-- If the task mentions standalone scripts, inline script metadata, or `uv run --with`: use `uv-scripts`.
-- If the task mentions ruff, ty, pytest, coverage, or CI: use `python-quality-tooling`.
-- If the task mentions CLI, commands, Typer: use `python-cli-typer`.
-- If the task mentions logging, loguru, handlers, formatters: use `python-logging`.
-- If the task mentions packaging, build, publish, dist: use `python-packaging-uv`.
-- If the task mentions Peewee, ORM, DatabaseProxy, or SQLite models: use `python-peewee`.
+- If the task only needs Python routing, stop here after naming the focused skill and why.
+- If the task asks for implementation or commands, continue into the focused skill immediately.
+- For multi-intent tasks, use every focused skill that owns part of the work, in this order:
+  1. Environment and dependency setup: `python-uv-project-setup` or `uv-scripts`.
+  2. Domain/framework implementation: `python-cli-typer`, `python-logging`, or `python-peewee`.
+  3. Validation: `python-quality-tooling`.
+  4. Release: `python-packaging-uv`.
+
+Use these trigger rules:
+
+- Install, dependency, project initialization, missing package, or running project commands: `python-uv-project-setup`.
+- Standalone script, inline script metadata, one-off dependencies, `--with`, or `--no-project`: `uv-scripts`.
+- Ruff, ty, pytest, coverage, CI, hooks, or pre-merge checks: `python-quality-tooling`.
+- CLI commands, Typer, options, arguments, shell entry points, or command tests: `python-cli-typer`.
+- Logging, loguru, handlers, formatters, structured context, or library logging: `python-logging`.
+- Packaging, build, wheel, sdist, dist, Test PyPI, PyPI, or release verification: `python-packaging-uv`.
+- Peewee, ORM models, `DatabaseProxy`, transactions, or SQLite model tests: `python-peewee`.
 
 ## Example
 
@@ -37,10 +47,15 @@ User: "Missing fastapi and tests fail. How should I install it?"
 
 Route to: `python-uv-project-setup` (dependency management and run rules).
 
+User: "Add a Typer command and tests for it."
+
+Route to: `python-cli-typer` for the command structure and `python-quality-tooling` for the test/quality gate.
+
 ## Common Mistakes
 
 - Providing detailed commands here instead of routing to the focused skill.
-- Mixing multiple workflows in one response.
+- Choosing only one focused skill when the task clearly has multiple independent Python concerns.
+- Routing standalone script work to project setup when inline metadata or no-project mode is the better fit.
 
 ## Red Flags
 

@@ -7,7 +7,21 @@ description: Use when configuring or running Python quality tools (ruff, ty, pyt
 
 ## Overview
 
-Use ruff, ty, and pytest consistently through uv. Core principle: one repeatable quality gate across local and CI.
+Use ruff, ty, pytest, coverage, and prek consistently. Core principle: prefer the repository's single quality gate; otherwise run each tool through `uv run`.
+
+## Use When
+
+- Configuring or running lint, format, type checking, tests, coverage, hooks, or CI checks.
+- Deciding between `prek run -a` and individual `uv run` commands.
+- Adding quality tools as development dependencies.
+
+## Workflow
+
+1. Check the repo's existing quality gate first.
+2. If the repo uses prek, run `prek run -a` as the primary pre-merge gate.
+3. If no aggregate gate exists, run focused commands with `uv run`.
+4. Add missing quality tools with `uv add --dev`, not as runtime dependencies.
+5. Keep CI and local commands aligned.
 
 ## Quick Reference
 
@@ -19,20 +33,27 @@ Use ruff, ty, and pytest consistently through uv. Core principle: one repeatable
 | Type check | `uv run ty check` |
 | Test | `uv run pytest` |
 | Coverage | `uv run pytest --cov=src --cov-report=term-missing` |
-| Full gate (prek) | `prek run -a` |
+| Full repo gate (prek) | `prek run -a` |
 | Install git hooks (prek) | `prek install` |
 
-## Workflow
+## Command Priority
 
-- Install tools as dev deps (see `python-uv-project-setup`).
-- Run all checks before commit.
-- Keep CI aligned with local commands.
-- If the repo uses prek, prefer `prek run -a` as the single quality gate.
-- Pytest tests MUST be function-based (no class-based tests or `unittest.TestCase`).
+Use this order:
+
+1. Existing project command documented in the repo.
+2. `prek run -a` when the repo uses prek.
+3. Individual `uv run ruff ...`, `uv run ty check`, and `uv run pytest ...` commands.
+
+Pytest tests MUST be function-based (no class-based tests or `unittest.TestCase`).
 
 ## Example
 
 Pre-merge gate:
+```bash
+prek run -a
+```
+
+Fallback when no aggregate gate exists:
 ```bash
 uv run ruff check --fix
 uv run ruff format

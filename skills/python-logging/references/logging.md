@@ -1,5 +1,7 @@
 # Logging with Python stdlib
 
+Use stdlib logging for libraries, services, and applications that need standard ecosystem integration. Library modules should create loggers but leave handler and level configuration to the application entry point.
+
 ## Basic Configuration
 
 ```python
@@ -15,6 +17,20 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.info("Application started")
 ```
+
+## Library Pattern
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def load_user(user_id: int) -> None:
+    logger.info("Loading user", extra={"user_id": user_id})
+```
+
+Do not call `logging.basicConfig()` or attach process-wide handlers inside reusable library modules.
 
 ## Loggers and Handlers
 
@@ -40,6 +56,8 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 ```
+
+Configure handlers once at process startup. If setup code can run more than once, guard against duplicate handlers or centralize setup in a single entry point.
 
 ## Structured Context
 
