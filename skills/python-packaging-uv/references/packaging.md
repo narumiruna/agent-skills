@@ -8,7 +8,7 @@
 - [Publishing](#publishing)
 - [Common Issues](#common-issues)
 
-Build and distribute Python packages using uv's built-in build tools.
+Build and distribute Python packages using uv's built-in build tools. Release flow is: run the quality gate, build from release-ready sources, inspect artifacts, test wheel installation, publish to Test PyPI when appropriate, then publish to PyPI.
 
 ## Building Packages
 
@@ -57,19 +57,25 @@ my_package-1.0.0.tar.gz
 
 Before publishing, verify:
 
-**1. Build succeeds:**
+**1. Quality gate passes:**
 ```bash
-uv build --no-sources
+prek run -a
 ```
 
-**2. Test installation from wheel:**
+**2. Build succeeds:**
 ```bash
-uv pip install dist/my_package-1.0.0-py3-none-any.whl
+uv build --no-sources
 ```
 
 **3. Verify package contents:**
 ```bash
 unzip -l dist/my_package-1.0.0-py3-none-any.whl
+tar -tzf dist/my_package-1.0.0.tar.gz
+```
+
+**4. Test installation from wheel and import from the artifact:**
+```bash
+uv run --with dist/my_package-1.0.0-py3-none-any.whl python -c "import my_package"
 ```
 
 ## Publishing
@@ -86,7 +92,7 @@ uv publish --publish-url https://test.pypi.org/legacy/ --token $TEST_PYPI_TOKEN
 
 **Test installation from Test PyPI:**
 ```bash
-uv pip install --index-url https://test.pypi.org/simple/ my-package
+uv run --with my-package --index-url https://test.pypi.org/simple/ python -c "import my_package"
 ```
 
 ## Common Issues
@@ -97,6 +103,7 @@ uv pip install --index-url https://test.pypi.org/simple/ my-package
 **Import errors after installation:**
 - Verify package name matches import name
 - Check `[project]` name and `src/` directory structure
+- Test import from the built wheel, not from the source checkout
 
 **Large package size:**
 - Add `.pyc` and `__pycache__` to `.gitignore`

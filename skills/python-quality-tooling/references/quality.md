@@ -9,9 +9,11 @@
 - [Pre-merge Quality Gate](#pre-merge-quality-gate)
 - [CI Configuration Example](#ci-configuration-example)
 
-Keep quality tools in dev dependencies and run via `uv run` for consistency.
+Keep quality tools in dev dependencies. Prefer the repository's documented aggregate gate; if the repo uses prek, run `prek run -a`. Use individual `uv run` commands when no aggregate gate exists or when narrowing a failure.
 
 ## prek (pre-commit runner)
+
+Use prek as the primary gate when the repository has prek configuration or project instructions call for it. Do not mix `pre-commit` commands into a prek-standardized repo.
 
 **Install (preferred):**
 
@@ -92,26 +94,22 @@ uv run pytest -k "test_user"
 
 ## Pre-merge Quality Gate
 
-Run before committing or in CI:
+Run the project gate first when available:
 
 ```bash
-#!/bin/bash
-set -e
+prek run -a
+```
 
-echo "Running quality checks..."
+If no aggregate gate exists, run the tools directly through uv:
 
-# Format and lint
+```bash
 uv run ruff check --fix
 uv run ruff format
-
-# Type check
 uv run ty check
-
-# Run tests with coverage
 uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=80
-
-echo "All checks passed!"
 ```
+
+Use function-based pytest tests. Avoid class-based `Test*` suites and `unittest.TestCase` unless the repository already requires them.
 
 ## CI Configuration Example
 

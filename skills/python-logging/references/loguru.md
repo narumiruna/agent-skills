@@ -1,5 +1,7 @@
 # Logging with Loguru
 
+Use loguru for small apps and CLIs where the application owns process startup and logging configuration. Avoid forcing loguru into reusable libraries that should let callers configure logging.
+
 ## Installation
 
 ```bash
@@ -32,7 +34,7 @@ logger.remove()
 logger.add(
     sys.stderr,
     format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {message}",
-    level="INFO"
+    level="INFO",
 )
 
 # Add file handler with rotation
@@ -40,9 +42,11 @@ logger.add(
     "logs/app.log",
     rotation="500 MB",
     retention="10 days",
-    level="DEBUG"
+    level="DEBUG",
 )
 ```
+
+Configure loguru once near the CLI or application entry point. Avoid adding sinks from functions that may be called repeatedly.
 
 ## Exception Logging
 
@@ -64,6 +68,6 @@ logger.info(
     "User action",
     user_id=123,
     action="login",
-    ip_address="192.168.1.1"
+    ip_address="192.168.1.1",
 )
 ```

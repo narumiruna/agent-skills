@@ -6,7 +6,25 @@ description: Use when running or authoring standalone Python scripts with uv, es
 # UV Scripts
 
 ## Overview
-Use `uv run` to execute standalone scripts with automatic dependency management. Prefer inline metadata for self-contained scripts and `--no-project` when you are inside a project but do not need project code.
+
+Use `uv run` to execute standalone Python scripts with automatic dependency management. Core principle: prefer inline script metadata for reusable scripts, and use `--no-project` when running an ad hoc script from inside a project without needing project code.
+
+## Use When
+
+- Running or authoring a standalone Python file.
+- Adding one-off dependencies for a single invocation.
+- Embedding dependencies or Python requirements in script metadata.
+- Choosing whether a script should ignore the surrounding project.
+
+For package/project dependency management, use `python-uv-project-setup`.
+
+## Workflow
+
+1. Decide whether the file should use project dependencies, one-off dependencies, or inline metadata.
+2. Use plain `uv run script.py` when no extra dependencies are needed.
+3. Use `uv run --with ...` for disposable one-off dependencies.
+4. Use inline script metadata for reusable or shared standalone scripts.
+5. Use `--no-project` only when running inside a project and the script should ignore project code.
 
 ## Quick Reference
 
@@ -54,8 +72,9 @@ EOF
 ## Project vs. No-Project Mode
 
 - In a project (directory with `pyproject.toml`), `uv run` installs the project first.
-- If the script does not need project code, use `--no-project` to skip installation.
+- If the script does not need project code, use `--no-project` to skip project discovery and installation.
 - The `--no-project` flag must be before the script name.
+- If the script imports project modules, do not use `--no-project`.
 
 ```bash
 uv run --no-project example.py
@@ -65,7 +84,7 @@ If you use inline script metadata, project dependencies are ignored automaticall
 
 ## Running a Script With Dependencies
 
-Use `--with` to add per-invocation dependencies:
+Use `--with` for disposable, per-invocation dependencies:
 
 ```bash
 uv run --with rich example.py
@@ -73,9 +92,11 @@ uv run --with 'rich>12,<13' example.py
 uv run --with rich --with requests example.py
 ```
 
-In a project, these dependencies are added on top of project dependencies. Use `--no-project` to avoid that.
+In a project, these dependencies are added on top of project dependencies. Use `--no-project` when the script should not see the project environment.
 
-## Inline Script Metadata (Recommended)
+Use inline metadata instead of `--with` when the dependency list should live with the script or be reused by others.
+
+## Inline Script Metadata
 
 Initialize inline metadata:
 
@@ -106,6 +127,8 @@ resp = requests.get("https://peps.python.org/api/peps.json")
 data = resp.json()
 pprint([(k, v["title"]) for k, v in data.items()][:10])
 ```
+
+Use inline metadata for scripts that should be reproducible, executable by other users, or kept outside a full project.
 
 Notes:
 - The `dependencies` field must be provided even if empty.
@@ -190,3 +213,9 @@ Dependencies still work, e.g. `uv run --with PyQt5 example_pyqt.pyw`.
 - Placing `--no-project` after the script name.
 - Omitting the `# /// script` metadata block when you want self-contained scripts.
 - Assuming inline metadata uses project dependencies (it ignores them).
+
+## Red Flags
+
+- Advising `pip install` for a script dependency.
+- Adding a `pyproject.toml` only to run a one-file script.
+- Using `--no-project` for a script that imports local package code.
