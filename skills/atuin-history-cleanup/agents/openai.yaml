@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atuin History Cleanup"
+  short_description: "Audit and clean noisy Atuin history."
+  default_prompt: "Use $atuin-history-cleanup to find typo-like or overly duplicated Atuin history entries and propose safe cleanup steps."
