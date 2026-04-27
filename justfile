@@ -7,11 +7,22 @@ target := env('HOME') + "/.codex/skills"
 list:
     @just --list
 
-# Install (symlink) local skills into ~/.codex/skills.
-install:
+# Install (symlink) all local skills into ~/.codex/skills.
+install-all:
     mkdir -p {{ target }}
     stow {{ sync_flags }} -t {{ target }} skills
 
-# Clean only when target exists to avoid noisy first-run errors.
-clean:
+# Install (symlink) a single local skill into ~/.codex/skills/<skill>.
+install skill:
+    test -d skills/{{ skill }}
+    mkdir -p {{ target }}/{{ skill }}
+    stow {{ sync_flags }} -d skills -t {{ target }}/{{ skill }} {{ skill }}
+
+# Clean all local skill symlinks only when target exists.
+clean-all:
     if [ -d {{ target }} ]; then stow {{ clean_flags }} -t {{ target }} skills; else echo "skip clean: {{ target }} does not exist"; fi
+
+# Clean a single local skill symlink only when its target exists.
+clean skill:
+    test -d skills/{{ skill }}
+    if [ -d {{ target }}/{{ skill }} ]; then stow {{ clean_flags }} -d skills -t {{ target }}/{{ skill }} {{ skill }}; else echo "skip clean: {{ target }}/{{ skill }} does not exist"; fi
