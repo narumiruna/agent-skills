@@ -1,0 +1,42 @@
+flowchart TD
+    A[Trained Model] --> B[Make Predictions]
+    B --> C[Compare with True Labels]
+    C --> D{Task Type?}
+
+    D -->|Classification| E[Classification Metrics]
+    D -->|Regression| F[Regression Metrics]
+
+    E --> E1[Accuracy]
+    E --> E2[Precision]
+    E --> E3[Recall]
+    E --> E4[F1 Score]
+    E --> E5[Confusion Matrix]
+
+    F --> F1[MSE]
+    F --> F2[RMSE]
+    F --> F3[MAE]
+    F --> F4[R² Score]
+
+    E1 --> G[Analyze Results]
+    E2 --> G
+    E3 --> G
+    E4 --> G
+    E5 --> G
+    F1 --> G
+    F2 --> G
+    F3 --> G
+    F4 --> G
+
+    G --> H{Satisfactory?}
+    H -->|Yes| I[Deploy Model]
+    H -->|No| J[Improve Model]
+    J --> K[Tune Hyperparameters]
+    J --> L[Add Features]
+    J --> M[Get More Data]
+    K --> A
+    L --> A
+    M --> A
+
+    style A fill:#4A90E2,stroke:#333,color:#fff
+    style I fill:#7CB342,stroke:#333,color:#fff
+    style J fill:#FB8C00,stroke:#333,color:#fff
