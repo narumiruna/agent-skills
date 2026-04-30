@@ -4,7 +4,7 @@ This repo hosts my personal agent skills.
 
 ## Available Plugins
 
-- `python-skills` - Python toolkit centered on a single `python` entry for uv project work, quality gates, and packaging, with focused skills for scripts, Typer, logging, and Peewee
+- `python-skills` - Python toolkit centered on a single `python` entry for uv project and standalone script work, quality gates, and packaging, with focused skills for Typer, logging, and Peewee
 - `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
 - `writing-skills` - IMRaD toolkit centered on a single `imrad` skill that auto-routes between applicability detection, drafting, recomposition, and review
 - `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations

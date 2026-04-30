@@ -1,22 +1,22 @@
 ---
 name: python
-description: Use when a task involves Python project setup, dependency management with uv, running project commands, quality gates (ruff, ty, pytest, coverage, prek), or building and publishing packages with uv, and when routing specialized work to uv-scripts, Typer CLI, logging, or Peewee.
+description: Use when a task involves Python project setup or standalone scripts with uv, including dependency management, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates (ruff, ty, pytest, coverage, prek), or building and publishing packages with uv, and when routing specialized Typer CLI, logging, or Peewee work.
 ---
 
 # Python
 
 ## Overview
 
-Use this skill as the default entry point for Python project work. Own project setup, dependency management, quality checks, and package release here. Route only standalone scripts, Typer CLI structure, logging design, and Peewee ORM patterns to focused skills.
+Use this skill as the default entry point for Python and uv work. Own project setup, standalone script workflow, dependency management, quality checks, and package release here. Route only Typer CLI structure, logging design, and Peewee ORM patterns to focused skills.
 
 ## Quick Reference
 
 | Need | Use this skill |
 | --- | --- |
 | Init project, add or remove deps, sync, run commands | `python` |
+| Standalone scripts, inline metadata, one-off deps, or `--no-project` | `python` |
 | Lint, format, type-check, test, coverage, CI gates | `python` |
 | Build or publish wheel/sdist with uv | `python` |
-| Standalone scripts with inline metadata | `uv-scripts` |
 | Build a CLI with Typer | `python-cli-typer` |
 | Choose/configure logging or loguru | `python-logging` |
 | Peewee ORM, DatabaseProxy, SQLite tests | `python-peewee` |
@@ -24,25 +24,26 @@ Use this skill as the default entry point for Python project work. Own project s
 ## Routing Rules
 
 - Stay in `python` for project-scoped work involving `pyproject.toml`, shared dependencies, `uv run`, quality tools, or package release.
-- Route to `uv-scripts` when the task is a standalone Python file that should carry its own dependencies or ignore the surrounding project with `--no-project`.
+- Stay in `python` for standalone Python files when deciding among plain `uv run`, `uv run --with`, inline metadata, `--no-project`, or script-specific Python version handling.
 - Route to `python-cli-typer`, `python-logging`, or `python-peewee` only for those domain-specific concerns. Keep dependency, quality, and release expectations from this skill.
-- For mixed tasks, use `python` first for environment and validation, then apply the focused skill.
+- For mixed tasks, select project mode or standalone-script mode here first, then apply the focused skill if needed.
 
 Use these trigger rules:
 
 - Install, dependency, project initialization, missing package, running project commands, lint, type-checking, tests, coverage, CI gates, or packaging: stay in `python`.
-- Standalone script, inline script metadata, one-off dependencies, `--with`, or `--no-project`: `uv-scripts`.
+- Standalone script, inline script metadata, one-off dependencies, `--with`, `--no-project`, `uv init --script`, `uv add --script`, `uv lock --script`, or script Python version selection: stay in `python`.
 - CLI commands, Typer, options, arguments, shell entry points, or command tests: `python-cli-typer`.
 - Logging, loguru, handlers, formatters, structured context, or library logging: `python-logging`.
 - Peewee, ORM models, `DatabaseProxy`, transactions, or SQLite model tests: `python-peewee`.
 
-## Project vs. Standalone Script
+## Mode Selection
 
-- Project work has a `pyproject.toml`, shared codebase, or lockfile. Use this skill.
-- Standalone script work is a single file with inline metadata, one-off `--with` dependencies, or intentional `--no-project` execution. Use `uv-scripts`.
-- A script inside a project still belongs here when it should use project dependencies, for example `uv run python script.py`.
+- Choose project mode when the work has a `pyproject.toml`, shared codebase, or lockfile.
+- Choose standalone-script mode when the work is a single file, stdin snippet, or ad hoc invocation that should not become a full project.
+- Treat a script inside a project as project mode when it imports local package code, for example `uv run python script.py`.
+- Treat a script inside a project as standalone-script mode only when it should ignore project code via `--no-project`.
 
-## Core Workflow
+## Project Workflow
 
 1. Inspect `pyproject.toml` and the repository's documented commands before changing anything.
 2. Install runtime dependencies with `uv add`; install lint, test, type, and build tools with `uv add --dev`.
@@ -51,11 +52,26 @@ Use these trigger rules:
 5. Run the repository quality gate after dependency or code changes.
 6. For package release, build, inspect, test-install, then publish.
 
+## Standalone-Script Workflow
+
+1. Decide whether the script should use project dependencies, one-off `--with` dependencies, or inline metadata.
+2. Use plain `uv run script.py` when no extra dependencies are needed.
+3. Use `uv run --with ... script.py` for disposable per-invocation dependencies.
+4. Use `uv init --script` and `uv add --script` when the dependency list should live with the script.
+5. Use `--no-project` only when running inside a project and the script must ignore project code.
+6. Use `uv run --python <version>` or `requires-python` in metadata when the script needs a specific Python version.
+7. Use `uv lock --script` when reproducibility matters.
+8. See `references/scripts.md` for stdin, heredoc, shebang, alternate indexes, Windows `.pyw`, and lock details.
+
 ## Non-Negotiable Rules
 
 - Install dependencies with `uv add`, never `pip install`.
-- Run Python, pytest, and other project commands with `uv run`, never direct `python` or `pytest`.
+- Run Python, pytest, and script invocations with `uv run`, never direct `python` or `pytest`.
 - Keep quality and release tooling in dev dependencies via `uv add --dev`.
+- Do not create a `pyproject.toml` only to run a one-file script.
+- Put `--no-project` before the script name, and never use it when the script imports local package code.
+- Treat `uv run --with` as disposable; use inline metadata when the script should be shared or reused.
+- Remember that inline script metadata ignores project dependencies.
 - Prefer the repository's aggregate command first; if the repo standardizes on prek, use `prek run -a`.
 - Build release artifacts with `uv build --no-sources` so local `[tool.uv.sources]` overrides do not leak into release output.
 - Test installs from the built wheel or published artifact, not only from the source checkout.
@@ -71,6 +87,12 @@ Use these trigger rules:
 | Sync deps | `uv sync` |
 | Run Python | `uv run python <file.py>` |
 | Run module | `uv run python -m <module>` |
+| Run a standalone script | `uv run script.py` |
+| Run a script with one-off deps | `uv run --with requests script.py` |
+| Run a script outside the project | `uv run --no-project script.py` |
+| Init script metadata | `uv init --script script.py --python 3.12` |
+| Add script deps | `uv add --script script.py requests rich` |
+| Lock script deps | `uv lock --script script.py` |
 | Run tests | `uv run pytest` |
 | Full repo gate (prek) | `prek run -a` |
 | Build release artifacts | `uv build --no-sources` |
@@ -115,7 +137,11 @@ Handle in `python`: follow the release workflow from build through artifact veri
 
 User: "Write a one-file script with inline deps."
 
-Route to `uv-scripts`.
+Handle in `python`: initialize script metadata, add script dependencies, and keep the file self-contained.
+
+User: "Run this ad hoc script inside the repo but ignore project code."
+
+Handle in `python`: use `uv run --no-project ...` and keep the script separate from project dependencies.
 
 User: "Add a Typer command and tests for it."
 
@@ -123,7 +149,9 @@ Use `python-cli-typer` for CLI structure and keep dependency and quality rules f
 
 ## Common Mistakes
 
-- Treating a one-file script as project work when `uv-scripts` would be smaller and clearer.
+- Treating a one-file script as project work when inline metadata or `--no-project` would be smaller and clearer.
+- Using `--no-project` for a script that imports local package code.
+- Keeping reusable script dependencies only in `uv run --with ...` shell history instead of the script metadata.
 - Routing lint, test, or release work away from `python` even though this skill owns those workflows.
 - Running tools outside uv.
 - Publishing before verifying artifacts.
@@ -131,6 +159,7 @@ Use `python-cli-typer` for CLI structure and keep dependency and quality rules f
 ## Red Flags
 
 - Suggesting `pip install` or direct `python` or `pytest` execution.
+- Adding a `pyproject.toml` only to run a one-file script.
 - Mixing `pre-commit` commands into a prek-standardized repo.
 - Verifying only the source tree instead of the built artifact.
 
@@ -138,3 +167,4 @@ Use `python-cli-typer` for CLI structure and keep dependency and quality rules f
 
 - `references/quality.md` - Full commands, CI examples, coverage, and prek usage.
 - `references/packaging.md` - Build, inspect, and publish details.
+- `references/scripts.md` - Standalone script patterns, inline metadata, locking, and special cases.
