@@ -16,7 +16,7 @@ Use `uv run` to execute standalone Python scripts with automatic dependency mana
 - Embedding dependencies or Python requirements in script metadata.
 - Choosing whether a script should ignore the surrounding project.
 
-For package/project dependency management, use `python-uv-project-setup`.
+For project dependency management, quality gates, and package release, use `python`.
 
 ## Workflow
 
