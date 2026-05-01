@@ -1,0 +1,4 @@
+interface:
+  display_name: "Marp Authoring"
+  short_description: "Write Marp/Marpit slides with minimal lookup."
+  default_prompt: "Use $marp-authoring to write or revise this Marp/Marpit deck and route to the right authoring references."
