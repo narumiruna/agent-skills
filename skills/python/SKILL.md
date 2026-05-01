@@ -18,7 +18,7 @@ Use this skill as the default entry point for Python and uv work. Own project se
 | Standalone scripts, inline metadata, one-off deps, or `--no-project` | `python` |
 | Lint, format, type-check, test, coverage, CI gates | `python` |
 | Build or publish wheel/sdist with uv | `python` |
-| Build a CLI with Typer | `python-cli-typer` |
+| Build a CLI with Typer | `python-typer` |
 | Choose/configure logging or loguru | `python-logging` |
 | Peewee ORM, DatabaseProxy, SQLite tests | `python-peewee` |
 
@@ -26,14 +26,14 @@ Use this skill as the default entry point for Python and uv work. Own project se
 
 - Stay in `python` for project-scoped work involving `pyproject.toml`, shared dependencies, `uv run`, quality tools, or package release.
 - Stay in `python` for standalone Python files when deciding among plain `uv run`, `uv run --with`, inline metadata, `--no-project`, or script-specific Python version handling.
-- Route to `python-cli-typer`, `python-logging`, or `python-peewee` only for those domain-specific concerns. Keep dependency, quality, and release expectations from this skill.
+- Route to `python-typer`, `python-logging`, or `python-peewee` only for those domain-specific concerns. Keep dependency, quality, and release expectations from this skill.
 - For mixed tasks, select project mode or standalone-script mode here first, then apply the focused skill if needed.
 
 Use these trigger rules:
 
 - Install, dependency, project initialization, missing package, running project commands, lint, type-checking, tests, coverage, CI gates, or packaging: stay in `python`.
 - Standalone script, inline script metadata, one-off dependencies, `--with`, `--no-project`, `uv init --script`, `uv add --script`, `uv lock --script`, or script Python version selection: stay in `python`.
-- CLI commands, Typer, options, arguments, shell entry points, or command tests: `python-cli-typer`.
+- CLI commands, Typer, options, arguments, shell entry points, or command tests: `python-typer`.
 - Logging, loguru, handlers, formatters, structured context, or library logging: `python-logging`.
 - Peewee, ORM models, `DatabaseProxy`, transactions, or SQLite model tests: `python-peewee`.
 
@@ -167,7 +167,7 @@ Handle in `python`: initialize the project, run `uv add --dev ruff ty pytest pyt
 
 User: "Add a Typer command and tests for it."
 
-Use `python-cli-typer` for CLI structure and keep dependency and quality rules from `python`.
+Use `python-typer` for CLI structure and keep dependency and quality rules from `python`.
 
 ## Common Mistakes
 

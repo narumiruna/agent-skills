@@ -61,7 +61,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 ### Python
 
 - `python`: default entry for uv project setup, dependencies, quality gates, packaging, and standalone scripts.
-- `python-cli-typer`: Typer command structure, options, and multi-command apps.
+- `python-typer`: Typer command structure, options, and multi-command apps.
 - `python-logging`: choosing and configuring stdlib logging or loguru.
 - `python-peewee`: Peewee patterns such as `DatabaseProxy`, scoped transactions, and SQLite tests.
 

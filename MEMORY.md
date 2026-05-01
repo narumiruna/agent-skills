@@ -6,6 +6,7 @@
 - Codex CLI is unreliable with symlinks when loading local skills; this repo's `just` install flow now uses copy/rm instead of `stow`.
 - IMRaD now only lives under `skills/imrad/`; there are no remaining `imrad-*` legacy skill names in the repo to update.
 - Python project setup, quality tooling, and packaging are now consolidated into `skills/python/`; there are no remaining `python-uv-project-setup`, `python-quality-tooling`, or `python-packaging-uv` skills in the repo to update.
+- Typer CLI guidance now lives under `skills/python-typer/`; use that name consistently across repo docs and prompts.
 - Standalone uv script guidance is also consolidated into `skills/python/`; there is no remaining `uv-scripts` skill in the repo to update.
 - Root document ownership is now fixed as `README.md` for external-facing docs and `AGENTS.md` for maintainer-facing docs; treat `justfile` as the source of truth for install recipes, with `install-all`/`install <skill>` and `clean-all`/`clean <skill>` as the supported commands.
 - `skills/python/` in this repo and `~/.codex/skills/python/` are not the same bound path; after changing the repo copy, run `just install python` again to sync the version Codex actually loads.
