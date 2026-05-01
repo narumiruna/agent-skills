@@ -21,14 +21,6 @@ uv add --dev ruff ty pytest pytest-cov
 
 `pytest` is the default test framework for new projects. Write tests as function-based `tests/test_*.py` files, use plain `assert`, prefer fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases.
 
-If `pyproject.toml` does not already configure pytest discovery, add a minimal block:
-
-```toml
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-```
-
 Keep `ruff` and `ty` on defaults unless the project has a concrete need for custom configuration.
 
 In an existing repository, follow the established test stack unless the user explicitly requests a migration. Do not introduce `unittest.TestCase` or class-based `Test*` suites as the default for a new project.

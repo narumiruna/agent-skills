@@ -53,9 +53,8 @@ When creating a brand-new Python project, do this immediately after `uv init <na
 2. Make `pytest` the default test framework for the project.
 3. Write new tests as function-based `tests/test_*.py` files that use plain `assert`.
 4. Prefer pytest fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases.
-5. If `pyproject.toml` does not already configure pytest discovery, add a minimal `[tool.pytest.ini_options]` block with `testpaths = ["tests"]` and `python_files = ["test_*.py"]`.
-6. Do not introduce `unittest`, `unittest.TestCase`, or class-based `Test*` suites unless the repository already requires them.
-7. In an existing repository, follow the established test stack unless the user explicitly asks to migrate frameworks.
+5. Do not introduce `unittest`, `unittest.TestCase`, or class-based `Test*` suites unless the repository already requires them.
+6. In an existing repository, follow the established test stack unless the user explicitly asks to migrate frameworks.
 
 ## Project Workflow
 
@@ -164,7 +163,7 @@ Handle in `python`: use `uv run --no-project ...` and keep the script separate f
 
 User: "Start a new Python project with a simple test."
 
-Handle in `python`: initialize the project, run `uv add --dev ruff ty pytest pytest-cov`, add minimal pytest discovery config when needed, and write a function-based pytest test under `tests/test_*.py`.
+Handle in `python`: initialize the project, run `uv add --dev ruff ty pytest pytest-cov`, and write a function-based pytest test under `tests/test_*.py`.
 
 User: "Add a Typer command and tests for it."
 
