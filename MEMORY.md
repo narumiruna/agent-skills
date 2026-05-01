@@ -1,14 +1,14 @@
 ## GOTCHA
 
-- `skill-creator` 的 `quick_validate.py` 需要 `PyYAML`; 在這個 repo 用 `uv run --with pyyaml python /home/narumi/.codex/skills/.system/skill-creator/scripts/quick_validate.py <skill-dir>` 比直接 `uv run python` 穩定。
-- 這個 sandbox 對 `~/.cache/uv` 可能是唯讀；跑 `uv run --with ...` 類的一次性工具時，先設 `UV_CACHE_DIR=/tmp/uv-cache` 比較穩。
-- 在這個 sandbox 首次跑 `uv run --with pyyaml` 這類 skill metadata 工具時，如果本機 cache 還沒有套件，通常還需要暫時放行網路讓 `uv` 抓 `PyYAML`。
-- Codex CLI 讀本地 skills 時對 symlink 不可靠；這個 repo 的 `just` 安裝流程改成 copy/rm，不再用 `stow`。
-- IMRaD 現在只保留 `skills/imrad/`; repo 內已無 `imrad-*` 舊 skill 名稱可更新。
-- Python 的 project setup、quality tooling、packaging 現在都整併進 `skills/python/`; repo 內已無 `python-uv-project-setup`、`python-quality-tooling`、`python-packaging-uv` 可更新。
-- Standalone uv script guidance 現在也整併進 `skills/python/`; repo 內已無 `uv-scripts` 可更新。
-- Root 文件分工現在固定為 `README.md` 對外、`AGENTS.md` 對內；安裝 recipe 以 `justfile` 為準，支持的是 `install-all`/`install <skill>` 與 `clean-all`/`clean <skill>`。
-- 這個 repo 的 `skills/python/` 和 `~/.codex/skills/python/` 不是同一路徑綁定；改完 repo 後要再跑 `just install python` 才會同步到 Codex 實際載入版本。
+- `skill-creator`'s `quick_validate.py` requires `PyYAML`; in this repo, `uv run --with pyyaml python /home/narumi/.codex/skills/.system/skill-creator/scripts/quick_validate.py <skill-dir>` is more reliable than plain `uv run python`.
+- In this sandbox, `~/.cache/uv` may be read-only; when running one-off `uv run --with ...` tools, set `UV_CACHE_DIR=/tmp/uv-cache` first for more reliable behavior.
+- In this sandbox, the first run of skill metadata tools like `uv run --with pyyaml` may still need temporary network access if the local cache does not already contain the package, so `uv` can fetch `PyYAML`.
+- Codex CLI is unreliable with symlinks when loading local skills; this repo's `just` install flow now uses copy/rm instead of `stow`.
+- IMRaD now only lives under `skills/imrad/`; there are no remaining `imrad-*` legacy skill names in the repo to update.
+- Python project setup, quality tooling, and packaging are now consolidated into `skills/python/`; there are no remaining `python-uv-project-setup`, `python-quality-tooling`, or `python-packaging-uv` skills in the repo to update.
+- Standalone uv script guidance is also consolidated into `skills/python/`; there is no remaining `uv-scripts` skill in the repo to update.
+- Root document ownership is now fixed as `README.md` for external-facing docs and `AGENTS.md` for maintainer-facing docs; treat `justfile` as the source of truth for install recipes, with `install-all`/`install <skill>` and `clean-all`/`clean <skill>` as the supported commands.
+- `skills/python/` in this repo and `~/.codex/skills/python/` are not the same bound path; after changing the repo copy, run `just install python` again to sync the version Codex actually loads.
 
 ## TASTE
-- `git-commit` 應依賴 repo 級 `AGENTS.md` 的 git 基線；SKILL.md 只保留 diff 到 commit message 的流程與判斷，少見 Conventional Commits 細節放在 `references/`。
+- `git-commit` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
