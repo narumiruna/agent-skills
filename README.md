@@ -1,56 +1,96 @@
 # Agent Skills
 
-This repo hosts my personal agent skills.
+Reusable agent skills for coding, writing, research, and slide work. The collection is organized for Codex-first workflows, and it can also be installed as a standard skills repo with `npx skills add narumiruna/agent-skills`.
 
-## Available Plugins
+## Install
 
-- `python-skills` - Python toolkit centered on a single `python` entry for uv project and standalone script work, quality gates, and packaging, with focused skills for Typer, logging, and Peewee
-- `slide-skills` - Umbrella + focused skills for Marp/Marpit slides (color, authoring, SVG) with fast routing
-- `writing-skills` - IMRaD toolkit centered on a single `imrad` skill that auto-routes between applicability detection, drafting, recomposition, and review
-- `gourmet-research` - Evidence-based gourmet research workflow for city dining recommendations
+### 1. Install with `npx`
 
-## Installation
+Use this when you want the collection without linking a local checkout.
 
-### Codex (local skills)
-
-Codex does not support marketplaces. Use one of the following:
-
-Option A: Copy skills directly into `~/.codex/skills/`:
 ```shell
-cp -R ./skills/* ~/.codex/skills/
+npx skills add narumiruna/agent-skills
 ```
 
-Option B: Use `stow` to create symlinks (recommended for development).
-Install `stow`:
+### 2. Local Codex development with `just` and `stow`
+
+Install `stow` first:
+
 ```shell
-# Linux (Debian/Ubuntu)
+# Debian/Ubuntu
 sudo apt update
 sudo apt install -y stow
 
-# macOS (using Homebrew)
+# macOS
 brew install stow
 ```
 
-Sync skills into `~/.codex/skills/` using the Makefile:
+Then install symlinks into `~/.codex/skills`:
 
 ```shell
-just
+just install-all
 
-# or
-just sync
+# or install one skill
+just install python
 ```
 
-Remove the synced skills when finished:
+Remove symlinks when finished:
 
 ```shell
-just clean
+just clean-all
+
+# or clean one skill
+just clean python
 ```
 
-## Learn More
+`just` by itself only lists the available recipes.
 
-This marketplace demonstrates:
-- Multi-skill plugins (python-skills, slide-skills with multiple skills)
-- Using `strict: false` for inline plugin definitions
-- Organizing skills in `skills/` directory
-- Marketplace validation and testing
-- Entry skills for faster routing in multi-skill bundles
+### 3. Manual copy for Codex
+
+Use this when you want a simple local copy without `stow`.
+
+```shell
+mkdir -p ~/.codex/skills
+cp -R ./skills/* ~/.codex/skills/
+```
+
+## How To Use In Codex
+
+- Run `/skills` to inspect the installed collection.
+- Type `$python`, `$imrad`, or another skill name to invoke one explicitly.
+- Or describe the task normally and let Codex choose a matching skill.
+
+If Codex does not pick up a local skill change, restart Codex and try again.
+
+## Skill Guide
+
+### Python
+
+- `python`: default entry for uv project setup, dependencies, quality gates, packaging, and standalone scripts.
+- `python-cli-typer`: Typer command structure, options, and multi-command apps.
+- `python-logging`: choosing and configuring stdlib logging or loguru.
+- `python-peewee`: Peewee patterns such as `DatabaseProxy`, scoped transactions, and SQLite tests.
+
+### Writing And Research
+
+- `imrad`: deciding whether IMRaD fits, drafting new IMRaD outputs, and reviewing existing drafts.
+- `gourmet-research`: evidence-based city dining research with structured scoring and audit files.
+
+### Slides And Visuals
+
+- `slide-creator`: end-to-end Marp/Marpit slide creation, including color systems and SVG visuals.
+- `marp-authoring`: focused Marp/Marpit authoring rules, directives, and layouts.
+- `slide-color-design`: slide palette selection and color-system workflows.
+- `svg-illustration`: SVG diagram and illustration guidance for slide decks.
+- `mermaid-creator`: Mermaid diagrams for docs, architecture, sequence flows, ER diagrams, and Gantt charts.
+
+### Workflow And Repository Maintenance
+
+- `git-commit`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
+- `agents-writer`: creating or updating `AGENTS.md` guidance for this repository.
+- `codex-cli-hooks`: designing or debugging Codex CLI hooks and `hooks.json` behavior.
+- `test-driven-development`: applying a red-green-refactor workflow to non-trivial code changes.
+
+### Utilities
+
+- `atuin-history-cleanup`: preview-first cleanup planning for noisy Atuin shell history.

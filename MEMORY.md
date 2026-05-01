@@ -5,5 +5,6 @@
 - IMRaD 現在只保留 `skills/imrad/`; repo 內已無 `imrad-*` 舊 skill 名稱可更新。
 - Python 的 project setup、quality tooling、packaging 現在都整併進 `skills/python/`; repo 內已無 `python-uv-project-setup`、`python-quality-tooling`、`python-packaging-uv` 可更新。
 - Standalone uv script guidance 現在也整併進 `skills/python/`; repo 內已無 `uv-scripts` 可更新。
+- Root 文件分工現在固定為 `README.md` 對外、`AGENTS.md` 對內；安裝 recipe 以 `justfile` 為準，支持的是 `install-all`/`install <skill>` 與 `clean-all`/`clean <skill>`。
 
 ## TASTE
