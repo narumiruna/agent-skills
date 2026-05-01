@@ -1,6 +1,6 @@
 # Agent Skills
 
-Reusable agent skills for coding, writing, research, and slide work. The collection is organized for Codex-first workflows, and it can also be installed as a standard skills repo with `npx skills add narumiruna/agent-skills`.
+Reusable agent skills for coding, writing, research, and slide work. The collection is organized for Codex-first workflows, and it can also be installed as a standard skills repo with `npx skills add narumiruna/skills`.
 
 ## Install
 
@@ -9,7 +9,7 @@ Reusable agent skills for coding, writing, research, and slide work. The collect
 Use this when you want the collection without linking a local checkout.
 
 ```shell
-npx skills add narumiruna/agent-skills
+npx skills add narumiruna/skills
 ```
 
 ### 2. Local Codex development with `just`

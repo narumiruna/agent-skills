@@ -153,13 +153,13 @@ One workflow: from color design to a final deck with diagrams
 **Add from GitHub**
 
 ```bash
-/plugin marketplace add narumi/agent-skills
+/plugin marketplace add narumi/skills
 ```
 
 **Local testing**
 
 ```bash
-/plugin marketplace add ./path/to/agent-skills
+/plugin marketplace add ./path/to/skills
 ```
 
 ---
@@ -260,7 +260,7 @@ Plugins activate immediately after installation
 **Standard directory layout**
 
 ```
-agent-skills/
+skills/
 ├── plugins/
 │   ├── python-skills/
 │   └── slide-skills/
@@ -300,6 +300,6 @@ agent-skills/
 
 **Working Marketplace + Learning Resource**
 
-🔗 **github.com/narumiruna/agent-skills**
+🔗 **github.com/narumiruna/skills**
 
 Install useful plugins | Learn to build your own marketplace
