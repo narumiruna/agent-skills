@@ -1,0 +1,30 @@
+graph LR
+    I1((x1))
+    I2((x2))
+    I3((x3))
+
+    H1((h1))
+    H2((h2))
+
+    O1((ŷ1))
+    O2((ŷ2))
+
+    I1 --> H1
+    I1 --> H2
+    I2 --> H1
+    I2 --> H2
+    I3 --> H1
+    I3 --> H2
+
+    H1 --> O1
+    H1 --> O2
+    H2 --> O1
+    H2 --> O2
+
+    style I1 fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style I2 fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style I3 fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style H1 fill:#7CB342,stroke:#333,stroke-width:2px,color:#fff
+    style H2 fill:#7CB342,stroke:#333,stroke-width:2px,color:#fff
+    style O1 fill:#E53935,stroke:#333,stroke-width:2px,color:#fff
+    style O2 fill:#E53935,stroke:#333,stroke-width:2px,color:#fff
