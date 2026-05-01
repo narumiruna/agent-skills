@@ -13,7 +13,6 @@ Follow global defaults; this file defines only repo-specific additions and overr
 - Skills live in `skills/<skill-name>/SKILL.md`.
 - Optional supporting material stays inside the skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Slides and visual examples live under `examples/`.
-- Tests live under `tests/`.
 
 ## Commands
 
