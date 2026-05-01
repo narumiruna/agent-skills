@@ -1,5 +1,5 @@
 ---
-name: python-cli-typer
+name: python-typer
 description: Use when building or structuring Python CLI commands with Typer, including commands, options, and multi-command apps.
 ---
 
