@@ -7,7 +7,7 @@ description: Use when auditing Atuin shell history for noisy duplicates or high-
 
 ## Overview
 
-Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries, then apply only official Atuin cleanup flows.
+Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries, then apply only official Atuin cleanup flows that keep typo deletion inside Atuin's interactive inspector.
 
 Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune behavior.
 
@@ -22,7 +22,8 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 
 - Always run `atuin info` and the audit script before any destructive step.
 - Treat duplicate cleanup as global. `atuin history dedup` is not a single-command delete tool.
-- For typo candidates, default to the interactive inspector path so you can confirm the exact row before deleting it.
+- `atuin search --delete` is query-wide and follows Atuin's active search semantics. Do not use it for typo cleanup.
+- For typo candidates, always use the interactive inspector path so you can confirm the exact row before deleting it.
 - Re-confirm every destructive command immediately before running it.
 - Do not delete rows directly from SQLite.
 - Do not edit Atuin config as part of this skill. `history_filter` and `cwd_filter` tuning is out of scope for v1.
@@ -51,7 +52,7 @@ uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audi
    Use the reported `atuin history dedup --dry-run ...` command. If the dry run matches expectations, rerun the same command without `--dry-run`.
 
 4. Review the `typos` section second.
-   Start with the suggested `atuin search -i <query>` preview command. In the TUI inspector, use `Ctrl+O`, confirm the exact entry, then `Ctrl+D` to delete that one row. Only use `atuin search --delete ...` when the audit marks the preview query as uniquely scoped to the target.
+   Start with the suggested `atuin search -i --search-mode prefix ...` preview command. The audit will also add `--cwd <cwd>` when it knows the original working directory, so review stays narrow even if your default Atuin config uses `skim` or another fuzzy mode. In the TUI inspector, use `Ctrl+O`, confirm the exact entry, then `Ctrl+D` to delete that one row. Do not rerun typo queries with `atuin search --delete`.
 
 5. Stop after the cleanup you actually verified. Do not keep expanding the scope.
 
@@ -60,6 +61,7 @@ uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audi
 - Resolves the database path from `atuin info` unless `--db-path` is provided.
 - Opens the SQLite database in read-only mode and inspects only `id`, `timestamp`, `exit`, `command`, `cwd`, `session`, and `hostname`.
 - Groups duplicates by `(command, cwd, hostname)` and reports how many rows exceed `--dupkeep`.
+- Emits typo review commands with an explicit `--search-mode prefix` override and never emits `atuin search --delete`.
 - Detects typo candidates only when all of these are true:
   - same session
   - within the configured window
@@ -73,5 +75,5 @@ uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audi
 ## Output Expectations
 
 - `duplicates` gives one global preview/apply pair for `history dedup`.
-- `typos` gives per-row review data: id, time, cwd, original command, suggested correction, reason, and shell-safe preview commands.
+- `typos` gives per-row review data: id, time, cwd, original command, suggested correction, reason, and shell-safe preview commands for inspector review only.
 - `--format json` is preferable when another tool needs to post-process the audit.
