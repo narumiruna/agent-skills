@@ -10,3 +10,4 @@
 - 這個 repo 的 `skills/python/` 和 `~/.codex/skills/python/` 不是同一路徑綁定；改完 repo 後要再跑 `just install python` 才會同步到 Codex 實際載入版本。
 
 ## TASTE
+- `git-commit` 應依賴 repo 級 `AGENTS.md` 的 git 基線；SKILL.md 只保留 diff 到 commit message 的流程與判斷，少見 Conventional Commits 細節放在 `references/`。
