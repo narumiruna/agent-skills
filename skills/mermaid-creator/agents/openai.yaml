@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mermaid Creator"
+  short_description: "Create Mermaid diagrams and export slide-ready SVGs."
+  default_prompt: "Use $mermaid-creator to create or convert this diagram in Mermaid and export SVG if needed."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AGENTS.md Writer"
+  short_description: "Create and update repository AGENTS.md guides."
+  default_prompt: "Use $agents-writer to draft or update the repository AGENTS.md contributor guide."
