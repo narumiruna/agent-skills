@@ -266,11 +266,8 @@ skills/
 │   └── slide-skills/
 └── skills/
     ├── python/
-    ├── python-uv-project-setup/
-    ├── python-quality-tooling/
-    ├── python-cli-typer/
+    ├── python-typer/
     ├── python-logging/
-    ├── python-packaging-uv/
     ├── python-peewee/
     └── slide-creator/
 ```
