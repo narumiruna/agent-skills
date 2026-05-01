@@ -80,6 +80,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Workflow And Repository Maintenance
 
+- `help-me`: deciding whether to check `--help`, built-in `help`, or `man` before running a shell or CLI command.
 - `git-commit`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
 - `agents-writer`: creating or updating `AGENTS.md` guidance for this repository.
 - `codex-cli-hooks`: designing or debugging Codex CLI hooks and `hooks.json` behavior.
