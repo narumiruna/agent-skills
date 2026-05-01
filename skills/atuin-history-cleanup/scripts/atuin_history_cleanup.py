@@ -26,6 +26,7 @@ FROM history
 RARE_TOKEN_MAX_FREQUENCY = 3
 MIN_OVERLAP_PREFIX_OR_SUFFIX = 2
 TEXT_DUPLICATE_GROUP_LIMIT = 20
+TYPO_REVIEW_SEARCH_MODE = "prefix"
 
 
 class AuditError(RuntimeError):
@@ -60,6 +61,15 @@ def build_cd_command(cwd: str) -> str | None:
     if not cwd or cwd == "unknown":
         return None
     return f"cd {shell_quote(cwd)}"
+
+
+def build_typo_preview_command(command: str, cwd: str) -> str:
+    """Build a narrow interactive review command for a typo candidate."""
+    parts = ["atuin", "search", "-i", "--search-mode", TYPO_REVIEW_SEARCH_MODE]
+    if cwd and cwd != "unknown":
+        parts.extend(["--cwd", cwd])
+    parts.append(command)
+    return build_shell_command(parts)
 
 
 def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -455,11 +465,6 @@ def analyze_duplicates(
     }
 
 
-def count_preview_matches(entries: list[HistoryEntry], query: str) -> int:
-    """Approximate how many local rows the preview query would hit."""
-    return sum(1 for entry in entries if query in entry.command)
-
-
 def analyze_typos(
     entries: list[HistoryEntry],
     typo_window_seconds: int,
@@ -531,8 +536,6 @@ def analyze_typos(
                 continue
 
             query = previous.command
-            preview_match_count = count_preview_matches(entries, query)
-            unique_preview = preview_match_count == 1
             reason = "; ".join(
                 [
                     f"same session within {delta_seconds}s",
@@ -554,16 +557,12 @@ def analyze_typos(
                     "reason": reason,
                     "preview_query": query,
                     "preview_query_shell_quoted": shell_quote(query),
-                    "preview_match_count": preview_match_count,
-                    "preview_command": build_shell_command(
-                        ["atuin", "search", "-i", query]
+                    # Always override the search mode for review. Users often
+                    # configure skim/fuzzy search, and Atuin's `--delete`
+                    # removes every matching row rather than a chosen id.
+                    "preview_command": build_typo_preview_command(
+                        previous.command, previous.cwd
                     ),
-                    "delete_command": (
-                        build_shell_command(["atuin", "search", "--delete", query])
-                        if unique_preview
-                        else None
-                    ),
-                    "unique_preview": unique_preview,
                     "time_delta_seconds": delta_seconds,
                     "previous_exit_code": previous.exit_code,
                     "session": previous.session,
@@ -682,10 +681,6 @@ def format_typos_section(typos: dict[str, Any]) -> list[str]:
         )
         if candidate["cd_command"]:
             lines.insert(-2, f"   restore cwd: {candidate['cd_command']}")
-        if candidate["delete_command"]:
-            lines.append(
-                f"   apply: {candidate['delete_command']}  # only after the preview shows exactly one target"
-            )
     return lines
 
 

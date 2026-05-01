@@ -2,15 +2,17 @@
 
 ## Single-entry delete in the TUI
 
-- Run `atuin search -i <query>` to open the interactive search view.
+- Run `atuin search -i --search-mode prefix <query>` to open the interactive search view.
+- Add `--cwd <cwd>` when you know the original working directory and want a narrower review.
 - Open the entry inspector with `Ctrl+O`.
 - After confirming the exact row, press `Ctrl+D` to delete that one history item.
 
-## Batch delete after preview
+## Why this skill avoids `search --delete` for typos
 
-- Start with `atuin search -i <query>` so you can preview what the query matches.
-- If the preview is clearly scoped, rerun it as `atuin search --delete <query>`.
-- Keep the preview and apply commands adjacent so deletion stays review-first.
+- `atuin search --help` defines `--delete` as deleting anything that matches the query.
+- Matching behavior depends on the selected `--search-mode` or your configured default.
+- Even under `--search-mode prefix`, `search --delete` still deletes every matching row, not one chosen id.
+- For typo cleanup, stay in the interactive inspector and delete the confirmed row with `Ctrl+D`.
 
 ## Global duplicate cleanup
 
