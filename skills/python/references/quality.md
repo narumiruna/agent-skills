@@ -11,6 +11,28 @@
 
 Keep quality tools in dev dependencies. Prefer the repository's documented aggregate gate; if the repo uses prek, run `prek run -a`. Use individual `uv run` commands when no aggregate gate exists or when narrowing a failure.
 
+## New Project Defaults
+
+For a brand-new `uv init` project, install the default quality baseline immediately:
+
+```bash
+uv add --dev ruff ty pytest pytest-cov
+```
+
+`pytest` is the default test framework for new projects. Write tests as function-based `tests/test_*.py` files, use plain `assert`, prefer fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases.
+
+If `pyproject.toml` does not already configure pytest discovery, add a minimal block:
+
+```toml
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+```
+
+Keep `ruff` and `ty` on defaults unless the project has a concrete need for custom configuration.
+
+In an existing repository, follow the established test stack unless the user explicitly requests a migration. Do not introduce `unittest.TestCase` or class-based `Test*` suites as the default for a new project.
+
 ## prek (pre-commit runner)
 
 Use prek as the primary gate when the repository has prek configuration or project instructions call for it. Do not mix `pre-commit` commands into a prek-standardized repo.
@@ -76,7 +98,7 @@ uv add --dev pytest pytest-cov
 uv run pytest
 
 # Run with coverage
-uv run pytest --cov=src --cov-report=term-missing
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing
 
 # Run specific tests
 uv run pytest tests/test_specific.py
@@ -106,10 +128,10 @@ If no aggregate gate exists, run the tools directly through uv:
 uv run ruff check --fix
 uv run ruff format
 uv run ty check
-uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing --cov-fail-under=80
 ```
 
-Use function-based pytest tests. Avoid class-based `Test*` suites and `unittest.TestCase` unless the repository already requires them.
+Use function-based pytest tests. Avoid class-based `Test*` suites and `unittest.TestCase` unless the repository already requires them. Prefer plain `assert`, pytest fixtures, and `@pytest.mark.parametrize` over framework-style test classes.
 
 ## CI Configuration Example
 
@@ -145,5 +167,5 @@ jobs:
         run: uv run ty check
 
       - name: Test
-        run: uv run pytest --cov=src --cov-report=xml
+        run: uv run pytest --cov=<package-or-src-path> --cov-report=xml
 ```

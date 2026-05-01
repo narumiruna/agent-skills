@@ -7,13 +7,14 @@ description: Use when a task involves Python project setup or standalone scripts
 
 ## Overview
 
-Use this skill as the default entry point for Python and uv work. Own project setup, standalone script workflow, dependency management, quality checks, and package release here. Route only Typer CLI structure, logging design, and Peewee ORM patterns to focused skills.
+Use this skill as the default entry point for Python and uv work. Own project setup, standalone script workflow, dependency management, quality checks, and package release here. For brand-new projects, bootstrap a default quality baseline with `ruff`, `ty`, `pytest`, and `pytest-cov`. Route only Typer CLI structure, logging design, and Peewee ORM patterns to focused skills.
 
 ## Quick Reference
 
 | Need | Use this skill |
 | --- | --- |
 | Init project, add or remove deps, sync, run commands | `python` |
+| Init a new project with the default quality baseline | `python` |
 | Standalone scripts, inline metadata, one-off deps, or `--no-project` | `python` |
 | Lint, format, type-check, test, coverage, CI gates | `python` |
 | Build or publish wheel/sdist with uv | `python` |
@@ -39,14 +40,27 @@ Use these trigger rules:
 ## Mode Selection
 
 - Choose project mode when the work has a `pyproject.toml`, shared codebase, or lockfile.
+- Treat a brand-new repository created with `uv init` as project mode.
 - Choose standalone-script mode when the work is a single file, stdin snippet, or ad hoc invocation that should not become a full project.
 - Treat a script inside a project as project mode when it imports local package code, for example `uv run python script.py`.
 - Treat a script inside a project as standalone-script mode only when it should ignore project code via `--no-project`.
 
+## New Project Baseline
+
+When creating a brand-new Python project, do this immediately after `uv init <name>`:
+
+1. Install the default dev toolchain with `uv add --dev ruff ty pytest pytest-cov`.
+2. Make `pytest` the default test framework for the project.
+3. Write new tests as function-based `tests/test_*.py` files that use plain `assert`.
+4. Prefer pytest fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases.
+5. If `pyproject.toml` does not already configure pytest discovery, add a minimal `[tool.pytest.ini_options]` block with `testpaths = ["tests"]` and `python_files = ["test_*.py"]`.
+6. Do not introduce `unittest`, `unittest.TestCase`, or class-based `Test*` suites unless the repository already requires them.
+7. In an existing repository, follow the established test stack unless the user explicitly asks to migrate frameworks.
+
 ## Project Workflow
 
 1. Inspect `pyproject.toml` and the repository's documented commands before changing anything.
-2. Install runtime dependencies with `uv add`; install lint, test, type, and build tools with `uv add --dev`.
+2. For a brand-new project, install the default dev toolchain with `uv add --dev ruff ty pytest pytest-cov`; otherwise install the missing lint, test, type, and build tools with `uv add --dev`.
 3. Remove dependencies with `uv remove` and reconcile the environment with `uv sync` when dependencies changed elsewhere.
 4. Run project commands through `uv run`.
 5. Run the repository quality gate after dependency or code changes.
@@ -68,6 +82,10 @@ Use these trigger rules:
 - Install dependencies with `uv add`, never `pip install`.
 - Run Python, pytest, and script invocations with `uv run`, never direct `python` or `pytest`.
 - Keep quality and release tooling in dev dependencies via `uv add --dev`.
+- For a brand-new project, immediately install `ruff`, `ty`, `pytest`, and `pytest-cov` with `uv add --dev ruff ty pytest pytest-cov` unless the repository already defines an equivalent toolchain.
+- For a brand-new project, use `pytest` as the default test framework. Do not start with `unittest`, `unittest.TestCase`, or class-based `Test*` suites.
+- Write pytest tests as function-based `tests/test_*.py` files with plain `assert`; prefer fixtures and `@pytest.mark.parametrize` over custom setup helpers or loop-driven assertions.
+- In an existing repository, follow the current test stack unless the user explicitly asks to migrate frameworks.
 - Do not create a `pyproject.toml` only to run a one-file script.
 - Put `--no-project` before the script name, and never use it when the script imports local package code.
 - Treat `uv run --with` as disposable; use inline metadata when the script should be shared or reused.
@@ -81,6 +99,7 @@ Use these trigger rules:
 | Task | Command |
 | --- | --- |
 | Initialize project | `uv init <name>` |
+| Add the new-project quality baseline | `uv add --dev ruff ty pytest pytest-cov` |
 | Add dependency | `uv add <package>` |
 | Add dev dependency | `uv add --dev <package>` |
 | Remove dependency | `uv remove <package>` |
@@ -112,10 +131,10 @@ Fallback command set:
 uv run ruff check --fix
 uv run ruff format
 uv run ty check
-uv run pytest --cov=src --cov-report=term-missing
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing
 ```
 
-Pytest tests MUST be function-based unless the repository already requires another style.
+Pytest tests MUST be function-based unless the repository already requires another style. For new projects, keep tests in `tests/test_*.py`, use plain `assert`, prefer fixtures plus `@pytest.mark.parametrize`, and avoid `unittest.TestCase` or class-based `Test*` suites.
 
 ## Release Workflow
 
@@ -143,6 +162,10 @@ User: "Run this ad hoc script inside the repo but ignore project code."
 
 Handle in `python`: use `uv run --no-project ...` and keep the script separate from project dependencies.
 
+User: "Start a new Python project with a simple test."
+
+Handle in `python`: initialize the project, run `uv add --dev ruff ty pytest pytest-cov`, add minimal pytest discovery config when needed, and write a function-based pytest test under `tests/test_*.py`.
+
 User: "Add a Typer command and tests for it."
 
 Use `python-cli-typer` for CLI structure and keep dependency and quality rules from `python`.
@@ -153,12 +176,15 @@ Use `python-cli-typer` for CLI structure and keep dependency and quality rules f
 - Using `--no-project` for a script that imports local package code.
 - Keeping reusable script dependencies only in `uv run --with ...` shell history instead of the script metadata.
 - Routing lint, test, or release work away from `python` even though this skill owns those workflows.
+- Starting a brand-new project with `unittest` or without the default dev toolchain.
 - Running tools outside uv.
 - Publishing before verifying artifacts.
 
 ## Red Flags
 
 - Suggesting `pip install` or direct `python` or `pytest` execution.
+- Starting a brand-new project without `uv add --dev ruff ty pytest pytest-cov`.
+- Defaulting to `unittest.TestCase` for a new project.
 - Adding a `pyproject.toml` only to run a one-file script.
 - Mixing `pre-commit` commands into a prek-standardized repo.
 - Verifying only the source tree instead of the built artifact.
