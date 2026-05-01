@@ -1,6 +1,7 @@
 ## GOTCHA
 
 - `skill-creator`'s `quick_validate.py` requires `PyYAML`; in this repo, `uv run --with pyyaml python /home/narumi/.codex/skills/.system/skill-creator/scripts/quick_validate.py <skill-dir>` is more reliable than plain `uv run python`.
+- `skill-creator`'s `init_skill.py` creates the target skill directory and `SKILL.md` before it validates `agents/openai.yaml` metadata, so a bad `--interface short_description` can leave a partially initialized skill directory behind.
 - In this sandbox, `~/.cache/uv` may be read-only; when running one-off `uv run --with ...` tools, set `UV_CACHE_DIR=/tmp/uv-cache` first for more reliable behavior.
 - In this sandbox, the first run of skill metadata tools like `uv run --with pyyaml` may still need temporary network access if the local cache does not already contain the package, so `uv` can fetch `PyYAML`.
 - Codex CLI is unreliable with symlinks when loading local skills; this repo's `just` install flow now uses copy/rm instead of `stow`.
