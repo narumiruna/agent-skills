@@ -5,11 +5,8 @@ import sys
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-
 MODULE_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "scripts"
-    / "atuin_history_cleanup.py"
+    Path(__file__).resolve().parents[1] / "scripts" / "atuin_history_cleanup.py"
 )
 SPEC = importlib.util.spec_from_file_location("atuin_history_cleanup", MODULE_PATH)
 assert SPEC is not None
