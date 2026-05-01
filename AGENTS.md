@@ -18,7 +18,7 @@ Follow global defaults; this file defines only repo-specific additions and overr
 ## Commands
 
 - `just` is non-mutating by default and only lists available recipes.
-- Local Codex symlink flows use `just install-all`, `just install <skill>`, `just clean-all`, and `just clean <skill>`.
+- Local Codex copy/rm flows use `just install-all`, `just install <skill>`, `just clean-all`, and `just clean <skill>`.
 - `prek run -a` is the default repository-wide verification gate before a PR.
 - Rebuild slide outputs after changing content under `examples/slides/`.
 

@@ -1,5 +1,3 @@
-sync_flags := "--restow -v"
-clean_flags := "--delete -v"
 target := env('HOME') + "/.codex/skills"
 
 # Default behavior: show available recipes instead of mutating state.
@@ -7,22 +5,23 @@ target := env('HOME') + "/.codex/skills"
 list:
     @just --list
 
-# Install (symlink) all local skills into ~/.codex/skills.
+# Install all local skills into ~/.codex/skills by copying directories.
 install-all:
     mkdir -p {{ target }}
-    stow {{ sync_flags }} -t {{ target }} skills
+    for dir in skills/*; do [ -d "$dir" ] || continue; name=${dir##*/}; rm -rf "{{ target }}/$name"; cp -R "$dir" "{{ target }}/$name"; done
 
-# Install (symlink) a single local skill into ~/.codex/skills/<skill>.
+# Install a single local skill into ~/.codex/skills/<skill> by copying it.
 install skill:
     test -d skills/{{ skill }}
-    mkdir -p {{ target }}/{{ skill }}
-    stow {{ sync_flags }} -d skills -t {{ target }}/{{ skill }} {{ skill }}
+    mkdir -p {{ target }}
+    rm -rf "{{ target }}/{{ skill }}"
+    cp -R "skills/{{ skill }}" "{{ target }}/{{ skill }}"
 
-# Clean all local skill symlinks only when target exists.
+# Clean all local skill copies managed by this repo when target exists.
 clean-all:
-    if [ -d {{ target }} ]; then stow {{ clean_flags }} -t {{ target }} skills; else echo "skip clean: {{ target }} does not exist"; fi
+    if [ -d {{ target }} ]; then for dir in skills/*; do [ -d "$dir" ] || continue; name=${dir##*/}; if [ -e "{{ target }}/$name" ] || [ -L "{{ target }}/$name" ]; then rm -rf "{{ target }}/$name"; else echo "skip clean: {{ target }}/$name does not exist"; fi; done; else echo "skip clean: {{ target }} does not exist"; fi
 
-# Clean a single local skill symlink only when its target exists.
+# Clean a single local skill copy only when its target exists.
 clean skill:
     test -d skills/{{ skill }}
-    if [ -d {{ target }}/{{ skill }} ]; then stow {{ clean_flags }} -d skills -t {{ target }}/{{ skill }} {{ skill }}; else echo "skip clean: {{ target }}/{{ skill }} does not exist"; fi
+    if [ -e "{{ target }}/{{ skill }}" ] || [ -L "{{ target }}/{{ skill }}" ]; then rm -rf "{{ target }}/{{ skill }}"; else echo "skip clean: {{ target }}/{{ skill }} does not exist"; fi

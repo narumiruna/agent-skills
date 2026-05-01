@@ -12,20 +12,9 @@ Use this when you want the collection without linking a local checkout.
 npx skills add narumiruna/agent-skills
 ```
 
-### 2. Local Codex development with `just` and `stow`
+### 2. Local Codex development with `just`
 
-Install `stow` first:
-
-```shell
-# Debian/Ubuntu
-sudo apt update
-sudo apt install -y stow
-
-# macOS
-brew install stow
-```
-
-Then install symlinks into `~/.codex/skills`:
+Use this when you want repo-managed local copies in `~/.codex/skills`.
 
 ```shell
 just install-all
@@ -34,7 +23,9 @@ just install-all
 just install python
 ```
 
-Remove symlinks when finished:
+Each install replaces the target skill directory before copying.
+
+Remove copied skills when finished:
 
 ```shell
 just clean-all
@@ -47,12 +38,15 @@ just clean python
 
 ### 3. Manual copy for Codex
 
-Use this when you want a simple local copy without `stow`.
+Use this when you want a one-off local copy without `just`.
 
 ```shell
 mkdir -p ~/.codex/skills
-cp -R ./skills/* ~/.codex/skills/
+rm -rf ~/.codex/skills/python
+cp -R ./skills/python ~/.codex/skills/python
 ```
+
+Repeat the same pattern for other skills as needed.
 
 ## How To Use In Codex
 
