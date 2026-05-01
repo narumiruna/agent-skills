@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#0A1634"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF6B3D"/>
+      <stop offset="1" stop-color="#EE4C2C"/>
+    </linearGradient>
+    <filter id="shadow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <style><![CDATA[
+      .title { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 86px; font-weight: 780; letter-spacing: -0.6px; fill: #E7ECF5; }
+      .subtitle { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 34px; font-weight: 520; fill: #A7B0C2; }
+      .label { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 22px; font-weight: 560; fill: #A7B0C2; letter-spacing: 0.3px; }
+      .kicker { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 22px; font-weight: 650; fill: #A7B0C2; letter-spacing: 0.3px; }
+      .pill { font-family: system-ui, -apple-system, "Segoe UI", Inter, "Noto Sans", sans-serif; font-size: 24px; font-weight: 650; fill: #E7ECF5; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    ]]></style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g opacity="0.12" stroke="#2B3558" stroke-width="1">
+    <path d="M0 120H1600M0 240H1600M0 360H1600M0 480H1600M0 600H1600M0 720H1600M0 840H1600"/>
+    <path d="M120 0V900M240 0V900M360 0V900M480 0V900M600 0V900M720 0V900M840 0V900M960 0V900M1080 0V900M1200 0V900M1320 0V900M1440 0V900"/>
+  </g>
+
+  <!-- icon -->
+  <g transform="translate(1240 150)" filter="url(#shadow-sm)">
+    <rect x="-120" y="-120" width="240" height="240" rx="56" fill="#121A33" stroke="#2B3558" stroke-width="3"/>
+    <path d="M0 -54 C18 -32 28 -10 28 10 C28 48 6 68 0 84 C-6 68 -28 48 -28 10 C-28 -10 -18 -32 0 -54 Z"
+          fill="url(#accent)"/>
+    <path d="M0 -18 C10 -6 16 8 16 22 C16 44 6 56 0 66 C-6 56 -16 44 -16 22 C-16 8 -10 -6 0 -18 Z"
+          fill="#FFD1C3" opacity="0.85"/>
+  </g>
+
+  <!-- title block -->
+  <g transform="translate(140 220)">
+    <text class="label" x="0" y="0" dominant-baseline="hanging">PYTORCH QUICKSTART</text>
+    <text class="title" x="0" y="72" dominant-baseline="hanging">Torch Basics</text>
+    <text class="subtitle" x="0" y="176" dominant-baseline="hanging">Tensors, autograd, and a minimal training loop</text>
+
+    <g transform="translate(0 280)">
+      <rect x="0" y="0" width="320" height="54" rx="18" fill="#121A33" stroke="#2B3558" stroke-width="3"/>
+      <text class="pill" x="26" y="14" dominant-baseline="hanging"><tspan class="mono">torch.Tensor</tspan></text>
+    </g>
+    <g transform="translate(350 280)">
+      <rect x="0" y="0" width="240" height="54" rx="18" fill="#121A33" stroke="#2B3558" stroke-width="3"/>
+      <text class="pill" x="26" y="14" dominant-baseline="hanging"><tspan class="mono">autograd</tspan></text>
+    </g>
+    <g transform="translate(620 280)">
+      <rect x="0" y="0" width="290" height="54" rx="18" fill="#121A33" stroke="#2B3558" stroke-width="3"/>
+      <text class="pill" x="26" y="14" dominant-baseline="hanging"><tspan class="mono">nn.Module</tspan></text>
+    </g>
+  </g>
+
+  <text class="kicker" x="140" y="842" dominant-baseline="hanging">examples/slides/torch-basics</text>
+</svg>
