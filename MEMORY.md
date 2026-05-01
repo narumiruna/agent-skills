@@ -11,6 +11,8 @@
 - Root document ownership is now fixed as `README.md` for external-facing docs and `AGENTS.md` for maintainer-facing docs; treat `justfile` as the source of truth for install recipes, with `install-all`/`install <skill>` and `clean-all`/`clean <skill>` as the supported commands.
 - `skills/python/` in this repo and `~/.codex/skills/python/` are not the same bound path; after changing the repo copy, run `just install python` again to sync the version Codex actually loads.
 - `atuin search --delete` deletes every history row matching the query under the active search semantics; do not treat preview uniqueness or local substring counts as proof of single-row safety.
+- `atuin search -i` can panic inside Codex's filesystem sandbox because Atuin fails to create its log file on a read-only path; run interactive inspector deletions with escalated permissions.
+- For Atuin cleanup automation, snapshot `history.db` with SQLite's backup API instead of a raw file copy so live-database state and WAL pages stay consistent.
 
 ## TASTE
 - `git-commit` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
