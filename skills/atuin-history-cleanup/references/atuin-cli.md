@@ -7,12 +7,13 @@
 - Open the entry inspector with `Ctrl+O`.
 - After confirming the exact row, press `Ctrl+D` to delete that one history item.
 
-## Why this skill avoids `search --delete` for typos
+## Why manual typo cleanup avoids `search --delete`
 
 - `atuin search --help` defines `--delete` as deleting anything that matches the query.
 - Matching behavior depends on the selected `--search-mode` or your configured default.
 - Even under `--search-mode prefix`, `search --delete` still deletes every matching row, not one chosen id.
-- For typo cleanup, stay in the interactive inspector and delete the confirmed row with `Ctrl+D`.
+- For manual typo cleanup, stay in the interactive inspector and delete the confirmed row with `Ctrl+D`.
+- The transactional `cleanup-typos` command may use `search --delete`, but only after adding strict filter gates such as cwd, exit code, and a narrow timestamp window, and only when that filtered match set is provably unique.
 
 ## Global duplicate cleanup
 

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
 import shlex
@@ -27,10 +28,45 @@ RARE_TOKEN_MAX_FREQUENCY = 3
 MIN_OVERLAP_PREFIX_OR_SUFFIX = 2
 TEXT_DUPLICATE_GROUP_LIMIT = 20
 TYPO_REVIEW_SEARCH_MODE = "prefix"
+DEFAULT_CLEANUP_DUPKEEP = 3
 
 
 class AuditError(RuntimeError):
     """User-facing audit failure."""
+
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+
+def load_transactional_module() -> Any:
+    """Load the sibling transactional helper module from disk."""
+    module_path = SCRIPT_DIR / "atuin_history_cleanup_transactional.py"
+    spec = importlib.util.spec_from_file_location(
+        "atuin_history_cleanup_transactional_runtime",
+        module_path,
+    )
+    if spec is None or spec.loader is None:
+        raise AuditError(f"Failed to load transactional helpers from {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+transactional = load_transactional_module()
+
+transactional.CleanupError = AuditError
+build_cleanup_plan = transactional.build_cleanup_plan
+execute_cleanup_plan = transactional.execute_cleanup_plan
+get_current_host_uuid = transactional.get_current_host_uuid
+get_remote_sync_status = transactional.get_remote_sync_status
+read_history_ids = transactional.read_history_ids
+render_cleanup_report = transactional.render_cleanup_report
+resolve_backup_dir = transactional.resolve_backup_dir
+rollback_cleanup = transactional.rollback_cleanup
+run_cli_command = transactional.run_cli_command
+sqlite_backup = transactional.sqlite_backup
+verify_cleanup_result = transactional.verify_cleanup_result
+write_json_report = transactional.write_json_report
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,6 +108,28 @@ def build_typo_preview_command(command: str, cwd: str) -> str:
     return build_shell_command(parts)
 
 
+def add_shared_history_scope_args(parser: argparse.ArgumentParser) -> None:
+    """Add db and typo-scope arguments shared by audit and cleanup."""
+    parser.add_argument("--db-path", help="Explicit path to Atuin history.db")
+    parser.add_argument(
+        "--before",
+        default="now",
+        help="Audit only rows at or before this timestamp. Accepts 'now', ISO-8601, or Unix epoch.",
+    )
+    parser.add_argument(
+        "--typo-window-seconds",
+        type=int,
+        default=300,
+        help="Maximum gap between a failed typo and the corrected retry.",
+    )
+    parser.add_argument(
+        "--max-typos",
+        type=int,
+        default=20,
+        help="Maximum typo candidates to return.",
+    )
+
+
 def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -83,7 +141,7 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
         "audit",
         help="Inspect Atuin history without mutating the database.",
     )
-    audit.add_argument("--db-path", help="Explicit path to Atuin history.db")
+    add_shared_history_scope_args(audit)
     audit.add_argument(
         "--dupkeep",
         type=int,
@@ -91,27 +149,20 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="How many copies dedup should keep per (command, cwd, hostname) group.",
     )
     audit.add_argument(
-        "--before",
-        default="now",
-        help="Audit only rows at or before this timestamp. Accepts 'now', ISO-8601, or Unix epoch.",
-    )
-    audit.add_argument(
-        "--typo-window-seconds",
-        type=int,
-        default=300,
-        help="Maximum gap between a failed typo and the corrected retry.",
-    )
-    audit.add_argument(
-        "--max-typos",
-        type=int,
-        default=20,
-        help="Maximum typo candidates to return.",
-    )
-    audit.add_argument(
         "--format",
         choices=("text", "json"),
         default="text",
         help="Output format.",
+    )
+
+    cleanup = subparsers.add_parser(
+        "cleanup-typos",
+        help="Transactionally delete high-confidence typo entries with backup and rollback.",
+    )
+    add_shared_history_scope_args(cleanup)
+    cleanup.add_argument(
+        "--backup-dir",
+        help="Directory for history.db snapshots and cleanup reports.",
     )
     return parser.parse_args(argv)
 
@@ -701,28 +752,138 @@ def render_text_report(report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def cleanup_typos(
+    db_path: str | Path | None,
+    *,
+    before: str,
+    typo_window_seconds: int,
+    max_typos: int,
+    backup_dir: str | None,
+) -> dict[str, Any]:
+    """Run the transactional typo cleanup flow."""
+    pre_audit = audit_history(
+        db_path,
+        dupkeep=DEFAULT_CLEANUP_DUPKEEP,
+        before=before,
+        typo_window_seconds=typo_window_seconds,
+        max_typos=max_typos,
+    )
+    candidates = pre_audit["typos"]["candidates"]
+    candidate_count = pre_audit["typos"]["candidate_count"]
+    if candidate_count == 0:
+        return {
+            "status": "noop",
+            "db_path": pre_audit["db_path"],
+            "candidate_count": 0,
+        }
+    if pre_audit["typos"]["returned_count"] != candidate_count:
+        raise AuditError(
+            f"Found {candidate_count} typo candidates but --max-typos only allowed "
+            f"{pre_audit['typos']['returned_count']}. Increase --max-typos or narrow --before."
+        )
+
+    resolved_db_path = Path(pre_audit["db_path"])
+    remote = get_remote_sync_status()
+    current_host = get_current_host_uuid()
+    backup_root = resolve_backup_dir(resolved_db_path, backup_dir)
+    snapshot_path = backup_root / "history.db.before"
+    rollback_warnings: list[str] = []
+    mutation_started = False
+
+    try:
+        run_cli_command(
+            ["atuin", "store", "push", "--tag", "history", "--host", current_host]
+        )
+        sqlite_backup(resolved_db_path, snapshot_path)
+        write_json_report(backup_root / "pre_audit.json", pre_audit)
+
+        before_cutoff = parse_before(before)
+        entries, _ = load_history_entries(resolved_db_path, before_cutoff)
+        plan = build_cleanup_plan(candidates, entries)
+        write_json_report(
+            backup_root / "plan.json",
+            {
+                "db_path": str(resolved_db_path),
+                "backup_dir": str(backup_root),
+                "candidate_count": len(plan),
+                "plan": plan,
+            },
+        )
+
+        mutation_started = True
+        execution = execute_cleanup_plan(plan)
+        post_audit = audit_history(
+            resolved_db_path,
+            dupkeep=DEFAULT_CLEANUP_DUPKEEP,
+            before=before,
+            typo_window_seconds=typo_window_seconds,
+            max_typos=max_typos,
+        )
+        verification = verify_cleanup_result(
+            snapshot_path,
+            resolved_db_path,
+            target_ids=[candidate["id"] for candidate in plan],
+            post_audit=post_audit,
+        )
+        post_verify = {"post_audit": post_audit, "verification": verification}
+        write_json_report(backup_root / "post_verify.json", post_verify)
+
+        run_cli_command(["atuin", "sync"])
+
+        return {
+            "status": "success",
+            "db_path": str(resolved_db_path),
+            "backup_dir": str(backup_root),
+            "candidate_count": len(plan),
+            "fast_count": execution["fast_count"],
+            "interactive_count": execution["interactive_count"],
+            "remote": remote,
+            "current_host": current_host,
+            "verification": verification,
+        }
+    except AuditError as exc:
+        if mutation_started and snapshot_path.exists():
+            rollback_warnings = rollback_cleanup(snapshot_path, resolved_db_path)
+
+        detail = str(exc)
+        if rollback_warnings:
+            detail += " Rollback warnings: " + "; ".join(rollback_warnings)
+        detail += f" Backup dir: {backup_root}"
+        raise AuditError(detail) from exc
+
+
 def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint."""
     args = parse_cli_args(argv)
-    if args.command != "audit":
-        raise AuditError(f"Unsupported command: {args.command}")
-
     try:
-        report = audit_history(
-            args.db_path,
-            dupkeep=args.dupkeep,
-            before=args.before,
-            typo_window_seconds=args.typo_window_seconds,
-            max_typos=args.max_typos,
-        )
+        if args.command == "audit":
+            report = audit_history(
+                args.db_path,
+                dupkeep=args.dupkeep,
+                before=args.before,
+                typo_window_seconds=args.typo_window_seconds,
+                max_typos=args.max_typos,
+            )
+        elif args.command == "cleanup-typos":
+            report = cleanup_typos(
+                args.db_path,
+                before=args.before,
+                typo_window_seconds=args.typo_window_seconds,
+                max_typos=args.max_typos,
+                backup_dir=args.backup_dir,
+            )
+        else:
+            raise AuditError(f"Unsupported command: {args.command}")
     except AuditError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 
-    if args.format == "json":
+    if args.command == "audit" and args.format == "json":
         print(json.dumps(report, indent=2, sort_keys=True))
-    else:
+    elif args.command == "audit":
         print(render_text_report(report))
+    else:
+        print(render_cleanup_report(report))
     return 0
 
 
