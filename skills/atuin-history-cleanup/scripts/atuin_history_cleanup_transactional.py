@@ -83,7 +83,9 @@ def sqlite_backup(source: Path, destination: Path) -> None:
 
 def write_json_report(path: Path, payload: dict[str, Any]) -> None:
     """Write a JSON report to disk."""
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
 
 
 def resolve_backup_dir(db_path: Path, explicit_dir: str | None) -> Path:
@@ -161,7 +163,9 @@ def parse_current_host_uuid(raw_output: str) -> str:
         re.MULTILINE,
     )
     if match is None:
-        raise CleanupError("Could not determine the current host UUID from `atuin store status`.")
+        raise CleanupError(
+            "Could not determine the current host UUID from `atuin store status`."
+        )
     return match.group(1)
 
 
