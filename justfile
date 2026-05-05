@@ -25,3 +25,7 @@ clean-all:
 clean skill:
     test -d skills/{{ skill }}
     if [ -e "{{ target }}/{{ skill }}" ] || [ -L "{{ target }}/{{ skill }}" ]; then rm -rf "{{ target }}/{{ skill }}"; else echo "skip clean: {{ target }}/{{ skill }} does not exist"; fi
+
+# Create the next semantic version tag from the latest major.minor.patch tag.
+bump-version bump="patch":
+    scripts/bump-version.sh {{ bump }}
