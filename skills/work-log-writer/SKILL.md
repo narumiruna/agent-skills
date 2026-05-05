@@ -53,7 +53,7 @@ Required format:
 - ...
 ```
 
-Use a title that includes the resolved date range. Keep the body as a single flat bullet list with no sections or subheadings. Each bullet should describe one high-level work item, progress point, blocker, or follow-up. Prefer concise summaries over implementation details, and order bullets by importance or chronology.
+Use a title that includes the resolved date range. Keep the body as a single flat bullet list with no sections or subheadings. Each bullet should describe one high-level work item, progress point, blocker, or follow-up. Prefer concise summaries over implementation details, and order bullets from highest to lowest team impact. If team impact is unclear, use the evidence to prioritize likely cross-team/customer impact, risk reduction, unblockers, and follow-ups before lower-impact implementation details.
 
 ## Uncertainty
 
