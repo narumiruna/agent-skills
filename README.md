@@ -58,12 +58,12 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## Skill Guide
 
-### Python
+### Python And uv
 
-- `python`: default entry for uv project setup, dependencies, quality gates, packaging, and standalone scripts.
-- `python-typer`: Typer command structure, options, and multi-command apps.
-- `python-logging`: choosing and configuring stdlib logging or loguru.
-- `python-peewee`: Peewee patterns such as `DatabaseProxy`, scoped transactions, and SQLite tests.
+- `python`: uv-based Python project setup and standalone scripts, including dependency add/remove/sync, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates with ruff, ty, pytest, coverage, prek or pre-commit, and package build or publishing workflows.
+- `python-typer`: focused Typer command structure, options, and multi-command apps.
+- `python-logging`: focused stdlib logging or loguru configuration.
+- `python-peewee`: focused Peewee patterns such as `DatabaseProxy`, scoped transactions, and SQLite tests.
 
 ### Writing And Research
 
