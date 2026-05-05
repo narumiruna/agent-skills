@@ -1,0 +1,56 @@
+name: bump-version
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version segment to bump from the latest major.minor.patch tag
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+concurrency: bump-version
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          token: ${{ env.PAT_TOKEN || github.token }}
+
+      - name: Bump version tag
+        id: version
+        shell: bash
+        run: scripts/bump-version.sh "${{ inputs.bump }}"
+
+      - name: Create and push tag
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -n "${PAT_TOKEN}" ]]; then
+            git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          fi
+
+          git push origin "refs/tags/${{ steps.version.outputs.next_version }}"
+
+      - name: Write summary
+        run: |
+          {
+            echo "## Version bumped"
+            echo
+            echo "- Previous tag: \`${{ steps.version.outputs.latest_version }}\`"
+            echo "- New tag: \`${{ steps.version.outputs.next_version }}\`"
+          } >> "${GITHUB_STEP_SUMMARY}"
