@@ -1,4 +1,4 @@
-# Agent Skills
+# Skills
 
 Reusable agent skills for coding, writing, research, and slide work. The collection is organized for Codex-first workflows, and it can also be installed as a standard skills repo with `npx skills add narumiruna/skills`.
 
