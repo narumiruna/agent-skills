@@ -1,41 +1,13 @@
 ---
 name: python
-description: Use when a task involves Python project setup or standalone scripts with uv, including dependency management, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates (ruff, ty, pytest, coverage, prek), or building and publishing packages with uv, and when routing specialized Typer CLI, logging, or Peewee work.
+description: Use for Python work with uv: project setup, `pyproject.toml`, dependency add/remove/sync, `uv run`, standalone scripts, `uv run --with`, `--no-project`, inline script metadata, ruff, ty, pytest, coverage, prek, wheel/sdist builds, and package publishing.
 ---
 
 # Python
 
 ## Overview
 
-Use this skill as the default entry point for Python and uv work. Own project setup, standalone script workflow, dependency management, quality checks, and package release here. For brand-new projects, bootstrap a default quality baseline with `ruff`, `ty`, `pytest`, and `pytest-cov`. Route only Typer CLI structure, logging design, and Peewee ORM patterns to focused skills.
-
-## Quick Reference
-
-| Need | Use this skill |
-| --- | --- |
-| Init project, add or remove deps, sync, run commands | `python` |
-| Init a new project with the default quality baseline | `python` |
-| Standalone scripts, inline metadata, one-off deps, or `--no-project` | `python` |
-| Lint, format, type-check, test, coverage, CI gates | `python` |
-| Build or publish wheel/sdist with uv | `python` |
-| Build a CLI with Typer | `python-typer` |
-| Choose/configure logging or loguru | `python-logging` |
-| Peewee ORM, DatabaseProxy, SQLite tests | `python-peewee` |
-
-## Routing Rules
-
-- Stay in `python` for project-scoped work involving `pyproject.toml`, shared dependencies, `uv run`, quality tools, or package release.
-- Stay in `python` for standalone Python files when deciding among plain `uv run`, `uv run --with`, inline metadata, `--no-project`, or script-specific Python version handling.
-- Route to `python-typer`, `python-logging`, or `python-peewee` only for those domain-specific concerns. Keep dependency, quality, and release expectations from this skill.
-- For mixed tasks, select project mode or standalone-script mode here first, then apply the focused skill if needed.
-
-Use these trigger rules:
-
-- Install, dependency, project initialization, missing package, running project commands, lint, type-checking, tests, coverage, CI gates, or packaging: stay in `python`.
-- Standalone script, inline script metadata, one-off dependencies, `--with`, `--no-project`, `uv init --script`, `uv add --script`, `uv lock --script`, or script Python version selection: stay in `python`.
-- CLI commands, Typer, options, arguments, shell entry points, or command tests: `python-typer`.
-- Logging, loguru, handlers, formatters, structured context, or library logging: `python-logging`.
-- Peewee, ORM models, `DatabaseProxy`, transactions, or SQLite model tests: `python-peewee`.
+Python work uses uv for project setup, standalone scripts, dependency management, quality checks, and package release. For brand-new projects, bootstrap a default quality baseline with `ruff`, `ty`, `pytest`, and `pytest-cov`.
 
 ## Mode Selection
 
@@ -143,38 +115,11 @@ Pytest tests MUST be function-based unless the repository already requires anoth
 4. Test install from the built wheel in a fresh uv-managed invocation.
 5. Publish to Test PyPI first for first or risky releases, then publish to PyPI.
 
-## Examples
-
-User: "Missing fastapi and tests fail."
-
-Handle in `python`: add the dependency with `uv add fastapi`, then run the repo quality gate.
-
-User: "Build and publish this package."
-
-Handle in `python`: follow the release workflow from build through artifact verification and publish.
-
-User: "Write a one-file script with inline deps."
-
-Handle in `python`: initialize script metadata, add script dependencies, and keep the file self-contained.
-
-User: "Run this ad hoc script inside the repo but ignore project code."
-
-Handle in `python`: use `uv run --no-project ...` and keep the script separate from project dependencies.
-
-User: "Start a new Python project with a simple test."
-
-Handle in `python`: initialize the project, run `uv add --dev ruff ty pytest pytest-cov`, and write a function-based pytest test under `tests/test_*.py`.
-
-User: "Add a Typer command and tests for it."
-
-Use `python-typer` for CLI structure and keep dependency and quality rules from `python`.
-
 ## Common Mistakes
 
 - Treating a one-file script as project work when inline metadata or `--no-project` would be smaller and clearer.
 - Using `--no-project` for a script that imports local package code.
 - Keeping reusable script dependencies only in `uv run --with ...` shell history instead of the script metadata.
-- Routing lint, test, or release work away from `python` even though this skill owns those workflows.
 - Starting a brand-new project with `unittest` or without the default dev toolchain.
 - Running tools outside uv.
 - Publishing before verifying artifacts.
