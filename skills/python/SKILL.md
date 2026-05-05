@@ -1,6 +1,6 @@
 ---
 name: python
-description: Use for Python work with uv: project setup, `pyproject.toml`, dependency add/remove/sync, `uv run`, standalone scripts, `uv run --with`, `--no-project`, inline script metadata, ruff, ty, pytest, coverage, prek, wheel/sdist builds, and package publishing.
+description: "Use for Python work with uv: project setup, `pyproject.toml`, dependency add/remove/sync, `uv run`, standalone scripts, `uv run --with`, `--no-project`, inline script metadata, ruff, ty, pytest, coverage, prek, wheel/sdist builds, and package publishing."
 ---
 
 # Python
