@@ -58,7 +58,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## Skill Guide
 
-### Python And uv
+### Python
 
 - `python`: uv-based Python project setup and standalone scripts, including dependency add/remove/sync, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates with ruff, ty, pytest, coverage, prek or pre-commit, and package build or publishing workflows.
 - `python-typer`: focused Typer command structure, options, and multi-command apps.
