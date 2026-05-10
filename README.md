@@ -67,6 +67,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Writing And Research
 
+- `writing-plans`: lean implementation and work plans with executable task lists, optional architecture and tech-stack notes, finite completion checklists, and plan archiving rules.
 - `imrad`: deciding whether IMRaD fits, drafting new IMRaD outputs, and reviewing existing drafts.
 - `gourmet-research`: evidence-based city dining research with structured scoring and audit files.
 
