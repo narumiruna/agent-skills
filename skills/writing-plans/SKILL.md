@@ -56,7 +56,7 @@ Always include `Goal`, `Plan`, and `Completion Checklist`.
 - `Plan`: Use Markdown task list items (`- [ ]`) for actionable steps. Each task must be independently executable by an agent or engineer, with a clear object, expected result, and an executable acceptance method in the same task item, such as a command, file/path evidence, test result, review status, deployment state, or explicit user acceptance. Example: `- [ ] Update \`src/auth.ts\` to reject expired tokens; verify with \`npm test -- auth\`.` Prefer tasks that can map to a commit, PR slice, command, file change, investigation, or review step. Include dependencies between steps when order matters.
 - `Risks` (optional): List risks that could break correctness, schedule, data integrity, UX, security, or maintainability.
 - `Rollback / Recovery` (optional): Include when the work touches production data, releases, migrations, infrastructure, public APIs, or user-visible behavior.
-- `Completion Checklist`: End every plan with finite Markdown task list items (`- [ ]`) that prove the whole work outcome is complete. Each item must be objectively checkable by code, docs, command output, test result, deployment state, review status, or explicit user acceptance. Include the verification method or evidence in the checklist item when it is not obvious.
+- `Completion Checklist`: End every plan with finite Markdown task list items (`- [ ]`) that prove the whole work outcome is complete. Each item must be objectively checkable by code, docs, command output, test result, deployment state, review status, or explicit user acceptance. Each checklist item must include the verification method or evidence in the same item.
 
 ### Plan Task Item Template
 
@@ -64,6 +64,14 @@ Use this shape for `Plan` task list items when it helps keep acceptance explicit
 
 ```markdown
 - [ ] <action> <object> to produce <expected result>; verify with <command/evidence/user acceptance>.
+```
+
+### Completion Checklist Item Template
+
+Use this shape for `Completion Checklist` items to prove the whole work outcome is complete:
+
+```markdown
+- [ ] <completed outcome> is verified by <command/evidence/user acceptance>.
 ```
 
 ## Planning Standards
