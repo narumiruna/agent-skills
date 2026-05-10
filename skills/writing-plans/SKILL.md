@@ -18,9 +18,11 @@ Write plans that help an agent or engineer act, verify progress, and expose unce
 
 ## File Output
 
-When saving a plan to the repository, use `./docs/plans/` by default unless the user specifies another path. Name plan files as `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md` or `2026-05-10_checkout-refactor-plan.md`.
+When this skill is used, produce a plan document. Save it to the repository by default unless the user explicitly asks for chat-only output.
 
-Create `./docs/plans/` if it does not exist. Do not save a plan file unless the user asks to write, create, draft into a file, or otherwise persist the plan.
+Use `./docs/plans/` by default unless the user specifies another path. Name plan files as `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md` or `2026-05-10_checkout-refactor-plan.md`.
+
+Create `./docs/plans/` if it does not exist. If the user does not specify a topic, derive a concise lowercase kebab-case stem from the plan goal and report the created file path.
 
 When archiving a completed plan, use `./docs/plans/archived/YYYY-MM-DD_<topic>-plan.md`. Never archive, move, or rename a plan automatically. If a plan appears complete, report the completion evidence and ask the user whether to archive it.
 
