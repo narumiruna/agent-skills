@@ -52,11 +52,11 @@ Always include `Goal`, `Plan`, and `Completion Checklist`.
 - `Tech Stack` (optional): Include when the work adds, removes, upgrades, or chooses tools, frameworks, packages, runtimes, databases, CI/CD, or cloud services.
 - `Non-Goals` (optional): Name related work that is explicitly out of scope.
 - `Assumptions` (optional): Name premises the plan depends on but can reasonably proceed with for now.
-- `Unknowns` (optional): Name unanswered questions that could change the plan; convert each important unknown into an early discovery or validation step.
+- `Unknowns` (optional): Name unanswered questions that could change the plan; convert each important unknown into an early discovery task or completion-check item.
 - `Plan`: Use Markdown task list items (`- [ ]`) for actionable steps. Each task must be independently executable by an agent or engineer, with a clear object, expected result, and observable completion signal. Prefer tasks that can map to a commit, PR slice, command, file change, investigation, or review step. Include dependencies between steps when order matters.
 - `Risks` (optional): List risks that could break correctness, schedule, data integrity, UX, security, or maintainability.
 - `Rollback / Recovery` (optional): Include when the work touches production data, releases, migrations, infrastructure, public APIs, or user-visible behavior.
-- `Completion Checklist`: End every plan with finite Markdown task list items (`- [ ]`) that prove the whole work outcome is complete. Each item must be objectively checkable by code, docs, command output, test result, deployment state, review status, or explicit user acceptance. Include the verification method or evidence in the item when it is not obvious.
+- `Completion Checklist`: End every plan with finite Markdown task list items (`- [ ]`) that prove the whole work outcome is complete. Each item must be objectively checkable by code, docs, command output, test result, deployment state, review status, or explicit user acceptance. Include the verification method or evidence in the checklist item when it is not obvious.
 
 ## Planning Standards
 
@@ -74,8 +74,8 @@ Always include `Goal`, `Plan`, and `Completion Checklist`.
 
 Treat a plan as complete only when all of these are true:
 
-1. Every required `Plan` task list item is checked or explicitly marked as no longer applicable using `- [x] N/A: <reason>`.
-2. Every `Completion Checklist` item is checked and has supporting evidence when the evidence is not obvious from repository state.
+1. Every required `Plan` task list item is checked or explicitly marked as not applicable using `- [x] Not applicable: <reason>`.
+2. Every `Completion Checklist` item is checked and has supporting evidence when the evidence is not obvious from repository state. Put evidence in the checklist item or in the completion review response, using commands, file paths, PR or review status, deployment state, or explicit user acceptance.
 3. Any `Unknowns` that affected execution are resolved, converted into follow-up work, or explicitly accepted by the user.
 4. Any unresolved `Risks` are documented as accepted, mitigated, or moved to follow-up work.
 5. Required handoff, documentation, or release notes are completed when the plan calls for them.
