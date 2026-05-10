@@ -58,6 +58,14 @@ Always include `Goal`, `Plan`, and `Completion Checklist`.
 - `Rollback / Recovery` (optional): Include when the work touches production data, releases, migrations, infrastructure, public APIs, or user-visible behavior.
 - `Completion Checklist`: End every plan with finite Markdown task list items (`- [ ]`) that prove the whole work outcome is complete. Each item must be objectively checkable by code, docs, command output, test result, deployment state, review status, or explicit user acceptance. Include the verification method or evidence in the checklist item when it is not obvious.
 
+### Plan Task Item Template
+
+Use this shape for `Plan` task list items when it helps keep acceptance explicit:
+
+```markdown
+- [ ] <action> <object> to produce <expected result>; verify with <command/evidence/user acceptance>.
+```
+
 ## Planning Standards
 
 - Keep task list items implementation-level when the user needs execution guidance.
