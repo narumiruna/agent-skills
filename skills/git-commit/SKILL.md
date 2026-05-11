@@ -32,6 +32,7 @@ Read `references/conventional-commits.md` when the type is ambiguous, when you n
 - Prefer multiple commits over one vague summary when the diff contains unrelated work.
 - If the user asks for validation, check both the structure and whether the wording matches the inspected diff.
 - Follow repo git rules for staging and commit structure; this skill focuses on mapping the diff to the right message.
+- Do not add, preserve, or generate any AI attribution trailers in commits, PRs, or messages, including `Co-authored-by`, `Generated-by`, `Created-by`, `Coding-Agent`, model names, tool names, or agent attribution footers.
 
 ## Reference
 
