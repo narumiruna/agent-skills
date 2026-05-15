@@ -1,4 +1,4 @@
 interface:
   display_name: "AGENTS.md Writer"
   short_description: "Create, review, audit, and update AGENTS.md guides, including nested monorepo instructions."
-  default_prompt: "Use $agents-writer to draft, review, or update repository AGENTS.md agent guidelines."
+  default_prompt: "Use $writing-agents-md to draft, review, or update repository AGENTS.md agent guidelines."

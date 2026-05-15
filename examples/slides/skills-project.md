@@ -146,7 +146,7 @@ section::after {
 | **Python** | `python`, `python-typer`, `python-logging`, `python-peewee` |
 | **Writing and research** | `imrad`, `gourmet-research` |
 | **Slides and visuals** | `slide-creator`, `marp-authoring`, `slide-color-design`, `svg-illustration`, `mermaid-creator` |
-| **Workflow maintenance** | `help-me`, `git-commit`, `codex-cli-hooks`, `agents-writer`, `work-log-writer` |
+| **Workflow maintenance** | `help-me`, `git-commit`, `codex-cli-hooks`, `writing-agents-md`, `work-log-writer` |
 
 ---
 

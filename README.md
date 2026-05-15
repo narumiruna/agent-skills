@@ -84,7 +84,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 - `help-me`: deciding whether to check `--help`, built-in `help`, or `man` before running a shell or CLI command.
 - `git-commit`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
 - `work-log-writer`: explicitly invoked only; writing concise work logs from repository evidence.
-- `agents-writer`: creating or updating `AGENTS.md` guidance for this repository.
+- `writing-agents-md`: creating or updating `AGENTS.md` guidance for this repository.
 - `codex-cli-hooks`: designing or debugging Codex CLI hooks and `hooks.json` behavior.
 - `test-driven-development`: applying a red-green-refactor workflow to non-trivial code changes.
 

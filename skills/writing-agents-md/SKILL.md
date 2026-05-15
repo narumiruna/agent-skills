@@ -1,5 +1,5 @@
 ---
-name: agents-writer
+name: writing-agents-md
 description: Use when creating, auditing, or updating AGENTS.md files for a repository, package, or monorepo. This skill turns repository facts into concise agent-facing instructions: setup, build/test commands, code style, security gotchas, PR/commit rules, nested AGENTS.md scope, and conflict precedence.
 ---
 
