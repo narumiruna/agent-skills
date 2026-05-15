@@ -3,9 +3,9 @@ name: writing-agents-md
 description: Use when creating, auditing, or updating AGENTS.md files for a repository, package, or monorepo. This skill turns repository facts into concise agent-facing instructions: setup, build/test commands, code style, security gotchas, PR/commit rules, nested AGENTS.md scope, and conflict precedence.
 ---
 
-# AGENTS.md Writer
+# Writing AGENTS.md
 
-Create or revise `AGENTS.md`: a standard Markdown "README for agents" that gives coding agents the project-specific context they need without cluttering the human README.
+Create, review, or revise `AGENTS.md`: a standard Markdown "README for agents" that gives coding agents the project-specific context they need without cluttering the human README.
 
 ## Grounding workflow
 
@@ -30,17 +30,17 @@ When asked to review an existing `AGENTS.md` instead of drafting one:
 
 ## AGENTS.md principles
 
-- `AGENTS.md` is plain Markdown; there are no required fields or frontmatter.
-- Default to a root-level `AGENTS.md`; add package-level files only when scoped instructions differ.
+- `AGENTS.md` is plain Markdown; do not add YAML frontmatter or required-field scaffolding to the generated file.
+- Default to a root-level `AGENTS.md`; add package-level files only when scoped instructions differ or the user asks for a specific subproject.
 - Keep it agent-focused: include details a coding agent needs to work safely and verify changes, not product marketing or broad README content.
 - Treat it as living documentation. Make rules actionable, testable, and easy to update.
 - User prompts override repository instructions. When multiple `AGENTS.md` files apply, the closest file to the edited path takes precedence.
 - For large monorepos, prefer nested `AGENTS.md` files in packages/subprojects instead of one overloaded root file. Root files should describe global rules and point to scoped files.
 - Avoid copying broad human-facing README content, long install walkthroughs, unverifiable "best practices", personal preferences, or rules that merely restate tool defaults.
 
-## Output requirements
+## File requirements
 
-- Name the file exactly `AGENTS.md`.
+- Name the file exactly `AGENTS.md`; when the user specifies a package or subdirectory, place it in that scope.
 - Use a clear title; `# Repository Guidelines` is a good default unless the repo already uses another title.
 - Keep it concise: usually 200–500 words for a root file. Go longer only when the repository genuinely needs more operational detail.
 - Use direct imperative bullets with concrete examples: commands, paths, naming patterns, and verification gates.

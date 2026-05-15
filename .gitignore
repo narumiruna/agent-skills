@@ -212,3 +212,5 @@ __marimo__/
 notes/
 docs/
 vendor/
+
+.markdownlint-cli2.yaml
