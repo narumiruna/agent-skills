@@ -24,7 +24,7 @@ Use `./docs/plans/` by default unless the user specifies another path. Name plan
 
 Create `./docs/plans/` if it does not exist. If the user does not specify a topic, derive a concise lowercase kebab-case stem from the plan goal and report the created file path.
 
-When archiving a completed plan, use `./docs/plans/archived/YYYY-MM-DD_<topic>-plan.md`. Never archive, move, or rename a plan automatically. If a plan appears complete, report the completion evidence and ask the user whether to archive it.
+When a plan is complete, immediately archive it by moving it to `./docs/plans/archived/YYYY-MM-DD_<topic>-plan.md`. Create `./docs/plans/archived/` if it does not exist. Report the completion evidence and archived file path.
 
 ## Output Shape
 
@@ -100,7 +100,7 @@ Treat a plan as complete only when all of these are true:
 
 Do not infer completion from implementation work alone. If evidence is missing, report which checks remain open instead of calling the plan complete.
 
-When the plan is complete, ask the user whether to archive it under `./docs/plans/archived/`. Do not archive without the user's explicit instruction.
+When the plan is complete, archive it immediately under `./docs/plans/archived/` and report the archived path. Do not archive if completion evidence is missing.
 
 ## Useful Distinctions
 
