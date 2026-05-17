@@ -1,6 +1,6 @@
 ---
 name: memory-md
-description: Use at the start of repository conversations to check whether MEMORY.md should guide the work, and use whenever creating, reviewing, or updating repository MEMORY.md files. Use when the user mentions MEMORY.md, asks to record a gotcha or preference, when an error should be remembered to avoid repeating it, or when existing MEMORY.md content may be wrong and needs correction.
+description: Maintains concise repository MEMORY.md notes for gotchas, stale memory corrections, and durable user preferences. Use at the start of repository conversations, when the user mentions MEMORY.md, when an error should be remembered to avoid repeating it, or when MEMORY.md content may be wrong.
 ---
 
 # MEMORY.md
@@ -41,3 +41,9 @@ For taste, capture the preference and its practical effect:
 ```markdown
 - Prefer <choice> when <context>; avoid <alternative> because <reason>.
 ```
+
+## Examples
+
+- `GOTCHA`: command failed because a tool needed `UV_CACHE_DIR=/tmp/uv-cache`; record the symptom, cause, and future command pattern.
+- `TASTE`: the user prefers thin skills with only `SKILL.md` unless supporting files solve a concrete problem.
+- Do not record: "finished PR #12" or "ran tests today." Those are task logs, not reusable memory.
