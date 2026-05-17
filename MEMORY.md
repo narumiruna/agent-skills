@@ -13,3 +13,4 @@
 
 ## TASTE
 - `git-commit` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
+- `memory-md` should stay a thin repo-memory decision and editing guide; keep `SKILL.md` focused on when to read/update `MEMORY.md` and the required `GOTCHA` / `TASTE` shape.
