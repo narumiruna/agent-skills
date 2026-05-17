@@ -1,4 +1,5 @@
 target := env('HOME') + "/.codex/skills"
+active_skills := "find skills -mindepth 1 -maxdepth 1 -type d ! -name deprecated | sort"
 
 # Default behavior: show available recipes instead of mutating state.
 [default]
@@ -8,7 +9,7 @@ list:
 # Install all local skills into ~/.codex/skills by copying directories.
 install-all:
     mkdir -p {{ target }}
-    for dir in skills/*; do [ -d "$dir" ] || continue; name=${dir##*/}; rm -rf "{{ target }}/$name"; cp -R "$dir" "{{ target }}/$name"; done
+    {{ active_skills }} | while read -r dir; do name=${dir##*/}; rm -rf "{{ target }}/$name"; cp -R "$dir" "{{ target }}/$name"; done
 
 # Install a single local skill into ~/.codex/skills/<skill> by copying it.
 install skill:
@@ -19,7 +20,7 @@ install skill:
 
 # Clean all local skill copies managed by this repo when target exists.
 clean-all:
-    if [ -d {{ target }} ]; then for dir in skills/*; do [ -d "$dir" ] || continue; name=${dir##*/}; if [ -e "{{ target }}/$name" ] || [ -L "{{ target }}/$name" ]; then rm -rf "{{ target }}/$name"; else echo "skip clean: {{ target }}/$name does not exist"; fi; done; else echo "skip clean: {{ target }} does not exist"; fi
+    if [ -d {{ target }} ]; then {{ active_skills }} | while read -r dir; do name=${dir##*/}; if [ -e "{{ target }}/$name" ] || [ -L "{{ target }}/$name" ]; then rm -rf "{{ target }}/$name"; else echo "skip clean: {{ target }}/$name does not exist"; fi; done; else echo "skip clean: {{ target }} does not exist"; fi
 
 # Clean a single local skill copy only when its target exists.
 clean skill:

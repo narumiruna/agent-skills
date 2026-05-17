@@ -42,13 +42,13 @@ atuin info
 2. Run the audit:
 
 ```bash
-uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audit
+uv run python skills/deprecated/atuin-history-cleanup/scripts/atuin_history_cleanup.py audit
 ```
 
 Useful flags:
 
 ```bash
-uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audit --db-path ~/.local/share/atuin/history.db --dupkeep 3 --before now --typo-window-seconds 300 --max-typos 20
+uv run python skills/deprecated/atuin-history-cleanup/scripts/atuin_history_cleanup.py audit --db-path ~/.local/share/atuin/history.db --dupkeep 3 --before now --typo-window-seconds 300 --max-typos 20
 ```
 
 3. Review the `duplicates` section first.
@@ -58,13 +58,13 @@ uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py audi
    Preferred transactional path:
 
 ```bash
-uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py cleanup-typos
+uv run python skills/deprecated/atuin-history-cleanup/scripts/atuin_history_cleanup.py cleanup-typos
 ```
 
    Useful flags:
 
 ```bash
-uv run python skills/atuin-history-cleanup/scripts/atuin_history_cleanup.py cleanup-typos --db-path ~/.local/share/atuin/history.db --before now --typo-window-seconds 300 --max-typos 20 --backup-dir ~/.local/share/atuin/cleanup-backups/manual-run
+uv run python skills/deprecated/atuin-history-cleanup/scripts/atuin_history_cleanup.py cleanup-typos --db-path ~/.local/share/atuin/history.db --before now --typo-window-seconds 300 --max-typos 20 --backup-dir ~/.local/share/atuin/cleanup-backups/manual-run
 ```
 
    Manual review path:

@@ -23,7 +23,8 @@ just install-all
 just install python
 ```
 
-Each install replaces the target skill directory before copying.
+Each install replaces the target skill directory before copying. `just install-all`
+installs active top-level skills only; it skips `skills/deprecated/`.
 
 Remove copied skills when finished:
 
@@ -89,6 +90,9 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 - `codex-cli-hooks`: designing or debugging Codex CLI hooks and `hooks.json` behavior.
 - `test-driven-development`: applying a red-green-refactor workflow to non-trivial code changes.
 
-### Utilities
+## Deprecated Skills
+
+Deprecated skills remain in `skills/deprecated/<skill-name>/` for reference and
+are not included in `just install-all`.
 
 - `atuin-history-cleanup`: preview-first cleanup planning for noisy Atuin shell history.
