@@ -19,7 +19,8 @@ Use `MEMORY.md` as a concise repository-local memory file. It is not automatical
 - Add or revise an entry after a mistake, discovery, or user preference when it will help avoid repeating the same issue.
 - If an existing `MEMORY.md` entry is wrong, stale, or contradicted by current evidence, correct that entry instead of adding a conflicting note.
 - Keep entries short, reusable, and grounded in the current repo.
-- Never store secrets or sensitive data in `MEMORY.md`. This includes credentials, tokens, API keys, cookies, private URLs or endpoints, proprietary/internal-only details that should not be committed, and sensitive personal data. When a gotcha or preference involves such material, record only the minimal sanitized lesson, not the secret or identifying detail itself.
+- Never store secrets or sensitive data in `MEMORY.md`, including credentials, tokens, API keys, cookies, private endpoints, proprietary/internal-only details, or sensitive personal data.
+- When a gotcha or preference involves sensitive material, record only the sanitized lesson, not the secret or identifying detail.
 - Do not add task logs, transient status, broad summaries, or speculative plans.
 
 ## Required Shape
