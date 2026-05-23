@@ -23,7 +23,7 @@ Use uv as the default workflow for Python projects, standalone scripts, dependen
 2. For a brand-new project, run `uv init <name>`, then install the default dev toolchain with `uv add --dev ruff ty pytest pytest-cov`.
 3. Use pytest as the default test framework for new projects: function-based `tests/test_*.py` files with plain `assert`.
 4. Add dependencies with `uv add`; remove them with `uv remove`; reconcile external dependency changes with `uv sync`.
-5. Run project Python, tests, and tools through `uv run` unless the repository provides a documented wrapper command.
+5. Run project Python, tests, and tools through `uv run` unless the repository provides a documented wrapper command; for pytest, default to an explicit `tests` target when the project does not document another test location.
 6. Run the repository quality gate before finalizing dependency or code changes.
 
 ## Standalone Script Workflow
@@ -39,7 +39,7 @@ Use uv as the default workflow for Python projects, standalone scripts, dependen
 ## Non-Negotiable Rules
 
 - Manage dependencies with `uv add`, `uv remove`, and `uv sync`; do not use `pip install` to mutate a project environment.
-- Run Python, pytest, scripts, and Python tools with `uv run` unless a repository command wraps them.
+- Run Python, pytest, scripts, and Python tools with `uv run` unless a repository command wraps them; when no project-specific pytest target is documented, include `tests` explicitly (for example, `uv run pytest tests`) rather than bare `uv run pytest`.
 - Follow existing repository choices; do not migrate test frameworks, hook runners, or tool configuration unless asked.
 - For a brand-new project, immediately add `ruff`, `ty`, `pytest`, and `pytest-cov`; do not start with `unittest`, `unittest.TestCase`, or class-based `Test*` suites.
 - Do not create a `pyproject.toml` only to run a one-file script.

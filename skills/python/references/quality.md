@@ -19,7 +19,7 @@ For a brand-new `uv init` project, install the default quality baseline immediat
 uv add --dev ruff ty pytest pytest-cov
 ```
 
-`pytest` is the default test framework for new projects. Write tests as function-based `tests/test_*.py` files, use plain `assert`, prefer fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases.
+`pytest` is the default test framework for new projects. Write tests as function-based `tests/test_*.py` files, use plain `assert`, prefer fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases. Unless project docs or configuration specify a different test location, treat `tests/` as the pytest target and include it in commands instead of relying on implicit discovery.
 
 Keep `ruff` and `ty` on defaults unless the project has a concrete need for custom configuration.
 
@@ -87,23 +87,23 @@ uv add --dev pytest pytest-cov
 
 ```bash
 # Run all tests
-uv run pytest
+uv run pytest tests
 
 # Run with coverage
-uv run pytest --cov=<package-or-src-path> --cov-report=term-missing
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing tests
 
 # Run specific tests
 uv run pytest tests/test_specific.py
 uv run pytest tests/test_specific.py::test_function
 
 # Verbose output
-uv run pytest -v
+uv run pytest -v tests
 
 # Stop on first failure
-uv run pytest -x
+uv run pytest -x tests
 
 # Run tests matching pattern
-uv run pytest -k "test_user"
+uv run pytest -k "test_user" tests
 ```
 
 ## Pre-merge Quality Gate
@@ -122,7 +122,7 @@ If no aggregate gate exists, run the tools directly through uv:
 uv run ruff check --fix
 uv run ruff format
 uv run ty check
-uv run pytest --cov=<package-or-src-path> --cov-report=term-missing --cov-fail-under=80
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing --cov-fail-under=80 tests
 ```
 
 Use function-based pytest tests. Avoid class-based `Test*` suites and `unittest.TestCase` unless the repository already requires them. Prefer plain `assert`, pytest fixtures, and `@pytest.mark.parametrize` over framework-style test classes.
@@ -161,5 +161,5 @@ jobs:
         run: uv run ty check
 
       - name: Test
-        run: uv run pytest --cov=<package-or-src-path> --cov-report=xml
+        run: uv run pytest --cov=<package-or-src-path> --cov-report=xml tests
 ```
