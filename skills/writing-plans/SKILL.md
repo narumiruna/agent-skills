@@ -100,7 +100,9 @@ Treat a plan as complete only when all of these are true:
 
 Do not infer completion from implementation work alone. If evidence is missing, report which checks remain open instead of calling the plan complete.
 
-When the plan is complete, archive it immediately under `./docs/plans/archived/` and report the archived path. Do not archive if completion evidence is missing.
+At the end of any task that uses this skill, inspect `./docs/plans/*.md` for active plans that appear complete. If an active plan appears complete, run the Completion Review rules before responding.
+
+When the plan is complete, archive it immediately under `./docs/plans/archived/` and report the archived path. Do not archive if completion evidence is missing. Do not leave a completed plan in `./docs/plans/`. If an archived file with the same name already exists, stop and report the conflict instead of overwriting.
 
 ## Useful Distinctions
 
