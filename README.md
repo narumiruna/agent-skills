@@ -83,6 +83,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 ### Workflow And Repository Maintenance
 
 - `help-me`: deciding whether to check `--help`, built-in `help`, or `man` before running a shell or CLI command.
+- `jira-cli`: using ankitpokhrel/jira-cli for Jira setup, issue queries and mutations, epics, sprints, releases, projects, boards, and script-friendly output.
 - `git-commit`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
 - `memory-md`: deciding when to read or update repository `MEMORY.md` files and keeping `GOTCHA` / `TASTE` entries concise.
 - `writing-agents-md`: creating or updating `AGENTS.md` guidance for this repository.
