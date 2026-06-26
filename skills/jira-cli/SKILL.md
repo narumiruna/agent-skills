@@ -86,6 +86,11 @@ For issue descriptions, use this compact template unless the user provides anoth
 
 ## Acceptance Criteria
 - [ ] <done condition>
+
+## Optional
+- Context: <why now>
+- Scope: <in/out of scope>
+- Links: <related issue, PR, doc>
 ```
 
 ```sh
