@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jira CLI"
+  short_description: "Use ankitpokhrel/jira-cli safely from terminal."
+  default_prompt: "Use $jira-cli to inspect Jira issues with read-only commands first, then prepare any requested Jira mutation for explicit confirmation."

@@ -13,7 +13,7 @@ Use `jira` for Jira work from the terminal. Prefer read-only discovery first, sc
 
 - Do not print or store Jira tokens. Use `JIRA_API_TOKEN`, `.netrc`, keychain, or the user's existing shell setup.
 - Check the installed command help when flags matter: `jira --help`, then `jira <resource> <command> --help`.
-- Prefer non-interactive output in agent runs: `--plain`, `--raw`, `--csv`, `--no-headers`, and `--columns`.
+- Prefer non-interactive output in agent runs when the command supports it: `--plain`, `--raw`, `--csv`, `--no-headers`, and `--columns`.
 - Prefer `--no-input` only when all required write parameters are known.
 - Before create/edit/move/assign/delete/comment/worklog/link operations, show the exact command and ask for confirmation unless the user already authorized that exact mutation.
 - Always confirm before `jira issue delete`, even if the user asked generally.
@@ -53,8 +53,8 @@ jira issue list -c ./jira-config.yaml --plain
 
 1. Identify context with read-only commands:
    ```sh
-   jira project list --plain
-   jira board list --plain
+   jira project list
+   jira board list
    jira me
    ```
 2. Search issues with filters or JQL:
@@ -121,10 +121,10 @@ jira sprint list SPRINT_ID -a$(jira me) --plain
 jira sprint add SPRINT_ID ISSUE-1 ISSUE-2
 
 # Releases, projects, boards
-jira release list --plain
-jira release list --project KEY --plain
-jira project list --plain
-jira board list --plain
+jira release list
+jira release list --project KEY
+jira project list
+jira board list
 ```
 
 ## Output Patterns For Scripts
@@ -145,6 +145,7 @@ jira sprint list --table --plain --columns id,name --no-headers
 ## Common Mistakes
 
 - Letting `jira issue list` open the interactive UI during an automated agent run.
+- Adding output flags to commands that do not support them; `project list`, `board list`, and `release list` do not accept `--plain` in current JiraCLI.
 - Mutating the wrong Jira instance because `JIRA_CONFIG_FILE` or `-c` was omitted.
 - Assuming status, resolution, priority, issue type, or custom field names; discover them with `jira ... --help`, existing tickets, or Jira config first.
 - Using unquoted shell arguments for statuses or summaries with spaces.
