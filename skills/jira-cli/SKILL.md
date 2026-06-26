@@ -78,6 +78,16 @@ Examples:
 - Known project name: `[skills] add jira-cli skill`
 - Unknown project name: `add jira-cli skill`
 
+For issue descriptions, use this compact template unless the user provides another one:
+
+```md
+## Summary
+<what changes>
+
+## Acceptance Criteria
+- [ ] <done condition>
+```
+
 ```sh
 # Create
 jira issue create -tTask -s"Summary" -b"Description" --no-input
