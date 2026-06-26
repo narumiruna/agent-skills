@@ -72,7 +72,7 @@ jira issue list -c ./jira-config.yaml --plain
 
 ## Write Workflow
 
-Use explicit issue keys and quote values with spaces.
+Use explicit issue keys and quote values with spaces. If a project name is known, format Jira issue titles/summaries as `[<project_name>] <title/summary>` (for example: `[skills] add jira-cli skill`).
 
 ```sh
 # Create
