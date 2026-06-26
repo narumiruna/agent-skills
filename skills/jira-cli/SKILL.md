@@ -60,7 +60,7 @@ jira issue list -c ./jira-config.yaml --plain
 2. Search issues with filters or JQL:
    ```sh
    jira issue list --plain --columns key,status,assignee,summary --no-headers
-   jira issue list -a"$(jira me)" -s"In Progress" --plain
+   jira issue list -a"user@example.com" -s"In Progress" --plain
    jira issue list -q "summary ~ cli" --plain
    jira issue list --raw
    ```
@@ -84,12 +84,12 @@ jira issue edit ISSUE-1 -s"New summary" --no-input
 jira issue edit ISSUE-1 --label -old-label --label new-label --no-input
 
 # Assign / unassign
-jira issue assign ISSUE-1 "$(jira me)"
+jira issue assign ISSUE-1 "user@example.com"
 jira issue assign ISSUE-1 x
 
 # Transition
 jira issue move ISSUE-1 "In Progress"
-jira issue move ISSUE-1 Done -RFixed -a"$(jira me)"
+jira issue move ISSUE-1 Done -RFixed -a"user@example.com"
 
 # Comments and worklogs
 jira issue comment add ISSUE-1 "Comment body"
@@ -117,7 +117,7 @@ jira epic remove ISSUE-1 ISSUE-2
 # Sprints
 jira sprint list --table --plain
 jira sprint list --current --plain
-jira sprint list SPRINT_ID -a"$(jira me)" --plain
+jira sprint list SPRINT_ID -a"user@example.com" --plain
 jira sprint add SPRINT_ID ISSUE-1 ISSUE-2
 
 # Releases, projects, boards
