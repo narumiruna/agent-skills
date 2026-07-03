@@ -1,4 +1,0 @@
-interface:
-  display_name: "Python Logging"
-  short_description: "Choose and configure Python logging safely."
-  default_prompt: "Use $python-logging to choose between stdlib logging and loguru, then configure the logging setup for this app or library."

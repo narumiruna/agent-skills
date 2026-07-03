@@ -1,4 +1,0 @@
-interface:
-  display_name: "MEMORY.md Keeper"
-  short_description: "Maintain concise repository MEMORY.md notes."
-  default_prompt: "Use $memory-md to check repository MEMORY.md at conversation start, record repeatable mistakes as GOTCHA, and keep durable preferences under TASTE."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Gourmet Research"
-  short_description: "Produce auditable city food research outputs."
-  default_prompt: "Use $gourmet-research to build a traceable city food research pack with sources, scores, and audit files."

@@ -1,6 +1,0 @@
-interface:
-  display_name: "Work Log Writer"
-  short_description: "Write concise repository work logs."
-  default_prompt: "Use $work-log-writer to summarize my work for yesterday from this repository."
-policy:
-  allow_implicit_invocation: false

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python"
+  short_description: "Handle Python and uv project workflows."
+  default_prompt: "Use $managing-python-projects to set up or update this Python project with uv, dependencies, quality checks, or packaging."

@@ -42,7 +42,7 @@
         <rect x="740" y="256" width="212" height="112" rx="16" fill="#F0FDFA" stroke="#0F766E" stroke-width="3" filter="url(#shadow-sm)"/>
         <text x="846" y="296" text-anchor="middle" font-size="24" font-weight="700">Invoke</text>
         <text x="846" y="326" text-anchor="middle" fill="#64748B">/skills</text>
-        <text x="846" y="351" text-anchor="middle" fill="#64748B">$python, $imrad</text>
+        <text x="846" y="351" text-anchor="middle" fill="#64748B">$managing-python-projects, $writing-imrad</text>
       </g>
 
       <g>

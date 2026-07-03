@@ -1,4 +1,0 @@
-interface:
-  display_name: "IMRaD"
-  short_description: "Draft, transform, and review IMRaD outputs."
-  default_prompt: "Use $imrad to decide whether IMRaD fits, then draft, transform, or review this material in IMRaD form."

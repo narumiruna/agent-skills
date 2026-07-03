@@ -1,4 +1,0 @@
-interface:
-  display_name: "Git Commit"
-  short_description: "Draft and validate Conventional Commit messages."
-  default_prompt: "Use $git-commit to inspect the current changes, choose a Conventional Commits message, and create a focused git commit."
