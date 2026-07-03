@@ -82,6 +82,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Workflow And Repository Maintenance
 
+- `naming-agent-skills`: creating, reviewing, renaming, and standardizing agent skill names so they are predictable, searchable, and easy for agents to select.
 - `help-me`: deciding whether to check `--help`, built-in `help`, or `man` before running a shell or CLI command.
 - `jira-cli`: using ankitpokhrel/jira-cli for Jira setup, issue queries and mutations, epics, sprints, releases, projects, boards, and script-friendly output.
 - `git-commit`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
