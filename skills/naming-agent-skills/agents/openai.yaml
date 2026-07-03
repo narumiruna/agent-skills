@@ -1,0 +1,4 @@
+interface:
+  display_name: "Naming Agent Skills"
+  short_description: "Name agent skills consistently."
+  default_prompt: "Use $naming-agent-skills to propose production-ready names for these agent skill ideas."
