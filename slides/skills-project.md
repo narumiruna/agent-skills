@@ -143,10 +143,10 @@ section::after {
 
 | Area | Skills |
 |---|---|
-| **Python** | `python`, `python-typer`, `python-logging`, `python-peewee` |
-| **Writing and research** | `imrad`, `gourmet-research` |
-| **Slides and visuals** | `slide-creator`, `marp-authoring`, `slide-color-design`, `svg-illustration`, `mermaid-creator` |
-| **Workflow maintenance** | `help-me`, `git-commit`, `memory-md`, `writing-agents-md` |
+| **Python** | `managing-python-projects`, `building-typer-clis`, `configuring-python-logging`, `using-peewee-orm` |
+| **Writing and research** | `writing-imrad`, `researching-gourmet-venues` |
+| **Slides and visuals** | `creating-slide-decks`, `authoring-marp-slides`, `designing-slide-colors`, `creating-svg-illustrations`, `creating-mermaid-diagrams` |
+| **Workflow maintenance** | `checking-cli-help`, `writing-git-commits`, `maintaining-memory-md`, `writing-agents-md` |
 
 ---
 
@@ -162,8 +162,8 @@ Use local copy-based installs while editing this repository:
 
 ```shell
 just install-all
-just install python
-just clean python
+just install managing-python-projects
+just clean managing-python-projects
 ```
 
 `just` by itself is intentionally non-mutating.
@@ -216,10 +216,10 @@ This is especially visible in the slide toolkit: colors, Marp authoring, and SVG
 
 ## Example: the slide skills compose cleanly
 
-1. `slide-color-design` defines the 7-role palette.
-2. `marp-authoring` writes valid Marpit Markdown.
-3. `svg-illustration` keeps diagrams consistent and validated.
-4. `slide-creator` ties the modules together for full decks.
+1. `designing-slide-colors` defines the 7-role palette.
+2. `authoring-marp-slides` writes valid Marpit Markdown.
+3. `creating-svg-illustrations` keeps diagrams consistent and validated.
+4. `creating-slide-decks` ties the modules together for full decks.
 
 **Result:** one color system, one spacing rhythm, and SVG assets that embed reliably with `bg fit`.
 
@@ -247,9 +247,9 @@ Then in Codex:
 
 ```text
 /skills
-$python
-$slide-creator
-$git-commit
+$managing-python-projects
+$creating-slide-decks
+$writing-git-commits
 ```
 
 **Start with the task. Let the matching skill load the context.**

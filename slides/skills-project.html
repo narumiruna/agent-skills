@@ -81,19 +81,19 @@
 <tbody>
 <tr>
 <td><strong>Python</strong></td>
-<td><code>python</code>, <code>python-typer</code>, <code>python-logging</code>, <code>python-peewee</code></td>
+<td><code>managing-python-projects</code>, <code>building-typer-clis</code>, <code>configuring-python-logging</code>, <code>using-peewee-orm</code></td>
 </tr>
 <tr>
 <td><strong>Writing and research</strong></td>
-<td><code>imrad</code>, <code>gourmet-research</code></td>
+<td><code>writing-imrad</code>, <code>researching-gourmet-venues</code></td>
 </tr>
 <tr>
 <td><strong>Slides and visuals</strong></td>
-<td><code>slide-creator</code>, <code>marp-authoring</code>, <code>slide-color-design</code>, <code>svg-illustration</code>, <code>mermaid-creator</code></td>
+<td><code>creating-slide-decks</code>, <code>authoring-marp-slides</code>, <code>designing-slide-colors</code>, <code>creating-svg-illustrations</code>, <code>creating-mermaid-diagrams</code></td>
 </tr>
 <tr>
 <td><strong>Workflow maintenance</strong></td>
-<td><code>help-me</code>, <code>git-commit</code>, <code>memory-md</code>, <code>writing-agents-md</code></td>
+<td><code>checking-cli-help</code>, <code>writing-git-commits</code>, <code>maintaining-memory-md</code>, <code>writing-agents-md</code></td>
 </tr>
 </tbody>
 </table>
@@ -105,8 +105,8 @@
 </code></pre>
 <p>Use local copy-based installs while editing this repository:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-shell">just install-all
-just install python
-just clean python
+just install managing-python-projects
+just clean managing-python-projects
 </code></pre>
 <p><code>just</code> by itself is intentionally non-mutating.</p>
 </section>
@@ -171,10 +171,10 @@ just clean python
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-background-color="#F7FAFC" data-color="#1F2937" data-theme="default" lang="POSIX" data-marpit-pagination="11" style="--paginate:true;--background-color:#F7FAFC;--color:#1F2937;--theme:default;color:#1F2937;background-color:#F7FAFC;background-image:none;" data-marpit-pagination-total="13">
 <h2 id="example-the-slide-skills-compose-cleanly">Example: the slide skills compose cleanly</h2>
 <ol>
-<li><code>slide-color-design</code> defines the 7-role palette.</li>
-<li><code>marp-authoring</code> writes valid Marpit Markdown.</li>
-<li><code>svg-illustration</code> keeps diagrams consistent and validated.</li>
-<li><code>slide-creator</code> ties the modules together for full decks.</li>
+<li><code>designing-slide-colors</code> defines the 7-role palette.</li>
+<li><code>authoring-marp-slides</code> writes valid Marpit Markdown.</li>
+<li><code>creating-svg-illustrations</code> keeps diagrams consistent and validated.</li>
+<li><code>creating-slide-decks</code> ties the modules together for full decks.</li>
 </ol>
 <p><strong>Result:</strong> one color system, one spacing rhythm, and SVG assets that embed reliably with <code>bg fit</code>.</p>
 </section>
@@ -189,9 +189,9 @@ just clean python
 </code></pre>
 <p>Then in Codex:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">/skills
-$python
-$slide-creator
-$git-commit
+$managing-python-projects
+$creating-slide-decks
+$writing-git-commits
 </code></pre>
 <p><strong>Start with the task. Let the matching skill load the context.</strong></p>
 </section>
