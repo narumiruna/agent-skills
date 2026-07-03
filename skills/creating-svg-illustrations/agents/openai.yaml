@@ -1,0 +1,4 @@
+interface:
+  display_name: "SVG Illustration"
+  short_description: "Create slide-ready SVG diagrams and illustrations."
+  default_prompt: "Use $creating-svg-illustrations to create or refine a slide-ready SVG diagram with the right sizing, layout, and embedding rules."

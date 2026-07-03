@@ -1,4 +1,0 @@
-interface:
-  display_name: "Codex CLI Hooks"
-  short_description: "Build and debug Codex CLI hook configs."
-  default_prompt: "Use $codex-cli-hooks to design, implement, or debug Codex CLI hooks for this workspace."
