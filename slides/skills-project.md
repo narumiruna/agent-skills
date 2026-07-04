@@ -143,8 +143,8 @@ section::after {
 
 | Area | Skills |
 |---|---|
-| **Python** | `managing-python-projects`, `building-typer-clis`, `configuring-python-logging`, `using-peewee-orm` |
-| **Writing and research** | `writing-imrad`, `researching-gourmet-venues` |
+| **Python** | `managing-python-with-uv`, `building-typer-clis`, `configuring-python-logging`, `using-peewee-orm` |
+| **Writing and research** | `applying-imrad`, `researching-gourmet-venues` |
 | **Slides and visuals** | `creating-slide-decks`, `authoring-marp-slides`, `designing-slide-colors`, `creating-svg-illustrations`, `creating-mermaid-diagrams` |
 | **Workflow maintenance** | `checking-cli-help`, `writing-git-commits`, `maintaining-memory-md`, `writing-agents-md` |
 
@@ -162,8 +162,8 @@ Use local copy-based installs while editing this repository:
 
 ```shell
 just install-all
-just install managing-python-projects
-just clean managing-python-projects
+just install managing-python-with-uv
+just clean managing-python-with-uv
 ```
 
 `just` by itself is intentionally non-mutating.
@@ -247,7 +247,7 @@ Then in Codex:
 
 ```text
 /skills
-$managing-python-projects
+$managing-python-with-uv
 $creating-slide-decks
 $writing-git-commits
 ```
