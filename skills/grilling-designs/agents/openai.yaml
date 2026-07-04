@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grilling Designs"
+  short_description: "Interrogate designs until assumptions are clear."
+  default_prompt: "Use $grilling-designs to grill my design one question at a time until the major risks are clear."

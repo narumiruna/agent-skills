@@ -84,7 +84,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | Skill | Use it for |
 | --- | --- |
 | `writing-plans` | Lean implementation plans with executable task lists and completion checks. |
-| `stress-testing-plans` | One-question-at-a-time plan and design stress testing. |
+| `grilling-designs` | One-question-at-a-time plan and design grilling. |
 | `writing-imrad` | IMRaD fit checks, drafting, and review. |
 | `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
 

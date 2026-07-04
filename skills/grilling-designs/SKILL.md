@@ -1,13 +1,13 @@
 ---
-name: stress-testing-plans
-description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
+name: grilling-designs
+description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to get grilled on a design, stress-test a plan, or mentions "grill me".
 ---
 
-# Stress Testing Plans
+# Grilling Designs
 
 ## Purpose
 
-Stress-test a user's plan or design with a one-question-at-a-time interview until decisions, dependencies, assumptions, tradeoffs, and verification are explicit.
+Grill a user's plan or design with a one-question-at-a-time interview until decisions, dependencies, assumptions, tradeoffs, and verification are explicit.
 
 ## Operating Loop
 
