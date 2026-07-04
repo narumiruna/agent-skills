@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stress Testing Plans"
+  short_description: "Interrogate plans until assumptions are clear."
+  default_prompt: "Use $stress-testing-plans to stress-test my plan one question at a time until the major risks are clear."

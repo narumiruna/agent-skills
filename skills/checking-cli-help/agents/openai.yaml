@@ -1,0 +1,4 @@
+interface:
+  display_name: "Checking CLI Help"
+  short_description: "Decide when to inspect command help."
+  default_prompt: "Use $checking-cli-help to decide whether to check help before running this command."
