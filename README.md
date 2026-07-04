@@ -106,6 +106,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `naming-agent-skills` | Predictable, searchable skill names. |
 | `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
+| `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |
 | `writing-git-commits` | Focused Conventional Commits from real diffs. |
 | `maintaining-memory-md` | Concise repository `MEMORY.md` `GOTCHA` and `TASTE` entries. |
 | `writing-agents-md` | Creating or updating repository `AGENTS.md` guidance. |
@@ -118,5 +119,4 @@ Deprecated skills remain in `skills/deprecated/<skill-name>/` for reference and 
 | --- | --- |
 | `cleaning-atuin-history` | Preview-first cleanup planning for noisy Atuin shell history. |
 | `building-codex-hooks` | Codex CLI hooks and `hooks.json` behavior. |
-| `writing-tests-first` | Red-green-refactor workflow for non-trivial code changes. |
 | `writing-work-logs` | Explicitly invoked work logs from repository evidence. |

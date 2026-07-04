@@ -1,9 +1,9 @@
 ---
-name: writing-tests-first
-description: Use when implementing non-trivial code changes that should follow TDD (write a failing test first, make the smallest passing change, then refactor safely).
+name: applying-tdd
+description: Use when implementing non-trivial code changes with Test-Driven Development (TDD): write a failing test first, make the smallest passing change, then refactor safely.
 ---
 
-# TDD Policy
+# Applying TDD
 
 - Non-trivial changes SHOULD begin with a test.
 - A test SHOULD fail before implementation begins whenever practical (red → green → refactor).
