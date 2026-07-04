@@ -1,6 +1,6 @@
 ---
 name: applying-tdd
-description: Use when implementing non-trivial code changes with Test-Driven Development (TDD): write a failing test first, make the smallest passing change, then refactor safely.
+description: "Use when implementing non-trivial code changes with Test-Driven Development (TDD): write a failing test first, make the smallest passing change, then refactor safely."
 ---
 
 # Applying TDD
