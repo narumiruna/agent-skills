@@ -24,7 +24,7 @@ Create skills that another agent can reliably select and use. Keep each skill co
    - Keep the folder name exactly equal to the frontmatter `name`.
 
 3. Plan reusable contents.
-   - Use only `SKILL.md` and `agents/openai.yaml` for judgment or workflow skills.
+   - Default to `SKILL.md` and `agents/openai.yaml` for judgment or workflow skills when no bundled resources are needed.
    - Add `scripts/` only when deterministic repeated code is useful.
    - Add `references/` only for detail that should be loaded on demand.
    - Add `assets/` only for files that should be copied or used in outputs.
