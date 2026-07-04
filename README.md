@@ -102,6 +102,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 | Skill | Use it for |
 | --- | --- |
+| `creating-agent-skills` | Creating concise, valid, discoverable agent skills. |
 | `naming-agent-skills` | Predictable, searchable skill names. |
 | `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
