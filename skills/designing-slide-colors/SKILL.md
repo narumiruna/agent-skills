@@ -28,7 +28,7 @@ Prompt: "Need a light palette from a brand color." → Read `workflow.md`, then 
 - `assets/examples/` - Palette example outputs
 
 ## Common Mistakes
-- Skimming the creating-slide-decks overview instead of the color workflow
+- Opening slide authoring or SVG references instead of the color workflow
 - Jumping into Marp authoring before defining palette roles
 
 ## Red Flags

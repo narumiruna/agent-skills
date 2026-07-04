@@ -1,7 +1,0 @@
-flowchart TD
-    Start[User Request] --> Auth{Authenticated?}
-    Auth -->|No| Login[Redirect to Login]
-    Auth -->|Yes| Role{Check Role}
-    Role -->|Admin| AdminDash[Admin Dashboard]
-    Role -->|User| UserDash[User Dashboard]
-    Role -->|Guest| Limited[Limited Access]

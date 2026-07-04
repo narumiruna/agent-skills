@@ -1,209 +1,112 @@
-# Other Diagram Types
+# Other Mermaid Diagram Types
 
-Additional Mermaid diagram types for specialized use cases.
+Use these when the structure is not a flow, sequence, class, state, or ER diagram.
 
-## Gantt Charts
+## Gantt
 
-Project timelines and task scheduling.
-
-### Basic Syntax
+Use for schedules and dependencies. Example file: `assets/examples/other/gantt-basic.mmd`.
 
 ```mermaid
 gantt
     title Project Timeline
     dateFormat YYYY-MM-DD
-
-    section Planning
-    Requirements    :a1, 2024-01-01, 7d
-    Design         :a2, after a1, 5d
+    section Build
+    Task A :a1, 2026-01-01, 5d
+    Task B :after a1, 3d
 ```
 
-### Task Status
+## Pie
 
-- `done` - Completed task
-- `active` - In progress
-- `crit` - Critical task
-- No keyword - Planned task
-
-**Examples**:
-- `assets/examples/other/gantt-basic.mmd`
-- `assets/examples/other/gantt-status.mmd`
-
-## Pie Charts
-
-Data distribution visualization.
+Use for small part-to-whole breakdowns.
 
 ```mermaid
-pie title Distribution
-    "Category A" : 45
-    "Category B" : 30
-    "Category C" : 25
+pie title Traffic Sources
+    "Search" : 55
+    "Direct" : 30
+    "Referral" : 15
 ```
 
-Use `showData` to display percentages.
+## Git Graph
 
-**Examples**:
-- `assets/examples/other/pie-basic.mmd`
-- `assets/examples/other/pie-showdata.mmd`
-
-## Git Graphs
-
-Git commit history and branching.
+Use for branch and release explanations.
 
 ```mermaid
 gitGraph
     commit
-    branch develop
-    checkout develop
+    branch feature
+    checkout feature
     commit
     checkout main
-    merge develop
+    merge feature
 ```
 
-Add IDs and tags: `commit id: "Initial"`, `merge develop tag: "v1.0"`
+## Journey
 
-**Examples**:
-- `assets/examples/other/git-basic.mmd`
-- `assets/examples/other/git-feature-branch.mmd`
-- `assets/examples/other/git-tags.mmd`
-
-## User Journey
-
-User experience and interaction flows with satisfaction scores (1-5).
+Use for user experience steps and sentiment.
 
 ```mermaid
 journey
-    title User Journey
-    section Browse
-      Action 1: 5: User
-      Action 2: 4: User, System
+    title Signup
+    section Account
+      Enter email: 4: User
+      Verify: 3: User,System
 ```
 
-**Examples**:
-- `assets/examples/other/journey-shopping.mmd`
-- `assets/examples/other/journey-service.mmd`
+## Quadrant
 
-## Quadrant Chart
-
-2D comparison and categorization.
+Use for two-axis prioritization.
 
 ```mermaid
 quadrantChart
-    title Priority Matrix
-    x-axis Low --> High
-    y-axis Low --> High
-    quadrant-1 Top Right
-    quadrant-2 Top Left
-    quadrant-3 Bottom Left
-    quadrant-4 Bottom Right
-
-    Item A: [0.7, 0.8]
+    x-axis Low Effort --> High Effort
+    y-axis Low Value --> High Value
+    Quick win: [0.2, 0.8]
 ```
-
-**Examples**:
-- `assets/examples/other/quadrant-basic.mmd`
-- `assets/examples/other/quadrant-priority.mmd`
 
 ## Timeline
 
-Chronological events.
+Use for chronological events.
 
 ```mermaid
 timeline
-    title History
-    2020 : Event 1
-         : Event 2
-    2021 : Event 3
+    title Release
+    2026-01-01 : Kickoff
+    2026-02-01 : Launch
 ```
-
-Use `section` for grouping.
-
-**Examples**:
-- `assets/examples/other/timeline-basic.mmd`
-- `assets/examples/other/timeline-project.mmd`
 
 ## Mindmap
 
-Hierarchical idea organization.
+Use for topic breakdowns.
 
 ```mermaid
 mindmap
-  root((Central Idea))
-    Topic 1
-      Subtopic A
-      Subtopic B
-    Topic 2
+  root((Skills))
+    Python
+    Writing
+    Slides
 ```
 
-**Example**: `assets/examples/other/mindmap-basic.mmd`
+## Requirement
 
-## Requirement Diagram
-
-Requirements and their relationships.
+Use for requirement traceability.
 
 ```mermaid
 requirementDiagram
-    requirement Req1 {
+    requirement req_login {
         id: 1
-        text: Description
-        risk: high
+        text: User can sign in
+        risk: medium
         verifymethod: test
     }
-
-    element System {
-        type: system
-    }
-
-    System - satisfies -> Req1
 ```
 
-**Example**: `assets/examples/other/requirement-basic.mmd`
+## C4 Context
 
-## C4 Diagram
-
-Software architecture context.
+Use only when Mermaid C4 is available in the target renderer.
 
 ```mermaid
 C4Context
-    title System Context
-
-    Person(user, "User", "Description")
-    System(system, "System", "Description")
-
-    Rel(user, system, "Uses")
+    Person(user, "User")
+    System(app, "Application")
+    Rel(user, app, "uses")
 ```
-
-**Example**: `assets/examples/other/c4-context.mmd`
-
-## Best Practices by Type
-
-### Gantt
-- Use realistic date formats
-- Mark critical path with `crit`
-- Group related tasks in sections
-- Use `after` for dependencies
-
-### Pie
-- Keep to 5-7 slices maximum
-- Combine small slices into "Other"
-- Use `showData` for transparency
-
-### Git
-- Use meaningful commit IDs
-- Tag important releases
-- Show realistic branch patterns
-
-### Journey
-- Keep to 3-5 sections
-- Use consistent actor names
-- Score from user perspective (1=worst, 5=best)
-
-### Quadrant
-- Choose meaningful axis labels
-- Use all four quadrants
-- Place items thoughtfully
-
-### Timeline
-- Group by logical periods
-- Use sections for organization
-- Keep descriptions concise
