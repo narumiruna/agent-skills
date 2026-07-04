@@ -1,12 +1,24 @@
 # Skills
 
-Reusable agent skills for coding, writing, research, and slide work. The collection is organized for Codex-first workflows, and it can also be installed as a standard skills repo with `npx skills add narumiruna/skills`.
+Reusable agent skills for coding, writing, research, and slide work. This repo is organized for Codex-first workflows and can also be installed as a standard skills repo.
 
-## Install
+## 🚀 Quick Start
 
-### 1. Install with `npx`
+Install the collection:
 
-Use this when you want the collection without linking a local checkout.
+```shell
+npx skills add narumiruna/skills
+```
+
+Then open Codex and run `/skills` to inspect what was installed. Invoke a skill explicitly with `$skill-name`, or describe the task normally and let Codex choose a match.
+
+## 📦 Install
+
+Choose the path that matches how you want to use the skills.
+
+### 1. Standard install with `npx`
+
+Use this when you want the collection without linking a local checkout:
 
 ```shell
 npx skills add narumiruna/skills
@@ -14,7 +26,7 @@ npx skills add narumiruna/skills
 
 ### 2. Local Codex development with `just`
 
-Use this when you want repo-managed local copies in `~/.codex/skills`.
+Use this when you want repo-managed local copies in `~/.codex/skills`:
 
 ```shell
 just install-all
@@ -23,8 +35,7 @@ just install-all
 just install managing-python-projects
 ```
 
-Each install replaces the target skill directory before copying. `just install-all`
-installs active top-level skills only; it skips `skills/deprecated/`.
+Each install replaces the target skill directory before copying. `just install-all` installs active top-level skills only; it skips `skills/deprecated/`.
 
 Remove copied skills when finished:
 
@@ -39,7 +50,7 @@ just clean managing-python-projects
 
 ### 3. Manual copy for Codex
 
-Use this when you want a one-off local copy without `just`.
+Use this when you want a one-off local copy without `just`:
 
 ```shell
 mkdir -p ~/.codex/skills
@@ -49,53 +60,62 @@ cp -R ./skills/managing-python-projects ~/.codex/skills/managing-python-projects
 
 Repeat the same pattern for other skills as needed.
 
-## How To Use In Codex
+## 🧭 How To Use In Codex
 
 - Run `/skills` to inspect the installed collection.
 - Type `$managing-python-projects`, `$writing-imrad`, or another skill name to invoke one explicitly.
-- Or describe the task normally and let Codex choose a matching skill.
+- Describe the task normally and let Codex choose a matching skill.
 
 If Codex does not pick up a local skill change, restart Codex and try again.
 
-## Skill Guide
+## 🧰 Skill Catalog
 
 ### Python
 
-- `managing-python-projects`: uv-based Python project setup and standalone scripts, including dependency add/remove/sync, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates with ruff, ty, pytest, coverage, prek or pre-commit, and package build or publishing workflows.
-- `building-typer-clis`: focused Typer command structure, options, and multi-command apps.
-- `configuring-python-logging`: focused stdlib logging or loguru configuration.
-- `using-peewee-orm`: focused Peewee patterns such as `DatabaseProxy`, scoped transactions, and SQLite tests.
+| Skill | Use it for |
+| --- | --- |
+| `managing-python-projects` | uv-based setup, scripts, dependencies, quality gates, and packaging. |
+| `building-typer-clis` | Typer command structure, options, and multi-command apps. |
+| `configuring-python-logging` | stdlib logging and loguru configuration choices. |
+| `using-peewee-orm` | Peewee patterns, scoped transactions, and SQLite tests. |
 
-### Writing And Research
+### Writing & Research
 
-- `writing-plans`: lean implementation and work plans with executable task lists, optional architecture and tech-stack notes, finite completion checklists, and plan archiving rules.
-- `stress-testing-plans`: one-question-at-a-time plan and design stress-testing until decisions, dependencies, and verification are explicit.
-- `writing-imrad`: deciding whether IMRaD fits, drafting new IMRaD outputs, and reviewing existing drafts.
-- `researching-gourmet-venues`: evidence-based city dining research with structured scoring and audit files.
+| Skill | Use it for |
+| --- | --- |
+| `writing-plans` | Lean implementation plans with executable task lists and completion checks. |
+| `stress-testing-plans` | One-question-at-a-time plan and design stress testing. |
+| `writing-imrad` | IMRaD fit checks, drafting, and review. |
+| `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
 
-### Slides And Visuals
+### Slides & Visuals
 
-- `creating-slide-decks`: end-to-end Marp/Marpit slide creation, including color systems and SVG visuals.
-- `authoring-marp-slides`: focused Marp/Marpit authoring rules, directives, and layouts.
-- `designing-slide-colors`: slide palette selection and color-system workflows.
-- `creating-svg-illustrations`: SVG diagram and illustration guidance for slide decks.
-- `creating-mermaid-diagrams`: Mermaid diagrams for docs, architecture, sequence flows, ER diagrams, and Gantt charts.
+| Skill | Use it for |
+| --- | --- |
+| `creating-slide-decks` | End-to-end Marp/Marpit slide creation. |
+| `authoring-marp-slides` | Marp/Marpit directives, layouts, and authoring rules. |
+| `designing-slide-colors` | Slide palettes and color-system workflows. |
+| `creating-svg-illustrations` | SVG diagrams and illustrations for decks. |
+| `creating-mermaid-diagrams` | Mermaid flowcharts, sequence diagrams, ER diagrams, and more. |
 
-### Workflow And Repository Maintenance
+### Workflow & Repository Maintenance
 
-- `naming-agent-skills`: creating, reviewing, renaming, and standardizing agent skill names so they are predictable, searchable, and easy for agents to select.
-- `checking-cli-help`: deciding whether to check `--help`, built-in `help`, or `man` before running a shell or CLI command.
-- `using-jira-cli`: using ankitpokhrel/jira-cli for Jira setup, issue queries and mutations, epics, sprints, releases, projects, boards, and script-friendly output.
-- `writing-git-commits`: reviewing diffs, choosing commit types, and writing focused Conventional Commits.
-- `maintaining-memory-md`: deciding when to read or update repository `MEMORY.md` files and keeping `GOTCHA` / `TASTE` entries concise.
-- `writing-agents-md`: creating or updating `AGENTS.md` guidance for this repository.
+| Skill | Use it for |
+| --- | --- |
+| `naming-agent-skills` | Predictable, searchable skill names. |
+| `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
+| `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
+| `writing-git-commits` | Focused Conventional Commits from real diffs. |
+| `maintaining-memory-md` | Concise repository `MEMORY.md` `GOTCHA` and `TASTE` entries. |
+| `writing-agents-md` | Creating or updating repository `AGENTS.md` guidance. |
 
-## Deprecated Skills
+## 🗄️ Deprecated Skills
 
-Deprecated skills remain in `skills/deprecated/<skill-name>/` for reference and
-are not included in `just install-all`.
+Deprecated skills remain in `skills/deprecated/<skill-name>/` for reference and are not included in `just install-all`.
 
-- `cleaning-atuin-history`: preview-first cleanup planning for noisy Atuin shell history.
-- `building-codex-hooks`: designing or debugging Codex CLI hooks and `hooks.json` behavior.
-- `writing-tests-first`: applying a red-green-refactor workflow to non-trivial code changes.
-- `writing-work-logs`: explicitly invoked only; writing concise work logs from repository evidence.
+| Skill | Notes |
+| --- | --- |
+| `cleaning-atuin-history` | Preview-first cleanup planning for noisy Atuin shell history. |
+| `building-codex-hooks` | Codex CLI hooks and `hooks.json` behavior. |
+| `writing-tests-first` | Red-green-refactor workflow for non-trivial code changes. |
+| `writing-work-logs` | Explicitly invoked work logs from repository evidence. |
