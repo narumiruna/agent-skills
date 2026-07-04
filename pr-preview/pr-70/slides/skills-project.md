@@ -144,8 +144,8 @@ section::after {
 | Area | Skills |
 |---|---|
 | **Python** | `managing-python-projects`, `building-typer-clis`, `configuring-python-logging`, `using-peewee-orm` |
-| **Writing and research** | `writing-plans`, `stress-testing-plans`, `writing-imrad`, `researching-gourmet-venues` |
-| **Slides and visuals** | `authoring-marp-slides`, `designing-slide-colors`, `creating-svg-illustrations`, `creating-mermaid-diagrams` |
+| **Writing and research** | `writing-imrad`, `researching-gourmet-venues` |
+| **Slides and visuals** | `creating-slide-decks`, `authoring-marp-slides`, `designing-slide-colors`, `creating-svg-illustrations`, `creating-mermaid-diagrams` |
 | **Workflow maintenance** | `checking-cli-help`, `writing-git-commits`, `maintaining-memory-md`, `writing-agents-md` |
 
 ---
@@ -219,6 +219,7 @@ This is especially visible in the slide toolkit: colors, Marp authoring, and SVG
 1. `designing-slide-colors` defines the 7-role palette.
 2. `authoring-marp-slides` writes valid Marpit Markdown.
 3. `creating-svg-illustrations` keeps diagrams consistent and validated.
+4. `creating-slide-decks` ties the modules together for full decks.
 
 **Result:** one color system, one spacing rhythm, and SVG assets that embed reliably with `bg fit`.
 
@@ -247,7 +248,7 @@ Then in Codex:
 ```text
 /skills
 $managing-python-projects
-$authoring-marp-slides
+$creating-slide-decks
 $writing-git-commits
 ```
 
