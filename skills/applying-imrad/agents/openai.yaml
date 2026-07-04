@@ -1,0 +1,4 @@
+interface:
+  display_name: "Applying IMRaD"
+  short_description: "Fit-check, draft, transform, and review IMRaD outputs."
+  default_prompt: "Use $applying-imrad to decide whether IMRaD fits, then draft, transform, or review this material in IMRaD form."

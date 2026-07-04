@@ -1,9 +1,9 @@
 ---
-name: managing-python-projects
+name: managing-python-with-uv
 description: "Use when a task involves Python project setup or standalone scripts with uv, including dependency management, `uv run`, `uv run --with`, `--no-project`, inline script metadata, quality gates (ruff, ty, pytest, coverage, prek/pre-commit), and package build or publishing workflows."
 ---
 
-# Python
+# Python with uv
 
 ## Core Posture
 
