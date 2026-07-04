@@ -1,20 +1,12 @@
 # /// script
 # requires-python = ">=3.12"
-# dependencies = [
-#     "typer",
-# ]
+# dependencies = []
 # ///
 """Generate slide color palettes from brand colors or strategies."""
 
 from colorsys import hls_to_rgb, rgb_to_hls
-from typing import Annotated, Any, cast
-
-import typer  # type: ignore[import-untyped]
-
-app = typer.Typer(
-    help="Generate and manage color palettes for slides and SVG illustrations",
-    no_args_is_help=True,
-)
+import sys
+from typing import Any, cast
 
 
 def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
@@ -554,70 +546,66 @@ def format_palette_css(palette: dict[str, str]) -> str:
     return "\n".join(output)
 
 
-@app.command("list")
-def list_command():
-    """List all available slide palettes (7-role color systems)."""
-    print(list_palettes())
+def print_usage() -> None:
+    """Print CLI usage."""
+    print(
+        """Generate and manage color palettes for slides and SVG illustrations.
+
+Usage:
+  generate_palette.py list
+  generate_palette.py show <palette-name>
+  generate_palette.py brand <hex-color> [light|dark]
+  generate_palette.py svg-list
+  generate_palette.py svg-show <palette-name>
+""".strip()
+    )
 
 
-@app.command("show")
-def show_command(
-    name: Annotated[
-        str, typer.Argument(help="Palette name (e.g., code-blue, clean-corporate)")
-    ],
-):
-    """Show details for a specific slide palette."""
+def require_arg_count(args: list[str], count: int, usage: str) -> None:
+    """Raise a concise error when a command gets the wrong number of args."""
+    if len(args) != count:
+        raise ValueError(usage)
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Run the palette CLI."""
+    args = sys.argv[1:] if argv is None else argv
+    if not args or args[0] in {"-h", "--help"}:
+        print_usage()
+        return 0
+
+    command, *rest = args
     try:
-        palette = generate_preset_palette(name)
-        output = format_palette_markdown(palette, name)
-        print(output)
-    except ValueError as e:
-        typer.echo(f"❌ Error: {e}", err=True)
-        raise typer.Exit(1)
-
-
-@app.command("brand")
-def brand_command(
-    color: Annotated[
-        str, typer.Argument(help="Brand color in hex format (e.g., #2E75B6)")
-    ],
-    style: Annotated[str, typer.Argument(help="Style: light or dark")] = "light",
-):
-    """Generate palette from brand color."""
-    if style not in ["light", "dark"]:
-        typer.echo("❌ Error: Style must be 'light' or 'dark'", err=True)
-        raise typer.Exit(1)
-
-    try:
-        palette = generate_palette_from_brand(color, style)
-        output = format_palette_markdown(palette)
-        print(output)
-    except ValueError as e:
-        typer.echo(f"❌ Error: {e}", err=True)
-        raise typer.Exit(1)
-
-
-@app.command("svg-list")
-def svg_list_command():
-    """List all available SVG palettes (quick color schemes)."""
-    print(list_svg_palettes())
-
-
-@app.command("svg-show")
-def svg_show_command(
-    name: Annotated[
-        str,
-        typer.Argument(help="SVG palette name (e.g., default, creative, dark-mode)"),
-    ],
-):
-    """Show details for a specific SVG palette."""
-    try:
-        output = format_svg_palette(name)
-        print(output)
-    except ValueError as e:
-        typer.echo(f"❌ Error: {e}", err=True)
-        raise typer.Exit(1)
+        if command == "list":
+            require_arg_count(rest, 0, "Usage: generate_palette.py list")
+            print(list_palettes())
+        elif command == "show":
+            require_arg_count(rest, 1, "Usage: generate_palette.py show <palette-name>")
+            print(format_palette_markdown(generate_preset_palette(rest[0]), rest[0]))
+        elif command == "brand":
+            if len(rest) not in {1, 2}:
+                raise ValueError(
+                    "Usage: generate_palette.py brand <hex-color> [light|dark]"
+                )
+            style = rest[1] if len(rest) == 2 else "light"
+            if style not in {"light", "dark"}:
+                raise ValueError("Style must be 'light' or 'dark'")
+            print(format_palette_markdown(generate_palette_from_brand(rest[0], style)))
+        elif command == "svg-list":
+            require_arg_count(rest, 0, "Usage: generate_palette.py svg-list")
+            print(list_svg_palettes())
+        elif command == "svg-show":
+            require_arg_count(
+                rest, 1, "Usage: generate_palette.py svg-show <palette-name>"
+            )
+            print(format_svg_palette(rest[0]))
+        else:
+            raise ValueError(f"Unknown command: {command}")
+    except ValueError as exc:
+        print(f"❌ Error: {exc}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    app()
+    raise SystemExit(main())

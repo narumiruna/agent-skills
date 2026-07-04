@@ -29,7 +29,7 @@ Prompt: "Need an architecture diagram with clean sizing." → Read `core-rules.m
 
 ## Common Mistakes
 - Reading Marp authoring before SVG rules when only diagrams are needed
-- Skimming creating-slide-decks overview instead of SVG references
+- Opening slide authoring or color references before the SVG path requires them
 
 ## Red Flags
 - "Maybe SVG rules are buried in authoring"

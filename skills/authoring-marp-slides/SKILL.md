@@ -6,7 +6,7 @@ description: Use when you need Marp/Marpit Markdown authoring rules, directives,
 # Marp Authoring Entry
 
 ## Overview
-Thin entry skill for Marp/Marpit authoring. Core principle: route directly to the authoring references instead of skimming the full creating-slide-decks bundle.
+Thin entry skill for Marp/Marpit authoring. Core principle: route directly to the authoring references and load color or SVG skills only when needed.
 
 ## When to Use
 - Writing Marp/Marpit slides (syntax, directives, layouts)
@@ -31,7 +31,7 @@ Prompt: "Need a split layout with a code block." → Read `syntax-guide.md`, the
 - `assets/icons/` - Common slide icons
 
 ## Common Mistakes
-- Skimming creating-slide-decks overview instead of authoring references
+- Opening unrelated color or SVG references before the authoring path requires them
 - Opening color or SVG modules for authoring-only tasks
 
 ## Red Flags

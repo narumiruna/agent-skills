@@ -1,106 +1,33 @@
-# Flowchart Diagrams
+# Flowcharts
 
-Flowcharts represent processes, workflows, and decision trees.
+Use flowcharts for processes, routing, workflows, and decision trees.
 
-## Basic Syntax
+## Minimal Pattern
 
 ```mermaid
 flowchart TD
     A[Start] --> B{Decision}
-    B -->|Yes| C[Process]
-    B -->|No| D[Alternative]
+    B -->|Yes| C[Do work]
+    B -->|No| D[Skip]
     C --> E[End]
     D --> E
 ```
 
-**Example**: See `assets/examples/flowchart/basic.mmd`
+Example file: `assets/examples/flowchart/basic.mmd`.
 
-## Direction
+## Rules
 
-- `TD` or `TB` - Top to bottom
-- `BT` - Bottom to top
-- `LR` - Left to right
-- `RL` - Right to left
+- Pick a direction first: `TD` for top-down, `LR` for left-to-right.
+- Use diamonds only for decisions.
+- Label branches when the condition matters.
+- Split workflows once a diagram needs more than one screen to read.
 
-## Node Shapes
-
-| Shape | Syntax | Use Case |
-|-------|--------|----------|
-| Rectangle | `[Text]` | Standard process |
-| Rounded | `(Text)` | Start/end points |
-| Stadium | `([Text])` | Alternative start/end |
-| Subroutine | `[[Text]]` | Predefined process |
-| Database | `[(Text)]` | Data storage |
-| Circle | `((Text))` | Connection point |
-| Diamond | `{Text}` | Decision |
-| Hexagon | `{{Text}}` | Preparation |
-| Parallelogram | `[/Text/]` or `[\Text\]` | Input/output |
-| Trapezoid | `[/Text\]` or `[\Text/]` | Manual operation |
-
-**Example**: See `assets/examples/flowchart/node-shapes.mmd`
-
-## Connections
-
-| Type | Syntax | Use Case |
-|------|--------|----------|
-| Arrow | `-->` | Standard flow |
-| Line | `---` | Connection without direction |
-| Dotted arrow | `-.->` | Optional or conditional |
-| Dotted line | `-.-` | Weak connection |
-| Thick arrow | `==>` | Primary/important flow |
-| Thick line | `===` | Strong connection |
-
-Add labels: `A -->|Label| B`
-
-**Examples**:
-- `assets/examples/flowchart/connections.mmd`
-- `assets/examples/flowchart/labeled-links.mmd`
-
-## Common Patterns
-
-Refer to example files for complete implementations:
-
-- **Process Flow**: `assets/examples/flowchart/process-flow.mmd`
-  Standard input → validate → process → save pattern
-
-- **Decision Tree**: `assets/examples/flowchart/decision-tree.mmd`
-  Authentication and role-based routing
-
-- **Workflow with Subprocesses**: `assets/examples/flowchart/workflow-subprocess.mmd`
-  Order processing with validation and payment
-
-## Best Practices
-
-- Use descriptive labels for nodes and connections
-- Keep flows top-to-bottom or left-to-right for readability
-- Use consistent node shapes (rectangles for processes, diamonds for decisions)
-- Limit complexity - split large flows into multiple diagrams
-- Use subgraphs for logical grouping
-
-## Advanced Features
-
-### Subgraphs
-
-Group related processes:
+## Common Shapes
 
 ```mermaid
-flowchart TD
-    A[Start] --> B[Process]
-
-    subgraph Processing
-        B --> C[Step 1]
-        C --> D[Step 2]
-    end
-
-    D --> E[End]
+flowchart LR
+    A[Process]
+    B{Decision}
+    C((Start/End))
+    D[(Database)]
 ```
-
-**Example**: `assets/examples/flowchart/subgraph.mmd`
-
-### Styling
-
-Apply custom styles with `style` directive or `classDef`:
-
-**Examples**:
-- `assets/examples/flowchart/styling.mmd`
-- `assets/examples/flowchart/class-definitions.mmd`

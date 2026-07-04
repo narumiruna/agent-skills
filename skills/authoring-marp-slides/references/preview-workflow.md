@@ -1,67 +1,36 @@
-# Marp Server Preview + Playwright Review
+# Marp Preview Workflow
 
-Use this workflow to preview Marp slides in server mode and review specific pages with Playwright.
-
-## Table of Contents
-
-- [Preconditions](#preconditions)
-- [Full workflow](#full-workflow)
-- [Playwright page navigation](#playwright-page-navigation)
-- [Troubleshooting](#troubleshooting)
-- [See Also](#see-also)
+Use this when visual inspection is required.
 
 ## Preconditions
 
-- `marp` CLI installed
-- Playwright installed with Chromium
-- A slide directory that contains `slides.md` and related assets
+- `marp` CLI is installed.
+- The deck and assets use repository-relative paths.
 
-## Full workflow
+## Preview
 
-1) Start Marp server mode from the slide directory:
 ```bash
-marp -s examples/slides/marketplace/
+marp -s examples/slides
 ```
 
-2) Confirm the preview URL loads:
-```
-http://localhost:8080/slides.md
+Open the printed URL, usually:
+
+```text
+http://localhost:8080/<deck>.md
 ```
 
-3) Jump to a specific page using the hash:
-```
-http://localhost:8080/slides.md#5
-```
+Jump to a slide with `#N`, for example `deck.md#5`.
 
-4) Review the page in a browser.
+## Export Check
 
-5) Capture a screenshot with Playwright (example):
 ```bash
-node --input-type=module <<'EOF'
-import { chromium } from 'playwright';
-
-const url = 'http://localhost:8080/slides.md#5';
-const out = '/tmp/slide-5.png';
-
-const browser = await chromium.launch();
-const page = await browser.newPage();
-await page.goto(url, { waitUntil: 'domcontentloaded' });
-await page.screenshot({ path: out, fullPage: true });
-await browser.close();
-EOF
+marp examples/slides/deck.md -o /tmp/deck.html
 ```
 
-## Playwright page navigation
+Inspect the title slide, the densest slide, and every slide that uses images or SVGs.
 
-If you cannot use the `#N` hash, send ArrowRight N-1 times:
-- Page 1: no keypress
-- Page 5: press ArrowRight 4 times
+## Common Fixes
 
-## Troubleshooting
-
-See `../../creating-slide-decks/references/troubleshooting-common.md` for preview and asset issues.
-
-## See Also
-
-- `index.md` - Reference navigation hub
-- `../../creating-slide-decks/references/troubleshooting-common.md` - Common preview issues
+- Broken image: use a relative path from the deck file.
+- Cropped SVG: check the SVG `viewBox` and use `![bg fit]`.
+- Low contrast: adjust the palette or image background, then re-export.
