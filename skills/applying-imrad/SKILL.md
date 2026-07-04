@@ -1,9 +1,9 @@
 ---
-name: writing-imrad
+name: applying-imrad
 description: Use when deciding whether IMRaD fits, drafting a fresh IMRaD output, transforming mixed material into IMRaD, or reviewing an IMRaD draft for structure, evidence, and section-boundary correctness.
 ---
 
-# IMRaD
+# Applying IMRaD
 
 ## Overview
 

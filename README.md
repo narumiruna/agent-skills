@@ -32,7 +32,7 @@ Use this when you want repo-managed local copies in `~/.codex/skills`:
 just install-all
 
 # or install one skill
-just install managing-python-projects
+just install managing-python-with-uv
 ```
 
 Each install replaces the target skill directory before copying. `just install-all` installs active top-level skills only; it skips `skills/deprecated/`.
@@ -43,7 +43,7 @@ Remove copied skills when finished:
 just clean-all
 
 # or clean one skill
-just clean managing-python-projects
+just clean managing-python-with-uv
 ```
 
 `just` by itself only lists the available recipes.
@@ -54,8 +54,8 @@ Use this when you want a one-off local copy without `just`:
 
 ```shell
 mkdir -p ~/.codex/skills
-rm -rf ~/.codex/skills/managing-python-projects
-cp -R ./skills/managing-python-projects ~/.codex/skills/managing-python-projects
+rm -rf ~/.codex/skills/managing-python-with-uv
+cp -R ./skills/managing-python-with-uv ~/.codex/skills/managing-python-with-uv
 ```
 
 Repeat the same pattern for other skills as needed.
@@ -63,7 +63,7 @@ Repeat the same pattern for other skills as needed.
 ## 🧭 How To Use In Codex
 
 - Run `/skills` to inspect the installed collection.
-- Type `$managing-python-projects`, `$writing-imrad`, or another skill name to invoke one explicitly.
+- Type `$managing-python-with-uv`, `$applying-imrad`, or another skill name to invoke one explicitly.
 - Describe the task normally and let Codex choose a matching skill.
 
 If Codex does not pick up a local skill change, restart Codex and try again.
@@ -74,7 +74,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 | Skill | Use it for |
 | --- | --- |
-| `managing-python-projects` | uv-based setup, scripts, dependencies, quality gates, and packaging. |
+| `managing-python-with-uv` | uv-based projects, scripts, dependencies, quality gates, and packaging. |
 | `building-typer-clis` | Typer command structure, options, and multi-command apps. |
 | `configuring-python-logging` | stdlib logging and loguru configuration choices. |
 | `using-peewee-orm` | Peewee patterns, scoped transactions, and SQLite tests. |
@@ -85,7 +85,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | --- | --- |
 | `writing-plans` | Lean implementation plans with executable task lists and completion checks. |
 | `grilling-designs` | One-question-at-a-time plan and design grilling. |
-| `writing-imrad` | IMRaD fit checks, drafting, and review. |
+| `applying-imrad` | IMRaD fit checks, drafting, transformation, and review. |
 | `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
 
 ### Slides & Visuals

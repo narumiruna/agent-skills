@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python with uv"
+  short_description: "Handle Python projects and scripts with uv."
+  default_prompt: "Use $managing-python-with-uv to set up or update this Python project or script with uv, dependencies, quality checks, or packaging."
