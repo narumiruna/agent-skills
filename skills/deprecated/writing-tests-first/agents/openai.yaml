@@ -1,4 +1,0 @@
-interface:
-  display_name: "Test-Driven Development"
-  short_description: "Implement non-trivial changes with TDD."
-  default_prompt: "Use $writing-tests-first to drive this non-trivial change with a failing test first, then the smallest passing implementation."
