@@ -16,7 +16,8 @@ Stress-test a user's plan or design with a one-question-at-a-time interview unti
 3. Ask exactly one question at a time. Pick the highest-leverage unresolved decision whose answer unblocks later branches.
 4. For each question, include:
    - `Question:` the single thing the user must answer next.
-   - `Recommended answer:` the answer you would choose, with enough rationale to be useful.
+   - `Options:` a numbered list of likely answers the user can choose from.
+   - `Recommended answer:` the option number you would choose, with enough rationale to be useful.
 5. After each user answer, update the shared understanding, resolve dependent branches, and ask the next question.
 6. If an answer conflicts with repository evidence or an earlier decision, call out the conflict and ask the smallest clarifying question.
 
