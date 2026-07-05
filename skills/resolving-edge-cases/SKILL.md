@@ -7,6 +7,10 @@ description: Use when implementing or debugging code and the goal is to keep fin
 
 Use this before editing code when the task is to find, fix, or harden edge cases.
 
+## Default Scope
+
+When the user does not provide files, a commit, or a diff, run `git diff <base>...HEAD` against the merge base with `main` or `master`, then use the changed paths as the starting point for the loop below.
+
 ## Loop
 
 1. State the intended behavior and the boundary being hardened.
