@@ -104,6 +104,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | --- | --- |
 | `creating-agent-skills` | Creating concise, valid, discoverable agent skills. |
 | `reviewing-code` | Code review for correctness, edge cases, tests, security, and integration risk. |
+| `resolving-edge-cases` | Iteratively finding, fixing, and verifying plausible edge cases in code flows. |
 | `naming-agent-skills` | Predictable, searchable skill names. |
 | `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
