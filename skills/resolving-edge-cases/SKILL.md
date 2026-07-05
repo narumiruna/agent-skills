@@ -1,22 +1,22 @@
 ---
 name: resolving-edge-cases
-description: Use when implementing or debugging code and the goal is to keep finding and fixing plausible edge cases, harden a flow, resolve repeated review comments, or prevent adjacent regressions revealed by each fix.
+description: Use when asked to proactively find, fix, and harden plausible edge-case bugs in a code flow, or when implementing/debugging code must prevent adjacent regressions.
 ---
 
 # Resolving Edge Cases
 
-Use this before editing code when the task is to find, fix, or harden edge cases.
+Use this to actively inspect relevant code, find plausible edge-case bugs, and fix or harden them. Do not wait for the user to enumerate edge cases.
 
 ## Default Scope
 
-When the user does not provide files, a commit, or a diff, run `git diff --name-only main...HEAD`; if the repo uses `master`, run `git diff --name-only master...HEAD` instead. Use those changed paths as the starting point for the loop below.
+When the user does not provide files, a commit, or a diff, use changed paths as the starting point: run `git diff --name-only main...HEAD`; if the repo uses `master`, run `git diff --name-only master...HEAD` instead. If there is no diff, inspect the files implied by the request; if no scope can be inferred, ask for one target.
 
 ## Loop
 
-1. State the intended behavior and the boundary being hardened.
+1. Infer intended behavior from the user request, code, tests, docs, and sibling flows; state assumptions, but only ask when the rule is ambiguous.
 2. Trace the real flow end to end, including callers, sibling routes, cleanup paths, and stored state.
-3. List only plausible edge cases for that flow; skip generic checklists that cannot occur.
-4. Fix the shared root path, not only the reported symptom.
+3. Proactively inspect plausible edge cases for that flow; skip generic checklists that cannot occur.
+4. Fix or harden each plausible bug at the shared root path, not only the reported symptom.
 5. Add the smallest regression test or executable check that fails without the fix.
 6. Run the narrow check, then scan sibling callers/routes for the same pattern.
 7. Repeat while each fix exposes a concrete adjacent edge case.
@@ -43,4 +43,5 @@ Consider these only when relevant:
 - If a timeout or cancellation can fire, close or clear the resource too.
 - If input crosses a trust boundary, validate type and shape before use.
 - If a package/config points to code, prove the referenced file exists in the packaged/runtime form.
-- Stop when checks pass and the sibling scan finds no same-pattern bug; report any unverified risk plainly.
+- Stop when checks pass and the sibling scan finds no same-pattern bug; report fixed cases, checks run, and any unverified risk plainly.
+- Do not return only a checklist or plan unless the user explicitly asks for one.
