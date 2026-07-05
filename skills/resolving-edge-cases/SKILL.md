@@ -9,7 +9,7 @@ Use this before editing code when the task is to find, fix, or harden edge cases
 
 ## Default Scope
 
-When the user does not provide files, a commit, or a diff, run `git diff <base>...HEAD` against the merge base with `main` or `master`, then use the changed paths as the starting point for the loop below.
+When the user does not provide files, a commit, or a diff, run `git diff --name-only main...HEAD`; if the repo uses `master`, run `git diff --name-only master...HEAD` instead. Use those changed paths as the starting point for the loop below.
 
 ## Loop
 
