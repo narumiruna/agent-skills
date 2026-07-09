@@ -1,6 +1,6 @@
 ---
 name: resolving-edge-cases
-description: Use when asked to proactively find, fix, and harden plausible edge-case bugs in a code flow, or when implementing/debugging code must prevent adjacent regressions.
+description: Use when asked to proactively find, fix, or harden edge-case bugs in a specific code flow, or when a concrete bug fix suggests nearby same-pattern regression risks that should be inspected.
 ---
 
 # Resolving Edge Cases
