@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Draft lean, executable, and verifiable plans before non-trivial work. Use when the user asks for a plan, implementation plan, roadmap, design plan, migration plan, refactor plan, PR split, plan checklist, or completion checklist for a plan; or when the task needs sequencing, tradeoffs, assumptions, unknowns, risk control, or completion criteria. Do not use for small, obvious tasks that can be completed directly.
+description: Draft, execute, and track lean, verifiable plans for non-trivial work. Use when the user asks for a plan, implementation plan, roadmap, design plan, migration plan, refactor plan, PR split, plan checklist, completion checklist, or execution of an existing plan; or when the task needs sequencing, tradeoffs, assumptions, unknowns, risk control, or completion criteria. Do not use for small, obvious tasks that can be completed directly.
 ---
 
 # Writing Plans
@@ -18,13 +18,11 @@ Write plans that help an agent or engineer act, verify progress, and expose unce
 
 ## File Output
 
-When this skill is used, produce a plan document. Save it to the repository by default unless the user explicitly asks for chat-only output.
+When drafting a plan, save it to the repository unless the user explicitly requests chat-only output. When executing an existing saved plan, update that file in place.
 
-Use `./docs/plans/` by default unless the user specifies another path. Name plan files as `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md` or `2026-05-10_checkout-refactor-plan.md`.
+Use `./docs/plans/` by default unless the user specifies another path. Name new plan files `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a concise lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md`.
 
-Create `./docs/plans/` if it does not exist. If the user does not specify a topic, derive a concise lowercase kebab-case stem from the plan goal and report the created file path.
-
-When a plan is complete, immediately archive it by moving it to `./docs/plans/archived/YYYY-MM-DD_<topic>-plan.md`. Create `./docs/plans/archived/` if it does not exist. Report the completion evidence and archived file path.
+Create `./docs/plans/` when needed. If the user does not specify a topic, derive it from the plan goal and report the resulting file path.
 
 ## Output Shape
 
@@ -88,12 +86,20 @@ Use this shape for `Completion Checklist` items to prove the whole work outcome 
 - Do not include open-ended completion checks such as "monitor forever", "keep improving", "ensure quality", or "handle edge cases"; convert them into bounded checks.
 - End with `Completion Checklist`, not with open-ended commentary. If execution should begin immediately, put the next concrete action in the `Plan` task list.
 
+## Execution Tracking
+
+Use the plan as the live progress tracker during execution. Whenever a `Plan` task completes—sequentially or in parallel—confirm its stated acceptance method, then immediately change that item from `- [ ]` to `- [x]`. Update saved plans in place; for a chat-only plan, show the updated item in the next progress response.
+
+Record supporting evidence in the item when it is not obvious from repository state. If verification fails or is unavailable, leave the item unchecked and report the blocker or missing evidence. Do not defer or batch checkbox updates.
+
+Apply the same rule to each `Completion Checklist` item as soon as its required evidence is available. If later work invalidates that evidence, immediately change the item back to `- [ ]` and reverify it after the relevant work. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
+
 ## Completion Review
 
 Treat a plan as complete only when all of these are true:
 
 1. Every required `Plan` task list item is checked or explicitly marked as not applicable using `- [x] Not applicable: <reason>`.
-2. Every `Completion Checklist` item is checked and has supporting evidence when the evidence is not obvious from repository state. Put evidence in the checklist item or in the completion review response, using commands, file paths, PR or review status, deployment state, or explicit user acceptance.
+2. Every `Completion Checklist` item is checked, reverified after any work that could invalidate it, and has supporting evidence when the evidence is not obvious from repository state. Put evidence in the checklist item or in the completion review response, using commands, file paths, PR or review status, deployment state, or explicit user acceptance.
 3. Any `Unknowns` that affected execution are resolved, converted into follow-up work, or explicitly accepted by the user.
 4. Any unresolved `Risks` are documented as accepted, mitigated, or moved to follow-up work.
 5. Required handoff, documentation, or release notes are completed when the plan calls for them.
@@ -102,7 +108,7 @@ Do not infer completion from implementation work alone. If evidence is missing, 
 
 At the end of any task that uses this skill, inspect `./docs/plans/*.md` for active plans that appear complete. If an active plan appears complete, run the Completion Review rules before responding.
 
-When the plan is complete, archive it immediately under `./docs/plans/archived/` and report the archived path. Do not archive if completion evidence is missing. Do not leave a completed plan in `./docs/plans/`. If an archived file with the same name already exists, stop and report the conflict instead of overwriting.
+When the plan is complete, create `./docs/plans/archived/` if needed, archive the plan there immediately, and report the archived path. Do not archive if completion evidence is missing. Do not leave a completed plan in `./docs/plans/`. If an archived file with the same name already exists, stop and report the conflict instead of overwriting.
 
 ## Useful Distinctions
 
