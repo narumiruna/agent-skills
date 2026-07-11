@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Draft lean, executable, and verifiable plans before non-trivial work. Use when the user asks for a plan, implementation plan, roadmap, design plan, migration plan, refactor plan, PR split, plan checklist, or completion checklist for a plan; or when the task needs sequencing, tradeoffs, assumptions, unknowns, risk control, or completion criteria. Do not use for small, obvious tasks that can be completed directly.
+description: Draft, execute, and track lean, verifiable plans for non-trivial work. Use when the user asks for a plan, implementation plan, roadmap, design plan, migration plan, refactor plan, PR split, plan checklist, completion checklist, or execution of an existing plan; or when the task needs sequencing, tradeoffs, assumptions, unknowns, risk control, or completion criteria. Do not use for small, obvious tasks that can be completed directly.
 ---
 
 # Writing Plans
@@ -92,14 +92,14 @@ Use the plan as the live progress tracker during execution. Whenever a `Plan` ta
 
 Record supporting evidence in the item when it is not obvious from repository state. If verification fails or is unavailable, leave the item unchecked and report the blocker or missing evidence. Do not defer or batch checkbox updates.
 
-Apply the same rule to each `Completion Checklist` item as soon as its required evidence is available. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
+Apply the same rule to each `Completion Checklist` item as soon as its required evidence is available. If later work invalidates that evidence, immediately change the item back to `- [ ]` and reverify it after the relevant work. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
 
 ## Completion Review
 
 Treat a plan as complete only when all of these are true:
 
 1. Every required `Plan` task list item is checked or explicitly marked as not applicable using `- [x] Not applicable: <reason>`.
-2. Every `Completion Checklist` item is checked and has supporting evidence when the evidence is not obvious from repository state. Put evidence in the checklist item or in the completion review response, using commands, file paths, PR or review status, deployment state, or explicit user acceptance.
+2. Every `Completion Checklist` item is checked, reverified after any work that could invalidate it, and has supporting evidence when the evidence is not obvious from repository state. Put evidence in the checklist item or in the completion review response, using commands, file paths, PR or review status, deployment state, or explicit user acceptance.
 3. Any `Unknowns` that affected execution are resolved, converted into follow-up work, or explicitly accepted by the user.
 4. Any unresolved `Risks` are documented as accepted, mitigated, or moved to follow-up work.
 5. Required handoff, documentation, or release notes are completed when the plan calls for them.
@@ -108,7 +108,7 @@ Do not infer completion from implementation work alone. If evidence is missing, 
 
 At the end of any task that uses this skill, inspect `./docs/plans/*.md` for active plans that appear complete. If an active plan appears complete, run the Completion Review rules before responding.
 
-When the plan is complete, archive it immediately under `./docs/plans/archived/` and report the archived path. Do not archive if completion evidence is missing. Do not leave a completed plan in `./docs/plans/`. If an archived file with the same name already exists, stop and report the conflict instead of overwriting.
+When the plan is complete, create `./docs/plans/archived/` if needed, archive the plan there immediately, and report the archived path. Do not archive if completion evidence is missing. Do not leave a completed plan in `./docs/plans/`. If an archived file with the same name already exists, stop and report the conflict instead of overwriting.
 
 ## Useful Distinctions
 
