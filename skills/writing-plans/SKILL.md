@@ -88,14 +88,11 @@ Use this shape for `Completion Checklist` items to prove the whole work outcome 
 
 ## Execution Tracking
 
-When executing a saved plan, use the plan document as the live progress tracker:
+Use the plan as the live progress tracker during execution. Whenever a `Plan` task completes—sequentially or in parallel—confirm its stated acceptance method, then immediately change that item from `- [ ]` to `- [x]`. Update saved plans in place; for a chat-only plan, show the updated item in the next progress response.
 
-1. Complete and verify one `Plan` task.
-2. Immediately update that task in the plan file from `- [ ]` to `- [x]`.
-3. Record supporting evidence in the task item when it is not obvious from repository state.
-4. Continue to the next task.
+Record supporting evidence in the item when it is not obvious from repository state. If verification fails or is unavailable, leave the item unchecked and report the blocker or missing evidence. Do not defer or batch checkbox updates.
 
-Never check a task before its stated acceptance method succeeds, and never defer or batch checkbox updates. Check each `Completion Checklist` item as soon as its required evidence is available. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
+Apply the same rule to each `Completion Checklist` item as soon as its required evidence is available. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
 
 ## Completion Review
 
