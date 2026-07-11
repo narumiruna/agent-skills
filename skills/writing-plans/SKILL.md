@@ -18,13 +18,11 @@ Write plans that help an agent or engineer act, verify progress, and expose unce
 
 ## File Output
 
-When this skill is used, produce a plan document. Save it to the repository by default unless the user explicitly asks for chat-only output.
+When drafting a plan, save it to the repository unless the user explicitly requests chat-only output. When executing an existing saved plan, update that file in place.
 
-Use `./docs/plans/` by default unless the user specifies another path. Name plan files as `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md` or `2026-05-10_checkout-refactor-plan.md`.
+Use `./docs/plans/` by default unless the user specifies another path. Name new plan files `YYYY-MM-DD_<topic>-plan.md`, where `<topic>` is a concise lowercase kebab-case stem, for example `2026-05-10_auth-migration-plan.md`.
 
-Create `./docs/plans/` if it does not exist. If the user does not specify a topic, derive a concise lowercase kebab-case stem from the plan goal and report the created file path.
-
-When a plan is complete, immediately archive it by moving it to `./docs/plans/archived/YYYY-MM-DD_<topic>-plan.md`. Create `./docs/plans/archived/` if it does not exist. Report the completion evidence and archived file path.
+Create `./docs/plans/` when needed. If the user does not specify a topic, derive it from the plan goal and report the resulting file path.
 
 ## Output Shape
 
@@ -87,6 +85,17 @@ Use this shape for `Completion Checklist` items to prove the whole work outcome 
 - Mention tradeoffs only when they affect a decision the user or implementer must make.
 - Do not include open-ended completion checks such as "monitor forever", "keep improving", "ensure quality", or "handle edge cases"; convert them into bounded checks.
 - End with `Completion Checklist`, not with open-ended commentary. If execution should begin immediately, put the next concrete action in the `Plan` task list.
+
+## Execution Tracking
+
+When executing a saved plan, use the plan document as the live progress tracker:
+
+1. Complete and verify one `Plan` task.
+2. Immediately update that task in the plan file from `- [ ]` to `- [x]`.
+3. Record supporting evidence in the task item when it is not obvious from repository state.
+4. Continue to the next task.
+
+Never check a task before its stated acceptance method succeeds, and never defer or batch checkbox updates. Check each `Completion Checklist` item as soon as its required evidence is available. For an inapplicable item, use `- [x] Not applicable: <reason>` rather than silently skipping it.
 
 ## Completion Review
 
