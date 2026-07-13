@@ -1,6 +1,6 @@
 ## GOTCHA
 
-- `skill-creator`'s `quick_validate.py` requires `PyYAML`; in this repo, `uv run --with pyyaml python /home/narumi/.codex/skills/.system/skill-creator/scripts/quick_validate.py <skill-dir>` is more reliable than plain `uv run python`.
+- Symptom: `skill-creator`'s `quick_validate.py` raises `ModuleNotFoundError: yaml` even with `uv run --with pyyaml` under the default Python 3.14. Cause: that one-off environment did not inject PyYAML. Fix: run `UV_CACHE_DIR=/tmp/uv-cache uv run --no-project --python 3.13 --with pyyaml python "$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py" <skill-dir>`.
 - `skill-creator`'s `init_skill.py` creates the target skill directory and `SKILL.md` before it validates `agents/openai.yaml` metadata, so a bad `--interface short_description` can leave a partially initialized skill directory behind.
 - In this sandbox, `~/.cache/uv` may be read-only; when running one-off `uv run --with ...` tools, set `UV_CACHE_DIR=/tmp/uv-cache` first for more reliable behavior.
 - In this sandbox, the first run of skill metadata tools like `uv run --with pyyaml` may still need temporary network access if the local cache does not already contain the package, so `uv` can fetch `PyYAML`.
@@ -14,4 +14,4 @@
 ## TASTE
 - Prefer preserving a skill's original user intent when naming or renaming skills; do not force `<verb-ing>-<object>` if it changes the meaning.
 - `writing-git-commits` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
-- `maintaining-memory-md` should trigger at the start of repository conversations, record repeatable mistakes as `GOTCHA`, correct wrong or stale memory entries in place, and store durable user preferences under `TASTE`.
+- `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA` or durable `TASTE` emerges, it should create the repository-root file without extra confirmation and revise stale or similar entries in place.
