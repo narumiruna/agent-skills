@@ -1,4 +1,4 @@
 interface:
   display_name: "Applying TDD"
-  short_description: "Implement non-trivial changes with TDD."
-  default_prompt: "Use $applying-tdd to drive this non-trivial change with a failing test first, then the smallest passing implementation."
+  short_description: "Apply TDD to non-trivial product and library code."
+  default_prompt: "Use $applying-tdd for this non-trivial product or library change: start with a failing test, then make the smallest passing implementation. Do not apply TDD to files under scripts/; validate those scripts directly."
