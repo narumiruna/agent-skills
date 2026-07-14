@@ -88,6 +88,12 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `applying-imrad` | IMRaD fit checks, drafting, transformation, and review. |
 | `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
 
+### UI/UX Design
+
+| Skill | Use it for |
+| --- | --- |
+| `designing-user-interfaces` | HIG-informed, accessible interfaces that preserve agency and useful capability. |
+
 ### Slides & Visuals
 
 | Skill | Use it for |
