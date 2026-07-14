@@ -26,6 +26,7 @@ Before proposing a design, identify the primary user, current context, primary t
 11. **Avoid false simplicity.** A cleaner surface is worse if it increases search time, navigation depth, repeated effort, uncertainty, hidden dependencies, context loss, or inaccessible interaction.
 12. **Adapt without losing identity.** Preserve recognizable structure and priority across viewport sizes, text sizes, localization, right-to-left layout, input methods, permissions, and content states.
 13. **Follow conventions deliberately.** Prefer established platform and product patterns unless deviation produces a specific, testable usability gain. On Apple platforms, consult the relevant HIG platform and component topics.
+14. **Give each workspace a distinct responsibility.** When multiple surfaces handle the same objects, assign one canonical owner for each workflow instead of duplicating full editors. Keep cross-workspace handoffs shallow, predictable, and context preserving.
 
 ## Visibility Decision
 
@@ -50,6 +51,7 @@ For each element, ask:
 6. Is the proposed entry point labeled and predictable?
 7. Would hiding it increase memory, search, navigation, or recovery burden?
 8. Does the design reduce complexity, or merely move it elsewhere?
+9. Does the action apply to the object’s current lifecycle state, or should it appear only after a prerequisite such as saving?
 
 When evidence is missing, state the assumption that drives the classification. Do not pretend frequency or user priority is known.
 
@@ -65,20 +67,21 @@ Organize the interface in this order:
 4. Separate primary, secondary/supporting, contextual, and advanced layers.
 5. Make scanning order and action priority clear through layout before decoration; account for right-to-left reading order.
 6. Check narrow and wide layouts, large text, long localization, empty and dense data, loading, errors, offline behavior, permissions, and assistive-technology focus order; hierarchy must survive them all.
+7. Make each title, status, badge, summary, and instruction answer a distinct question. Remove synonymous layers that repeat identity or state without helping the next decision.
 
 Prefer the fewest visible elements that still support efficient, predictable use. Fewer elements are not automatically better.
 
 ## Design Workflow
 
 1. **Frame the task.** Identify user, purpose, context, frequency, stakes, constraints, input methods, and success signal.
-2. **Inventory capability and state.** List actions, information, dependencies, current location, loading, empty, success, error, offline, disabled, permission-denied, and unsaved-work states before simplifying.
+2. **Inventory capability, state, and ownership.** List actions, information, dependencies, current location, loading, empty, success, error, offline, disabled, permission-denied, and unsaved-work states before simplifying. Identify which surface owns selection and drafts so disclosure, responsive presentation, refreshes, and handoffs do not reset work.
 3. **Classify visibility.** Apply the visibility table and explain uncertain classifications.
 4. **Structure the hierarchy.** Define regions, groups, reading and focus order, primary action, and disclosure paths. Generally limit prominent actions to one or two per view.
 5. **Protect discoverability.** Give every hidden capability a clear label, obvious entry point, predictable location, minimal depth, return path, and consistent interaction.
 6. **Protect accessibility.** Check semantic labels, contrast, noncolor cues, text scaling and reflow, target size and spacing, keyboard and assistive operation, gesture alternatives, and reduced motion.
 7. **Match feedback to stakes.** Put routine status and validation near the affected object. Use interruption only when the information is critical and actionable; make irreversible or unexpected consequences explicit.
 8. **Audit overload and false simplicity.** Check competing emphasis, dense choices, decorative noise, extra steps, menu hunting, context loss, hidden status, recall, and repeated work.
-9. **Test adaptation and edge states.** Exercise the smallest and largest layouts, largest text, long translated and right-to-left content, empty and dense data, all supported inputs, errors, offline operation, permissions, cancellation, and recovery.
+9. **Test adaptation, transitions, and edge states.** Exercise the smallest and largest layouts, largest text, long translated and right-to-left content, empty and dense data, all supported inputs, errors, offline operation, permissions, cancellation, and recovery. Test stateful transitions — create, switch panel/item/workspace, refresh, reject or accept discard, save, fail, and retry — because static screenshots cannot prove draft preservation or recovery.
 10. **Explain and validate tradeoffs.** Tie each choice to purpose, frequency, consequence, context, evidence, accessibility, or convention; name what user evidence or testing would change it.
 
 ## Required Output

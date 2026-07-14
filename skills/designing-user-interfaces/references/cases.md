@@ -8,11 +8,17 @@ Use these examples as contextual precedents, not rigid templates. Match the unde
 
 **Avoid:** Put search, filters, export, and create into one unlabeled overflow menu merely to produce an empty header. This increases search cost and hides the primary path.
 
+## Catalog and Canonical Editor
+
+**Prefer:** Give catalog and editing work distinct responsibilities. Let the catalog own browsing, search, sharing, deletion, and lifecycle management; let one canonical editor own spatial or otherwise specialized changes. Make `Open on map` or its equivalent a one-step handoff that carries the selected object and returns predictably.
+
+**Avoid:** Mount the same full editor in both the catalog and workbench, or require a second `Edit` mode after opening the canonical editor. Duplicate editors create competing mental models, state synchronization risk, and redundant controls.
+
 ## Object Detail View
 
-**Prefer:** Show identity, current status, essential metadata, and the next likely action near the top. Put long history, diagnostics, and specialized metadata in labeled sections or tabs while preserving object context.
+**Prefer:** Show identity, current status, essential metadata, and the next likely action near the top. Give each header layer a separate purpose — for example, object name, meaningful revision, and actionable validation near Save. Put long history, diagnostics, and specialized metadata in labeled sections or tabs while preserving object context.
 
-**Avoid:** Reduce the page to a name and one button, forcing users through separate screens to understand status or consequences.
+**Avoid:** Reduce the page to a name and one button, forcing users through separate screens to understand status or consequences. Also avoid stacking synonymous labels such as `Draft route`, `New route`, and a generic draft instruction when they do not change the next decision.
 
 ## Settings
 
@@ -58,9 +64,9 @@ Use these examples as contextual precedents, not rigid templates. Match the unde
 
 ## Mobile or Narrow Viewports
 
-**Prefer:** Keep the primary task, essential status, and current location apparent. Collapse secondary groups behind labeled controls while maintaining a shallow, reversible path. Reflow at large text sizes instead of shrinking targets or truncating useful content.
+**Prefer:** Keep the primary task, essential status, and current location apparent. For a desktop picker/canvas/inspector workspace, show one primary region at a time behind explicit labels such as `Map`, `Choose`, and `Edit`, while keeping selection and draft state in shared ownership. Reflow at large text sizes instead of shrinking targets or truncating useful content.
 
-**Avoid:** Treat an unlabeled hamburger or swipe gesture as a universal solution. Constrained space changes presentation, not the need for discoverability, readable text, or accessible targets.
+**Avoid:** Stack every desktop region into one long mobile page, remount panels in a way that loses drafts, or treat an unlabeled hamburger or swipe gesture as a universal solution. Constrained space changes presentation, not the need for discoverability, readable text, accessible targets, or state continuity.
 
 ## Modal Tasks
 
@@ -73,6 +79,12 @@ Use these examples as contextual precedents, not rigid templates. Match the unde
 **Prefer:** Let people experience the product quickly, teach one relevant action in context, make tutorials optional and findable later, and postpone nonessential setup.
 
 **Avoid:** Front-load a feature tour people must memorize, repeatedly show skipped onboarding, explain standard controls, or require configuration that a useful default can avoid.
+
+## Utility Typography Across Scripts
+
+**Prefer:** In an operational interface that mixes Latin and CJK or other scripts, use a compatible, legible UI family across headings and body text. Reserve monospaced type for coordinates, identifiers, or technical values, and use decorative display type only when expression is a real product goal and the script pairing has been tested.
+
+**Avoid:** Apply a decorative Latin display face to hierarchy labels while unsupported scripts fall back to an unrelated system font. The split makes one hierarchy feel like two visual systems and can make a dense tool harder to scan.
 
 ## Accessibility and Multiple Inputs
 

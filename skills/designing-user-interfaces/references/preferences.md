@@ -9,6 +9,7 @@ Read this file when the task reaches visual direction or when comparing multiple
 | Containers | Use open grouping and whitespace before cards or bordered panels | A boundary communicates interaction, selection, ownership, or a distinct state |
 | Corners | Use restrained, consistent radii | Existing design-system tokens or platform conventions specify otherwise |
 | Color | Use a limited functional palette for hierarchy, state, and feedback, with noncolor cues for essential meaning | Brand expression is important and does not compete with meaning, contrast, or appearance adaptation |
+| Typography | Use a legible, compatible UI family for operational surfaces; reserve monospaced type for technical values | Editorial or expressive presentation is a product goal, the full script set has been tested, and display type does not weaken scanning or fallback consistency |
 | Motion | Use brief, cancellable motion to explain continuity, causality, or state change | Reduced-motion preferences, urgency, performance, repeated use, or discomfort argues for a reduced or static alternative |
 | Labels | Prefer concise verb labels and familiar symbols; use text when it is clearer | Space is constrained and the icon is conventional, unambiguous, labeled for assistive technology, and not the only route to a core action |
 | Action emphasis | Prefer one primary nondestructive action, with at most one additional prominent action | Evidence shows that multiple peer actions are equally central; never make a destructive action the default |
