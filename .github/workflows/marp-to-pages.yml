@@ -6,7 +6,11 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - examples/slides/**
   pull_request:
+    paths:
+      - examples/slides/**
     types:
       - opened
       - reopened
