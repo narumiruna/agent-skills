@@ -1,4 +1,4 @@
 interface:
   display_name: "Resolving Edge Cases"
   short_description: "Find and fix plausible edge cases in code flows."
-  default_prompt: "Use $resolving-edge-cases to harden this code path by finding plausible edge cases, fixing the shared root cause, and verifying each fix."
+  default_prompt: "Use $resolving-edge-cases to harden this code path by confirming plausible edge-case failures, fixing the shared root cause, and verifying each fix."
