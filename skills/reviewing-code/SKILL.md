@@ -5,122 +5,47 @@ description: Use when reviewing code changes for correctness, maintainability, r
 
 # Reviewing Code
 
-## Purpose
+Review the requested change, not the entire codebase. Prioritize correctness and production risk over surface style. Treat the review as read-only unless the user asks you to address findings.
 
-Review code changes from a senior engineer's perspective. Prioritize issues that affect correctness, maintainability, security, performance, testability, and production stability.
+## Scope and Evidence
 
-Do not focus only on surface style or formatting unless the user explicitly asks for that.
+1. Determine the review target and comparison base from the request and repository context.
+   - For a branch or pull request, compare against the merge base of its target branch; do not assume the target is `main`.
+   - For a commit, patch, staged change, or working tree, inspect the exact requested change.
+   - When asked to audit whole source files rather than a change, state that broader scope explicitly.
+2. Infer intended behavior from the request, issue or PR description, tests, documentation, and surrounding code. State a reasonable assumption when intent remains unclear.
+3. Inspect the diff and enough related code to trace changed behavior through callers, downstream consumers, tests, and contracts.
+4. Run focused tests or static checks when feasible. Passing checks are supporting evidence, not proof that the behavior is correct.
+5. Clearly separate confirmed problems, inferred risks, and anything you could not verify.
+
+Report findings introduced by the reviewed change or made materially worse or newly reachable by it. Keep unrelated pre-existing problems out of the main findings unless the user requested a broader audit; mention a directly relevant pre-existing problem separately and label it clearly.
 
 ## Review Workflow
 
-1. Understand the intended change.
-   - Infer the intended behavior from the user request, diff, issue, PR/MR description, tests, and surrounding code.
-   - If the intent is unclear, state your reasonable assumption.
-   - Clearly separate confirmed problems, inferred risks, and things you cannot verify.
+1. Check correctness and relevant edge cases first.
+   - Trace logic, state changes, error handling, side effects, and boundary behavior.
+   - Consider only plausible cases such as empty or malformed input, ordering assumptions, time or numeric boundaries, concurrency, retries, partial failure, authorization, and resource cleanup.
+2. Check compatibility and integration.
+   - Verify changed interfaces against existing callers and data formats.
+   - Inspect relevant schemas, migrations, jobs, queues, caches, feature flags, permissions, configuration, and downstream behavior.
+3. Check security and privacy.
+   - Review trust boundaries, authentication, authorization, validation, secret handling, logging, injection, unsafe deserialization, dependencies, and sensitive-data exposure when relevant.
+4. Check performance and resources.
+   - Look for plausible repeated work, excessive I/O, N+1 queries, unsuitable data structures, blocking calls, leaks, and scalability regressions for the expected workload.
+5. Check tests and maintainability.
+   - Confirm tests cover the changed behavior, important error paths, and concrete regressions. Name exact missing cases without demanding excessive tests for trivial changes.
+   - Raise naming, structure, duplication, abstraction, or complexity concerns only when they create a concrete maintenance cost or risk.
 
-2. Check correctness first.
-   - Look for logic errors, missing branches, boundary mistakes, off-by-one errors, state pollution, error-handling gaps, and unintended side effects.
-   - Check whether the code handles empty inputs, single items, very large inputs, null, undefined, NaN, missing fields, and malformed data when relevant.
-   - Verify changed interfaces remain compatible with existing callers.
+## Findings
 
-3. Run an edge-case pass.
-   - Every review must include a separate edge-case check; do not review only the happy path.
-   - Consider only edge cases relevant to this change, such as:
-     - empty input, single item, very large input
-     - null, undefined, NaN, missing keys, malformed records
-     - boundary values, inclusive/exclusive ranges, off-by-one behavior
-     - duplicate values, unsorted input, hidden ordering assumptions
-     - time zones, daylight saving time, date boundaries, clock skew
-     - floating-point error, integer overflow, divide by zero
-     - concurrent access, retries, idempotency, race conditions
-     - partial failure, timeout, cancellation, rollback
-     - backward compatibility, existing data formats, existing API contracts
-     - permissions, ownership, tenant isolation, unauthorized access
-     - resource cleanup, file handles, DB connections, locks, memory growth
-   - Do not mechanically list every category. Report only edge cases that are plausible for the change.
+Lead with findings, ordered by severity:
 
-4. Check integration risk.
-   - Review API contracts, database schemas, migrations, background jobs, queues, caches, feature flags, permissions, and configuration when relevant.
-   - Identify behavior that could affect existing users, downstream systems, or production operations.
+- Critical: must fix; enables severe security impact, data loss, or widespread production failure.
+- Major: should fix before merge; causes important correctness, reliability, security, or maintainability risk.
+- Minor: a real but low-risk problem worth correcting.
 
-5. Check security and privacy.
-   - Review authentication, authorization, input validation, secret handling, logging, injection, unsafe deserialization, and sensitive-data exposure.
-   - Flag high-risk dependencies, permission settings, and network behavior.
+Each finding must include the file and line when available, the concrete triggering scenario, its impact, and an actionable fix. Do not invent context or report speculative risks without a plausible path to failure. Omit preference-only comments and nits unless the user explicitly asks for style or clarity feedback.
 
-6. Check performance.
-   - Look for unnecessary repeated work, excessive I/O, N+1 queries, unsuitable data structures, memory growth, blocking calls, and scalability issues.
-   - Raise performance findings only when they are plausible for the expected workload.
+If there are no findings, say so directly and note any meaningful residual risk or verification gap. Add a short summary only when it helps explain a complex change. Discuss tests separately only when there is a specific coverage gap.
 
-7. Check tests.
-   - Confirm tests cover the main behavior, edge cases, error paths, and regression cases.
-   - If coverage is insufficient, name the exact test cases to add.
-   - Do not demand excessive tests for trivial changes.
-
-8. Check readability and maintainability.
-   - Comment on naming, structure, duplication, abstraction level, or complexity only when it creates real maintenance cost or risk.
-   - Avoid personal-preference comments. Tie each suggestion to a concrete risk or cost.
-
-## Output Format
-
-Unless the user asks for another format, use this structure.
-
-### Summary
-
-Briefly describe what the change appears to do and the overall risk level.
-
-### Findings
-
-List findings by severity:
-
-- Critical: must fix before merge; can cause production failure, security issues, data loss, or severe correctness bugs.
-- Major: should fix before merge; important correctness, reliability, or maintainability issue.
-- Minor: useful but low-risk improvement.
-- Nit: optional style or clarity suggestion.
-
-Each finding should include:
-
-- severity
-- file and line number, when available
-- problem description
-- why it matters
-- suggested fix
-
-### Edge Cases
-
-List relevant edge cases and mark each as one of:
-
-- handled by the code
-- covered by tests
-- risky but acceptable
-- missing; should be fixed
-
-If you find no important edge-case gap, say so directly and list anything you still could not verify.
-
-### Tests
-
-State whether the existing tests are sufficient. If not, list the specific tests to add.
-
-### Merge Recommendation
-
-Use one conclusion:
-
-- Approve
-- Approve with minor comments
-- Request changes
-- Needs more context
-
-## Review Standards
-
-Feedback must be specific and actionable.
-
-Prefer this style:
-
-> Major — `src/foo.py:42`: This returns early when parsing fails, so `close()` is skipped. Use a context manager or `try/finally` so the resource is always released.
-
-Avoid this style:
-
-> This is bad.
-
-Do not invent line numbers, behavior, or context. If required context is missing, say what cannot be verified.
-
-If you find no blocking issues, say that directly and summarize the remaining risk.
+Give a merge recommendation only for a pull request, merge request, or explicit mergeability question. Use one conclusion: `Approve`, `Approve with minor comments`, `Request changes`, or `Needs more context`.
