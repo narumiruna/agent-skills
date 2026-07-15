@@ -332,6 +332,26 @@ def test_verify_cleanup_result_rejects_unexpected_removed_ids(tmp_path: Path) ->
     assert "unexpected_removed_ids=['2']" in str(excinfo.value)
 
 
+def test_verify_cleanup_result_allows_concurrent_added_ids(tmp_path: Path) -> None:
+    snapshot_db = tmp_path / "history-before.db"
+    live_db = tmp_path / "history-live.db"
+    create_history_db(snapshot_db, ["target", "existing"])
+    create_history_db(live_db, ["existing", "concurrent"])
+
+    result = MODULE.verify_cleanup_result(
+        snapshot_db,
+        live_db,
+        target_ids=["target"],
+        post_audit={"typos": {"candidate_count": 0}},
+    )
+
+    assert result == {
+        "removed_ids": ["target"],
+        "added_ids": ["concurrent"],
+        "target_ids": ["target"],
+    }
+
+
 def test_rollback_preserves_live_database_without_concurrent_rows(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
