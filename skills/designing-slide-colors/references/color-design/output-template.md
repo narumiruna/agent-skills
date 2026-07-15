@@ -84,11 +84,11 @@ Always use this exact structure:
 
 ## Validation Checklist
 
-- [x] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
-- [x] Accent color stands out clearly from primary
-- [x] Palette limited to 5-7 colors maximum
-- [x] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
-- [x] Consistent color usage across all slide types
+- [ ] Verify body-text contrast is ≥ 4.5:1 (≥ 7:1 for AAA)
+- [ ] Verify the accent remains distinct from the primary color
+- [ ] Verify the palette is limited to 5-7 colors
+- [ ] Verify the exported deck on the target projector
+- [ ] Verify color meanings stay consistent across slide types
 ```
 
 ---
@@ -123,17 +123,17 @@ Dark Technical — chosen because the presentation focuses on system architectur
 
 ## Notes & Constraints
 
-* All text contrasts exceed 7:1 for WCAG AAA accessibility
-* Tested on projector—colors remain distinct even in bright rooms
+* Text Primary/Background is 11.25:1 (AAA); Text Secondary/Background is 4.52:1 (AA)
+* Projector performance remains unverified until the exported deck is tested in the target room
 * Amber accent used sparingly (max 5-10% of visual space) to maintain focus
 * Avoid pure white text to reduce eye strain in dark rooms
 
 ## Validation Checklist
 
-- [x] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
+- [x] Text Primary and Text Secondary contrast ratios are calculated above
 - [x] Accent color stands out clearly from primary
 - [x] Palette limited to 5-7 colors maximum
-- [x] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
+- [ ] Verify the exported deck on the target projector
 - [x] Consistent color usage across all slide types
 
 ---
@@ -168,17 +168,17 @@ Light Professional — chosen for a formal business setting with mixed audience 
 
 ## Notes & Constraints
 
-* Text Primary/Background contrast is 14.2:1 (exceeds AAA)
-* All colors print well on standard office printers
+* Text Primary/Background contrast is 13.38:1 (exceeds AAA)
+* Print performance remains unverified until a representative handout is printed
 * Accent color (orange) used only for positive metrics and emphasis (< 10% usage)
 * Conservative palette appropriate for C-level audience
 
 ## Validation Checklist
 
-- [x] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
+- [x] Text Primary/Background contrast exceeds 7:1
 - [x] Accent color stands out clearly from primary
 - [x] Palette limited to 5-7 colors maximum
-- [x] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
+- [ ] Verify a representative print and the exported deck on the target projector
 - [x] Consistent color usage across all slide types
 
 ---
@@ -214,16 +214,16 @@ Accent-Driven — chosen for a high-impact product launch requiring strong visua
 ## Notes & Constraints
 
 * Accent color used sparingly—only for product name, CTAs, and critical stats (< 10%)
-* High contrast (16.8:1 for text) ensures readability in large venues
+* Text Primary/Background contrast is 15.43:1; venue readability still requires an exported-deck check
 * Minimal design philosophy: every element must serve a purpose
 * Ample whitespace between elements
 
 ## Validation Checklist
 
-- [x] Text contrast ratio ≥ 4.5:1 for body text (≥ 7:1 for AAA)
+- [x] Text Primary/Background contrast exceeds 7:1
 - [x] Accent color stands out clearly from primary
 - [x] Palette limited to 5-7 colors maximum
-- [x] Colors work on projector (avoid pure black #000000 / pure white #FFFFFF)
+- [ ] Verify the exported deck in the target venue
 - [x] Consistent color usage across all slide types
 
 ---

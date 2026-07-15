@@ -4,19 +4,27 @@
 # ///
 """Generate slide color palettes from brand colors or strategies."""
 
-from colorsys import hls_to_rgb, rgb_to_hls
+import re
+import shlex
 import sys
+from colorsys import hls_to_rgb, rgb_to_hls
+from pathlib import Path
 from typing import Any, cast
+
+SCRIPT_PATH = Path(__file__).resolve()
+CONTRAST_CHECKER_PATH = SCRIPT_PATH.with_name("check_contrast.py")
 
 
 def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
-    """Convert hex color to RGB tuple."""
-    hex_color = hex_color.lstrip("#")
-    if len(hex_color) != 6:
-        raise ValueError(f"Invalid hex color: {hex_color}")
-    r = int(hex_color[0:2], 16)
-    g = int(hex_color[2:4], 16)
-    b = int(hex_color[4:6], 16)
+    """Convert a three-channel hexadecimal color to an RGB tuple."""
+    normalized = hex_color.removeprefix("#")
+    if re.fullmatch(r"[0-9A-Fa-f]{6}", normalized) is None:
+        raise ValueError(
+            f"Invalid hex color: {hex_color!r} (expected #RRGGBB or RRGGBB)"
+        )
+    r = int(normalized[0:2], 16)
+    g = int(normalized[2:4], 16)
+    b = int(normalized[4:6], 16)
     return (r, g, b)
 
 
@@ -24,6 +32,30 @@ def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
     """Convert RGB tuple to hex color."""
     r, g, b = [max(0, min(255, int(x))) for x in rgb]
     return f"#{r:02x}{g:02x}{b:02x}"
+
+
+def relative_luminance(rgb: tuple[int, int, int]) -> float:
+    """Calculate WCAG relative luminance for an RGB color."""
+
+    def adjust(value: int) -> float:
+        channel = value / 255.0
+        return (
+            channel / 12.92
+            if channel <= 0.03928
+            else ((channel + 0.055) / 1.055) ** 2.4
+        )
+
+    red, green, blue = rgb
+    return 0.2126 * adjust(red) + 0.7152 * adjust(green) + 0.0722 * adjust(blue)
+
+
+def contrast_ratio(color1: str, color2: str) -> float:
+    """Calculate the WCAG contrast ratio between two hex colors."""
+    luminance1 = relative_luminance(hex_to_rgb(color1))
+    luminance2 = relative_luminance(hex_to_rgb(color2))
+    lighter = max(luminance1, luminance2)
+    darker = min(luminance1, luminance2)
+    return (lighter + 0.05) / (darker + 0.05)
 
 
 def adjust_lightness(hex_color: str, factor: float) -> str:
@@ -57,6 +89,10 @@ def generate_palette_from_brand(
     Returns:
         Dictionary with 7 color roles
     """
+    if style not in {"light", "dark"}:
+        raise ValueError("Style must be 'light' or 'dark'")
+    brand_color = rgb_to_hex(hex_to_rgb(brand_color)).upper()
+
     if style == "dark":
         return {
             "Background": "#1E1E1E",
@@ -206,71 +242,61 @@ PALETTE_METADATA = {
         "name": "Code-Focused Blue",
         "category": "Dark Technical",
         "best_for": "Code-heavy presentations, technical demos, system architecture",
-        "contrast": "Text Primary/Background = 8.2:1, Primary/Background = 4.8:1",
         "notes": "Inspired by VS Code theme; familiar to developers",
     },
     "terminal-dark": {
         "name": "Terminal Dark",
         "category": "Dark Technical",
         "best_for": "Terminal commands, CLI tools, DevOps presentations",
-        "contrast": "Text Primary/Background = 10.5:1, Primary/Background = 6.2:1",
         "notes": "High contrast for projectors; three-color semantic system",
     },
     "midnight-professional": {
         "name": "Midnight Professional",
         "category": "Dark Technical",
         "best_for": "Professional technical presentations with a softer feel",
-        "contrast": "Text Primary/Background = 9.8:1, Primary/Background = 4.5:1",
         "notes": "Less harsh than pure black backgrounds",
     },
     "clean-corporate": {
         "name": "Clean Corporate",
         "category": "Light Professional",
         "best_for": "Business presentations, documentation, formal settings",
-        "contrast": "Text Primary/Background = 14.2:1, Primary/Background = 5.8:1",
         "notes": "Conservative and widely acceptable",
     },
     "modern-minimal": {
         "name": "Modern Minimal",
         "category": "Light Professional",
         "best_for": "Modern tech companies, product presentations, startups",
-        "contrast": "Text Primary/Background = 15.8:1, Primary/Background = 7.1:1",
         "notes": "Material Design inspired; clean and modern",
     },
     "warm-professional": {
         "name": "Warm Professional",
         "category": "Light Professional",
         "best_for": "Creative presentations, design reviews, brand-focused decks",
-        "contrast": "Text Primary/Background = 13.5:1, Primary/Background = 6.8:1",
         "notes": "Warm palette for approachable, friendly tone",
     },
     "minimal-teal": {
         "name": "Minimal with Teal Focus",
         "category": "Accent-Driven",
         "best_for": "Story-driven presentations, keynotes, single-message slides",
-        "contrast": "Text Primary/Background = 16.8:1, Accent/Background = 3.8:1",
         "notes": "Minimal design; let content breathe; use accent sparingly (5-10% of elements)",
     },
     "grayscale-red": {
         "name": "Gray Scale with Red Accent",
         "category": "Accent-Driven",
         "best_for": "High-impact messages, problem-solution narratives, urgent topics",
-        "contrast": "Text Primary/Background = 13.2:1, Accent/Background = 5.5:1",
         "notes": "Red accent should be reserved for 1-2 key elements per slide",
     },
     "data-viz": {
         "name": "Data Visualization (Categorical)",
         "category": "Specialized",
         "best_for": "Charts, graphs, multi-category data",
-        "contrast": "N/A",
         "notes": "Tableau-inspired; colorblind-friendly; maximizes distinction",
     },
     "accessibility": {
         "name": "Accessibility First (High Contrast)",
         "category": "Specialized",
         "best_for": "Accessibility requirements, large audiences, recorded content",
-        "contrast": "All combinations meet WCAG AAA (7:1 minimum)",
-        "notes": "Maximum legibility; suitable for vision-impaired audiences",
+        "notes": "Validate each foreground/background role pairing before use",
     },
 }
 
@@ -389,10 +415,26 @@ def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> s
         output.append(f"## {meta['name']}\n")
         output.append(f"**Category:** {meta['category']}")
         output.append(f"**Best for:** {meta['best_for']}")
-        output.append(f"**Contrast:** {meta['contrast']}")
-        output.append(f"**Notes:** {meta['notes']}\n")
+        output.append(f"**Notes:** {meta['notes']}")
     else:
-        output.append("## Color Palette\n")
+        output.append("## Color Palette")
+
+    background = palette.get("Background")
+    if background:
+        ratios = [
+            f"{role}/Background = {contrast_ratio(color, background):.2f}:1"
+            for role in (
+                "Text Primary",
+                "Text Secondary",
+                "Primary",
+                "Secondary",
+                "Accent",
+            )
+            if (color := palette.get(role)) is not None
+        ]
+        output.append(f"**Calculated contrast:** {', '.join(ratios)}\n")
+    else:
+        output.append("")
 
     # Display colors
     for role, color in palette.items():
@@ -418,7 +460,8 @@ def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> s
         output.append("\n## Validation\n")
         output.append("Check contrast ratios:")
         output.append(
-            f"```bash\nuv run skills/designing-slide-colors/scripts/check_contrast.py '{palette['Text Primary']}' '{palette['Background']}'\n```"
+            f"```bash\nuv run {shlex.quote(str(CONTRAST_CHECKER_PATH))} "
+            f"'{palette['Text Primary']}' '{palette['Background']}'\n```"
         )
 
     return "\n".join(output)
@@ -452,15 +495,11 @@ def list_palettes() -> str:
     output.append("\n## Usage\n")
     output.append("Show details for a specific palette:")
     output.append("```bash")
-    output.append(
-        "uv run skills/designing-slide-colors/scripts/generate_palette.py show <palette-name>"
-    )
+    output.append(f"uv run {shlex.quote(str(SCRIPT_PATH))} show <palette-name>")
     output.append("```\n")
     output.append("Example:")
     output.append("```bash")
-    output.append(
-        "uv run skills/designing-slide-colors/scripts/generate_palette.py show code-blue"
-    )
+    output.append(f"uv run {shlex.quote(str(SCRIPT_PATH))} show code-blue")
     output.append("```")
 
     return "\n".join(output)
@@ -478,18 +517,12 @@ def list_svg_palettes() -> str:
     output.append("\n## Usage\n")
     output.append("Show details for a specific SVG palette:")
     output.append("```bash")
-    output.append(
-        "uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show <palette-name>"
-    )
+    output.append(f"uv run {shlex.quote(str(SCRIPT_PATH))} svg-show <palette-name>")
     output.append("```\n")
     output.append("Example:")
     output.append("```bash")
-    output.append(
-        "uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show default"
-    )
-    output.append(
-        "uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show creative"
-    )
+    output.append(f"uv run {shlex.quote(str(SCRIPT_PATH))} svg-show default")
+    output.append(f"uv run {shlex.quote(str(SCRIPT_PATH))} svg-show creative")
     output.append("```")
 
     return "\n".join(output)

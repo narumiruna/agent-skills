@@ -61,17 +61,29 @@ Configure handlers once at process startup. If setup code can run more than once
 
 ## Structured Context
 
+When a formatter reads custom fields, provide defaults so records from third-party libraries do not fail formatting.
+
 ```python
 import logging
+import sys
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s:%(lineno)d | %(user_id)s | %(message)s",
+handler = logging.StreamHandler(sys.stderr)
+handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(name)s | %(user_id)s | %(message)s",
+        defaults={"user_id": "-"},
+    )
 )
 
-logger = logging.getLogger(__name__)
-logger.info("User action", extra={"user_id": 123})
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO)
+root_logger.addHandler(handler)
+
+logging.getLogger("my_app").info("User action", extra={"user_id": 123})
+logging.getLogger("third_party").info("Record without user context")
 ```
+
+For larger applications, use a `LoggerAdapter`, filter, or structured logging handler to add request context at a defined boundary.
 
 ## Exceptions
 

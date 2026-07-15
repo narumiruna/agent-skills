@@ -28,17 +28,17 @@ Template-first workflow for traceable, comparable, auditable food recommendation
 
 ## Ranking Retrieval (When user asks for “highest score”)
 Before extracting any “top N” list, **confirm the scope**:
-- **Geography**: Okinawa *prefecture* vs *main island only* vs *specific subarea*.
+- **Geography**: requested city, administrative region, island group, or subarea boundaries.
 - **Category**: overall vs cuisine category.
 - **Source URL**: must match the user’s intent exactly.
 
 **Checklist (must pass):**
-1. URL matches the requested scope (prefecture vs category).
-2. If “main island only” is required, exclude island subareas (A4705/A4706).
-3. Page title confirms the intended ranking.
-4. Language modal handled so list items actually render.
+1. URL and page title match the requested geography and category.
+2. Exclude outlying islands, suburbs, or neighboring regions when the requested boundary omits them.
+3. Record any source-specific area identifiers used to enforce the boundary.
+4. Handle consent, language, or location modals so list items actually render.
 
-If static scraping fails or content is blocked, **use Playwright** to load the page, close the language modal (日本語), and then extract items.
+If static scraping fails or content is blocked, use available browser automation, close blocking modals in the appropriate locale, and then extract items.
 
 ## Evidence & Negative Review Rules
 - Sources must include: **Maps + local reviews + guide/editorial + official channel** (where available).

@@ -1,6 +1,8 @@
 ---
 name: writing-work-logs
 description: Use only when the user explicitly names the writing-work-logs skill; never auto-activate from generic work log, daily log, EOD summary, status update, or date-range summary requests.
+metadata:
+  internal: true
 ---
 
 # Work Log Writer

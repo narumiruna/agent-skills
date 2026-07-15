@@ -1,6 +1,8 @@
 ---
 name: building-codex-hooks
 description: Use when designing, implementing, reviewing, or debugging Codex CLI hooks, including `hooks.json`, `.codex/hooks.json`, feature-flag setup, matcher behavior, event-specific stdin/stdout payloads, and hook scripts for `SessionStart`, `PreToolUse`, `PostToolUse`, `UserPromptSubmit`, or `Stop`.
+metadata:
+  internal: true
 ---
 
 # Codex CLI Hooks

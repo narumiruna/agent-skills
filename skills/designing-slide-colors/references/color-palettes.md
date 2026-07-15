@@ -10,31 +10,32 @@ These palettes define full 7-role color systems for comprehensive slide design. 
 
 ### Available Palettes
 
-Use the palette generation script to browse and retrieve palette details:
+Resolve `scripts/generate_palette.py` against the `designing-slide-colors` skill directory and use its absolute path to browse palette details.
 
 **List all available palettes:**
 ```bash
-uv run skills/designing-slide-colors/scripts/generate_palette.py list
+DESIGNING_SLIDE_COLORS_SKILL_DIR="/absolute/path/to/designing-slide-colors"
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" list
 ```
 
 **Show details for a specific palette:**
 ```bash
-uv run skills/designing-slide-colors/scripts/generate_palette.py show <palette-name>
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" show <palette-name>
 ```
 
 **Examples:**
 ```bash
 # List all palettes grouped by category
-uv run skills/designing-slide-colors/scripts/generate_palette.py list
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" list
 
 # Show Code-Focused Blue palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py show code-blue
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" show code-blue
 
 # Show Modern Minimal palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py show modern-minimal
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" show modern-minimal
 
 # Show Data Visualization palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py show data-viz
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" show data-viz
 ```
 
 ### Palette Categories
@@ -69,10 +70,10 @@ uv run skills/designing-slide-colors/scripts/generate_palette.py show data-viz
 **Generate from brand color:**
 ```bash
 # Generate light theme from brand color
-uv run skills/designing-slide-colors/scripts/generate_palette.py brand "#2E75B6" light
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" brand "#2E75B6" light
 
 # Generate dark theme from brand color
-uv run skills/designing-slide-colors/scripts/generate_palette.py brand "#569CD6" dark
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" brand "#569CD6" dark
 ```
 
 ---
@@ -83,31 +84,31 @@ Quick color schemes with SVG code examples for rapid illustration creation.
 
 ### Available SVG Palettes
 
-Use the palette generation script to browse and retrieve SVG palette details:
+Use the resolved palette script path to browse and retrieve SVG palette details:
 
 **List all available SVG palettes:**
 ```bash
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-list
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-list
 ```
 
 **Show details for a specific SVG palette:**
 ```bash
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show <palette-name>
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-show <palette-name>
 ```
 
 **Examples:**
 ```bash
 # List all SVG palettes
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-list
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-list
 
 # Show Default palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show default
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-show default
 
 # Show Creative & Modern palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show creative
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-show creative
 
 # Show Dark Mode palette
-uv run skills/designing-slide-colors/scripts/generate_palette.py svg-show dark-mode
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/generate_palette.py" svg-show dark-mode
 ```
 
 ### SVG Palette List

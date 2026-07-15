@@ -1,13 +1,15 @@
 ---
 name: cleaning-atuin-history
 description: Use when auditing Atuin shell history for noisy duplicates or high-confidence typo/retry pairs and when preparing safe preview-first cleanup steps without editing the SQLite database directly.
+metadata:
+  internal: true
 ---
 
 # Atuin History Cleanup
 
 ## Overview
 
-Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries. For typo cleanup, prefer the transactional `cleanup-typos` command so the flow snapshots `history.db`, uploads the current host history store, deletes candidates, verifies the result, and rolls back automatically if verification fails.
+Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries. For typo cleanup, prefer the transactional `cleanup-typos` command so the flow snapshots `history.db`, uploads the current host history store, deletes candidates, and verifies the result. If verification fails, it preserves both the live database and snapshot for race-free manual recovery instead of automatically replacing the whole database.
 
 Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune behavior.
 
@@ -16,7 +18,7 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 - Reviewing a noisy Atuin `history.db` before removing anything.
 - Estimating how much `atuin history dedup` would remove while still keeping the newest repeated entries.
 - Looking for typo-like retries such as `gti status` followed by `git status`.
-- Running a transactional typo cleanup with backup, verification, and rollback.
+- Running a transactional typo cleanup with backup, verification, and manual recovery artifacts.
 - Rechecking an Atuin cleanup plan without mutating the database directly.
 
 ## Guardrails
@@ -26,7 +28,7 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 - `atuin search --delete` is query-wide and follows Atuin's active search semantics. Do not use it manually for typo cleanup.
 - `cleanup-typos` is the only approved automation path for typo deletion. It may use `atuin search --delete` only after a strict uniqueness gate; any ambiguous match must fall back to the interactive inspector path.
 - `cleanup-typos` must snapshot `history.db` before deletion and delay the final remote sync until verification passes.
-- Rollback is whole-database restore, not selective row restore.
+- Do not automatically restore the whole database after failure; a check-then-restore race can still discard concurrent history. Preserve the live database and snapshot for manual recovery.
 - Re-confirm every destructive command immediately before running it.
 - Do not delete rows directly from SQLite.
 - Do not edit Atuin config as part of this skill. `history_filter` and `cwd_filter` tuning is out of scope for v1.
@@ -39,16 +41,17 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 atuin info
 ```
 
-2. Run the audit:
+2. Resolve `scripts/atuin_history_cleanup.py` against this skill directory and run the audit by absolute path:
 
 ```bash
-uv run python skills/deprecated/cleaning-atuin-history/scripts/atuin_history_cleanup.py audit
+ATUIN_HISTORY_SKILL_DIR="/absolute/path/to/cleaning-atuin-history"
+uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" audit
 ```
 
 Useful flags:
 
 ```bash
-uv run python skills/deprecated/cleaning-atuin-history/scripts/atuin_history_cleanup.py audit --db-path ~/.local/share/atuin/history.db --dupkeep 3 --before now --typo-window-seconds 300 --max-typos 20
+uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" audit --db-path ~/.local/share/atuin/history.db --dupkeep 3 --before now --typo-window-seconds 300 --max-typos 20
 ```
 
 3. Review the `duplicates` section first.
@@ -58,13 +61,13 @@ uv run python skills/deprecated/cleaning-atuin-history/scripts/atuin_history_cle
    Preferred transactional path:
 
 ```bash
-uv run python skills/deprecated/cleaning-atuin-history/scripts/atuin_history_cleanup.py cleanup-typos
+uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" cleanup-typos
 ```
 
    Useful flags:
 
 ```bash
-uv run python skills/deprecated/cleaning-atuin-history/scripts/atuin_history_cleanup.py cleanup-typos --db-path ~/.local/share/atuin/history.db --before now --typo-window-seconds 300 --max-typos 20 --backup-dir ~/.local/share/atuin/cleanup-backups/manual-run
+uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" cleanup-typos --db-path ~/.local/share/atuin/history.db --before now --typo-window-seconds 300 --max-typos 20 --backup-dir ~/.local/share/atuin/cleanup-backups/manual-run
 ```
 
    Manual review path:

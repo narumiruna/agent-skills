@@ -410,10 +410,11 @@ def verify_cleanup_result(
     target_ids: list[str],
     post_audit: dict[str, Any],
 ) -> dict[str, Any]:
-    """Confirm that only the intended ids disappeared and no typo candidates remain."""
+    """Confirm intended removals while allowing concurrent history additions."""
     if post_audit["typos"]["candidate_count"] != 0:
         raise CleanupError(
-            "Post-delete audit still found high-confidence typo candidates. Rolling back."
+            "Post-delete audit still found high-confidence typo candidates. "
+            "Manual recovery may be required."
         )
 
     snapshot_ids = read_history_ids(snapshot_db_path)
@@ -424,10 +425,9 @@ def verify_cleanup_result(
     target_id_set = set(target_ids)
     unexpected_removed_ids = sorted(set(removed_ids) - target_id_set)
     missing_removed_ids = sorted(target_id_set - set(removed_ids))
-    if added_ids or unexpected_removed_ids or missing_removed_ids:
+    if unexpected_removed_ids or missing_removed_ids:
         raise CleanupError(
             "Post-delete verification failed: "
-            + f"added_ids={added_ids}, "
             + f"unexpected_removed_ids={unexpected_removed_ids}, "
             + f"missing_removed_ids={missing_removed_ids}."
         )
@@ -440,14 +440,13 @@ def verify_cleanup_result(
 
 
 def rollback_cleanup(snapshot_db_path: Path, live_db_path: Path) -> list[str]:
-    """Restore the saved database snapshot and best-effort re-align sync state."""
-    warnings: list[str] = []
-    sqlite_backup(snapshot_db_path, live_db_path)
-    try:
-        run_cli_command(["atuin", "sync", "-f"])
-    except CleanupError as exc:
-        warnings.append(str(exc))
-    return warnings
+    """Preserve live and snapshot databases for race-free manual recovery."""
+    del snapshot_db_path, live_db_path
+    return [
+        "Skipped automatic whole-database rollback to avoid racing with concurrent "
+        "history writes; the live database and backup were preserved for manual "
+        "recovery."
+    ]
 
 
 def render_cleanup_report(result: dict[str, Any]) -> str:

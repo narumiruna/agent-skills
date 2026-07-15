@@ -76,8 +76,9 @@ Use Markdown tables only for small comparisons. For dense data, simplify or use 
 
 ## Validation
 
-Run the local syntax check when available:
+Resolve `scripts/validate_marpit.sh` against the `authoring-marp-slides` skill directory, then run the local syntax check by absolute path:
 
 ```shell
-bash skills/authoring-marp-slides/scripts/validate_marpit.sh deck.md
+AUTHORING_MARP_SLIDES_SKILL_DIR="/absolute/path/to/authoring-marp-slides"
+bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/validate_marpit.sh" deck.md
 ```

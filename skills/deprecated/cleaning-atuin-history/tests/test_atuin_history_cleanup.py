@@ -332,6 +332,78 @@ def test_verify_cleanup_result_rejects_unexpected_removed_ids(tmp_path: Path) ->
     assert "unexpected_removed_ids=['2']" in str(excinfo.value)
 
 
+def test_verify_cleanup_result_allows_concurrent_added_ids(tmp_path: Path) -> None:
+    snapshot_db = tmp_path / "history-before.db"
+    live_db = tmp_path / "history-live.db"
+    create_history_db(snapshot_db, ["target", "existing"])
+    create_history_db(live_db, ["existing", "concurrent"])
+
+    result = MODULE.verify_cleanup_result(
+        snapshot_db,
+        live_db,
+        target_ids=["target"],
+        post_audit={"typos": {"candidate_count": 0}},
+    )
+
+    assert result == {
+        "removed_ids": ["target"],
+        "added_ids": ["concurrent"],
+        "target_ids": ["target"],
+    }
+
+
+def test_rollback_preserves_live_database_without_concurrent_rows(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    snapshot_db = tmp_path / "history-before.db"
+    live_db = tmp_path / "history-live.db"
+    create_history_db(snapshot_db, ["deleted", "existing"])
+    create_history_db(live_db, ["existing"])
+
+    commands: list[list[str]] = []
+    monkeypatch.setattr(
+        MODULE.transactional,
+        "run_cli_command",
+        lambda parts, **kwargs: commands.append(parts),
+    )
+
+    warnings = MODULE.rollback_cleanup(snapshot_db, live_db)
+
+    assert MODULE.read_history_ids(live_db) == {"existing"}
+    assert commands == []
+    assert warnings == [
+        "Skipped automatic whole-database rollback to avoid racing with concurrent "
+        "history writes; the live database and backup were preserved for manual "
+        "recovery."
+    ]
+
+
+def test_rollback_preserves_concurrent_history_rows(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    snapshot_db = tmp_path / "history-before.db"
+    live_db = tmp_path / "history-live.db"
+    create_history_db(snapshot_db, ["existing"])
+    create_history_db(live_db, ["existing", "concurrent"])
+
+    commands: list[list[str]] = []
+    monkeypatch.setattr(
+        MODULE.transactional,
+        "run_cli_command",
+        lambda parts, **kwargs: commands.append(parts),
+    )
+
+    warnings = MODULE.rollback_cleanup(snapshot_db, live_db)
+
+    assert MODULE.read_history_ids(live_db) == {"existing", "concurrent"}
+    assert commands == []
+    assert warnings == [
+        "Skipped automatic whole-database rollback to avoid racing with concurrent "
+        "history writes; the live database and backup were preserved for manual "
+        "recovery."
+    ]
+
+
 def test_cleanup_typos_runs_transactional_flow(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

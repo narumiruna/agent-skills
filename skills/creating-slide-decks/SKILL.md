@@ -9,7 +9,7 @@ Create professional Marp/Marpit presentations, diagrams, and color systems with 
 
 ## Core rules
 
-- **Use `bg` (background) syntax for all images** - Reduces manual resizing with `fit` modifier
+- Use `bg` syntax for full-slide or split-layout visuals; keep logos, icons, and other small images inline.
 - Define one 7-role color palette and reuse it in slides and SVGs.
 - Define one spacing unit (e.g., 8px or 16px) and reuse it across layouts.
 - Define text hierarchy tiers (title/section/body) with sizes and weights; use them consistently.
@@ -61,8 +61,11 @@ Pick one task and follow the exact reading path:
 ### Two Ways to Start
 
 **Option 1: Use scripts** (automated):
+Load `authoring-marp-slides`, resolve `scripts/init_presentation.py` against that skill directory, and run it by absolute path:
+
 ```bash
-uv run skills/authoring-marp-slides/scripts/init_presentation.py technical-dark my-deck.md "My Title" "Author"
+AUTHORING_MARP_SLIDES_SKILL_DIR="/absolute/path/to/authoring-marp-slides"
+uv run "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/init_presentation.py" technical-dark my-deck.md "My Title" "Author"
 ```
 
 **Option 2: Work manually** (full control):

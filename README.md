@@ -24,6 +24,8 @@ Use this when you want the collection without linking a local checkout:
 npx skills add narumiruna/skills
 ```
 
+Standard discovery exposes active skills only; deprecated skills are marked internal and remain available solely for repository reference or explicit local use.
+
 ### 2. Local Codex development with `just`
 
 Use this when you want repo-managed local copies in `~/.codex/skills`:

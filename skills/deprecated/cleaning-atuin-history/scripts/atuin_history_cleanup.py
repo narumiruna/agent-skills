@@ -157,7 +157,7 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
 
     cleanup = subparsers.add_parser(
         "cleanup-typos",
-        help="Transactionally delete high-confidence typo entries with backup and rollback.",
+        help="Transactionally delete high-confidence typo entries with backup and recovery artifacts.",
     )
     add_shared_history_scope_args(cleanup)
     cleanup.add_argument(
@@ -847,7 +847,7 @@ def cleanup_typos(
 
         detail = str(exc)
         if rollback_warnings:
-            detail += " Rollback warnings: " + "; ".join(rollback_warnings)
+            detail += " Recovery notes: " + "; ".join(rollback_warnings)
         detail += f" Backup dir: {backup_root}"
         raise AuditError(detail) from exc
 
