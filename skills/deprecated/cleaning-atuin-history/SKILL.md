@@ -9,7 +9,7 @@ metadata:
 
 ## Overview
 
-Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries. For typo cleanup, prefer the transactional `cleanup-typos` command so the flow snapshots `history.db`, uploads the current host history store, deletes candidates, and verifies the result. It rolls back automatically only when no history rows were added after the snapshot; otherwise it preserves the live database and backup for manual recovery.
+Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries. For typo cleanup, prefer the transactional `cleanup-typos` command so the flow snapshots `history.db`, uploads the current host history store, deletes candidates, and verifies the result. If verification fails, it preserves both the live database and snapshot for race-free manual recovery instead of automatically replacing the whole database.
 
 Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune behavior.
 
@@ -18,7 +18,7 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 - Reviewing a noisy Atuin `history.db` before removing anything.
 - Estimating how much `atuin history dedup` would remove while still keeping the newest repeated entries.
 - Looking for typo-like retries such as `gti status` followed by `git status`.
-- Running a transactional typo cleanup with backup, verification, and rollback.
+- Running a transactional typo cleanup with backup, verification, and manual recovery artifacts.
 - Rechecking an Atuin cleanup plan without mutating the database directly.
 
 ## Guardrails
@@ -28,7 +28,7 @@ Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune b
 - `atuin search --delete` is query-wide and follows Atuin's active search semantics. Do not use it manually for typo cleanup.
 - `cleanup-typos` is the only approved automation path for typo deletion. It may use `atuin search --delete` only after a strict uniqueness gate; any ambiguous match must fall back to the interactive inspector path.
 - `cleanup-typos` must snapshot `history.db` before deletion and delay the final remote sync until verification passes.
-- Rollback is a whole-database restore, so skip automatic restore when concurrent history rows would be lost and preserve both databases for manual recovery.
+- Do not automatically restore the whole database after failure; a check-then-restore race can still discard concurrent history. Preserve the live database and snapshot for manual recovery.
 - Re-confirm every destructive command immediately before running it.
 - Do not delete rows directly from SQLite.
 - Do not edit Atuin config as part of this skill. `history_filter` and `cwd_filter` tuning is out of scope for v1.

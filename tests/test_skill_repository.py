@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import importlib.util
+import re
 import subprocess
+import sys
 from pathlib import Path
 from types import ModuleType
 
+import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,14 +37,12 @@ def test_openai_short_descriptions_fit_supported_ui_length() -> None:
 
 
 def test_bundled_script_commands_do_not_assume_source_checkout_layout() -> None:
+    checkout_script = re.compile(r"(?<![\w/])skills/[^\s`\"']+/scripts/")
     offenders: list[Path] = []
     for markdown_path in sorted(SKILLS.glob("**/*.md")):
         if "/assets/" in markdown_path.as_posix():
             continue
-        if (
-            "skills/" in markdown_path.read_text()
-            and "/scripts/" in markdown_path.read_text()
-        ):
+        if checkout_script.search(markdown_path.read_text()):
             offenders.append(markdown_path)
     assert offenders == []
 
@@ -65,13 +66,72 @@ def test_marp_validator_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
     assert "syntax valid" not in result.stdout
 
 
-def test_contrast_checker_reports_failed_large_text(tmp_path: Path) -> None:
-    del tmp_path
+def test_marp_validator_requires_exactly_one_file(tmp_path: Path) -> None:
+    deck = tmp_path / "valid.md"
+    deck.write_text("---\nmarp: true\n---\n# Slide\n")
+
     result = subprocess.run(
         [
-            "uv",
-            "run",
-            "--no-project",
+            "bash",
+            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(deck),
+            "unexpected.md",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode != 0
+    assert "Usage:" in result.stdout
+
+
+def test_marp_validator_accepts_relative_path_starting_with_dash(
+    tmp_path: Path,
+) -> None:
+    deck = tmp_path / "--deck.md"
+    deck.write_text("---\nmarp: true\n---\n# Slide\n")
+
+    result = subprocess.run(
+        [
+            "bash",
+            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            deck.name,
+        ],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_marp_validator_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
+    deck = tmp_path / "windows.md"
+    deck.write_bytes(
+        b"---\r\nmarp: TRUE  # enable Marp\r\ntheme: default\r\n---\r\n# Slide\r\n"
+    )
+
+    result = subprocess.run(
+        [
+            "bash",
+            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(deck),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0, result.stdout
+    assert "Slides: 1" in result.stdout
+
+
+def test_contrast_checker_reports_failed_large_text() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
             str(SKILLS / "designing-slide-colors/scripts/check_contrast.py"),
             "#999999",
             "#FFFFFF",
@@ -82,6 +142,34 @@ def test_contrast_checker_reports_failed_large_text(tmp_path: Path) -> None:
     )
 
     assert "WCAG AA (large text):   ❌ Fail" in result.stdout
+
+
+def test_color_parsers_reject_malformed_six_character_values() -> None:
+    generator = load_module(
+        SKILLS / "designing-slide-colors/scripts/generate_palette.py",
+        "generate_palette_invalid_color_test",
+    )
+    checker = load_module(
+        SKILLS / "designing-slide-colors/scripts/check_contrast.py",
+        "check_contrast_invalid_color_test",
+    )
+
+    for module in (generator, checker):
+        with pytest.raises(ValueError, match="Invalid hex color"):
+            module.hex_to_rgb("-12345")
+
+
+def test_brand_palette_normalizes_color_and_rejects_unknown_style() -> None:
+    generator = load_module(
+        SKILLS / "designing-slide-colors/scripts/generate_palette.py",
+        "generate_palette_brand_test",
+    )
+
+    palette = generator.generate_palette_from_brand("2e75b6", "light")
+
+    assert palette["Primary"] == "#2E75B6"
+    with pytest.raises(ValueError, match="Style must be 'light' or 'dark'"):
+        generator.generate_palette_from_brand("#2E75B6", "sepia")
 
 
 def test_generated_palette_contrast_is_calculated_from_colors() -> None:
