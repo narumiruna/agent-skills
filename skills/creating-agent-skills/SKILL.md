@@ -33,7 +33,7 @@ Create skills that another agent can reliably select and use. Keep each skill co
 4. Create or update the skill files.
    - Use the target repo's documented skill root.
    - In this repo, new active skills belong in `skills/<skill-name>/SKILL.md`.
-   - In this repo, deprecated skills belong in `skills/deprecated/<skill-name>/SKILL.md`.
+   - In this repo, deprecated skills belong in `deprecated/<skill-name>/SKILL.md`, outside the active skill root.
    - If the target repo, skill framework, or active instructions document or expose a scaffold tool, use it before editing manually.
    - Keep edits bounded to the skill directory and required catalog files.
 

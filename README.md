@@ -24,7 +24,7 @@ Use this when you want the collection without linking a local checkout:
 npx skills add narumiruna/skills
 ```
 
-Standard discovery exposes active skills only; deprecated skills are marked internal and remain available solely for repository reference or explicit local use.
+Standard discovery exposes active skills only; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
 
 ### 2. Local Codex development with `just`
 
@@ -37,7 +37,7 @@ just install-all
 just install managing-python-with-uv
 ```
 
-Each install replaces the target skill directory before copying. `just install-all` installs active top-level skills only; it skips `skills/deprecated/`.
+Each install replaces the target skill directory before copying. `just install-all` installs the top-level directories under `skills/`; deprecated skills live outside that tree.
 
 Remove copied skills when finished:
 
@@ -123,7 +123,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## 🗄️ Deprecated Skills
 
-Deprecated skills remain in `skills/deprecated/<skill-name>/` for reference and are not included in `just install-all`.
+Deprecated skills remain in `deprecated/<skill-name>/` for reference and are not included in `just install-all`.
 
 | Skill | Notes |
 | --- | --- |

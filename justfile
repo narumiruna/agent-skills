@@ -1,5 +1,5 @@
 target := env('HOME') + "/.codex/skills"
-active_skills := "find skills -mindepth 1 -maxdepth 1 -type d ! -name deprecated | sort"
+active_skills := "find skills -mindepth 1 -maxdepth 1 -type d | sort"
 
 # Default behavior: show available recipes instead of mutating state.
 [default]
