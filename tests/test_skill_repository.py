@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import re
 import subprocess
 import sys
@@ -8,7 +9,6 @@ from pathlib import Path
 from types import ModuleType
 
 import pytest
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
@@ -25,14 +25,19 @@ def load_module(path: Path, name: str) -> ModuleType:
 
 def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
     for skill_md in sorted((SKILLS / "deprecated").glob("*/SKILL.md")):
-        frontmatter = yaml.safe_load(skill_md.read_text().split("---", 2)[1])
-        assert frontmatter.get("metadata", {}).get("internal") is True, skill_md
+        frontmatter = skill_md.read_text().split("---", 2)[1]
+        assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
 
 
 def test_openai_short_descriptions_fit_supported_ui_length() -> None:
     for metadata_path in sorted(SKILLS.glob("**/agents/openai.yaml")):
-        metadata = yaml.safe_load(metadata_path.read_text())
-        description = metadata["interface"]["short_description"]
+        description_line = next(
+            line
+            for line in metadata_path.read_text().splitlines()
+            if line.lstrip().startswith("short_description:")
+        )
+        description = json.loads(description_line.split(":", 1)[1].strip())
+        assert isinstance(description, str), metadata_path
         assert 25 <= len(description) <= 64, metadata_path
 
 
