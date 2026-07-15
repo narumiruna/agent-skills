@@ -16,7 +16,8 @@ Review the requested change, not the entire codebase. Prioritize correctness and
 2. Infer intended behavior from the request, issue or PR description, tests, documentation, and surrounding code. State a reasonable assumption when intent remains unclear.
 3. Inspect the diff and enough related code to trace changed behavior through callers, downstream consumers, tests, and contracts.
 4. Run focused tests or static checks when feasible. Passing checks are supporting evidence, not proof that the behavior is correct.
-5. Clearly separate confirmed problems, inferred risks, and anything you could not verify.
+5. Keep the investigation proportional to the change. Stop when the relevant diff, directly affected callers and contracts, and focused checks provide enough evidence; report remaining uncertainty instead of expanding the scope indefinitely.
+6. Clearly separate confirmed problems, inferred risks, and anything you could not verify.
 
 Report findings introduced by the reviewed change or made materially worse or newly reachable by it. Keep unrelated pre-existing problems out of the main findings unless the user requested a broader audit; mention a directly relevant pre-existing problem separately and label it clearly.
 
