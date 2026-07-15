@@ -73,7 +73,7 @@ if __name__ == "__main__":
             f"WCAG AA (normal text):  {'✅ Pass' if wcag['AA_normal'] else '❌ Fail'} (≥4.5:1)"
         )
         print(
-            f"WCAG AA (large text):   {'✅ Pass' if wcag['AA_large'] else '✅ Pass'} (≥3.0:1)"
+            f"WCAG AA (large text):   {'✅ Pass' if wcag['AA_large'] else '❌ Fail'} (≥3.0:1)"
         )
         print(
             f"WCAG AAA (normal text): {'✅ Pass' if wcag['AAA_normal'] else '❌ Fail'} (≥7.0:1)"

@@ -28,22 +28,21 @@ if ! head -n 1 "$FILE" | grep -q "^---$"; then
     ERRORS=$((ERRORS + 1))
 fi
 
-# Check marp: true
-if ! head -n 10 "$FILE" | grep -q "marp: true"; then
-    echo "❌ Missing 'marp: true' in frontmatter"
+# Locate the frontmatter closing delimiter.
+FRONTMATTER_END=$(awk 'NR > 1 && $0 == "---" { print NR; exit }' "$FILE")
+if [ -z "$FRONTMATTER_END" ]; then
+    echo "❌ Missing frontmatter closing delimiter (---)"
     ERRORS=$((ERRORS + 1))
-fi
-
-# Check frontmatter closing
-if ! head -n 10 "$FILE" | tail -n +2 | grep -q "^---$"; then
-    echo "⚠️  Frontmatter may not be properly closed with ---"
+else
+    # Check marp: true inside frontmatter only.
+    if ! awk -v end="$FRONTMATTER_END" 'NR > 1 && NR < end' "$FILE" | grep -Eq '^marp:[[:space:]]*true[[:space:]]*$'; then
+        echo "❌ Missing 'marp: true' in frontmatter"
+        ERRORS=$((ERRORS + 1))
+    fi
 fi
 
 # Check slide separators
 SEPARATOR_COUNT=$(grep -c "^---$" "$FILE" || true)
-if [ "$SEPARATOR_COUNT" -lt 2 ]; then
-    echo "⚠️  Only $SEPARATOR_COUNT separator(s) found. Expected at least 2 (frontmatter + slides)"
-fi
 
 # Count slides (separators minus frontmatter)
 SLIDE_COUNT=$((SEPARATOR_COUNT - 1))

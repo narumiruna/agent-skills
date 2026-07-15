@@ -46,7 +46,7 @@ Format structure: see `color-design/output-template.md`.
 - [x] Contrast ratio Text Primary/Background = 11.25:1 (exceeds WCAG AAA)
 - [x] Contrast ratio Primary/Background = 5.65:1 (meets WCAG AA, close to AAA)
 - [x] Palette limited to 7 colors
-- [x] Colors tested on projector (high contrast maintained)
+- [ ] Verify the exported deck on the target projector; do not infer projector performance from contrast ratios alone
 - [x] Consistent with VS Code theme (familiar to developers)
 ```
 
@@ -89,10 +89,10 @@ Format structure: see `color-design/output-template.md`.
 
 ## Validation Checklist
 
-- [x] Contrast ratio Text Primary/Background = 14.2:1 (exceeds WCAG AAA)
-- [x] Contrast ratio Primary/Background = 5.8:1 (meets WCAG AA)
+- [x] Contrast ratio Text Primary/Background = 13.38:1 (exceeds WCAG AAA)
+- [x] Contrast ratio Primary/Background = 4.64:1 (meets WCAG AA)
 - [x] Palette limited to 7 colors
-- [x] Colors work for printing and projection
+- [ ] Verify a representative print and the exported deck on the target projector
 - [x] Professional, conservative appearance suitable for business
 ```
 

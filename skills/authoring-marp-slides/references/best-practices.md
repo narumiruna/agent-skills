@@ -27,10 +27,11 @@ Use Markdown first. Use inline HTML only when Marp Markdown cannot express the l
 
 ## Pre-Commit Check
 
-Before handing off a deck:
+Before handing off a deck, resolve `scripts/validate_marpit.sh` against the `authoring-marp-slides` skill directory, then run it by absolute path:
 
 ```shell
-bash skills/authoring-marp-slides/scripts/validate_marpit.sh deck.md
+AUTHORING_MARP_SLIDES_SKILL_DIR="/absolute/path/to/authoring-marp-slides"
+bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/validate_marpit.sh" deck.md
 ```
 
 Then preview or export the deck and inspect at least title, densest content slide, and every slide with an SVG/background image.

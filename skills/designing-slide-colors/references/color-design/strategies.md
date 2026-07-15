@@ -142,7 +142,7 @@ See [../color-palettes.md](../color-palettes.md) for:
 ### Tips
 
 - Use #FAFAFA instead of pure white (#FFFFFF) to reduce glare
-- Ensure text contrast is very high (≥ 7:1 for AA)
+- Ensure text contrast is very high (≥ 7:1 for AAA)
 - Conservative colors are safer for business contexts
 - Test printed versions—some blues may appear too dark
 

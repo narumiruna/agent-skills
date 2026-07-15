@@ -440,7 +440,21 @@ def verify_cleanup_result(
 
 
 def rollback_cleanup(snapshot_db_path: Path, live_db_path: Path) -> list[str]:
-    """Restore the saved database snapshot and best-effort re-align sync state."""
+    """Restore the snapshot unless concurrent history writes would be lost."""
+    snapshot_ids = read_history_ids(snapshot_db_path)
+    live_ids = read_history_ids(live_db_path)
+    added_ids = live_ids - snapshot_ids
+    if added_ids:
+        row_phrase = (
+            "1 history row was"
+            if len(added_ids) == 1
+            else f"{len(added_ids)} history rows were"
+        )
+        return [
+            f"Skipped automatic rollback because {row_phrase} added after the snapshot; "
+            "the live database and backup were preserved for manual recovery."
+        ]
+
     warnings: list[str] = []
     sqlite_backup(snapshot_db_path, live_db_path)
     try:

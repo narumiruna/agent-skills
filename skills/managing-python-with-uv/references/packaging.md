@@ -80,15 +80,21 @@ uv run --with dist/my_package-1.0.0-py3-none-any.whl python -c "import my_packag
 
 ## Publishing
 
+Keep upload tokens out of command arguments. Set `UV_PUBLISH_TOKEN` through the shell's secure environment or CI secret store, then publish without a token flag.
+
 **To PyPI:**
 ```bash
-uv publish --token $PYPI_TOKEN
+UV_PUBLISH_TOKEN="$PYPI_TOKEN" uv publish
 ```
 
 **To Test PyPI (recommended first):**
 ```bash
-uv publish --publish-url https://test.pypi.org/legacy/ --token $TEST_PYPI_TOKEN
+UV_PUBLISH_TOKEN="$TEST_PYPI_TOKEN" \
+UV_PUBLISH_URL="https://test.pypi.org/legacy/" \
+uv publish
 ```
+
+Prefer trusted publishing in supported CI environments so no long-lived upload token is required.
 
 **Test installation from Test PyPI:**
 ```bash

@@ -54,10 +54,11 @@ svglint diagrams/flow.svg
 Symptom: Text is readable in preview but fails contrast in PDF/HTML export.
 
 Fix:
-1. Check contrast ratio:
+1. Load `designing-slide-colors`, resolve `scripts/check_contrast.py` against that skill directory, and check the ratio by absolute path:
 
 ```bash
-uv run skills/designing-slide-colors/scripts/check_contrast.py '#D4D4D4' '#1E1E1E'
+DESIGNING_SLIDE_COLORS_SKILL_DIR="/absolute/path/to/designing-slide-colors"
+uv run "$DESIGNING_SLIDE_COLORS_SKILL_DIR/scripts/check_contrast.py" '#D4D4D4' '#1E1E1E'
 ```
 
 2. Aim for 7:1 (AAA) when possible.

@@ -332,6 +332,31 @@ def test_verify_cleanup_result_rejects_unexpected_removed_ids(tmp_path: Path) ->
     assert "unexpected_removed_ids=['2']" in str(excinfo.value)
 
 
+def test_rollback_preserves_concurrent_history_rows(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    snapshot_db = tmp_path / "history-before.db"
+    live_db = tmp_path / "history-live.db"
+    create_history_db(snapshot_db, ["existing"])
+    create_history_db(live_db, ["existing", "concurrent"])
+
+    commands: list[list[str]] = []
+    monkeypatch.setattr(
+        MODULE.transactional,
+        "run_cli_command",
+        lambda parts, **kwargs: commands.append(parts),
+    )
+
+    warnings = MODULE.rollback_cleanup(snapshot_db, live_db)
+
+    assert MODULE.read_history_ids(live_db) == {"existing", "concurrent"}
+    assert commands == []
+    assert warnings == [
+        "Skipped automatic rollback because 1 history row was added after the snapshot; "
+        "the live database and backup were preserved for manual recovery."
+    ]
+
+
 def test_cleanup_typos_runs_transactional_flow(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
