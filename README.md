@@ -114,7 +114,6 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `reviewing-code` | Code review for correctness, edge cases, tests, security, and integration risk. |
 | `resolving-edge-cases` | Iteratively finding, fixing, and verifying plausible edge cases in code flows. |
 | `naming-agent-skills` | Predictable, searchable skill names. |
-| `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
 | `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |
 | `writing-git-commits` | Focused Conventional Commits from real diffs. |
@@ -127,6 +126,7 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are not
 
 | Skill | Notes |
 | --- | --- |
+| `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
 | `cleaning-atuin-history` | Preview-first cleanup planning for noisy Atuin shell history. |
 | `building-codex-hooks` | Codex CLI hooks and `hooks.json` behavior. |
 | `writing-work-logs` | Explicitly invoked work logs from repository evidence. |
