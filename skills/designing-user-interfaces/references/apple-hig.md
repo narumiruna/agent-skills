@@ -1,6 +1,6 @@
 # Apple HIG-Derived Interface Baseline
 
-Use this reference for universal interaction principles and whenever the target includes an Apple platform. It summarizes the repository archive captured from Apple’s Human Interface Guidelines; it does not replace platform-specific specifications.
+Use the product posture in this reference as cross-platform design philosophy. Read the detailed baseline when a task benefits from deeper HIG-derived reasoning, or when the target includes an Apple platform. Translate universal principles into the target platform's conventions; do not copy Apple-specific metrics, controls, or interaction patterns onto other platforms by default. This reference summarizes the repository archive captured from Apple’s Human Interface Guidelines; it does not replace platform-specific specifications.
 
 When the archive is available, treat it as the source of truth:
 

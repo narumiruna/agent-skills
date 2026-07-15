@@ -1,15 +1,29 @@
 ---
 name: designing-user-interfaces
-description: Design and review UI/UX that minimizes cognitive load without sacrificing functional completeness. Use when creating or evaluating screens, components, wireframes, navigation, workflows, dashboards, forms, or design systems; especially when deciding what stays visible, what uses progressive disclosure, how information should be prioritized, or whether an interface is cluttered or over-simplified.
+description: Design, implement, and review UI/UX that minimizes cognitive load without sacrificing functional completeness, using Apple-derived design philosophy adapted to the target platform. Use when creating or evaluating screens, components, wireframes, navigation, workflows, dashboards, forms, or design systems; especially when deciding what stays visible, what uses progressive disclosure, how information should be prioritized, or whether an interface is cluttered or over-simplified.
 ---
 
 # Designing User Interfaces
 
 ## Objective
 
-Minimize cognitive load while preserving useful capability, agency, context, and recovery. Do not pursue visual simplicity by deleting necessary functions or moving complexity into harder navigation, memory, or repeated effort. As Apple’s HIG states, simplicity is not minimalism: keep the important things close and include what the task actually needs.
+Minimize cognitive load while preserving useful capability, agency, context, and recovery. Apply Apple-derived principles of purpose, agency, responsibility, familiarity, flexibility, simplicity, craft, and delight across platforms, translating them into the target platform's conventions instead of copying Apple-specific components. Simplicity is not minimalism: keep important things close and include what the task actually needs.
 
-Before proposing a design, identify the primary user, current context, primary task, platform, input methods, constraints, and existing product conventions. Inspect available product evidence rather than inventing requirements or user research. Read `references/apple-hig.md` for the HIG-derived baseline; for material Apple-platform decisions, inspect the mapped source JSON in `docs/human-interface-guidelines` when it is available.
+Before designing, reviewing, or changing an interface, identify the primary user, current context, primary task, platform, input methods, constraints, and existing product conventions. Inspect available product evidence rather than inventing requirements or user research.
+
+## Operating Mode
+
+Choose the mode from the request and do not substitute a design report for requested implementation work.
+
+- **Proposal:** Recommend the smallest coherent structure that satisfies the task, then explain material hierarchy, disclosure, accessibility, and tradeoff decisions.
+- **Review:** Lead with concrete findings or a direct recommendation. Tie each issue to user effort, risk, evidence, or a violated convention.
+- **Implementation:** Inspect the existing interface, design system, content, behavior, and repository conventions; make the bounded requested change and verify the directly affected states and interactions.
+
+During implementation, preserve existing product behavior, content meaning, data semantics, validation contracts, permissions, persistence, and destructive consequences unless the request or product evidence authorizes a change. Treat current code and copy as evidence, not as an invitation to complete a speculative production flow. A destructive label alone does not establish reversibility, timing, scope, reauthentication, or recovery policy. Do not invent business rules, limits, defaults, system capabilities, success claims, consequences, or unsupported states.
+
+If a missing product decision materially blocks safe implementation, ask at most one question. Until it is answered, leave the uncertain behavior unchanged and make only improvements that do not depend on that decision. In a proposal or review, frame unsupported behavior as a decision or open question, not an assumed fact.
+
+Keep the effort and code change proportional to the requested surface and risk. Prefer the smallest coherent change that uses the existing design system. Do not turn a small implementation into a full redesign or exhaustive audit, and do not redesign unrelated regions. Stop when the requested task, directly affected states, accessibility paths, and recovery behavior are addressed; report unsupported or unverified scenarios instead of inventing them.
 
 ## Stable Principles
 
@@ -41,19 +55,7 @@ Classify every action or information element before styling it.
 | Safety/status | Needed to understand system state, consequences, permissions, errors, progress, or recovery | Visible at the relevant time and near the affected object; interrupt only when necessary |
 | Redundant or irrelevant | Duplicates another path or does not support the current context | Remove only after confirming no capability, status, recovery path, or learning cue is lost |
 
-For each element, ask:
-
-1. Is it necessary for the current task?
-2. How often is it used, and by whom?
-3. What is the consequence if it cannot be found quickly?
-4. Must it remain visible, or can context reveal it at the right moment?
-5. Can it be grouped with related controls or information?
-6. Is the proposed entry point labeled and predictable?
-7. Would hiding it increase memory, search, navigation, or recovery burden?
-8. Does the design reduce complexity, or merely move it elsewhere?
-9. Does the action apply to the object’s current lifecycle state, or should it appear only after a prerequisite such as saving?
-
-When evidence is missing, state the assumption that drives the classification. Do not pretend frequency or user priority is known.
+For each element, determine its necessity for the current task, evidence of frequency and audience, consequence if missed, applicable lifecycle state, possible grouping, disclosure entry point, and the memory, search, navigation, or recovery burden of hiding it. Label missing evidence as unknown; do not convert unknown frequency, priority, or behavior into product requirements.
 
 Never hide the current location, consequential system state, required input, destructive consequence, permission boundary, unsaved-work risk, error recovery, or the only accessible route to a core action. Never rely on an unlabeled icon, hidden gesture, hover, color, sound, or motion as the sole route or explanation.
 
@@ -66,7 +68,7 @@ Organize the interface in this order:
 3. Group related content and actions by user intent, not by implementation ownership.
 4. Separate primary, secondary/supporting, contextual, and advanced layers.
 5. Make scanning order and action priority clear through layout before decoration; account for right-to-left reading order.
-6. Check narrow and wide layouts, large text, long localization, empty and dense data, loading, errors, offline behavior, permissions, and assistive-technology focus order; hierarchy must survive them all.
+6. Check the relevant narrow and wide layouts, text sizes, localization, content density, system states, supported inputs, and assistive-technology focus order; hierarchy must survive the conditions the product supports.
 7. Make each title, status, badge, summary, and instruction answer a distinct question. Remove synonymous layers that repeat identity or state without helping the next decision.
 
 Prefer the fewest visible elements that still support efficient, predictable use. Fewer elements are not automatically better.
@@ -74,36 +76,36 @@ Prefer the fewest visible elements that still support efficient, predictable use
 ## Design Workflow
 
 1. **Frame the task.** Identify user, purpose, context, frequency, stakes, constraints, input methods, and success signal.
-2. **Inventory capability, state, and ownership.** List actions, information, dependencies, current location, loading, empty, success, error, offline, disabled, permission-denied, and unsaved-work states before simplifying. Identify which surface owns selection and drafts so disclosure, responsive presentation, refreshes, and handoffs do not reset work.
+2. **Inventory relevant capability, state, and ownership.** List the actions, information, dependencies, and reachable states needed by the requested flow before simplifying. Identify which surface owns selection and drafts so disclosure, responsive presentation, refreshes, and handoffs do not reset work.
 3. **Classify visibility.** Apply the visibility table and explain uncertain classifications.
 4. **Structure the hierarchy.** Define regions, groups, reading and focus order, primary action, and disclosure paths. Generally limit prominent actions to one or two per view.
 5. **Protect discoverability.** Give every hidden capability a clear label, obvious entry point, predictable location, minimal depth, return path, and consistent interaction.
 6. **Protect accessibility.** Check semantic labels, contrast, noncolor cues, text scaling and reflow, target size and spacing, keyboard and assistive operation, gesture alternatives, and reduced motion.
 7. **Match feedback to stakes.** Put routine status and validation near the affected object. Use interruption only when the information is critical and actionable; make irreversible or unexpected consequences explicit.
 8. **Audit overload and false simplicity.** Check competing emphasis, dense choices, decorative noise, extra steps, menu hunting, context loss, hidden status, recall, and repeated work.
-9. **Test adaptation, transitions, and edge states.** Exercise the smallest and largest layouts, largest text, long translated and right-to-left content, empty and dense data, all supported inputs, errors, offline operation, permissions, cancellation, and recovery. Test stateful transitions — create, switch panel/item/workspace, refresh, reject or accept discard, save, fail, and retry — because static screenshots cannot prove draft preservation or recovery.
+9. **Test relevant adaptation, transitions, and edge states.** Exercise the supported layouts, text and localization extremes, content densities, inputs, failures, permissions, cancellation, and recovery that the requested change can affect. Test relevant stateful transitions because static screenshots cannot prove preservation or recovery. Do not invent unsupported behavior to complete a checklist.
 10. **Explain and validate tradeoffs.** Tie each choice to purpose, frequency, consequence, context, evidence, accessibility, or convention; name what user evidence or testing would change it.
 
-## Required Output
+## Output
 
-For a proposal or review, include:
+Lead with the result appropriate to the mode: the recommended structure for a proposal, prioritized findings for a review, or the implemented changes and verification for implementation. Do not return only rationale when the user asked for working UI changes.
 
-1. **Primary task and context** — who is doing what, where, and under which assumptions.
-2. **Action priority** — primary, secondary/supporting, contextual, and advanced actions.
-3. **Information hierarchy** — scan order, grouping, emphasis, and status placement.
-4. **Always visible** — functions and information that must remain on the surface, with reasons.
-5. **Progressively disclosed** — what is initially hidden and why.
-6. **Discoverability path** — label, location, trigger, navigation depth, and return path for hidden functions.
-7. **Cognitive-overload risks** — simultaneous choices, density, competing emphasis, or irrelevant content.
-8. **Over-simplification risks** — buried capability, extra steps, hidden state, recall burden, or lost context.
-9. **Tradeoffs and alternatives** — what improves, what worsens, and what evidence would change the decision.
-10. **Accessibility, convention, and validation check** — supported inputs and assistive paths, adaptation and edge states, relevant platform/product patterns, applicable HIG topics for Apple work, and how the design should be tested.
+For a material proposal or review, cover only the dimensions that affect the decision:
+
+1. **Task, context, and assumptions** — who is doing what and under which evidence or constraints.
+2. **Action priority and information hierarchy** — scan order, grouping, emphasis, status placement, and primary versus secondary actions.
+3. **Visibility and discoverability** — what stays visible, what is disclosed, and the labeled path to hidden capability.
+4. **Overload and over-simplification risks** — competing emphasis, density, extra steps, hidden state, recall burden, or lost context.
+5. **Tradeoffs and alternatives** — what improves, what worsens, and what evidence would change the decision.
+6. **Accessibility, conventions, and validation** — supported inputs and assistive paths, relevant adaptation and edge states, target-platform patterns, and how the design should be tested.
+
+Omit inapplicable or repetitive sections. A small component decision may need only a recommendation, the key consequence, and a verification note.
 
 Do not stop at adjectives such as “clean,” “simple,” or “modern.” Name the concrete structural decision and its effect on user effort.
 
 ## References
 
-- Read `references/apple-hig.md` for the HIG-derived product, accessibility, layout, action, feedback, modality, writing, privacy, and motion baseline. For material Apple-platform decisions, inspect the mapped archived topic and exact component page.
+- Apply the Apple-derived philosophy in this file to every platform. Read `references/apple-hig.md` when the task benefits from deeper HIG-derived reasoning or exact accessibility, layout, action, feedback, modality, writing, privacy, or motion guidance. For material Apple-platform decisions, inspect the mapped archived topic and exact platform or component page; do not apply Apple-specific metrics or controls to other platforms by default.
 - Read `references/preferences.md` before choosing visual density, shape, motion, color, or information amount. Project requirements, user evidence, platform conventions, and accessibility needs override its defaults.
 - Read `references/cases.md` when a listed pattern resembles the current problem or when reviewing whether a proposal creates false simplicity.
 

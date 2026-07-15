@@ -13,7 +13,7 @@
 - For Atuin cleanup automation, snapshot `history.db` with SQLite's backup API instead of a raw file copy so live-database state and WAL pages stay consistent.
 
 ## TASTE
-- Prefer UI/UX that minimizes cognitive load without sacrificing functional completeness; keep critical actions and state visible, and use predictable progressive disclosure for secondary complexity.
+- Prefer applying Apple-derived design philosophy across platforms while translating platform-specific metrics and controls to target conventions; minimize cognitive load without sacrificing functional completeness, keep critical actions and state visible, and use predictable progressive disclosure for secondary complexity.
 - Prefer preserving a skill's original user intent when naming or renaming skills; do not force `<verb-ing>-<object>` if it changes the meaning.
 - `writing-git-commits` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
 - `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA` or durable `TASTE` emerges, it should create the repository-root file without extra confirmation and revise stale or similar entries in place.
