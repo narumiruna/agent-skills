@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage Git Worktrees"
+  short_description: "Create and safely manage local Git worktrees."
+  default_prompt: "Use $managing-git-worktrees to create or safely manage a Git worktree in this repository."

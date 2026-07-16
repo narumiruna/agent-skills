@@ -117,6 +117,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
 | `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |
 | `writing-git-commits` | Focused Conventional Commits from real diffs. |
+| `managing-git-worktrees` | Safe Git worktree creation, repair, removal, pruning, and branch cleanup. |
 | `maintaining-memory-md` | Creates repository `MEMORY.md` on the first durable `GOTCHA` or `TASTE`, then keeps entries concise and current. |
 | `writing-agents-md` | Creating or updating repository `AGENTS.md` guidance. |
 
