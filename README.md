@@ -90,6 +90,12 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `applying-imrad` | IMRaD fit checks, drafting, transformation, and review. |
 | `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
 
+### Learning & Explanation
+
+| Skill | Use it for |
+| --- | --- |
+| `explaining-step-by-step` | Progressive, source-grounded explanations of concepts, issues, PRs, code, systems, and decisions. |
+
 ### UI/UX Design
 
 | Skill | Use it for |
