@@ -38,6 +38,7 @@ ALLOWED_TAGS = {
     "video",
 }
 ALLOWED_ATTRIBUTES = {"href", "src"}
+ALLOWED_NODE_FIELDS = {"tag", "attrs", "children"}
 MAX_CONTENT_BYTES = 64 * 1024
 
 
@@ -50,21 +51,34 @@ def validate_content(content):
             return
         if not isinstance(node, dict):
             raise ValueError("Each node must be a string or object")
+        for field in node:
+            if field not in ALLOWED_NODE_FIELDS:
+                raise ValueError(f"Unsupported node field: {field}")
         tag = node.get("tag")
+        if not isinstance(tag, str):
+            raise ValueError("Node tag must be a string")
         if tag not in ALLOWED_TAGS:
             raise ValueError(f"Unsupported tag: {tag}")
-        for attribute in node.get("attrs", {}):
+        attrs = node.get("attrs", {})
+        if not isinstance(attrs, dict):
+            raise ValueError("Node attrs must be an object")
+        for attribute, value in attrs.items():
             if attribute not in ALLOWED_ATTRIBUTES:
                 raise ValueError(f"Unsupported attribute: {attribute}")
+            if not isinstance(value, str):
+                raise ValueError("Attribute values must be strings")
         children = node.get("children", [])
         if not isinstance(children, list):
             raise ValueError("Node children must be an array")
         for child in children:
             validate_node(child)
 
-    for item in content:
-        validate_node(item)
-    encoded = json.dumps(content, ensure_ascii=False, separators=(",", ":"))
+    try:
+        for item in content:
+            validate_node(item)
+        encoded = json.dumps(content, ensure_ascii=False, separators=(",", ":"))
+    except RecursionError as error:
+        raise ValueError("Content nesting is too deep") from error
     if len(encoded.encode("utf-8")) > MAX_CONTENT_BYTES:
         raise ValueError("Content exceeds Telegraph's 64 KB limit")
     return encoded
@@ -78,17 +92,38 @@ def _post(method, fields):
         method="POST",
     )
     with urlopen(request, timeout=30) as response:
-        payload = json.loads(response.read().decode("utf-8"))
-    if not payload.get("ok"):
-        raise RuntimeError(
-            f"Telegraph API error: {payload.get('error', 'UNKNOWN_ERROR')}"
-        )
+        try:
+            payload = json.loads(response.read().decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise RuntimeError("Telegraph API returned invalid JSON") from error
+    if not isinstance(payload, dict) or not isinstance(payload.get("ok"), bool):
+        raise RuntimeError("Telegraph API returned an invalid response")
+    if not payload["ok"]:
+        message = str(payload.get("error", "UNKNOWN_ERROR"))
+        access_token = fields.get("access_token")
+        if isinstance(access_token, str) and access_token:
+            message = message.replace(access_token, "[REDACTED]")
+        raise RuntimeError(f"Telegraph API error: {message}")
+    if "result" not in payload:
+        raise RuntimeError("Telegraph API returned an invalid response")
     return payload["result"]
 
 
+def _validate_string(name, value, minimum, maximum):
+    if not isinstance(value, str) or not minimum <= len(value) <= maximum:
+        raise ValueError(f"{name} must contain {minimum} to {maximum} characters")
+
+
+def _validate_author(author_name, author_url):
+    if author_name is not None:
+        _validate_string("author_name", author_name, 0, 128)
+    if author_url is not None:
+        _validate_string("author_url", author_url, 0, 512)
+
+
 def create_account(short_name, author_name=None, author_url=None):
-    if not 1 <= len(short_name) <= 32:
-        raise ValueError("short_name must contain 1 to 32 characters")
+    _validate_string("short_name", short_name, 1, 32)
+    _validate_author(author_name, author_url)
     fields = {"short_name": short_name}
     if author_name is not None:
         fields["author_name"] = author_name
@@ -131,8 +166,10 @@ def create_account_with_token_file(
 
 
 def create_page(access_token, title, content, author_name=None, author_url=None):
-    if not 1 <= len(title) <= 256:
-        raise ValueError("title must contain 1 to 256 characters")
+    if not isinstance(access_token, str) or not access_token:
+        raise ValueError("access_token must be a non-empty string")
+    _validate_string("title", title, 1, 256)
+    _validate_author(author_name, author_url)
     fields = {
         "access_token": access_token,
         "title": title,
@@ -143,7 +180,10 @@ def create_page(access_token, title, content, author_name=None, author_url=None)
         fields["author_name"] = author_name
     if author_url is not None:
         fields["author_url"] = author_url
-    return _post("createPage", fields)
+    page = _post("createPage", fields)
+    if not isinstance(page, dict) or not isinstance(page.get("url"), str):
+        raise RuntimeError("Telegraph API returned an invalid page")
+    return page
 
 
 def build_parser():

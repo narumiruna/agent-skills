@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from unittest.mock import patch
 
 import pytest
@@ -18,6 +19,8 @@ class FakeResponse:
         return False
 
     def read(self):
+        if isinstance(self.payload, bytes):
+            return self.payload
         return json.dumps(self.payload).encode()
 
 
@@ -55,14 +58,81 @@ def test_rejects_unsupported_attributes():
         telegraph.validate_content(content)
 
 
+@pytest.mark.parametrize(
+    ("node", "message"),
+    [
+        ({"tag": [], "children": []}, "Node tag must be a string"),
+        ({"tag": "a", "attrs": None}, "Node attrs must be an object"),
+        ({"tag": "a", "attrs": ["href"]}, "Node attrs must be an object"),
+        (
+            {"tag": "a", "attrs": {"href": None}},
+            "Attribute values must be strings",
+        ),
+        (
+            {"tag": "p", "childen": ["lost text"]},
+            "Unsupported node field: childen",
+        ),
+    ],
+)
+def test_rejects_malformed_node_shapes(node, message):
+    with pytest.raises(ValueError, match=message):
+        telegraph.validate_content([node])
+
+
+def test_rejects_content_with_excessive_nesting():
+    node = "text"
+    for _ in range(sys.getrecursionlimit() + 10):
+        node = {"tag": "p", "children": [node]}
+
+    with pytest.raises(ValueError, match="nesting is too deep"):
+        telegraph.validate_content([node])
+
+
+def test_rejects_invalid_scalar_fields_before_request():
+    with patch("telegraph.urlopen") as urlopen:
+        with pytest.raises(ValueError, match="author_name.*128"):
+            telegraph.create_account("Writer", author_name="a" * 129)
+        with pytest.raises(ValueError, match="author_url.*512"):
+            telegraph.create_page(
+                "token", "Hello", ["text"], author_url="https://" + "a" * 505
+            )
+        with pytest.raises(ValueError, match="access_token.*non-empty"):
+            telegraph.create_page("", "Hello", ["text"])
+
+    urlopen.assert_not_called()
+
+
 def test_api_error_is_reported_without_exposing_token():
-    response = FakeResponse({"ok": False, "error": "ACCESS_TOKEN_INVALID"})
+    response = FakeResponse(
+        {"ok": False, "error": "ACCESS_TOKEN_INVALID: secret-token"}
+    )
 
     with patch("telegraph.urlopen", return_value=response):
         with pytest.raises(RuntimeError, match="ACCESS_TOKEN_INVALID") as raised:
             telegraph.create_page("secret-token", "Hello", ["text"])
 
     assert "secret-token" not in str(raised.value)
+
+
+@pytest.mark.parametrize(
+    ("response", "message"),
+    [
+        (FakeResponse([]), "invalid response"),
+        (FakeResponse(b"not JSON"), "invalid JSON"),
+    ],
+)
+def test_malformed_api_response_is_reported_cleanly(response, message):
+    with patch("telegraph.urlopen", return_value=response):
+        with pytest.raises(RuntimeError, match=message):
+            telegraph.create_page("token", "Hello", ["text"])
+
+
+def test_create_page_rejects_malformed_result():
+    response = FakeResponse({"ok": True, "result": []})
+
+    with patch("telegraph.urlopen", return_value=response):
+        with pytest.raises(RuntimeError, match="invalid page"):
+            telegraph.create_page("token", "Hello", ["text"])
 
 
 def test_create_account_stores_token_without_printing_secrets(tmp_path, capsys):
@@ -134,6 +204,23 @@ def test_create_account_failure_removes_reserved_token_file(tmp_path):
             )
 
     assert not token_file.exists()
+
+
+def test_cli_rejects_deeply_nested_json_before_request(tmp_path):
+    depth = sys.getrecursionlimit() + 10
+    content_file = tmp_path / "content.json"
+    content_file.write_text(
+        "[" + '{"tag":"p","children":[' * depth + '"text"' + "]}" * depth + "]"
+    )
+
+    with (
+        patch.dict(os.environ, {"TELEGRAPH_ACCESS_TOKEN": "token"}, clear=True),
+        patch("telegraph.urlopen") as urlopen,
+        pytest.raises(ValueError, match="nesting is too deep"),
+    ):
+        telegraph.main(["create-page", "--title", "Hello", str(content_file)])
+
+    urlopen.assert_not_called()
 
 
 def test_cli_requires_token_from_environment():

@@ -22,7 +22,7 @@ CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
 
 2. Convert the body to a JSON array of Telegraph nodes in a temporary file. Use strings for text and objects shaped as `{"tag": "p", "children": ["Text"]}` for elements.
    - Use only `a`, `aside`, `b`, `blockquote`, `br`, `code`, `em`, `figcaption`, `figure`, `h3`, `h4`, `hr`, `i`, `iframe`, `img`, `li`, `ol`, `p`, `pre`, `s`, `strong`, `u`, `ul`, or `video`.
-   - Use only `href` and `src` attributes.
+   - Use only `tag`, `attrs`, and `children` object fields. Attribute names must be `href` or `src`, and attribute values must be strings.
    - Keep the encoded content at or below 64 KB.
    - Convert Markdown headings to `h3` or `h4`; Telegraph does not support `h1` or `h2` nodes.
 
