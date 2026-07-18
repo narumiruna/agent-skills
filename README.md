@@ -89,6 +89,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `grilling-designs` | One-question-at-a-time plan and design grilling. |
 | `applying-imrad` | IMRaD fit checks, drafting, transformation, and review. |
 | `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
+| `creating-telegraph-pages` | Publishing structured public articles to Telegra.ph. |
 
 ### Learning & Explanation
 
