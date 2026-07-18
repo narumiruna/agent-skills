@@ -97,6 +97,39 @@ def create_account(short_name, author_name=None, author_url=None):
     return _post("createAccount", fields)
 
 
+def create_account_with_token_file(
+    short_name, token_file, author_name=None, author_url=None
+):
+    token_file = Path(token_file)
+    fd = os.open(token_file, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    keep_file = False
+    try:
+        account = create_account(short_name, author_name, author_url)
+        if not isinstance(account, dict):
+            raise RuntimeError("Telegraph API returned an invalid account")
+        access_token = account.get("access_token")
+        if not isinstance(access_token, str) or not access_token:
+            raise RuntimeError("Telegraph API response did not include an access token")
+
+        with os.fdopen(fd, "w", encoding="utf-8") as secret_file:
+            fd = None
+            secret_file.write(access_token)
+        keep_file = True
+    finally:
+        if fd is not None:
+            os.close(fd)
+        if not keep_file:
+            token_file.unlink(missing_ok=True)
+
+    public_account = {
+        key: account[key]
+        for key in ("short_name", "author_name", "author_url")
+        if key in account
+    }
+    public_account["token_file"] = str(token_file)
+    return public_account
+
+
 def create_page(access_token, title, content, author_name=None, author_url=None):
     if not 1 <= len(title) <= 256:
         raise ValueError("title must contain 1 to 256 characters")
@@ -121,6 +154,12 @@ def build_parser():
     account.add_argument("--short-name", required=True)
     account.add_argument("--author-name")
     account.add_argument("--author-url")
+    account.add_argument(
+        "--token-file",
+        required=True,
+        type=Path,
+        help="New owner-readable file in which to store the access token",
+    )
 
     page = commands.add_parser("create-page", help="Publish a Telegraph page")
     page.add_argument("content", type=Path, help="JSON file containing Telegraph nodes")
@@ -133,7 +172,9 @@ def build_parser():
 def main(argv=None):
     args = build_parser().parse_args(argv)
     if args.command == "create-account":
-        result = create_account(args.short_name, args.author_name, args.author_url)
+        result = create_account_with_token_file(
+            args.short_name, args.token_file, args.author_name, args.author_url
+        )
     else:
         token = os.environ.get("TELEGRAPH_ACCESS_TOKEN")
         if not token:

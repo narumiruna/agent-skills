@@ -7,6 +7,12 @@ description: Create and publish public Telegra.ph articles through the official 
 
 Publish structured articles with the bundled `scripts/telegraph.py` helper. Treat page creation as an external write: verify the final title, author details, and content before publishing unless the user's request already makes them explicit.
 
+Resolve `scripts/telegraph.py` against this skill directory before running it, then use its absolute path throughout:
+
+```shell
+CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
+```
+
 ## Workflow
 
 1. Prepare the article.
@@ -22,25 +28,35 @@ Publish structured articles with the bundled `scripts/telegraph.py` helper. Trea
 
 3. Obtain an access token.
    - Prefer an existing token supplied through `TELEGRAPH_ACCESS_TOKEN`.
-   - Never place the token in a command argument, committed file, log, or response.
-   - If the user has no account, ask before creating one because it changes external state. Run:
+   - Never place the token in a command argument, committed file, tool output, log, or response.
+   - If the user has no account, ask before creating one because it changes external state. Also agree on a new secret-file path, then run:
 
      ```shell
-     uv run python scripts/telegraph.py create-account --short-name '<account-name>'
+     uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-account \
+       --short-name '<account-name>' \
+       --token-file '<user-approved-secret-path>'
      ```
 
-   - Treat the returned `access_token` as a secret and ask the user to store it securely. Do not create repeated accounts to avoid managing a token.
+   - The helper refuses to overwrite an existing file, stores the token with owner-only permissions, and omits `access_token` and `auth_url` from its output. Do not read the token with a tool that captures output or create repeated accounts to avoid managing one.
 
 4. Publish only after the content is ready:
 
    ```shell
-   uv run python scripts/telegraph.py create-page \
+   uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
      --title '<title>' \
      --author-name '<author>' \
      /tmp/telegraph-content.json
    ```
 
-   Omit `--author-name` or add `--author-url` when appropriate. Inject `TELEGRAPH_ACCESS_TOKEN` through the execution environment; do not write the literal token into shell history.
+   Omit `--author-name` or add `--author-url` when appropriate. Inject `TELEGRAPH_ACCESS_TOKEN` through the execution environment; do not write the literal token into shell history. If using the restricted token file, load it without printing it:
+
+   ```shell
+   TOKEN_FILE='<user-approved-secret-path>'
+   TELEGRAPH_ACCESS_TOKEN="$(cat "$TOKEN_FILE")" \
+     uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
+       --title '<title>' \
+       /tmp/telegraph-content.json
+   ```
 
 5. Verify the result.
    - Check that the command returned an `https://telegra.ph/...` URL.
