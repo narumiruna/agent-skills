@@ -37,7 +37,7 @@ just install-all
 just install managing-python-with-uv
 ```
 
-Each install replaces the target skill directory before copying. `just install-all` installs the top-level directories under `skills/`; deprecated skills live outside that tree.
+Each install replaces the target skill directory before copying. Active skills are grouped under `skills/<category>/<skill-name>/`; `just install-all` discovers those directories recursively and copies each skill directly into `~/.codex/skills/`. Deprecated skills live outside the active tree.
 
 Remove copied skills when finished:
 
@@ -57,7 +57,7 @@ Use this when you want a one-off local copy without `just`:
 ```shell
 mkdir -p ~/.codex/skills
 rm -rf ~/.codex/skills/managing-python-with-uv
-cp -R ./skills/managing-python-with-uv ~/.codex/skills/managing-python-with-uv
+cp -R ./skills/python/managing-python-with-uv ~/.codex/skills/managing-python-with-uv
 ```
 
 Repeat the same pattern for other skills as needed.
@@ -74,6 +74,8 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Python
 
+Repository path: `skills/python/`
+
 | Skill | Use it for |
 | --- | --- |
 | `managing-python-with-uv` | uv-based projects, scripts, dependencies, quality gates, and packaging. |
@@ -82,6 +84,8 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `using-peewee-orm` | Peewee patterns, scoped transactions, and SQLite tests. |
 
 ### Writing & Research
+
+Repository path: `skills/writing-research/`
 
 | Skill | Use it for |
 | --- | --- |
@@ -93,17 +97,23 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Learning & Explanation
 
+Repository path: `skills/learning-explanation/`
+
 | Skill | Use it for |
 | --- | --- |
 | `explaining-step-by-step` | Progressive, source-grounded explanations of concepts, issues, PRs, code, systems, and decisions. |
 
 ### UI/UX Design
 
+Repository path: `skills/ui-ux-design/`
+
 | Skill | Use it for |
 | --- | --- |
 | `designing-user-interfaces` | HIG-informed, accessible interfaces that preserve agency and useful capability. |
 
 ### Slides & Visuals
+
+Repository path: `skills/slides-visuals/`
 
 | Skill | Use it for |
 | --- | --- |
@@ -114,6 +124,8 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | `creating-mermaid-diagrams` | Mermaid flowcharts, sequence diagrams, ER diagrams, and more. |
 
 ### Workflow & Repository Maintenance
+
+Repository path: `skills/workflow-repository/`
 
 | Skill | Use it for |
 | --- | --- |

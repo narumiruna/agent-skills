@@ -29,6 +29,12 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
         assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
 
 
+def test_active_skills_are_grouped_one_category_deep() -> None:
+    categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
+    assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
+    assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
+
+
 def test_openai_short_descriptions_fit_supported_ui_length() -> None:
     for metadata_path in sorted(SKILLS.glob("**/agents/openai.yaml")):
         description_line = next(
@@ -59,7 +65,10 @@ def test_marp_validator_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
     result = subprocess.run(
         [
             "bash",
-            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(
+                SKILLS
+                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+            ),
             str(deck),
         ],
         check=False,
@@ -78,7 +87,10 @@ def test_marp_validator_requires_exactly_one_file(tmp_path: Path) -> None:
     result = subprocess.run(
         [
             "bash",
-            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(
+                SKILLS
+                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+            ),
             str(deck),
             "unexpected.md",
         ],
@@ -100,7 +112,10 @@ def test_marp_validator_accepts_relative_path_starting_with_dash(
     result = subprocess.run(
         [
             "bash",
-            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(
+                SKILLS
+                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+            ),
             deck.name,
         ],
         cwd=tmp_path,
@@ -121,7 +136,10 @@ def test_marp_validator_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
     result = subprocess.run(
         [
             "bash",
-            str(SKILLS / "authoring-marp-slides/scripts/validate_marpit.sh"),
+            str(
+                SKILLS
+                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+            ),
             str(deck),
         ],
         check=False,
@@ -137,7 +155,10 @@ def test_contrast_checker_reports_failed_large_text() -> None:
     result = subprocess.run(
         [
             sys.executable,
-            str(SKILLS / "designing-slide-colors/scripts/check_contrast.py"),
+            str(
+                SKILLS
+                / "slides-visuals/designing-slide-colors/scripts/check_contrast.py"
+            ),
             "#999999",
             "#FFFFFF",
         ],
@@ -151,11 +172,11 @@ def test_contrast_checker_reports_failed_large_text() -> None:
 
 def test_color_parsers_reject_malformed_six_character_values() -> None:
     generator = load_module(
-        SKILLS / "designing-slide-colors/scripts/generate_palette.py",
+        SKILLS / "slides-visuals/designing-slide-colors/scripts/generate_palette.py",
         "generate_palette_invalid_color_test",
     )
     checker = load_module(
-        SKILLS / "designing-slide-colors/scripts/check_contrast.py",
+        SKILLS / "slides-visuals/designing-slide-colors/scripts/check_contrast.py",
         "check_contrast_invalid_color_test",
     )
 
@@ -166,7 +187,7 @@ def test_color_parsers_reject_malformed_six_character_values() -> None:
 
 def test_brand_palette_normalizes_color_and_rejects_unknown_style() -> None:
     generator = load_module(
-        SKILLS / "designing-slide-colors/scripts/generate_palette.py",
+        SKILLS / "slides-visuals/designing-slide-colors/scripts/generate_palette.py",
         "generate_palette_brand_test",
     )
 
@@ -179,11 +200,11 @@ def test_brand_palette_normalizes_color_and_rejects_unknown_style() -> None:
 
 def test_generated_palette_contrast_is_calculated_from_colors() -> None:
     generator = load_module(
-        SKILLS / "designing-slide-colors/scripts/generate_palette.py",
+        SKILLS / "slides-visuals/designing-slide-colors/scripts/generate_palette.py",
         "generate_palette_for_test",
     )
     checker = load_module(
-        SKILLS / "designing-slide-colors/scripts/check_contrast.py",
+        SKILLS / "slides-visuals/designing-slide-colors/scripts/check_contrast.py",
         "check_contrast_for_test",
     )
     palette = generator.generate_preset_palette("accessibility")
@@ -195,26 +216,30 @@ def test_generated_palette_contrast_is_calculated_from_colors() -> None:
 
 
 def test_publish_examples_keep_tokens_out_of_argv() -> None:
-    packaging = (SKILLS / "managing-python-with-uv/references/packaging.md").read_text()
+    packaging = (
+        SKILLS / "python/managing-python-with-uv/references/packaging.md"
+    ).read_text()
     assert "--token" not in packaging
     assert "UV_PUBLISH_TOKEN" in packaging
 
 
 def test_logging_context_has_a_default_for_unrelated_records() -> None:
     logging_reference = (
-        SKILLS / "configuring-python-logging/references/logging.md"
+        SKILLS / "python/configuring-python-logging/references/logging.md"
     ).read_text()
     assert 'defaults={"user_id": "-"}' in logging_reference
 
 
 def test_plan_archival_is_scoped_to_the_current_plan() -> None:
-    plan_skill = (SKILLS / "writing-plans/SKILL.md").read_text()
+    plan_skill = (SKILLS / "writing-research/writing-plans/SKILL.md").read_text()
     assert "inspect `./docs/plans/*.md`" not in plan_skill
     assert "current plan" in plan_skill
 
 
 def test_generic_gourmet_ranking_is_not_hardcoded_to_okinawa() -> None:
-    gourmet_skill = (SKILLS / "researching-gourmet-venues/SKILL.md").read_text()
+    gourmet_skill = (
+        SKILLS / "writing-research/researching-gourmet-venues/SKILL.md"
+    ).read_text()
     ranking_section = gourmet_skill.split("## Ranking Retrieval", 1)[1].split("## ", 1)[
         0
     ]
@@ -223,6 +248,6 @@ def test_generic_gourmet_ranking_is_not_hardcoded_to_okinawa() -> None:
 
 
 def test_slide_image_guidance_preserves_inline_images() -> None:
-    slide_skill = (SKILLS / "creating-slide-decks/SKILL.md").read_text()
+    slide_skill = (SKILLS / "slides-visuals/creating-slide-decks/SKILL.md").read_text()
     assert "for all images" not in slide_skill
     assert "inline" in slide_skill

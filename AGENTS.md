@@ -10,7 +10,7 @@ Follow global defaults; this file defines only repo-specific additions and overr
 
 ## Repository Layout
 
-- Active skills live in `skills/<skill-name>/SKILL.md`.
+- Active skills live in `skills/<category>/<skill-name>/SKILL.md`; category directories are organizational only, and installed skills remain flat by skill name.
 - Deprecated skills live in `deprecated/<skill-name>/SKILL.md`, outside the active `skills/` tree, and are excluded from default install and clean flows.
 - Optional supporting material stays inside the skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Slides and visual examples live under `examples/`.

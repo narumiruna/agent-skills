@@ -6,7 +6,7 @@
 - In this sandbox, `~/.cache/uv` may be read-only; when running one-off `uv run --with ...` tools, set `UV_CACHE_DIR=/tmp/uv-cache` first for more reliable behavior.
 - In this sandbox, the first run of skill metadata tools like `uv run --with pyyaml` may still need temporary network access if the local cache does not already contain the package, so `uv` can fetch `PyYAML`.
 - Codex CLI is unreliable with symlinks when loading local skills; this repo's `just` install flow now uses copy/rm instead of `stow`.
-- IMRaD now only lives under `skills/applying-imrad/`; there are no remaining `imrad-*` legacy skill names in the repo to update.
+- IMRaD now only lives under `skills/writing-research/applying-imrad/`; there are no remaining `imrad-*` legacy skill names in the repo to update.
 - Root document ownership is now fixed as `README.md` for external-facing docs and `AGENTS.md` for maintainer-facing docs; treat `justfile` as the source of truth for install recipes, with `install-all`/`install <skill>` and `clean-all`/`clean <skill>` as the supported commands.
 - `atuin search --delete` deletes every history row matching the query under the active search semantics; do not treat preview uniqueness or local substring counts as proof of single-row safety.
 - `atuin search -i` can panic inside Codex's filesystem sandbox because Atuin fails to create its log file on a read-only path; run interactive inspector deletions with escalated permissions.
