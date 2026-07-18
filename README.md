@@ -119,11 +119,13 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 | --- | --- |
 | `creating-agent-skills` | Creating concise, valid, discoverable agent skills. |
 | `reviewing-code` | Code review for correctness, edge cases, tests, security, and integration risk. |
+| `resolving-pr-review-comments` | Explicitly invoked PR feedback assessment, fixes, replies, commits, and pushes. |
 | `resolving-edge-cases` | Iteratively finding, fixing, and verifying plausible edge cases in code flows. |
 | `naming-agent-skills` | Predictable, searchable skill names. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
 | `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |
 | `writing-git-commits` | Focused Conventional Commits from real diffs. |
+| `syncing-main-branch` | Explicitly invoked clean switch to `main` and protected fast-forward update. |
 | `managing-git-worktrees` | Safe Git worktree creation, repair, removal, pruning, and branch cleanup. |
 | `maintaining-memory-md` | Creates repository `MEMORY.md` on the first durable `GOTCHA` or `TASTE`, then keeps entries concise and current. |
 | `writing-agents-md` | Creating or updating repository `AGENTS.md` guidance. |
