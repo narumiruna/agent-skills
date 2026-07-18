@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creating Telegraph Pages"
+  short_description: "Publish structured articles to Telegra.ph"
+  default_prompt: "Use $creating-telegraph-pages to publish this article as a Telegra.ph page."
