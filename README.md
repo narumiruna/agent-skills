@@ -14,9 +14,7 @@ Then open Codex and run `/skills` to inspect what was installed. Invoke a skill 
 
 ## 📦 Install
 
-Choose the path that matches how you want to use the skills.
-
-### 1. Standard install with `npx`
+### Standard install with `npx skills`
 
 Use this when you want the collection without linking a local checkout:
 
@@ -25,44 +23,6 @@ npx skills add narumiruna/skills
 ```
 
 Standard discovery exposes active skills only; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
-
-### 2. Local Codex development with `just`
-
-Use this when you want repo-managed local copies in `~/.codex/skills`:
-
-```shell
-just install-all
-
-# or install one skill
-just install managing-python-with-uv
-```
-
-Each install replaces the target skill directory before copying. Active skills are grouped under `skills/<category>/<skill-name>/`; `just install-all` discovers those directories recursively and copies each skill directly into `~/.codex/skills/`. Deprecated skills live outside the active tree.
-
-`hardening-code-paths` replaces the former `resolving-edge-cases` name. Installing or cleaning all skills—or installing or cleaning `hardening-code-paths` individually—removes that legacy local copy.
-
-Remove copied skills when finished:
-
-```shell
-just clean-all
-
-# or clean one skill
-just clean managing-python-with-uv
-```
-
-`just` by itself only lists the available recipes.
-
-### 3. Manual copy for Codex
-
-Use this when you want a one-off local copy without `just`:
-
-```shell
-mkdir -p ~/.codex/skills
-rm -rf ~/.codex/skills/managing-python-with-uv
-cp -R ./skills/python/managing-python-with-uv ~/.codex/skills/managing-python-with-uv
-```
-
-Repeat the same pattern for other skills as needed.
 
 ## 🧭 How To Use In Codex
 
@@ -146,7 +106,7 @@ Repository path: `skills/workflow-repository/`
 
 ## 🗄️ Deprecated Skills
 
-Deprecated skills remain in `deprecated/<skill-name>/` for reference and are not included in `just install-all`.
+Deprecated skills remain in `deprecated/<skill-name>/` for reference and are excluded from standard discovery.
 
 | Skill | Notes |
 | --- | --- |
