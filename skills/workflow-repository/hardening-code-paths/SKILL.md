@@ -1,11 +1,11 @@
 ---
-name: resolving-edge-cases
-description: Use when asked to proactively find, fix, or harden edge-case bugs in a specific code flow, or when a concrete bug fix suggests nearby same-pattern regression risks that should be inspected.
+name: hardening-code-paths
+description: Use when asked to proactively harden a specific code path by finding and fixing plausible edge-case, boundary, failure-mode, or lifecycle bugs, or when a concrete bug fix suggests nearby same-pattern regression risks.
 ---
 
-# Resolving Edge Cases
+# Hardening Code Paths
 
-Use this to actively inspect relevant code, find plausible edge-case bugs, and fix or harden them. Do not wait for the user to enumerate edge cases.
+Actively inspect the relevant code path, confirm plausible edge-case and failure-mode bugs, and fix or harden them. Do not wait for the user to enumerate cases.
 
 ## Default Scope
 
