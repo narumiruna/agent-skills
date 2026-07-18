@@ -1,6 +1,6 @@
 ---
 name: reviewing-code
-description: Use when reviewing code changes for correctness, maintainability, readability, security, performance, test coverage, and integration risk; especially when the user asks to inspect a diff, pull request, merge request, commit, patch, or source files.
+description: Review code changes for correctness, maintainability, readability, security, performance, test coverage, and integration risk. Use when asked to inspect a diff, pull request, merge request, commit, patch, or source files; when fixes are also requested, hand confirmed edge-case and failure-mode findings to hardening-code-paths when available.
 ---
 
 # Reviewing Code
@@ -20,6 +20,19 @@ Review the requested change, not the entire codebase. Prioritize correctness and
 6. Clearly separate confirmed problems, inferred risks, and anything you could not verify.
 
 Report findings introduced by the reviewed change or made materially worse or newly reachable by it. Keep unrelated pre-existing problems out of the main findings unless the user requested a broader audit; mention a directly relevant pre-existing problem separately and label it clearly.
+
+## Hardening Handoff
+
+Keep the review read-only unless the user explicitly asks to fix findings, harden the implementation, or review and improve the code.
+
+When changes are authorized:
+
+1. Follow this review workflow until the triggering edge-case or failure-mode finding is confirmed.
+2. For each confirmed finding that needs bounded code-path hardening, load and follow the available `hardening-code-paths` skill for the affected flow.
+3. Do not hand off speculative risks, preference-only comments, or unrelated findings.
+4. Return to this workflow after hardening, inspect the resulting change, and report what was fixed, how it was verified, and any residual risk.
+
+If `hardening-code-paths` is unavailable, keep the review read-only, report the confirmed finding and missing companion skill, and do not recreate its workflow here.
 
 ## Review Workflow
 

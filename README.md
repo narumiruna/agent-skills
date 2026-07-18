@@ -39,6 +39,8 @@ just install managing-python-with-uv
 
 Each install replaces the target skill directory before copying. Active skills are grouped under `skills/<category>/<skill-name>/`; `just install-all` discovers those directories recursively and copies each skill directly into `~/.codex/skills/`. Deprecated skills live outside the active tree.
 
+`hardening-code-paths` replaces the former `resolving-edge-cases` name. Installing or cleaning all skills—or installing or cleaning `hardening-code-paths` individually—removes that legacy local copy.
+
 Remove copied skills when finished:
 
 ```shell
@@ -130,9 +132,9 @@ Repository path: `skills/workflow-repository/`
 | Skill | Use it for |
 | --- | --- |
 | `creating-agent-skills` | Creating concise, valid, discoverable agent skills. |
-| `reviewing-code` | Code review for correctness, edge cases, tests, security, and integration risk. |
+| `reviewing-code` | Read-only code review with conditional handoff for authorized code-path hardening. |
 | `resolving-pr-review-comments` | Explicitly invoked PR feedback assessment, fixes, replies, commits, and pushes. |
-| `resolving-edge-cases` | Iteratively finding, fixing, and verifying plausible edge cases in code flows. |
+| `hardening-code-paths` | Finding, fixing, and verifying plausible edge cases and failure modes in code paths. |
 | `naming-agent-skills` | Predictable, searchable skill names. |
 | `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
 | `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |

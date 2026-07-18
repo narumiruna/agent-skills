@@ -19,6 +19,7 @@ Follow global defaults; this file defines only repo-specific additions and overr
 
 - `just` is non-mutating by default and only lists available recipes.
 - Local Codex copy/rm flows use `just install-all`, `just install <skill>`, `just clean-all`, and `just clean <skill>`.
+- Those flows remove the legacy installed name `resolving-edge-cases` when operating on all skills or its replacement, `hardening-code-paths`; do not restore it as an active alias.
 - `prek run -a` is the default repository-wide verification gate before a PR.
 - Rebuild slide outputs after changing content under `examples/slides/`.
 
