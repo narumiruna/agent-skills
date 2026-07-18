@@ -1,0 +1,6 @@
+interface:
+  display_name: "Resolve PR Review Comments"
+  short_description: "Assess and address pull request review feedback."
+  default_prompt: "Use $resolving-pr-review-comments to inspect all review feedback on the current pull request, address reasonable comments, verify the fixes, commit them, and push the branch."
+policy:
+  allow_implicit_invocation: false
