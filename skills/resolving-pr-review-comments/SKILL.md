@@ -5,18 +5,27 @@ description: Inspect all feedback on a pull request, assess whether each comment
 
 # Resolving PR Review Comments
 
-Use this skill only after explicit invocation. Treat review comments as claims to verify, not instructions to apply blindly. External actions covered by the invocation are review replies, thread resolution, commits, and a normal push to the current pull-request branch.
+Use this skill only after explicit invocation. Treat review comments as claims to verify, not instructions to apply blindly. External actions covered by the invocation are review replies, thread resolution, commits, and an explicit push of the current pull-request branch.
 
 ## Establish Scope
 
-1. Inspect the worktree and current branch. Preserve unrelated staged, unstaged, and untracked changes; never blanket-stage them.
-2. Resolve the pull request, repository, head branch, base branch, number, URL, and current state from the hosting provider. For GitHub, start with:
+1. Inspect the worktree, index, and current branch:
 
    ```bash
-   gh pr view --json number,url,state,baseRefName,headRefName
+   git status --short --branch
+   git diff --cached --name-only
+   git symbolic-ref --quiet --short HEAD
    ```
 
-3. Confirm that the checked-out branch is the pull request head. Stop rather than editing or pushing another branch accidentally.
+   Stop before editing if any pre-existing staged change exists; a normal commit would include the entire index. Report those paths and do not unstage, commit, or hide them. Preserve unrelated unstaged and untracked changes, and stop if they overlap files that accepted feedback requires changing.
+
+2. Resolve the pull request, repository, head repository, head branch, base branch, number, URL, and current state from the hosting provider. For GitHub, start with:
+
+   ```bash
+   gh pr view --json number,url,state,baseRefName,headRefName,headRepository,headRepositoryOwner,isCrossRepository
+   ```
+
+3. Confirm that HEAD is attached and that the checked-out branch is the pull-request head. Stop rather than editing or pushing another or detached branch accidentally.
 4. Compare the pull request against the merge base of its reported base branch. Do not assume the base is `main`.
 
 ## Read All Feedback
@@ -56,9 +65,17 @@ Do not implement preference-only suggestions as correctness fixes. Do not mark a
 ## Commit and Push
 
 1. Group changes into coherent commit boundaries. If comments require unrelated fixes, use separate focused commits.
-2. Stage only intended paths and write Conventional Commit messages grounded in each staged diff. Do not add attribution trailers.
-3. If no file change is needed, do not create an empty commit.
-4. Push the current pull-request branch to its configured upstream with a normal `git push`. Never force-push unless the user separately and explicitly requests it.
+2. Stage only intended paths. Before each commit, verify that every path in `git diff --cached --name-only` belongs to that commit; stop if the index contains anything else.
+3. Write Conventional Commit messages grounded in each staged diff. Do not add attribution trailers. If no file change is needed, do not create an empty commit.
+4. Resolve a single push remote whose push URL matches the pull request's head repository, and validate the reported head branch with `git check-ref-format --branch`. Confirm any configured upstream with `git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}'`; stop if the remote or destination is missing, mismatched, or ambiguous.
+5. Push only HEAD to the verified pull-request branch with an explicit refspec:
+
+   ```bash
+   git push "$verified_remote" "HEAD:refs/heads/$verified_pr_head"
+   ```
+
+   Never use a no-refspec push, rely on `push.default` or `remote.*.push`, or force-push unless the user separately and explicitly requests it.
+6. Compare local HEAD with `git ls-remote --exit-code "$verified_remote" "refs/heads/$verified_pr_head"` before replying or resolving threads.
 
 ## Reply and Resolve
 
@@ -72,7 +89,7 @@ Finally, re-query all feedback surfaces and verify:
 - every reasonable comment is addressed
 - every eligible thread is resolved
 - intentionally open threads are reported with the reason
-- local HEAD equals the pushed remote head
+- local HEAD equals the verified pull-request remote head
 - the worktree contains no unintended changes
 
 Report the pull-request URL, commits pushed, resolved and remaining thread counts, checks run, and any feedback deliberately not implemented.
