@@ -6,7 +6,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 
 
@@ -84,6 +84,19 @@ def validate_content(content):
     return encoded
 
 
+def _redact_secret(value, secret):
+    if isinstance(value, str):
+        return value.replace(secret, "[REDACTED]")
+    if isinstance(value, list):
+        return [_redact_secret(item, secret) for item in value]
+    if isinstance(value, dict):
+        return {
+            _redact_secret(key, secret): _redact_secret(item, secret)
+            for key, item in value.items()
+        }
+    return value
+
+
 def _post(method, fields):
     request = Request(
         f"{API_ROOT}/{method}",
@@ -98,15 +111,18 @@ def _post(method, fields):
             raise RuntimeError("Telegraph API returned invalid JSON") from error
     if not isinstance(payload, dict) or not isinstance(payload.get("ok"), bool):
         raise RuntimeError("Telegraph API returned an invalid response")
+    access_token = fields.get("access_token")
     if not payload["ok"]:
         message = str(payload.get("error", "UNKNOWN_ERROR"))
-        access_token = fields.get("access_token")
         if isinstance(access_token, str) and access_token:
-            message = message.replace(access_token, "[REDACTED]")
+            message = _redact_secret(message, access_token)
         raise RuntimeError(f"Telegraph API error: {message}")
     if "result" not in payload:
         raise RuntimeError("Telegraph API returned an invalid response")
-    return payload["result"]
+    result = payload["result"]
+    if isinstance(access_token, str) and access_token:
+        result = _redact_secret(result, access_token)
+    return result
 
 
 def _validate_string(name, value, minimum, maximum):
@@ -182,6 +198,16 @@ def create_page(access_token, title, content, author_name=None, author_url=None)
         fields["author_url"] = author_url
     page = _post("createPage", fields)
     if not isinstance(page, dict) or not isinstance(page.get("url"), str):
+        raise RuntimeError("Telegraph API returned an invalid page")
+    try:
+        page_url = urlsplit(page["url"])
+    except ValueError as error:
+        raise RuntimeError("Telegraph API returned an invalid page") from error
+    if (
+        page_url.scheme != "https"
+        or page_url.netloc != "telegra.ph"
+        or not page_url.path.strip("/")
+    ):
         raise RuntimeError("Telegraph API returned an invalid page")
     return page
 

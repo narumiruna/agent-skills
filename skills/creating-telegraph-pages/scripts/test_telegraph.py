@@ -135,6 +135,41 @@ def test_create_page_rejects_malformed_result():
             telegraph.create_page("token", "Hello", ["text"])
 
 
+@pytest.mark.parametrize(
+    "url",
+    [
+        "",
+        "http://telegra.ph/Hello-01-01",
+        "https://example.com/Hello-01-01",
+        "https://telegra.ph/",
+    ],
+)
+def test_create_page_rejects_invalid_public_url(url):
+    response = FakeResponse({"ok": True, "result": {"url": url}})
+
+    with patch("telegraph.urlopen", return_value=response):
+        with pytest.raises(RuntimeError, match="invalid page"):
+            telegraph.create_page("token", "Hello", ["text"])
+
+
+def test_create_page_redacts_reflected_token_from_success_response():
+    response = FakeResponse(
+        {
+            "ok": True,
+            "result": {
+                "url": "https://telegra.ph/Hello-01-01",
+                "description": "unexpected secret-token reflection",
+            },
+        }
+    )
+
+    with patch("telegraph.urlopen", return_value=response):
+        page = telegraph.create_page("secret-token", "Hello", ["text"])
+
+    assert "secret-token" not in json.dumps(page)
+    assert "[REDACTED]" in page["description"]
+
+
 def test_create_account_stores_token_without_printing_secrets(tmp_path, capsys):
     token_file = tmp_path / "telegraph-token"
     account = {
