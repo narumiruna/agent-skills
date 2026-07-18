@@ -32,7 +32,7 @@ CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
    - If the user has no account, ask before creating one because it changes external state. Also agree on a new secret-file path, then run:
 
      ```shell
-     uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-account \
+     uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-account \
        --short-name '<account-name>' \
        --token-file '<user-approved-secret-path>'
      ```
@@ -42,7 +42,7 @@ CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
 4. Publish only after the content is ready:
 
    ```shell
-   uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
+   uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
      --title '<title>' \
      --author-name '<author>' \
      /tmp/telegraph-content.json
@@ -53,7 +53,7 @@ CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
    ```shell
    TOKEN_FILE='<user-approved-secret-path>'
    TELEGRAPH_ACCESS_TOKEN="$(cat "$TOKEN_FILE")" \
-     uv run python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
+     uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
        --title '<title>' \
        /tmp/telegraph-content.json
    ```
