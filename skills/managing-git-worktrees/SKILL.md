@@ -1,6 +1,6 @@
 ---
 name: managing-git-worktrees
-description: Create, inspect, attach, repair, remove, prune, and clean up local Git worktrees safely. Use when Codex needs to manage a repository's worktree lifecycle, including creating a branch-backed worktree under worktrees/, attaching an existing local branch, repairing moved worktrees, diagnosing stale metadata, preserving detached commits and local-only files during removal, or optionally deleting a merged branch.
+description: Create, inspect, attach, repair, remove, prune, and clean up local Git worktrees safely. Use when Codex needs to manage a repository's worktree lifecycle, including creating a branch-backed worktree beside the main worktree, attaching an existing local branch, repairing moved worktrees, diagnosing stale metadata, preserving detached commits and local-only files during removal, or optionally deleting a merged branch.
 ---
 
 # Manage Git Worktrees
@@ -19,10 +19,9 @@ Treat every branch, ref, and path as untrusted data. Prefer an argv-capable comm
 
 ## Choose the Path
 
-- Default to `<main-worktree-root>/worktrees/<path-name>`.
-- Derive `<path-name>` from the branch by replacing every `/` with `-`; for example, map `feat/login` to `worktrees/feat-login`.
+- Default to a sibling of the main worktree at `<main-worktree-parent>/<main-worktree-name>-<path-name>`.
+- Derive `<path-name>` from the branch by replacing every `/` with `-`; for example, with a main worktree at `/home/user/workspace/project`, map `feat/login` to `/home/user/workspace/project-feat-login`.
 - Check that the resolved path does not already exist and does not collide with another branch after normalization. Stop and report a collision instead of inventing another name.
-- Keep `worktrees/` local by ensuring an exact `/worktrees/` line appears in the common Git directory's `info/exclude`. Resolve the file with `git rev-parse --path-format=absolute --git-path info/exclude`, preserve all existing patterns, and append only when the exact line is absent. Do not overwrite the file or modify the tracked `.gitignore`.
 
 ## Create or Attach
 
