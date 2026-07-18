@@ -10,16 +10,14 @@ Follow global defaults; this file defines only repo-specific additions and overr
 
 ## Repository Layout
 
-- Active skills live in `skills/<category>/<skill-name>/SKILL.md`; category directories are organizational only, and installed skills remain flat by skill name.
-- Deprecated skills live in `deprecated/<skill-name>/SKILL.md`, outside the active `skills/` tree, and are excluded from default install and clean flows.
+- Active skills live in `skills/<category>/<skill-name>/SKILL.md`; category directories are organizational only.
+- Deprecated skills live in `deprecated/<skill-name>/SKILL.md`, outside the active `skills/` tree, and are excluded from standard discovery.
 - Optional supporting material stays inside the skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Slides and visual examples live under `examples/`.
 
 ## Commands
 
 - `just` is non-mutating by default and only lists available recipes.
-- Local Codex copy/rm flows use `just install-all`, `just install <skill>`, `just clean-all`, and `just clean <skill>`.
-- Those flows remove the legacy installed name `resolving-edge-cases` when operating on all skills or its replacement, `hardening-code-paths`; do not restore it as an active alias.
 - `prek run -a` is the default repository-wide verification gate before a PR.
 - Rebuild slide outputs after changing content under `examples/slides/`.
 
