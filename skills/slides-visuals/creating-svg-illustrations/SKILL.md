@@ -1,36 +1,26 @@
 ---
 name: creating-svg-illustrations
-description: Use when you need SVG diagram rules, layout patterns, or embedding guidance for slide decks and want the minimal SVG-focused reading path.
+description: Create, revise, embed, or troubleshoot accessible SVG diagrams and illustrations for slide decks, documents, and other static artifacts, with portable sizing, layout, style, and validation guidance.
 ---
 
-# SVG Illustration Entry
+# SVG Illustrations
 
-## Overview
-Thin entry skill for SVG diagrams. Core principle: go straight to SVG rules and patterns rather than scanning slide authoring or color modules.
+Start with `references/core-rules.md`; load only the extra detail the artifact needs.
 
-## When to Use
-- Creating slide-ready SVG diagrams or illustrations
-- Choosing SVG sizing, spacing, and embedding rules
-- Troubleshooting SVG export/embedding issues
-
-## Quick Reference
-| Goal | Read |
+| Need | Read or use |
 | --- | --- |
-| Core rules | references/core-rules.md |
-| Pattern examples | references/pattern-examples.md |
-| Embedding in slides | references/embedding.md |
-| Troubleshooting | references/troubleshooting.md |
+| Canvas, style, text, accessibility, validation | `references/core-rules.md` |
+| Reusable compositions | `references/pattern-examples.md` |
+| Marp embedding | `references/embedding.md` |
+| Rendering failures | `references/troubleshooting.md` |
+| Known-good deck example | `assets/examples/with-diagrams.md` |
 
-## Example
-Prompt: "Need an architecture diagram with clean sizing." → Read `core-rules.md`, then `pattern-examples.md`.
+## Workflow
 
-## Assets
-- `assets/examples/` - SVG diagram examples
+1. Inspect the target slide or document, required dimensions, surrounding palette, and renderer.
+2. Create the smallest editable SVG that communicates the idea. Use a correct `viewBox`, explicit text styles, consistent geometry, and accessible title/description where the visual carries meaning.
+3. Keep assets portable: avoid embedded fonts, unexplained emoji, unnecessary filters, and base64 content unless the output must be self-contained.
+4. Validate with `svglint` when available, then open or embed the SVG in the target artifact and inspect clipping, scaling, contrast, text, and relative paths.
+5. Return the SVG artifact first, followed by validation performed and any renderer or font caveat.
 
-## Common Mistakes
-- Reading Marp authoring before SVG rules when only diagrams are needed
-- Opening slide authoring or color references before the SVG path requires them
-
-## Red Flags
-- "Maybe SVG rules are buried in authoring"
-- "I'll just skim everything"
+Use slide-authoring or color guidance only when the request also requires it. Do not claim visual inspection when only source validation ran, and do not commit or publish the artifact unless requested.

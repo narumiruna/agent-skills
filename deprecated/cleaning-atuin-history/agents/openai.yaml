@@ -1,4 +1,4 @@
 interface:
-  display_name: "Atuin History Cleanup"
-  short_description: "Audit and clean noisy Atuin history."
-  default_prompt: "Use $cleaning-atuin-history to find typo-like or overly duplicated Atuin history entries and propose safe cleanup steps."
+  display_name: "Atuin Cleanup (Deprecated)"
+  short_description: "Audit Atuin history and prepare exact cleanup steps."
+  default_prompt: "Use $cleaning-atuin-history to audit duplicate and typo candidates, then prepare exact destructive and remote operations for separate approval."

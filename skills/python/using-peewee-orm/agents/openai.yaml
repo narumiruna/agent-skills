@@ -1,4 +1,4 @@
 interface:
   display_name: "Python Peewee"
-  short_description: "Use Peewee with DatabaseProxy and safe tests."
-  default_prompt: "Use $using-peewee-orm to model this data with Peewee, wire DatabaseProxy correctly, and keep SQLite tests isolated."
+  short_description: "Wire Peewee lifecycle, transactions, and isolated tests."
+  default_prompt: "Use $using-peewee-orm to define the Peewee binding, connection, transaction, and SQLite test lifecycle for this task."

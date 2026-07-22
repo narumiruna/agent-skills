@@ -1,6 +1,6 @@
 interface:
-  display_name: "Work Log Writer"
-  short_description: "Write concise repository work logs."
-  default_prompt: "Use $writing-work-logs to summarize my work for yesterday from this repository."
+  display_name: "Work Logs (Deprecated)"
+  short_description: "Write concise Git-evidence work logs."
+  default_prompt: "Use $writing-work-logs to summarize the explicitly requested date range from this repository's Git evidence."
 policy:
   allow_implicit_invocation: false

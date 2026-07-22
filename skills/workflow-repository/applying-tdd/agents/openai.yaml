@@ -1,4 +1,4 @@
 interface:
   display_name: "Applying TDD"
-  short_description: "Implement non-trivial changes with TDD."
-  default_prompt: "Use $applying-tdd to drive this non-trivial change with a failing test first, then the smallest passing implementation."
+  short_description: "Drive behavior changes with TDD when practical."
+  default_prompt: "Use $applying-tdd to prove the focused failure, make the smallest passing change, and refactor safely when a red-first cycle is practical."

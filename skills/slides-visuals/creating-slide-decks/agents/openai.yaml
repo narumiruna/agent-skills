@@ -1,4 +1,4 @@
 interface:
-  display_name: "Slide Creator"
-  short_description: "Create Marp decks, SVGs, and slide palettes."
-  default_prompt: "Use $creating-slide-decks to build or revise this Marp/Marpit deck with consistent colors, layout, and SVG visuals."
+  display_name: "Creating Slide Decks"
+  short_description: "Create coherent, validated Marp decks and visuals."
+  default_prompt: "Use $creating-slide-decks to build or revise this complete Marp deck with a coherent narrative, palette, visuals, and rendered checks."

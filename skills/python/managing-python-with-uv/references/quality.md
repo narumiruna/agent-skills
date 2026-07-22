@@ -1,165 +1,36 @@
-# Quality Tools (ruff, ty, pytest)
+# Quality Workflows with uv
 
-## Table of Contents
+Prefer the repository's documented aggregate gate. Do not add or replace quality tools merely to run validation.
 
-- [prek (pre-commit runner)](#prek-pre-commit-runner)
-- [Type Checking with ty](#type-checking-with-ty)
-- [Linting and Formatting with ruff](#linting-and-formatting-with-ruff)
-- [Testing and Coverage with pytest](#testing-and-coverage-with-pytest)
-- [Pre-merge Quality Gate](#pre-merge-quality-gate)
-- [CI Configuration Example](#ci-configuration-example)
+## Existing Repositories
 
-Keep quality tools in dev dependencies. Prefer the repository's documented aggregate gate; if the repo uses prek, run `prek run -a`. If the repo uses pre-commit and provides no prek path, run the documented pre-commit command. Use individual `uv run` commands when no aggregate gate exists or when narrowing a failure.
+1. Inspect project instructions, `pyproject.toml`, hook configuration, and CI.
+2. Run the narrowest relevant check while iterating.
+3. Run the documented full gate before handoff.
+4. Use the configured hook runner. If the repository uses prek, run `prek run -a`; if it uses pre-commit instead, run its documented command.
 
-## New Project Defaults
-
-For a brand-new `uv init` project, install the default quality baseline immediately:
+Typical direct commands when the corresponding tools are already configured:
 
 ```bash
-uv add --dev ruff ty pytest pytest-cov
-```
-
-`pytest` is the default test framework for new projects. Write tests as function-based `tests/test_*.py` files, use plain `assert`, prefer fixtures for setup and teardown, and use `@pytest.mark.parametrize` for matrix-style cases. Unless project docs or configuration specify a different test location, treat `tests/` as the pytest target and include it in commands instead of relying on implicit discovery.
-
-Keep `ruff` and `ty` on defaults unless the project has a concrete need for custom configuration.
-
-In an existing repository, follow the established test stack unless the user explicitly requests a migration. Do not introduce `unittest.TestCase` or class-based `Test*` suites as the default for a new project.
-
-## prek (pre-commit runner)
-
-Use prek as the primary gate when the repository has prek configuration or project instructions call for it. Use pre-commit only when the repository documents pre-commit and does not provide a prek path. Do not introduce or switch hook runners only for verification.
-
-**Install (preferred):**
-
-```bash
-uv tool install prek
-```
-
-**Usage:**
-
-```bash
-prek run -a        # Run all hooks on the repo
-prek run <hook>    # Run a specific hook
-prek install       # Install git hooks
-```
-
-## Type Checking with ty
-
-**Installation:**
-
-```bash
-uv add --dev ty
-```
-
-**Usage:**
-
-```bash
-uv run ty check              # Check all files
-uv run ty check src/         # Check specific directory
-uv run ty check --watch      # Watch mode for development
-```
-
-## Linting and Formatting with ruff
-
-**Installation:**
-
-```bash
-uv add --dev ruff
-```
-
-**Commands:**
-
-```bash
-uv run ruff check           # Check for issues
-uv run ruff check --fix     # Auto-fix safe issues
-uv run ruff format          # Format code
-```
-
-## Testing and Coverage with pytest
-
-**Installation:**
-
-```bash
-uv add --dev pytest pytest-cov
-```
-
-**Commands:**
-
-```bash
-# Run all tests
-uv run pytest tests
-
-# Run with coverage
-uv run pytest --cov=<package-or-src-path> --cov-report=term-missing tests
-
-# Run specific tests
-uv run pytest tests/test_specific.py
-uv run pytest tests/test_specific.py::test_function
-
-# Verbose output
-uv run pytest -v tests
-
-# Stop on first failure
-uv run pytest -x tests
-
-# Run tests matching pattern
-uv run pytest -k "test_user" tests
-```
-
-## Pre-merge Quality Gate
-
-Run the project gate first when available. Use `prek run -a` when the repository uses prek:
-
-```bash
-prek run -a
-```
-
-If the repository documents pre-commit and does not provide a prek path, use the documented pre-commit command instead.
-
-If no aggregate gate exists, run the tools directly through uv:
-
-```bash
-uv run ruff check --fix
-uv run ruff format
+uv run ruff check
+uv run ruff format --check
 uv run ty check
-uv run pytest --cov=<package-or-src-path> --cov-report=term-missing --cov-fail-under=80 tests
+uv run pytest tests
+uv run pytest --cov=<package-or-src-path> --cov-report=term-missing tests
 ```
 
-Use function-based pytest tests. Avoid class-based `Test*` suites and `unittest.TestCase` unless the repository already requires them. Prefer plain `assert`, pytest fixtures, and `@pytest.mark.parametrize` over framework-style test classes.
+Use project-specific targets and thresholds when defined. Do not invent a coverage threshold or assume `tests/` when repository evidence points elsewhere.
 
-## CI Configuration Example
+## New Projects
 
-**.github/workflows/test.yml:**
+When no project requirements exist, choose the smallest tool set that proves the requested quality bar. Common options are:
 
-```yaml
-name: Test
-
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-
-      - name: Set up Python
-        run: uv python install <version>
-
-      - name: Install dependencies
-        run: uv sync --all-extras --dev
-
-      - name: Lint
-        run: uv run ruff check
-
-      - name: Format check
-        run: uv run ruff format --check
-
-      - name: Type check
-        run: uv run ty check
-
-      - name: Test
-        run: uv run pytest --cov=<package-or-src-path> --cov-report=xml tests
+```bash
+uv add --dev pytest ruff ty
 ```
+
+Add coverage or a hook runner only when the workflow needs it. Prefer function-based pytest tests with plain `assert`, fixtures for lifecycle setup, and parametrization for input matrices, unless the project has another established style.
+
+## Handoff
+
+Report the commands run and their outcomes. Distinguish passing checks from checks that were unavailable or intentionally not configured.

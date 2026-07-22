@@ -1,4 +1,4 @@
 interface:
   display_name: "Explaining Step by Step"
-  short_description: "Explain concepts, issues, PRs, and systems progressively."
-  default_prompt: "Use $explaining-step-by-step to establish the big picture, then explain the details, causes, and effects step by step from available sources, adding examples when they improve understanding."
+  short_description: "Explain complex material progressively from evidence."
+  default_prompt: "Use $explaining-step-by-step to build a clear evidence-grounded mental model from the big picture to the exact mechanism."

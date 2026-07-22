@@ -1,4 +1,4 @@
 interface:
   display_name: "Python CLI with Typer"
-  short_description: "Build Python CLIs with Typer and testable wiring."
-  default_prompt: "Use $building-typer-clis to structure this Python CLI with Typer, keeping command wiring thin and testable."
+  short_description: "Build and test thin, well-wired Typer CLIs."
+  default_prompt: "Use $building-typer-clis to build or revise this Typer CLI with thin command adapters, correct entry points, and focused CLI tests."

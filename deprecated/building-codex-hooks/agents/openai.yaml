@@ -1,4 +1,4 @@
 interface:
-  display_name: "Codex CLI Hooks"
-  short_description: "Build and debug Codex CLI hook configs."
-  default_prompt: "Use $building-codex-hooks to design, implement, or debug Codex CLI hooks for this workspace."
+  display_name: "Codex CLI Hooks (Deprecated)"
+  short_description: "Interpret legacy Codex hook configs and scripts."
+  default_prompt: "Use $building-codex-hooks as a deprecated reference, verify current Codex documentation first, and then migrate or diagnose this hook."

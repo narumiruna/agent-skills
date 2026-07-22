@@ -1,100 +1,52 @@
 ---
 name: cleaning-atuin-history
-description: Use when auditing Atuin shell history for noisy duplicates or high-confidence typo/retry pairs and when preparing safe preview-first cleanup steps without editing the SQLite database directly.
+description: Audit Atuin history for duplicate pressure and high-confidence typo/retry pairs, then prepare exact preview-first cleanup steps without direct SQLite deletion. This is a deprecated internal workflow; destructive and remote operations require separate exact approval.
 metadata:
   internal: true
 ---
 
-# Atuin History Cleanup
+# Atuin History Cleanup (Deprecated Reference)
 
-## Overview
-
-Audit first, delete second. Use the bundled script to summarize duplicate pressure and high-confidence typo-like retries. For typo cleanup, prefer the transactional `cleanup-typos` command so the flow snapshots `history.db`, uploads the current host history store, deletes candidates, and verifies the result. If verification fails, it preserves both the live database and snapshot for race-free manual recovery instead of automatically replacing the whole database.
-
-Read `references/atuin-cli.md` when you need the exact delete, dedup, or prune behavior.
-
-## Use When
-
-- Reviewing a noisy Atuin `history.db` before removing anything.
-- Estimating how much `atuin history dedup` would remove while still keeping the newest repeated entries.
-- Looking for typo-like retries such as `gti status` followed by `git status`.
-- Running a transactional typo cleanup with backup, verification, and manual recovery artifacts.
-- Rechecking an Atuin cleanup plan without mutating the database directly.
+Audit first. Do not treat a preview, uniqueness estimate, or skill invocation as deletion approval.
 
 ## Guardrails
 
-- Always run `atuin info` and the audit script before any destructive step.
-- Treat duplicate cleanup as global. `atuin history dedup` is not a single-command delete tool.
-- `atuin search --delete` is query-wide and follows Atuin's active search semantics. Do not use it manually for typo cleanup.
-- `cleanup-typos` is the only approved automation path for typo deletion. It may use `atuin search --delete` only after a strict uniqueness gate; any ambiguous match must fall back to the interactive inspector path.
-- `cleanup-typos` must snapshot `history.db` before deletion and delay the final remote sync until verification passes.
-- Do not automatically restore the whole database after failure; a check-then-restore race can still discard concurrent history. Preserve the live database and snapshot for manual recovery.
-- Re-confirm every destructive command immediately before running it.
-- Do not delete rows directly from SQLite.
-- Do not edit Atuin config as part of this skill. `history_filter` and `cwd_filter` tuning is out of scope for v1.
+- Resolve the active database with `atuin info` and use the bundled audit before proposing mutation.
+- Never delete rows directly from SQLite or edit Atuin config as part of this workflow.
+- `atuin history dedup` mutates the selected history window globally.
+- `atuin search --delete` deletes every match under active search semantics; do not use it manually for a single row.
+- The transactional typo command snapshots the database but also runs `atuin store push`, recomputes and deletes candidates, may drive a TUI, and finishes with `atuin sync`. Its current interface cannot bind execution to approved candidate IDs or guarantee non-interactive operation.
+- Do not invoke `cleanup-typos` through this skill. Keep it disabled until it gains a plan-only output plus approved-ID and non-interactive execution checks; its source and recovery artifacts remain historical reference material.
+- Re-run the audit immediately before any user-run mutation. If candidates, scope, or counts differ from the reviewed set, stop for a new decision.
+- Do not auto-restore a full live database after failure; preserve live state, snapshot, and verification artifacts for recovery.
+- The interactive inspector is user-run. An agent must not open or drive its TUI.
 
-## Workflow
+Read `references/atuin-cli.md` when exact dedup, search, or prune semantics matter.
 
-1. Resolve the active database:
+## Audit
 
-```bash
-atuin info
-```
-
-2. Resolve `scripts/atuin_history_cleanup.py` against this skill directory and run the audit by absolute path:
+Resolve this skill directory and run the script by absolute path:
 
 ```bash
-ATUIN_HISTORY_SKILL_DIR="/absolute/path/to/cleaning-atuin-history"
-uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" audit
+uv run python "$SKILL_DIR/scripts/atuin_history_cleanup.py" audit
 ```
 
-Useful flags:
+Use `--format json` for structured review. Optional scope flags include `--db-path`, `--dupkeep`, `--before`, `--typo-window-seconds`, and `--max-typos`.
 
-```bash
-uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" audit --db-path ~/.local/share/atuin/history.db --dupkeep 3 --before now --typo-window-seconds 300 --max-typos 20
-```
+The audit reads selected history columns, groups duplicates by command/cwd/host, and proposes typo pairs only when session, time, arguments, exit status, frequency, and edit-distance evidence align. Treat its output as candidates, not proof that deletion is wanted.
 
-3. Review the `duplicates` section first.
-   Use the reported `atuin history dedup --dry-run ...` command. If the dry run matches expectations, rerun the same command without `--dry-run`.
+## Prepare Cleanup
 
-4. Review the `typos` section second and choose one path:
-   Preferred transactional path:
+### Duplicates
 
-```bash
-uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" cleanup-typos
-```
+Run the reported `atuin history dedup --dry-run ...`. Present the exact window, keep count, groups, and potential deletion count. Run the matching non-dry command only after that exact scope and loss are approved.
 
-   Useful flags:
+### Typos
 
-```bash
-uv run python "$ATUIN_HISTORY_SKILL_DIR/scripts/atuin_history_cleanup.py" cleanup-typos --db-path ~/.local/share/atuin/history.db --before now --typo-window-seconds 300 --max-typos 20 --backup-dir ~/.local/share/atuin/cleanup-backups/manual-run
-```
+Present each candidate ID, timestamp, cwd, original, correction, and reason. The supported path is the **user-run inspector**: give the user the prefix/cwd preview, candidate details, and inspector keys so they can confirm and delete the exact row themselves.
 
-   Manual review path:
-   Start with the suggested `atuin search -i --search-mode prefix ...` preview command. The audit will also add `--cwd <cwd>` when it knows the original working directory, so review stays narrow even if your default Atuin config uses `skim` or another fuzzy mode. In the TUI inspector, use `Ctrl+O`, confirm the exact entry, then `Ctrl+D` to delete that one row.
+Do not offer or execute the bundled transactional command as an approved automation path. It can run `atuin store push`, delete a recomputed set, open a TUI, and run `atuin sync` in one invocation before an agent can verify that the executed plan matches the reviewed IDs.
 
-5. Stop after the cleanup you actually verified. Do not keep expanding the scope.
+## Verify
 
-## What The Audit Does
-
-- Resolves the database path from `atuin info` unless `--db-path` is provided.
-- Opens the SQLite database in read-only mode and inspects only `id`, `timestamp`, `exit`, `command`, `cwd`, `session`, and `hostname`.
-- Groups duplicates by `(command, cwd, hostname)` and reports how many rows exceed `--dupkeep`.
-- Emits typo review commands with an explicit `--search-mode prefix` override and never emits `atuin search --delete`.
-- `cleanup-typos` first runs the same typo audit, then creates a snapshot, writes `pre_audit.json`, `plan.json`, and `post_verify.json`, and only commits the deletion to remote sync after verification succeeds.
-- Detects typo candidates only when all of these are true:
-  - same session
-  - within the configured window
-  - arguments after the first token are identical
-  - previous command exited non-zero
-  - the first token looks rare
-  - the corrected token is much more common
-  - the token change is a single-edit or adjacent-transposition typo
-- Excludes path- or script-like first tokens from typo suggestions.
-
-## Output Expectations
-
-- `duplicates` gives one global preview/apply pair for `history dedup`.
-- `typos` gives per-row review data: id, time, cwd, original command, suggested correction, reason, and shell-safe preview commands for inspector review only.
-- `--format json` is preferable when another tool needs to post-process the audit.
-- `cleanup-typos` prints a text summary and leaves its backup and verification artifacts in the chosen backup directory.
+Stop after the approved cleanup. Re-run the same audit scope and report remaining counts. If diagnosing a historical transactional run, preserve `pre_audit.json`, `plan.json`, `post_verify.json`, and the snapshot path; report remote-sync and recovery status without exposing unrelated history.

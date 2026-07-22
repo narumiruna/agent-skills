@@ -1,4 +1,4 @@
 interface:
-  display_name: "Harden Code Paths"
-  short_description: "Find and fix plausible failure modes in code paths."
-  default_prompt: "Use $hardening-code-paths to harden this code path by confirming plausible failures, fixing the shared root cause, and verifying each fix."
+  display_name: "Hardening Code Paths"
+  short_description: "Confirm and fix plausible code-path failure modes."
+  default_prompt: "Use $hardening-code-paths to trace this code path, confirm plausible failures, fix the shared cause, and verify bounded sibling cases."

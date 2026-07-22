@@ -1,4 +1,4 @@
 interface:
   display_name: "Creating Agent Skills"
-  short_description: "Create concise, valid agent skills."
-  default_prompt: "Use $creating-agent-skills to turn this skill idea into a concise, validated agent skill."
+  short_description: "Create, revise, and review lean agent skills."
+  default_prompt: "Use $creating-agent-skills to create, optimize, or review this skill for reliable triggering, lean instructions, aligned metadata, and validation."

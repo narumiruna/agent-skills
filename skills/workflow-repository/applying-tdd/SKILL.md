@@ -1,49 +1,31 @@
 ---
 name: applying-tdd
-description: "Use when implementing non-trivial code changes with Test-Driven Development (TDD): write a failing test first, make the smallest passing change, then refactor safely."
+description: "Use when implementing a non-trivial behavior change with Test-Driven Development (TDD) when practical: prove a focused failure, make the smallest passing change, then refactor safely."
 ---
 
 # Applying TDD
 
-- Non-trivial changes SHOULD begin with a test.
-- A test SHOULD fail before implementation begins whenever practical (red → green → refactor).
-- Implementation SHOULD follow the red → green → refactor cycle.
-- Implement the smallest change required to make the test pass.
-- Refactoring MUST happen only after tests pass and MUST NOT change behavior.
-- Tests MUST act as executable specifications of behavior, not merely coverage.
-- Tests MUST assert observable behavior, not implementation details.
-- Bug fixes SHOULD include a regression test when feasible.
-- Code changes SHOULD include corresponding test updates when behavior changes.
-- Tests MUST be deterministic and isolated from uncontrolled inputs (for example network, time, or randomness).
-- Tests SHOULD avoid reliance on external systems unless explicitly intended.
-- External dependencies SHOULD be controlled appropriately.
-- Tests SHOULD target the lowest meaningful level.
-- Integration and end-to-end tests SHOULD complement lower-level tests where needed.
-- Tests MUST NOT be weakened or removed to satisfy incorrect implementations.
-- Tests SHOULD fail for a single clear reason.
-- When tests cannot be added, this MUST be rare and explicitly justified, including:
-  - why testing is not feasible
-  - what risk remains
-  - how the change was validated
-- Skipping TDD for non-trivial changes REQUIRES explicit justification.
+Use tests as executable behavior specifications, not as a coverage ritual.
 
-## Scope
+## Cycle
 
-- Non-trivial changes include:
-  - Bug fixes
-  - New features
-  - Behavior changes
-  - Data transformations
-  - Business logic or query changes
+1. Identify the smallest observable behavior that should change.
+2. Add or update the lowest-level meaningful test. Control time, randomness, network, storage, and other external inputs so the test is deterministic and isolated.
+3. Run it and confirm it fails for the intended reason. If it passes, correct the test or establish why another check is the valid red state.
+4. Implement the smallest change that makes the test pass. Do not weaken or delete a correct test to accommodate the implementation.
+5. Run the focused test, then relevant integration or end-to-end coverage and the repository gate.
+6. Refactor only while tests are green and without changing behavior.
 
-- Excluded:
-  - Pure formatting changes
-  - Renames without behavior change
-  - Comment or documentation updates
+For a bug, add a regression test when feasible. For a multi-path change, repeat the cycle in small observable increments rather than writing the entire implementation first.
 
-### Exceptions
+## Exceptions
 
-- TDD MAY be relaxed for:
-  - Rapid prototyping or spike solutions
-  - Exploratory coding where requirements are unclear
-  - Pure UI layout or styling changes
+Pure formatting, comments, behavior-preserving renames, exploratory spikes, and visual-only styling may not benefit from a red-first cycle. Requirements may also be too uncertain to encode safely.
+
+When a non-trivial behavior change cannot start with a failing test, state:
+
+- why the red state was impractical or unavailable
+- how behavior was verified instead
+- what risk remains
+
+Finish with the behavior proved, the initial failure evidence when available, and the passing checks. Do not claim TDD merely because tests were added after implementation.

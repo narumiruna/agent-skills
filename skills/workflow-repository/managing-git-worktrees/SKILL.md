@@ -1,85 +1,63 @@
 ---
 name: managing-git-worktrees
-description: Create, inspect, attach, repair, remove, prune, and clean up local Git worktrees safely. Use when Codex needs to manage a repository's worktree lifecycle, including creating a branch-backed worktree beside the main worktree, attaching an existing local branch, repairing moved worktrees, diagnosing stale metadata, preserving detached commits and local-only files during removal, or optionally deleting a merged branch.
+description: Create, inspect, attach, repair, remove, or prune local Git worktrees while preserving branches, detached commits, and tracked, untracked, ignored, and submodule data. Use for the full worktree lifecycle or optional branch cleanup.
 ---
 
-# Manage Git Worktrees
+# Managing Git Worktrees
 
-Inspect repository state before changing worktrees. Keep worktree operations separate from commit and push workflows.
+Inspect before mutation. Keep worktree operations separate from commits, pushes, rebases, and unrelated branch changes. Treat dynamic refs and paths as untrusted: validate them, pass them as argv when possible, and quote shell values.
 
-Treat every branch, ref, and path as untrusted data. Prefer an argv-capable command interface; when using a shell, quote every dynamic value and never concatenate it into a command string. The variables in examples below stand for already validated values.
+## Inspect
 
-## Inspect State
+1. Capture the invoking worktree, symbolic branch, and HEAD. A detached invoking HEAD requires an explicit creation start point.
+2. Parse `git worktree list --porcelain -z`; the first record identifies the main worktree. If it is bare or stale, request a storage root or repair it before deriving paths.
+3. Resolve the requested branch, path, and start point. Never assume the default branch name.
 
-1. Before changing directories, capture the invoking worktree root, symbolic branch, and HEAD object. Treat `refs/heads/<invoking-branch>` as the default start-point.
-2. If `git symbolic-ref --quiet --short HEAD` fails during creation because the invoking HEAD is detached, stop and ask for an explicit start-point.
-3. Parse `git worktree list --porcelain -z`; use its first record as the main worktree. Do not substitute `git rev-parse --show-toplevel`, which returns the invoking linked worktree.
-4. If the first record is bare rather than a main worktree, ask for an explicit storage root instead of inventing one. If its path is stale, repair it before deriving a worktree path.
-5. Resolve the requested branch, path, and start-point before mutating anything. Never assume the default branch is named `main`.
-
-## Choose the Path
-
-- Default to a sibling of the main worktree at `<main-worktree-parent>/<main-worktree-name>-<path-name>`.
-- Derive `<path-name>` from the branch by replacing every `/` with `-`; for example, with a main worktree at `/home/user/workspace/project`, map `feat/login` to `/home/user/workspace/project-feat-login`.
-- Check that the resolved path does not already exist and does not collide with another branch after normalization. Stop and report a collision instead of inventing another name.
+For a new path, default to a sibling `<main-name>-<branch-with-slashes-replaced-by-hyphens>`. Stop on an existing path or normalization collision rather than inventing a suffix.
 
 ## Create or Attach
 
-1. Validate and normalize the branch with `git check-ref-format --branch "$branch"`; use its output as the branch value and stop on failure.
-2. Resolve the start-point to one commit with `git rev-parse --verify --end-of-options "${start_point}^{commit}"`; stop if it is missing or ambiguous.
-3. Check for the local branch with `git show-ref --verify --quiet "refs/heads/$branch"`.
-4. Parse `git worktree list --porcelain -z` to determine branch occupancy. Do not use substring matching.
-5. If the branch does not exist, create it from the resolved start object with:
+1. Normalize the branch with `git check-ref-format --branch "$branch"` and resolve the start point to one commit with `git rev-parse --verify --end-of-options "${start_point}^{commit}"`.
+2. Determine exact branch existence with `git show-ref --verify` and occupancy from porcelain records; do not substring-match.
+3. Create or attach:
 
-   ```bash
-   git worktree add -b "$branch" "$worktree_path" "$start_oid"
-   ```
+```bash
+git worktree add -b "$branch" "$worktree_path" "$start_oid"  # new branch
+git worktree add "$worktree_path" "$branch"                  # existing free branch
+```
 
-6. If the branch exists and is not present in another worktree record, attach it with:
-
-   ```bash
-   git worktree add "$worktree_path" "$branch"
-   ```
-
-7. If the branch is already checked out elsewhere, stop and report that worktree's path. Do not use `--force` to bypass branch occupancy.
-8. Verify the exact path and branch with `git worktree list --porcelain -z` and `git -C "$worktree_path" status --short --branch`.
+Stop if the branch is checked out elsewhere; do not bypass occupancy with `--force`. Verify the exact record and `git -C "$worktree_path" status --short --branch`.
 
 ## Remove Safely
 
-1. Parse `git worktree list --porcelain -z`. Confirm that the exact target path is registered and is not the first, main-worktree record.
-2. Inventory tracked, untracked, ignored, and submodule state with:
+1. Confirm the exact target is a registered linked worktree, not the first/main record.
+2. Inventory all data:
 
-   ```bash
-   git -C "$worktree_path" status --porcelain=v1 --untracked-files=all --ignored=matching --ignore-submodules=none
-   ```
+```bash
+git -C "$worktree_path" status --porcelain=v1 --untracked-files=all --ignored=matching --ignore-submodules=none
+```
 
-3. Treat every output line, including `??` and `!!`, as data that removal can discard. Expand directory entries when needed to make the loss concrete. If initialized submodules exist, inspect each recursively with the same status options. Stop and show the complete inventory before any destructive approval.
-4. Read the target's porcelain record. If it is detached, record its HEAD object and run `git for-each-ref --format='%(refname)' --contains="$head_oid" refs/heads refs/tags refs/remotes`. If no shared durable ref contains it, stop and preserve it with a user-named branch or tag before removal.
-5. If the target is locked, report its reason and stop. Unlock it only after the user explicitly confirms that the lock is no longer needed; do not bypass a lock with repeated `--force`.
-6. If the inventory is empty and detached-commit reachability is safe, run `git worktree remove "$worktree_path"` and verify that its exact record disappeared.
-7. If any local-only data exists, require explicit approval that names what will be lost. Use `--force` only when Git requires it and the user has approved the displayed loss; ignored files may be deleted even when Git does not require `--force`.
-8. Preserve the branch by default.
+Expand directory entries when needed and inspect initialized submodules recursively. Every tracked, `??`, and `!!` entry can be lost.
+3. For detached targets, record HEAD and check reachability:
 
-## Delete a Branch When Explicitly Requested
+```bash
+git for-each-ref --format='%(refname)' --contains="$head_oid" refs/heads refs/tags refs/remotes
+```
 
-1. Remove the worktree first, then validate the branch name and resolve both the branch and user-chosen comparison ref to commit objects with `git rev-parse --verify --end-of-options`.
-2. Do not silently choose a merge target. Verify ancestry with `git merge-base --is-ancestor "$branch_oid" "$comparison_oid"`.
-3. If ancestry fails, stop. Use `git branch -D "$branch"` only after a separate, explicit request that acknowledges commits not contained in the comparison ref.
-4. If ancestry succeeds, verify immediately that `refs/heads/$branch` still points to `$branch_oid`, then try `git branch -d "$branch"`. This command checks the branch's configured upstream, or current `HEAD` when no upstream exists, rather than the chosen comparison ref.
-5. If `-d` refuses solely because those merge targets differ, report the mismatch. Use `git branch -D "$branch"` only after separate explicit approval to bypass Git's built-in check and after re-verifying that the branch still points to `$branch_oid` and remains an ancestor of `$comparison_oid`.
+Preserve an otherwise unreachable commit with a user-named branch or tag before removal.
+4. Stop on a lock. Unlock only after explicit confirmation that the lock is no longer needed.
+5. If loss inventory is empty and reachability is safe, run `git worktree remove "$worktree_path"` and verify its record disappeared.
+6. If local-only data exists, display the complete loss and require approval that names it. Use `--force` only when Git requires it and that exact loss was approved; ignored data may disappear even without `--force`.
+7. Preserve the branch by default. Never delete the directory directly as a substitute for `git worktree remove`.
 
-## Repair or Prune Metadata
+## Branch Deletion
 
-- Do not prune during routine creation or removal.
-- Treat a missing registered path as a diagnosis, not proof of deletion. Run `git worktree repair` inside a moved main or linked worktree; when repairing multiple moved linked worktrees from another worktree, pass each quoted new path to `git worktree repair`. Verify every repaired porcelain record.
-- Prune only when the working directory is genuinely gone and the user does not want it recovered. Before pruning a detached record, run the same `git for-each-ref --contains` check and preserve any HEAD object not contained by a shared durable ref.
-- Preview with `git worktree prune --dry-run --verbose`. Show the exact preview before running `git worktree prune --verbose` with the same expiry options.
-- Do not conflate pruning administrative metadata with deleting a worktree directory or branch.
+Delete only when separately requested. Resolve the branch and user-chosen comparison ref to commits and prove ancestry with `git merge-base --is-ancestor`. Reverify the branch still points to the inspected object, then try `git branch -d`.
 
-## Safety Rules
+If the branch is unmerged or `-d` checks a different upstream/current-HEAD relationship than the chosen comparison, explain the mismatch. Use `git branch -D` only after separate approval to discard or bypass that exact condition and after rechecking object identity and ancestry.
 
-- Prefer porcelain output for reliable worktree and branch occupancy checks.
-- Avoid interactive Git commands and pagers.
-- Do not delete directories directly as a substitute for `git worktree remove`.
-- Never treat an empty default `git status` as proof that removal is lossless.
-- Do not perform commits, pushes, rebases, or unrelated branch changes unless the user separately requests that workflow.
+## Repair or Prune
+
+Use `git worktree repair` for moved worktrees and verify every repaired record. A missing path is not proof that its data should be abandoned.
+
+Prune only when the directory is genuinely gone and recovery is not wanted. Protect detached commits as above, preview with `git worktree prune --dry-run --verbose`, show the exact preview, then run the matching prune only after approval. Pruning metadata is not directory or branch deletion.

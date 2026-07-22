@@ -1,4 +1,4 @@
 interface:
   display_name: "Slide Color Design"
-  short_description: "Design slide palettes and color systems."
-  default_prompt: "Use $designing-slide-colors to choose or generate a slide palette and document color roles for this deck."
+  short_description: "Design semantic slide palettes with contrast evidence."
+  default_prompt: "Use $designing-slide-colors to design or validate this slide palette, define semantic roles, calculate actual pairings, and leave unperformed checks open."
