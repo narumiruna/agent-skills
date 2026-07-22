@@ -32,9 +32,9 @@ def example():
 
 ## Image or Diagram
 
-![width:600px](diagrams/example.svg)
+![Description of the diagram width:600px](diagrams/example.svg)
 
-**Caption**: Description of visual
+**Caption**: Visible semantic equivalent for the visual
 
 ---
 

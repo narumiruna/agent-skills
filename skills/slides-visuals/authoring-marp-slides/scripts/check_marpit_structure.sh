@@ -1,15 +1,17 @@
 #!/bin/bash
-# Validate Marpit Markdown syntax
+# Check basic Marpit Markdown structure without parsing YAML or rendering slides.
 
 set -e
 
 if [ $# -ne 1 ]; then
-    echo "Usage: validate_marpit.sh <file.md>"
+    echo "Usage: check_marpit_structure.sh <file.md>"
     echo ""
-    echo "Validates Marpit Markdown files for:"
-    echo "  - Frontmatter presence and format"
-    echo "  - Required 'marp: true' directive"
-    echo "  - Slide separators"
+    echo "Checks only:"
+    echo "  - Frontmatter opening and closing delimiters"
+    echo "  - A literal 'marp: true' directive in frontmatter"
+    echo "  - Structural slide-separator count"
+    echo ""
+    echo "This does not parse YAML or validate rendered Marp output."
     exit 1
 fi
 
@@ -55,13 +57,14 @@ else
     SLIDE_COUNT=0
 fi
 
-if [ $ERRORS -eq 0 ]; then
-    echo "✅ Marpit syntax valid"
+if [ "$ERRORS" -eq 0 ]; then
+    echo "✅ Structural precheck passed"
     echo "   File: $FILE"
     echo "   Slides: $SLIDE_COUNT"
+    echo "   Note: YAML and rendered Marp output were not validated"
     exit 0
-else
-    echo ""
-    echo "❌ Found $ERRORS error(s) in Marpit syntax"
-    exit 1
 fi
+
+echo ""
+echo "❌ Found $ERRORS structural issue(s)"
+exit 1

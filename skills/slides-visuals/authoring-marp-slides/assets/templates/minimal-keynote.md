@@ -42,7 +42,7 @@ Impact and implications
 
 <!-- _class: lead -->
 
-![width:800px](diagrams/impact.svg)
+![Visual evidence of transformation width:800px](diagrams/impact.svg)
 
 **Visual evidence** of transformation
 

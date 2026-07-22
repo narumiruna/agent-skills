@@ -12,7 +12,7 @@ Use the bundled `scripts/telegraph.py` by absolute path. A page is a public exte
 1. Preserve the user's language and wording unless editing was requested. Reject secrets, private data, and local-only asset links.
 2. Convert the body to a temporary JSON array of Telegraph nodes. Text may be a string; elements use `tag`, optional `attrs`, and optional `children`.
 3. Allow only `a`, `aside`, `b`, `blockquote`, `br`, `code`, `em`, `figcaption`, `figure`, `h3`, `h4`, `hr`, `i`, `iframe`, `img`, `li`, `ol`, `p`, `pre`, `s`, `strong`, `u`, `ul`, or `video`. Attributes are string-valued `href` or `src`. Convert larger Markdown headings to `h3`/`h4` and keep encoded content at or below 64 KB.
-4. Verify the final title, byline, links, node structure, and one-page publication scope.
+4. Record an explicit byline decision along with the final title, links, node structure, and one-page publication scope. Approve either exact author values or no public byline; do not infer omission from missing fields.
 
 ## Credentials and Account Boundary
 
@@ -35,11 +35,12 @@ With exact publication authorization and `SKILL_DIR` resolved to this skill dire
 ```shell
 uv run --no-project python "$SKILL_DIR/scripts/telegraph.py" create-page \
   --title '<approved-title>' \
-  --author-name '<approved-author>' \
+  --author-name '<approved-author-or-empty>' \
+  --author-url '<approved-author-url-or-empty>' \
   /tmp/telegraph-content.json
 ```
 
-Omit optional author fields unless approved. Inject the token through the execution environment; if loading an approved token file, do so without printing it.
+Pass the approved byline values explicitly. To suppress account-default identity, include `--author-name '' --author-url ''`; omitting these fields can publish the account's default author name or URL. Inject the token through the execution environment and load an approved token file without printing it.
 
 Require an `https://telegra.ph/...` result, then fetch or open the public page and verify title, byline, links, and content structure. Report the URL and any unavailable check. Remove sensitive temporary drafts after successful publication.
 

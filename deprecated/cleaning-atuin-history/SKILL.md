@@ -1,6 +1,6 @@
 ---
 name: cleaning-atuin-history
-description: Audit Atuin history for duplicate pressure and high-confidence typo/retry pairs, then prepare exact preview-first cleanup steps without direct SQLite deletion. This is a deprecated internal workflow; destructive and remote operations require separate exact approval.
+description: Audit Atuin history for duplicate pressure and high-confidence typo/retry pairs, then prepare fixed-scope deduplication or user-run inspector steps without direct SQLite deletion. This deprecated internal workflow keeps cleanup-typos disabled.
 metadata:
   internal: true
 ---
@@ -17,7 +17,7 @@ Audit first. Do not treat a preview, uniqueness estimate, or skill invocation as
 - `atuin search --delete` deletes every match under active search semantics; do not use it manually for a single row.
 - The transactional typo command snapshots the database but also runs `atuin store push`, recomputes and deletes candidates, may drive a TUI, and finishes with `atuin sync`. Its current interface cannot bind execution to approved candidate IDs or guarantee non-interactive operation.
 - Do not invoke `cleanup-typos` through this skill. Keep it disabled until it gains a plan-only output plus approved-ID and non-interactive execution checks; its source and recovery artifacts remain historical reference material.
-- Re-run the audit immediately before any user-run mutation. If candidates, scope, or counts differ from the reviewed set, stop for a new decision.
+- Re-run the audit and matching dry run immediately before every mutation, whether user- or agent-executed. Use a fixed cutoff instead of a relative value such as `now`; if candidates, scope, or counts differ from the approved set, stop for renewed approval.
 - Do not auto-restore a full live database after failure; preserve live state, snapshot, and verification artifacts for recovery.
 - The interactive inspector is user-run. An agent must not open or drive its TUI.
 
@@ -39,7 +39,7 @@ The audit reads selected history columns, groups duplicates by command/cwd/host,
 
 ### Duplicates
 
-Run the reported `atuin history dedup --dry-run ...`. Present the exact window, keep count, groups, and potential deletion count. Run the matching non-dry command only after that exact scope and loss are approved.
+Resolve the audit's `--before` value to a fixed cutoff, then run the reported `atuin history dedup --dry-run ...` and present the exact window, keep count, groups, and potential deletion count. Immediately before applying, repeat the audit and matching dry run with that same fixed cutoff. Run the identical non-dry command only when the results still match the approved scope and loss; otherwise obtain renewed approval.
 
 ### Typos
 

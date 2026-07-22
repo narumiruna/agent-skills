@@ -124,7 +124,7 @@ def test_bundled_script_commands_do_not_assume_source_checkout_layout() -> None:
     assert offenders == []
 
 
-def test_marp_validator_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
+def test_marp_structure_check_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
     deck = tmp_path / "invalid.md"
     deck.write_text("---\nmarp: true\n# Missing closing delimiter\n")
 
@@ -133,7 +133,7 @@ def test_marp_validator_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
             "bash",
             str(
                 SKILLS
-                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+                / "slides-visuals/authoring-marp-slides/scripts/check_marpit_structure.sh"
             ),
             str(deck),
         ],
@@ -146,7 +146,7 @@ def test_marp_validator_rejects_unclosed_frontmatter(tmp_path: Path) -> None:
     assert "syntax valid" not in result.stdout
 
 
-def test_marp_validator_requires_exactly_one_file(tmp_path: Path) -> None:
+def test_marp_structure_check_requires_exactly_one_file(tmp_path: Path) -> None:
     deck = tmp_path / "valid.md"
     deck.write_text("---\nmarp: true\n---\n# Slide\n")
 
@@ -155,7 +155,7 @@ def test_marp_validator_requires_exactly_one_file(tmp_path: Path) -> None:
             "bash",
             str(
                 SKILLS
-                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+                / "slides-visuals/authoring-marp-slides/scripts/check_marpit_structure.sh"
             ),
             str(deck),
             "unexpected.md",
@@ -169,7 +169,7 @@ def test_marp_validator_requires_exactly_one_file(tmp_path: Path) -> None:
     assert "Usage:" in result.stdout
 
 
-def test_marp_validator_accepts_relative_path_starting_with_dash(
+def test_marp_structure_check_accepts_relative_path_starting_with_dash(
     tmp_path: Path,
 ) -> None:
     deck = tmp_path / "--deck.md"
@@ -180,7 +180,7 @@ def test_marp_validator_accepts_relative_path_starting_with_dash(
             "bash",
             str(
                 SKILLS
-                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+                / "slides-visuals/authoring-marp-slides/scripts/check_marpit_structure.sh"
             ),
             deck.name,
         ],
@@ -193,7 +193,7 @@ def test_marp_validator_accepts_relative_path_starting_with_dash(
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-def test_marp_validator_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
+def test_marp_structure_check_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
     deck = tmp_path / "windows.md"
     deck.write_bytes(
         b"---\r\nmarp: TRUE  # enable Marp\r\ntheme: default\r\n---\r\n# Slide\r\n"
@@ -204,7 +204,7 @@ def test_marp_validator_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
             "bash",
             str(
                 SKILLS
-                / "slides-visuals/authoring-marp-slides/scripts/validate_marpit.sh"
+                / "slides-visuals/authoring-marp-slides/scripts/check_marpit_structure.sh"
             ),
             str(deck),
         ],
@@ -215,6 +215,31 @@ def test_marp_validator_accepts_crlf_and_yaml_comment(tmp_path: Path) -> None:
 
     assert result.returncode == 0, result.stdout
     assert "Slides: 1" in result.stdout
+
+
+def test_marp_structure_check_does_not_claim_to_parse_malformed_yaml(
+    tmp_path: Path,
+) -> None:
+    deck = tmp_path / "malformed-yaml.md"
+    deck.write_text("---\nmarp: true\ntheme: [\n---\n# Slide\n")
+
+    result = subprocess.run(
+        [
+            "bash",
+            str(
+                SKILLS
+                / "slides-visuals/authoring-marp-slides/scripts/check_marpit_structure.sh"
+            ),
+            str(deck),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "Structural precheck passed" in result.stdout
+    assert "syntax valid" not in result.stdout
 
 
 def test_contrast_checker_reports_failed_large_text() -> None:
@@ -278,7 +303,23 @@ def test_generated_palette_contrast_is_calculated_from_colors() -> None:
     expected = checker.contrast_ratio(palette["Primary"], palette["Background"])
 
     assert "All combinations meet WCAG AAA" not in output
+    assert "Accessibility First" not in output
+    assert "Accessibility requirements" not in output
     assert f"Primary/Background = {expected:.2f}:1" in output
+
+    terminal_output = generator.format_palette_markdown(
+        generator.generate_preset_palette("terminal-dark"), "terminal-dark"
+    )
+    data_viz_output = generator.format_palette_markdown(
+        generator.generate_preset_palette("data-viz"), "data-viz"
+    )
+    assert "High contrast for projectors" not in terminal_output
+    assert "colorblind-friendly" not in data_viz_output
+
+    svg_output = generator.format_svg_palette("high-contrast")
+    assert "High Contrast Candidate" in svg_output
+    assert "Accessibility, large venue presentations" not in svg_output
+    assert "AAA compliance" not in svg_output
 
 
 def test_publish_examples_keep_tokens_out_of_argv() -> None:
@@ -296,10 +337,12 @@ def test_logging_context_has_a_default_for_unrelated_records() -> None:
     assert 'defaults={"user_id": "-"}' in logging_reference
 
 
-def test_plan_archival_is_scoped_to_the_current_plan() -> None:
+def test_plan_archival_is_scoped_to_saved_current_plan() -> None:
     plan_skill = (SKILLS / "writing-research/writing-plans/SKILL.md").read_text()
     assert "inspect `./docs/plans/*.md`" not in plan_skill
-    assert "current plan" in plan_skill
+    assert "current saved plan" in plan_skill
+    assert "Do not create an archive file for a chat-only plan" in plan_skill
+    assert "archive that plan under `docs/plans/archived/`" in plan_skill
 
 
 def test_generic_gourmet_ranking_is_not_hardcoded_to_okinawa() -> None:
@@ -330,11 +373,77 @@ def test_external_and_destructive_workflows_require_exact_authorization() -> Non
     assert "exact package/version, repository or index, and artifacts" in uv_skill
     assert "does not by itself authorize public replies" in pr_skill
     assert "push remote" in pr_skill and "reply text" in pr_skill
-    assert "approval for the exact target and content" in jira_skill
+    assert "authorization for the exact operation, target, and content" in jira_skill
+    assert "Supplying values for a draft does not authorize execution" in jira_skill
     assert "do not run interactive `jira init`" in jira_skill
     assert "approved candidate IDs" in atuin_skill
     assert "Do not invoke `cleanup-typos`" in atuin_skill
+    assert "before every mutation" in atuin_skill
+    assert "fixed cutoff" in atuin_skill
     assert "`atuin store push`" in atuin_skill and "`atuin sync`" in atuin_skill
+
+
+def test_peewee_fixture_survives_sequential_connection_contexts() -> None:
+    peewee = (SKILLS / "python/using-peewee-orm/SKILL.md").read_text()
+
+    assert "def test_db(tmp_path):" in peewee
+    assert 'tmp_path / "test.db"' in peewee
+    assert 'SqliteDatabase(":memory:"' not in peewee
+    assert "two sequential `connection_context()`" in peewee
+
+
+def test_svg_embedding_preserves_host_level_accessibility() -> None:
+    embedding = (
+        SKILLS / "slides-visuals/creating-svg-illustrations/references/embedding.md"
+    ).read_text()
+
+    assert "descriptive host-level alt text" in embedding
+    assert "adjacent semantic equivalent" in embedding
+    assert "![System architecture w:800]" in embedding
+    assert "![bg fit](assets/diagram.svg)" not in embedding
+
+
+def test_marp_examples_pair_visuals_with_nonredundant_semantics() -> None:
+    authoring = SKILLS / "slides-visuals/authoring-marp-slides"
+    example = (authoring / "assets/examples/with-bg-syntax.md").read_text()
+    template = (authoring / "assets/templates/with-bg-images.md").read_text()
+
+    for markdown in (example, template):
+        background_slides = [
+            slide for slide in markdown.split("\n---\n") if "![bg" in slide
+        ]
+        assert background_slides
+        for slide in background_slides:
+            assert "**Diagram summary:**" in slide or "**Comparison summary:**" in slide
+
+    assert 'alt="" aria-hidden="true"' in example
+
+
+def test_atuin_disabled_automation_is_aligned_across_surfaces() -> None:
+    atuin_dir = DEPRECATED / "cleaning-atuin-history"
+    skill = (atuin_dir / "SKILL.md").read_text()
+    reference = (atuin_dir / "references/atuin-cli.md").read_text()
+    metadata = (atuin_dir / "agents/openai.yaml").read_text()
+
+    for text in (skill, reference, metadata):
+        assert "cleanup-typos" in text
+        assert "disabled" in text
+    assert "remote operations" not in metadata
+
+
+def test_publication_and_research_boundaries_remain_explicit() -> None:
+    telegraph = (
+        SKILLS / "writing-research/creating-telegraph-pages/SKILL.md"
+    ).read_text()
+    gourmet = (
+        SKILLS / "writing-research/researching-gourmet-venues/SKILL.md"
+    ).read_text()
+
+    assert "explicit byline decision" in telegraph
+    assert "--author-name '' --author-url ''" in telegraph
+    assert "Require four independent source roles by default" in gourmet
+    assert "three sources only" in gourmet
+    assert "Do not score or publish a recommendation with fewer sources" in gourmet
 
 
 def test_slide_color_checks_never_claim_unperformed_validation() -> None:
@@ -368,8 +477,8 @@ def test_logging_and_peewee_examples_preserve_runtime_semantics() -> None:
     assert "db_proxy.obj" not in peewee
     assert "MODELS = [User]" in peewee
     assert "with db.connection_context():\n    with db.atomic():" in peewee
-    assert "try:\n                db.drop_tables" in peewee
-    assert "finally:\n                db.close()" in peewee
+    assert "finally:\n        with db.connection_context():" in peewee
+    assert "            db.drop_tables(MODELS, safe=True)" in peewee
 
 
 def test_relative_markdown_links_resolve() -> None:

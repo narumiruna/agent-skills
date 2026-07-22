@@ -223,8 +223,8 @@ SVG_PALETTES = {
         "example": '<rect fill="#BFDBFE" stroke="#374151" stroke-width="3"/>\n<text fill="#374151">Soft, friendly label</text>',
     },
     "high-contrast": {
-        "name": "High Contrast",
-        "best_for": "Accessibility, large venue presentations",
+        "name": "High Contrast Candidate",
+        "best_for": "Starting point for diagrams that need strong color separation",
         "colors": {
             "Black": "#000000",
             "White": "#FFFFFF",
@@ -232,7 +232,7 @@ SVG_PALETTES = {
             "Cyan": "#22D3EE",
             "Magenta": "#F472B6",
         },
-        "notes": "Ensure text-to-background contrast ratio ≥ 7:1 for AAA compliance",
+        "notes": "Calculate each actual pairing and test the exported artifact in its target environment",
     },
 }
 
@@ -247,8 +247,8 @@ PALETTE_METADATA = {
     "terminal-dark": {
         "name": "Terminal Dark",
         "category": "Dark Technical",
-        "best_for": "Terminal commands, CLI tools, DevOps presentations",
-        "notes": "High contrast for projectors; three-color semantic system",
+        "best_for": "Candidate for terminal, CLI, and DevOps presentations",
+        "notes": "Verify every assigned pairing and the exported deck on the target projector",
     },
     "midnight-professional": {
         "name": "Midnight Professional",
@@ -287,16 +287,16 @@ PALETTE_METADATA = {
         "notes": "Red accent should be reserved for 1-2 key elements per slide",
     },
     "data-viz": {
-        "name": "Data Visualization (Categorical)",
+        "name": "Data Visualization Candidate (Categorical)",
         "category": "Specialized",
-        "best_for": "Charts, graphs, multi-category data",
-        "notes": "Tableau-inspired; colorblind-friendly; maximizes distinction",
+        "best_for": "Starting point for charts, graphs, and multi-category data",
+        "notes": "Verify series distinguishability with target charts, labels, and color-vision simulation",
     },
     "accessibility": {
-        "name": "Accessibility First (High Contrast)",
+        "name": "High Contrast Candidate",
         "category": "Specialized",
-        "best_for": "Accessibility requirements, large audiences, recorded content",
-        "notes": "Validate each foreground/background role pairing before use",
+        "best_for": "Starting point for slides with strong contrast requirements",
+        "notes": "Validate each actual pairing, noncolor cue, export, and assistive path before use",
     },
 }
 

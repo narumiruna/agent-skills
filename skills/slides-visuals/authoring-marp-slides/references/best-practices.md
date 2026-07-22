@@ -10,8 +10,8 @@
 ## Design
 
 - Reuse one palette, one spacing unit, and one heading hierarchy.
-- Prefer background image syntax for diagrams and photos.
-- Use high contrast for projected decks.
+- Prefer background image syntax for diagrams and photos when layout requires it; give meaningful backgrounds an adjacent semantic equivalent.
+- Measure actual text/background contrast and inspect the exported deck on the target projector before claiming venue suitability.
 - Keep diagrams, tables, and text aligned to a simple grid.
 
 ## HTML Policy
@@ -25,13 +25,13 @@ Use Markdown first. Use inline HTML only when Marp Markdown cannot express the l
 - Avoid tiny captions and overcrowded diagrams.
 - Avoid emoji when predictable rendering matters.
 
-## Pre-Commit Check
+## Handoff Check
 
-Before handing off a deck, resolve `scripts/validate_marpit.sh` against the `authoring-marp-slides` skill directory, then run it by absolute path:
+Resolve `scripts/check_marpit_structure.sh` against the `authoring-marp-slides` skill directory and run its limited delimiter/directive precheck:
 
 ```shell
 AUTHORING_MARP_SLIDES_SKILL_DIR="/absolute/path/to/authoring-marp-slides"
-bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/validate_marpit.sh" deck.md
+bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/check_marpit_structure.sh" deck.md
 ```
 
-Then preview or export the deck and inspect at least title, densest content slide, and every slide with an SVG/background image.
+This does not parse YAML or Marp syntax. Follow with the actual preview/export workflow and inspect at least the title, densest content slide, every SVG/background image, and the exported accessibility tree when meaningful visuals are present.

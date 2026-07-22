@@ -1,27 +1,26 @@
 # Atuin CLI Notes
 
-## Single-entry delete in the TUI
+## Transactional Automation Is Disabled
 
-- Run `atuin search -i --search-mode prefix <query>` to open the interactive search view.
-- Add `--cwd <cwd>` when you know the original working directory and want a narrower review.
-- Open the entry inspector with `Ctrl+O`.
-- After confirming the exact row, press `Ctrl+D` to delete that one history item.
+The bundled `cleanup-typos` automation is disabled. Its current interface can recompute candidates, issue query-wide deletion, drive a TUI, and perform remote synchronization without binding execution to approved candidate IDs. Do not offer or execute it until those boundaries are implemented and verified.
 
-## Why manual typo cleanup avoids `search --delete`
+## User-Run Single-Entry Deletion
 
-- `atuin search --help` defines `--delete` as deleting anything that matches the query.
-- Matching behavior depends on the selected `--search-mode` or your configured default.
-- Even under `--search-mode prefix`, `search --delete` still deletes every matching row, not one chosen id.
-- For manual typo cleanup, stay in the interactive inspector and delete the confirmed row with `Ctrl+D`.
-- The transactional `cleanup-typos` command may use `search --delete`, but only after adding strict filter gates such as cwd, exit code, and a narrow timestamp window, and only when that filtered match set is provably unique.
+- Give the user `atuin search -i --search-mode prefix <query>` to open the interactive search view.
+- Add `--cwd <cwd>` when the original working directory is known.
+- The user opens the entry inspector with `Ctrl+O`, confirms the exact row, then presses `Ctrl+D`.
+- An agent must not open or drive this TUI.
 
-## Global duplicate cleanup
+Avoid manual `atuin search --delete`: it deletes every match under the selected or configured search mode, not one chosen ID.
 
-- Preview with `atuin history dedup --dry-run --before "<before>" --dupkeep <n>`.
-- If the dry run matches expectations, rerun the same command without `--dry-run`.
-- `history dedup` is global across the selected history window, not a single-command delete.
+## Global Duplicate Cleanup
 
-## Retroactive filter cleanup
+- Use a fixed `--before` cutoff; do not carry a relative value such as `now` from approval to later execution.
+- Immediately before every mutation, rerun the audit and `atuin history dedup --dry-run --before "<fixed-cutoff>" --dupkeep <n>`.
+- Compare the exact window, groups, and deletion count with the approved result. Obtain renewed approval if any differ.
+- Only then run the identical command without `--dry-run`.
+- `history dedup` is global across the selected history window, not a single-command deletion.
 
-- Use `atuin history prune` only when you already have `history_filter` or `cwd_filter` rules and need to retroactively remove matching entries.
-- Do not use `history prune` as a general typo or duplicate cleanup substitute.
+## Retroactive Filter Cleanup
+
+Use `atuin history prune` only for already-approved `history_filter` or `cwd_filter` rules and an exact reviewed scope. Do not use it as a typo or duplicate cleanup substitute.

@@ -155,15 +155,6 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Output format.",
     )
 
-    cleanup = subparsers.add_parser(
-        "cleanup-typos",
-        help="Transactionally delete high-confidence typo entries with backup and recovery artifacts.",
-    )
-    add_shared_history_scope_args(cleanup)
-    cleanup.add_argument(
-        "--backup-dir",
-        help="Directory for history.db snapshots and cleanup reports.",
-    )
     return parser.parse_args(argv)
 
 
@@ -669,7 +660,7 @@ def audit_history(
             "max_typos": max_typos,
         },
         "stats": stats,
-        "duplicates": analyze_duplicates(entries, before, dupkeep),
+        "duplicates": analyze_duplicates(entries, before_cutoff.isoformat(), dupkeep),
         "typos": analyze_typos(entries, typo_window_seconds, max_typos),
     }
     return report
@@ -856,34 +847,23 @@ def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint."""
     args = parse_cli_args(argv)
     try:
-        if args.command == "audit":
-            report = audit_history(
-                args.db_path,
-                dupkeep=args.dupkeep,
-                before=args.before,
-                typo_window_seconds=args.typo_window_seconds,
-                max_typos=args.max_typos,
-            )
-        elif args.command == "cleanup-typos":
-            report = cleanup_typos(
-                args.db_path,
-                before=args.before,
-                typo_window_seconds=args.typo_window_seconds,
-                max_typos=args.max_typos,
-                backup_dir=args.backup_dir,
-            )
-        else:
+        if args.command != "audit":
             raise AuditError(f"Unsupported command: {args.command}")
+        report = audit_history(
+            args.db_path,
+            dupkeep=args.dupkeep,
+            before=args.before,
+            typo_window_seconds=args.typo_window_seconds,
+            max_typos=args.max_typos,
+        )
     except AuditError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 
-    if args.command == "audit" and args.format == "json":
+    if args.format == "json":
         print(json.dumps(report, indent=2, sort_keys=True))
-    elif args.command == "audit":
-        print(render_text_report(report))
     else:
-        print(render_cleanup_report(report))
+        print(render_text_report(report))
     return 0
 
 

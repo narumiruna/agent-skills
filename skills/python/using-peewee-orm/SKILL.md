@@ -56,21 +56,21 @@ MODELS = [User]
 
 
 @pytest.fixture
-def test_db():
-    db = SqliteDatabase(":memory:", pragmas={"foreign_keys": 1})
+def test_db(tmp_path):
+    db = SqliteDatabase(
+        str(tmp_path / "test.db"),
+        pragmas={"foreign_keys": 1},
+    )
     db_proxy.initialize(db)
     try:
-        db.connect()
-        db.create_tables(MODELS)
+        with db.connection_context():
+            db.create_tables(MODELS)
         yield db
     finally:
-        if not db.is_closed():
-            try:
-                db.drop_tables(MODELS, safe=True)
-            finally:
-                db.close()
+        with db.connection_context():
+            db.drop_tables(MODELS, safe=True)
 ```
 
-The fixture owns one open connection across the test, so test transactions may use `test_db.atomic()` inside that lifetime. Test successful commits and rollback behavior for multi-statement invariants. Do not reuse an application database or depend on table state from another test.
+A temporary file-backed database preserves its schema when tested code owns and closes scoped connections. Exercise at least two sequential `connection_context()` blocks—such as a write followed by a read—and test rollback behavior for multi-statement invariants. Do not reuse an application database or depend on table state from another test.
 
 Finish by reporting the binding boundary, connection and transaction ownership, schema-test lifecycle, and checks run.
