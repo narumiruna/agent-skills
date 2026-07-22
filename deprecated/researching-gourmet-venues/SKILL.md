@@ -1,11 +1,13 @@
 ---
 name: researching-gourmet-venues
-description: Create or update auditable city-based food research with multi-source evidence, scope-checked rankings, standardized scoring, and synchronized candidate, recommendation, and exclusion files.
+description: Deprecated internal workflow for auditable city-based food research with multi-source evidence, scope-checked rankings, standardized scoring, and synchronized candidate, recommendation, and exclusion files.
+metadata:
+  internal: true
 ---
 
-# Researching Gourmet Venues
+# Researching Gourmet Venues (Deprecated Reference)
 
-Keep evidence, scores, and decisions traceable across a six-file city research pack.
+This rarely used workflow is excluded from active discovery but retained for explicit local compatibility. Keep evidence, scores, and decisions traceable across a six-file city research pack.
 
 ## Initialize
 

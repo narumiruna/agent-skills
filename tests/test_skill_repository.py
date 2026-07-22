@@ -30,7 +30,7 @@ def load_module(path: Path, name: str) -> ModuleType:
 
 def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
     deprecated = sorted(DEPRECATED.glob("*/SKILL.md"))
-    assert len(deprecated) == 5
+    assert len(deprecated) == 6
     for skill_md in deprecated:
         frontmatter = skill_md.read_text().split("---", 2)[1]
         assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
@@ -109,6 +109,34 @@ def test_naming_agent_skills_is_merged_into_creating_agent_skills() -> None:
     assert "| `naming-agent-skills` |" in deprecated_catalog
 
 
+def test_gourmet_research_is_deprecated() -> None:
+    active_dir = SKILLS / "writing-research/researching-gourmet-venues"
+    deprecated_dir = DEPRECATED / "researching-gourmet-venues"
+
+    assert not active_dir.exists()
+    assert deprecated_dir.is_dir()
+
+    skill = (deprecated_dir / "SKILL.md").read_text()
+    metadata = (deprecated_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+    active_catalog, deprecated_catalog = readme.split("## 🗄️ Deprecated Skills", 1)
+
+    assert "metadata:\n  internal: true" in skill
+    assert "Deprecated" in metadata
+    assert {
+        path.name for path in (deprecated_dir / "assets/templates").glob("*.md")
+    } == {
+        "candidates.md",
+        "excluded.md",
+        "inbox.md",
+        "notes.md",
+        "overview.md",
+        "top-places.md",
+    }
+    assert "| `researching-gourmet-venues` |" not in active_catalog
+    assert "| `researching-gourmet-venues` |" in deprecated_catalog
+
+
 def test_material_trigger_surfaces_are_semantically_aligned() -> None:
     readme = (ROOT / "README.md").read_text()
     svg_skill = (
@@ -149,7 +177,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 28
+    assert len(categorized) == 27
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 
@@ -401,9 +429,7 @@ def test_plan_archival_is_scoped_to_saved_current_plan() -> None:
 
 
 def test_generic_gourmet_ranking_is_not_hardcoded_to_okinawa() -> None:
-    gourmet_skill = (
-        SKILLS / "writing-research/researching-gourmet-venues/SKILL.md"
-    ).read_text()
+    gourmet_skill = (DEPRECATED / "researching-gourmet-venues/SKILL.md").read_text()
     ranking_section = gourmet_skill.split("## Ranking Retrieval", 1)[1].split("## ", 1)[
         0
     ]
@@ -490,9 +516,7 @@ def test_publication_and_research_boundaries_remain_explicit() -> None:
     telegraph = (
         SKILLS / "writing-research/creating-telegraph-pages/SKILL.md"
     ).read_text()
-    gourmet = (
-        SKILLS / "writing-research/researching-gourmet-venues/SKILL.md"
-    ).read_text()
+    gourmet = (DEPRECATED / "researching-gourmet-venues/SKILL.md").read_text()
 
     assert "explicit byline decision" in telegraph
     assert "--author-name '' --author-url ''" in telegraph
