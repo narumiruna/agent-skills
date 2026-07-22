@@ -4,6 +4,7 @@ Follow global defaults; this file defines only repo-specific additions and overr
 
 ## Documentation Boundaries
 
+- Use `docs/guides/gpt-5.6.md` as the primary guide.
 - `README.md` owns external positioning, installation flows, and skill discovery.
 - This file owns maintainer workflow. Do not duplicate README product messaging or step-by-step install instructions here.
 - When install recipes or supported paths change, update `README.md`, `AGENTS.md`, and `justfile` together.
