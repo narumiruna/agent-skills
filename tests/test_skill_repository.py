@@ -30,7 +30,7 @@ def load_module(path: Path, name: str) -> ModuleType:
 
 def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
     deprecated = sorted(DEPRECATED.glob("*/SKILL.md"))
-    assert len(deprecated) == 4
+    assert len(deprecated) == 5
     for skill_md in deprecated:
         frontmatter = skill_md.read_text().split("---", 2)[1]
         assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
@@ -53,6 +53,60 @@ def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
         metadata = metadata_path.read_text()
         assert f"${name}" in metadata, metadata_path
         assert f"| `{name}` |" in readme, skill_md
+
+
+def test_naming_agent_skills_is_merged_into_creating_agent_skills() -> None:
+    creating_dir = SKILLS / "workflow-repository/creating-agent-skills"
+    active_naming_dir = SKILLS / "workflow-repository/naming-agent-skills"
+    deprecated_naming_dir = DEPRECATED / "naming-agent-skills"
+
+    assert not active_naming_dir.exists()
+    assert deprecated_naming_dir.is_dir()
+
+    creating = (creating_dir / "SKILL.md").read_text()
+    metadata = (creating_dir / "agents/openai.yaml").read_text()
+    deprecated = (deprecated_naming_dir / "SKILL.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    active_catalog, deprecated_catalog = readme.split("## 🗄️ Deprecated Skills", 1)
+    rename_boundary = creating.split("A naming recommendation", 1)[1].split(
+        "For naming-only output", 1
+    )[0]
+    metadata_fields = {
+        line.split(":", 1)[0].strip(): json.loads(line.split(":", 1)[1].strip())
+        for line in metadata.splitlines()
+        if line.strip().startswith(
+            ("display_name:", "short_description:", "default_prompt:")
+        )
+    }
+
+    assert "Create, name, rename, revise, or review agent skills" in creating
+    assert "Name the task and trigger the skill represents" in creating
+    assert "lowercase kebab-case" in creating
+    assert "original user intent" in creating
+    assert "Compare a small candidate set" in creating
+    assert "collision risk" in creating
+    assert "recommendation does not authorize a repository rename" in creating
+    assert "Do not edit files when the user asked only for names or review" in creating
+    for rename_surface in (
+        "directory",
+        "frontmatter `name`",
+        "UI metadata and default prompt",
+        "catalog",
+        "links",
+        "examples",
+        "tests",
+        "other exact-name references",
+        "compatibility note",
+    ):
+        assert rename_surface in rename_boundary
+    assert "Naming" in metadata_fields["display_name"]
+    assert "name, rename" in metadata_fields["short_description"]
+    assert "$creating-agent-skills" in metadata_fields["default_prompt"]
+    assert "name, rename" in metadata_fields["default_prompt"]
+    assert "metadata:\n  internal: true" in deprecated
+    assert "Creating, naming, renaming, optimizing, and reviewing" in active_catalog
+    assert "| `naming-agent-skills` |" not in active_catalog
+    assert "| `naming-agent-skills` |" in deprecated_catalog
 
 
 def test_material_trigger_surfaces_are_semantically_aligned() -> None:
@@ -95,6 +149,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
+    assert len(categorized) == 28
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 

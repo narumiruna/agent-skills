@@ -1,16 +1,30 @@
 ---
 name: creating-agent-skills
-description: Create, revise, or review agent skills for reliable triggering, lean instructions, justified resources, aligned UI metadata, repository discovery, and validation. Use for new skills, skill scaffolding, workflow-to-skill conversion, prompt optimization, or skill audits.
+description: Create, name, rename, revise, or review agent skills for reliable triggering, lean instructions, justified resources, aligned UI metadata, repository discovery, and validation. Use for new skills, naming decisions, authorized repository renames, skill scaffolding, workflow-to-skill conversion, prompt optimization, or skill audits.
 ---
 
 # Creating Agent Skills
 
 Create a skill another agent can select and apply without unnecessary context.
 
+## Name and Rename
+
+Name the task and trigger the skill represents, not its implementation.
+
+- Read the skill's actual description and workflow, then identify the triggering action, object or domain, and any necessary product qualifier.
+- Use lowercase kebab-case with meaningful digits and single hyphens; use no leading or trailing hyphen. Keep the directory and frontmatter `name` identical and respect the target framework's length limit.
+- Prefer two to four specific words. Avoid vague terms such as `helper`, `utils`, `tools`, `assistant`, `magic`, `smart`, or `general`, and avoid product or organization names unless the trigger is genuinely product-specific.
+- Preserve the original user intent rather than forcing `<verb-ing>-<object>` when another pattern better expresses the meaning or matches the repository's established convention.
+- Inspect sibling names and exact-name references. Compare a small candidate set for specificity, searchability, future stability, and collision risk, then lead with one recommendation and its deciding reason.
+
+A naming recommendation does not authorize a repository rename. Do not edit files when the user asked only for names or review. For an authorized rename, update the directory, frontmatter `name`, UI metadata and default prompt, catalog, links, examples, tests, and other exact-name references as one bounded change; preserve a compatibility note when external consumers depend on the old name.
+
+For naming-only output, lead with the recommendation and deciding reason. For multiple skills, use a current/recommended/reason table and include only conflicts or compatibility work that affects adoption.
+
 ## Workflow
 
 1. Inspect the target repository's instructions, skill root, sibling skills, catalog, validators, and any model-specific prompting guide. Infer the destination and ask one question only when purpose, trigger, or location is materially ambiguous.
-2. Choose a concise lowercase kebab-case name that preserves the skill's actual intent. Keep directory and frontmatter `name` identical.
+2. Choose or review the name with the naming criteria above.
 3. Keep only justified contents:
    - `SKILL.md` for trigger metadata and post-trigger workflow.
    - `agents/openai.yaml` when the target ecosystem uses UI metadata.
@@ -31,7 +45,7 @@ Create a skill another agent can select and apply without unnecessary context.
 
 ## Completion Criteria
 
-- One clear purpose and discriminating trigger.
+- One clear purpose, discriminating trigger, and specific collision-resistant name that preserves the intended meaning.
 - Body content is useful only after the skill has triggered.
 - No repeated instruction groups, generic background, decorative examples, or unjustified resources.
 - Local edits and checks proceed when requested; external, destructive, costly, or scope-expanding actions retain explicit approval boundaries.

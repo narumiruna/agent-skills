@@ -92,11 +92,10 @@ Repository path: `skills/workflow-repository/`
 
 | Skill | Use it for |
 | --- | --- |
-| `creating-agent-skills` | Creating, optimizing, and reviewing lean, discoverable agent skills. |
+| `creating-agent-skills` | Creating, naming, renaming, optimizing, and reviewing lean, discoverable agent skills. |
 | `reviewing-code` | Evidence-led read-only review with conditional authorized hardening handoff. |
 | `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
 | `hardening-code-paths` | Confirming, fixing, and verifying plausible code-path failure modes. |
-| `naming-agent-skills` | Choosing, reviewing, standardizing, or safely applying skill names. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `applying-tdd` | Practical red-green-refactor for non-trivial behavior changes. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
@@ -115,3 +114,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `cleaning-atuin-history` | Legacy Atuin audit and exact-approval cleanup preparation. |
 | `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |
 | `writing-work-logs` | Legacy explicit-only Git-evidence work logs. |
+| `naming-agent-skills` | Merged into `creating-agent-skills`; retained as a compatibility reference. |
