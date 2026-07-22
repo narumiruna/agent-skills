@@ -56,6 +56,7 @@ Repository path: `skills/writing-research/`
 | `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
 | `researching-gourmet-venues` | Auditable city dining research with scope-checked evidence and scores. |
 | `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
+| `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
 
 ### Learning & Explanation
 
