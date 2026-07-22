@@ -41,7 +41,7 @@ Repository path: `skills/python/`
 | Skill | Use it for |
 | --- | --- |
 | `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
-| `building-typer-clis` | Building, wiring, extending, and testing thin Typer CLIs. |
+| `building-typer-clis` | Typer command grammar, typed parameters, callbacks, packaging, completion, and current tests. |
 | `configuring-python-logging` | Python logging backend, boundary, sink, context, and exception choices. |
 | `using-peewee-orm` | Peewee binding, connection, transaction, and isolated test lifecycles. |
 

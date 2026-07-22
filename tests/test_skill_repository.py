@@ -137,6 +137,68 @@ def test_gourmet_research_is_deprecated() -> None:
     assert "| `researching-gourmet-venues` |" in deprecated_catalog
 
 
+def test_typer_skill_covers_current_framework_decisions() -> None:
+    typer_dir = SKILLS / "python/building-typer-clis"
+    skill = (typer_dir / "SKILL.md").read_text()
+    metadata = (typer_dir / "agents/openai.yaml").read_text()
+    references = {
+        path.name: path.read_text()
+        for path in sorted((typer_dir / "references").glob("*.md"))
+    }
+    readme = (ROOT / "README.md").read_text()
+
+    assert set(references) == {
+        "application-architecture.md",
+        "packaging-and-completion.md",
+        "parameters-and-runtime.md",
+        "testing.md",
+    }
+    assert "Preserve the public invocation grammar" in skill
+    assert "declared Typer version" in skill
+    assert "`PROGRAM [ARGS]...`" in skill
+    assert "`PROGRAM COMMAND [ARGS]...`" in skill
+    assert "registering a sub-app with `app.add_typer(...)`" in skill
+    assert "`typing.Annotated`" in skill
+    assert "`typer.BadParameter`" in skill
+    assert "`typer.Exit`" in skill
+    assert "`typer.Abort`" in skill
+    assert "`ctx.resilient_parsing`" in skill
+    assert "## Minimal Pattern" not in skill
+
+    architecture = references["application-architecture.md"]
+    assert 'app.add_typer(users_app, name="users")' in architecture
+    assert "Registering any sub-app also creates grouped grammar" in architecture
+    assert "default missing-command error" in architecture
+    assert "invoke_without_command=True" in architecture
+    assert "ctx.invoked_subcommand is None" in architecture
+
+    parameters = references["parameters-and-runtime.md"]
+    assert "requiredness comes from the presence of a default" in parameters
+    assert "absence of both a Python assignment and `default_factory=`" in parameters
+    assert "Do not combine `default_factory=` with a Python assignment" in parameters
+    assert "confirmation_prompt" in parameters
+    assert "`autocompletion`" in parameters
+    assert "`shell_complete`" in parameters
+
+    testing = references["testing.md"]
+    assert "sequentially" in testing
+    assert "result.stdout" in testing and "result.stderr" in testing
+    assert "`mix_stderr`" in testing
+    assert "`isolated_filesystem()`" in testing
+
+    packaging = references["packaging-and-completion.md"]
+    assert "`uv add typer`" in packaging
+    assert "`typer-slim`" in packaging and "`typer-cli`" in packaging
+    assert "`[project.scripts]`" in packaging
+    assert "Typer 0.26.0 vendors Click" in packaging
+    assert "`python -m`" in packaging and "shell completion" in packaging
+
+    assert all("https://typer.tiangolo.com/" in text for text in references.values())
+    assert "command grammar" in metadata
+    assert "Annotated" in metadata
+    assert "Typer command grammar, typed parameters" in readme
+
+
 def test_material_trigger_surfaces_are_semantically_aligned() -> None:
     readme = (ROOT / "README.md").read_text()
     svg_skill = (
