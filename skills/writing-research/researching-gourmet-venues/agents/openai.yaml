@@ -1,4 +1,0 @@
-interface:
-  display_name: "Gourmet Venue Research"
-  short_description: "Build auditable, scored city dining research."
-  default_prompt: "Use $researching-gourmet-venues to create or update a traceable city dining research pack with scope-checked sources, synchronized scores, and caveats."

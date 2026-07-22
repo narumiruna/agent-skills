@@ -54,7 +54,6 @@ Repository path: `skills/writing-research/`
 | `writing-plans` | Drafting, executing, and tracking lean plans with acceptance evidence. |
 | `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
-| `researching-gourmet-venues` | Auditable city dining research with scope-checked evidence and scores. |
 | `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
 | `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
 
@@ -115,3 +114,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |
 | `writing-work-logs` | Legacy explicit-only Git-evidence work logs. |
 | `naming-agent-skills` | Merged into `creating-agent-skills`; retained as a compatibility reference. |
+| `researching-gourmet-venues` | Rarely used city dining workflow retained as a compatibility reference. |
