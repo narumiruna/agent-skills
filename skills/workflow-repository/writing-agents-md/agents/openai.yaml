@@ -1,4 +1,4 @@
 interface:
   display_name: "AGENTS.md Writer"
-  short_description: "Create and review scoped AGENTS.md repository guides."
-  default_prompt: "Use $writing-agents-md to draft, review, or update repository AGENTS.md agent guidelines."
+  short_description: "Write lean, scoped, evidence-backed AGENTS.md guidance."
+  default_prompt: "Use $writing-agents-md to create or review scoped repository guidance with explicit authority and verification boundaries."

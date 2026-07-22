@@ -1,103 +1,98 @@
 ---
 name: writing-agents-md
-description: Use when the user asks to create, review, audit, migrate, or update an AGENTS.md file for a repository, package, subproject, or monorepo. This skill writes agent-facing repository guidance grounded in project evidence, including setup, build/test commands, code style, testing, security, PR rules, nested AGENTS.md scope, and instruction precedence.
+description: Create, review, audit, migrate, or update AGENTS.md files for repositories, packages, subprojects, and monorepos. Use when agent-facing repository guidance must be scoped, evidence-backed, concise, and explicit about commands, constraints, approval boundaries, verification, or instruction precedence.
 ---
 
 # Writing AGENTS.md
 
-Create, review, or revise `AGENTS.md`: a standard Markdown "README for agents" that gives coding agents the project-specific context they need without cluttering the human README.
+Write lean, evidence-backed repository instructions that give agents the context, constraints, authority, and completion criteria they need.
 
-## Grounding workflow
+## Workflow
 
-Before writing, inspect the repository instead of guessing:
+1. Determine the request mode and authority.
+   - For requests to answer, explain, review, diagnose, or plan, inspect relevant materials and report the result without editing files.
+   - For requests to create, update, fix, or migrate guidance, make the requested in-scope local edits and run relevant non-destructive checks.
+   - Require confirmation before external writes, destructive or costly actions, or a material expansion of scope.
+   - Ask one focused question only when an unresolved ambiguity would materially change the result or authorization.
 
-- Read existing guidance: `README.md`, `CONTRIBUTING.md`, current `AGENTS.md`, package-level docs, `.github/workflows/*`, config files, and obvious build manifests (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `justfile`, `Makefile`, etc.).
-- Check the tree for monorepos, generated directories, vendored code, large data, or subprojects that may need scoped instructions.
-- Verify commands from scripts, task files, Make/Just recipes, or CI definitions. Do not invent commands from ecosystem habits.
-- If sources conflict, prefer executable config and CI over prose; preserve uncertainty as a short note or ask one focused question rather than silently choosing.
-- If updating an existing `AGENTS.md`, preserve correct project-specific rules and remove stale or unverifiable claims.
-- Prefer repository evidence over generic best practices. Label uncertainty briefly or omit it rather than inventing commands.
+2. Resolve scope and precedence.
+   - Identify the target directory and every `AGENTS.md` that applies to it.
+   - Treat explicit user instructions as higher priority than repository guidance and the closest scoped `AGENTS.md` as higher priority than ancestor files.
+   - Default to a root `AGENTS.md`. Add nested files only where subprojects need genuinely different rules.
 
-## Review mode
+3. Gather repository evidence.
+   - Read current agent guidance, `README.md`, `CONTRIBUTING.md`, relevant package documentation, build manifests, task files, and CI configuration.
+   - Inspect the tree for subprojects, generated or vendored content, large data, and directories with distinct workflows.
+   - Verify commands from executable configuration or CI. Prefer those sources over prose when they conflict.
+   - Label unresolved uncertainty briefly; do not turn ecosystem conventions into repository facts.
 
-When asked to review an existing `AGENTS.md` instead of drafting one:
+4. Draft or revise the smallest useful guidance.
+   - Preserve correct project-specific rules and remove stale, repeated, speculative, or misplaced guidance.
+   - Include only sections supported by the repository or an explicit user requirement.
+   - Keep parent guidance global and child guidance local; do not repeat inherited rules.
 
-- Check it against repository evidence and the principles below.
-- Report concrete findings with severity, affected section/path, evidence, and a suggested replacement.
-- Prioritize incorrect commands, stale paths, missing scoped guidance, unsafe instructions, and conflicts with closer `AGENTS.md` files or explicit user directions.
-- Use this concise review shape when not directly editing: `Findings`, `Suggested edits`, `Verified evidence`, `Open questions`.
-- If edits are requested or clearly beneficial, make a bounded revision and then verify that all listed commands/paths remain grounded.
+5. Verify the result.
+   - Confirm every path and command exists, or clearly label illustrative examples.
+   - Check the applicable instruction chain for contradictions and missing precedence.
+   - Run the repository's documented Markdown, documentation, or full verification gate when proportionate to the change.
+   - Review the diff for duplicated rules, accidental scope growth, and unrelated edits.
 
-## AGENTS.md principles
+6. Report completion.
+   - For edits, summarize changed paths, the reason for the change, verification performed, and any unresolved caveat.
+   - For reviews, lead with findings and include the evidence needed to act on them.
 
-- `AGENTS.md` is plain Markdown; do not add YAML frontmatter or required-field scaffolding to the generated file.
-- Default to a root-level `AGENTS.md`; add package-level files only when scoped instructions differ or the user asks for a specific subproject.
-- Keep it agent-focused: include details a coding agent needs to work safely and verify changes, not product marketing or broad README content.
-- Treat it as living documentation. Make rules actionable, testable, and easy to update.
-- User prompts override repository instructions. When multiple `AGENTS.md` files apply, the closest file to the edited path takes precedence.
-- For large monorepos, prefer nested `AGENTS.md` files in packages/subprojects instead of one overloaded root file. Root files should describe global rules and point to scoped files.
-- Avoid copying broad human-facing README content, long install walkthroughs, unverifiable "best practices", personal preferences, or rules that merely restate tool defaults.
+## Instruction Design
 
-## File requirements
+- State the desired outcome, relevant context, hard constraints, approval boundaries, and success criteria. Let the agent infer routine steps unless sequencing is operationally important.
+- State each rule once. Consolidate repeated warnings and remove generic reminders that do not change behavior.
+- Use direct imperatives with concrete paths, commands, conditions, and stopping points.
+- When brevity matters, specify what the response must preserve and what it may omit instead of relying on vague instructions such as "be concise."
+- Define tone through observable writing choices, such as leading with the conclusion or omitting generic sign-offs, rather than broad personality labels.
+- Name the ambiguities that require a question; avoid blanket "ask first" rules for safe, expected local work.
+- Keep examples only when they encode a project requirement or prevent a demonstrated mistake.
 
-- Name the file exactly `AGENTS.md`; when the user specifies a package or subdirectory, place it in that scope.
-- Use a clear title; `# Repository Guidelines` is a good default unless the repo already uses another title.
-- Keep it concise: usually 200–500 words for a root file. Go longer only when the repository genuinely needs more operational detail.
-- Use direct imperative bullets with concrete examples: commands, paths, naming patterns, and verification gates.
-- Do not duplicate README installation walkthroughs unless agents specifically need those commands to run checks.
-- Do not include secrets, credentials, private URLs, speculative claims, or instructions that encourage bypassing security checks.
-- For review responses, prefer findings first; for file creation/update responses, summarize changed paths and verification.
+## Durable Autonomy Rules
 
-## Recommended content
+When the repository needs an action policy, keep it in one compact section:
 
-Choose sections that match the repository; omit empty or irrelevant sections. The core coverage from agents.md is: project overview, build and test commands, code style guidelines, testing instructions, security considerations, and extra teammate-like instructions such as commit/PR rules, deployment gotchas, large datasets, or migration steps.
+- Distinguish read-only work from authorized in-scope local changes.
+- Name safe local actions that do not require confirmation, such as reading files, inspecting logs, editing requested paths, and running non-destructive checks.
+- Require explicit approval for external writes, destructive actions, purchases or material cost, and scope expansion.
+- Do not scatter overlapping approval rules across sections; repetition can cause unnecessary pauses or contradictory behavior.
 
-### Project structure and scope
+## File and Scope Rules
 
-- Summarize key directories and what agents should edit or avoid.
-- Mention generated/vendor/build artifacts that should not be hand-edited.
-- In monorepos, state how to locate the relevant package and whether package-level `AGENTS.md` files override root guidance.
-- Example split: root `AGENTS.md` owns repo-wide safety rules and CI gates; `packages/api/AGENTS.md` owns API migrations and schema tests; `packages/web/AGENTS.md` owns UI screenshots and browser checks.
+- Name the file exactly `AGENTS.md` and use plain Markdown without YAML frontmatter.
+- Use a clear repository-appropriate title and a scannable heading structure.
+- Keep all required facts, decisions, caveats, and verification steps. Trim repetition, generic background, and optional examples first.
+- Keep product positioning and human installation walkthroughs in human-facing documentation unless agents need a specific command to work or validate changes.
+- Do not include secrets, credentials, private URLs, speculative claims, or instructions to bypass security checks.
+- Mark generated, vendored, migration-sensitive, destructive, or externally managed areas that agents must not edit casually.
 
-### Build, test, and development commands
+## Content Selection
 
-- List the smallest reliable commands for setup, local development, formatting, linting, typechecking, tests, and full CI-equivalent verification.
-- Include targeted variants when useful, e.g. package filters or single-test patterns.
-- State required working directory if commands must run from repo root or a package directory.
-- Prefer commands proven by `package.json` scripts, `just --list`, `make help`, lockfiles, or CI jobs; if a command cannot be confirmed, leave it out or mark it as an example.
+Include only the categories the repository needs:
 
-### Code style and conventions
+- **Structure and scope:** important directories, ownership boundaries, generated artifacts, and nested guidance.
+- **Commands:** the smallest reliable setup, build, format, lint, typecheck, test, and CI-equivalent commands, including required working directories.
+- **Code and tests:** enforceable naming, formatting, architecture, fixture, coverage, and targeted-test conventions.
+- **Security and data:** secret handling, configuration examples, migrations, external services, large datasets, and safe dry-run or mock paths.
+- **Collaboration:** evidence-backed commit conventions, pull-request requirements, screenshots, migration notes, deployments, and release constraints.
 
-- Capture formatting tools, language versions, strictness settings, naming patterns, architectural boundaries, and dependency rules.
-- Prefer enforceable rules over taste statements.
+## Tool and Workflow Rules
 
-### Testing and verification
+- Add tool-routing instructions only for workflows the repository actually uses; omit generic directions such as "use tools efficiently."
+- For bounded automation, identify the exact stage, allowed tools, required output or evidence, retry limit, and stopping condition.
+- Keep semantic judgment, approval decisions, and final validation explicit when automation cannot safely decide them.
 
-- Explain where tests live, naming conventions, fixture practices, coverage expectations, and which checks agents should run after specific change types.
-- Include relevant programmatic checks because agents may attempt listed commands and fix failures before finishing.
-- Encourage adding or updating tests with behavior changes when that is true for the repo.
+## Review Mode
 
-### Security, configuration, and data
+Report concrete findings with severity, affected section or path, repository evidence, and a specific replacement. Prioritize incorrect commands, stale paths, unsafe instructions, conflicting scope, ambiguous authority, and missing verification. Use this order when useful: `Findings`, `Suggested edits`, `Verified evidence`, `Open questions`. If no findings remain, say so and identify any material area that could not be verified.
 
-- Call out secret handling, environment files, migrations, external services, large datasets, deployment steps, and destructive commands.
-- Tell agents how to use safe examples (`.env.example`, local mocks, dry-run flags) when available.
+## Final Checks
 
-### Commit and PR guidance
-
-- Derive commit style from recent history if requested or relevant.
-- Include PR expectations such as linked issues, screenshots for UI changes, migration notes, and verification summaries.
-
-## Migration and compatibility notes
-
-- If the repo has older agent instruction files, migrate by renaming to `AGENTS.md`; optionally leave a symlink for tools that still expect the old name, e.g. `mv AGENT.md AGENTS.md && ln -s AGENTS.md AGENT.md`.
-- For tools that need explicit configuration, add minimal setup notes only when the repo uses them (for example Aider `read: AGENTS.md` or Gemini CLI `context.fileName`).
-
-## Final checks
-
-Before finishing:
-
-- Verify every listed command/path exists or is clearly marked as an example.
-- Ensure rules do not conflict with nearer scoped instructions or explicit user requirements.
-- Check that review output uses the requested findings format when applicable.
-- Keep one clear purpose per section; remove filler and generic advice.
-- If you edited the file, summarize affected path(s), evidence used, and verification performed.
+- Every instruction is grounded in repository evidence or an explicit user requirement.
+- Each rule appears once at the narrowest correct scope.
+- Authorization boundaries distinguish safe local work from actions requiring confirmation.
+- Commands, paths, precedence, validation, and completion criteria are concrete.
+- The final file is concise because low-value content was removed, not because required detail was omitted.

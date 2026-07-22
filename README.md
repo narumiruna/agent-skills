@@ -102,7 +102,7 @@ Repository path: `skills/workflow-repository/`
 | `syncing-main-branch` | Explicitly invoked clean switch to `main` and protected fast-forward update. |
 | `managing-git-worktrees` | Safe Git worktree creation, repair, removal, pruning, and branch cleanup. |
 | `maintaining-memory-md` | Creates repository `MEMORY.md` on the first durable `GOTCHA` or `TASTE`, then keeps entries concise and current. |
-| `writing-agents-md` | Creating or updating repository `AGENTS.md` guidance. |
+| `writing-agents-md` | Creating or reviewing concise, evidence-backed repository `AGENTS.md` guidance. |
 
 ## 🗄️ Deprecated Skills
 
