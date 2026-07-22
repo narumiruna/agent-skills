@@ -1,4 +1,4 @@
 interface:
   display_name: "Writing Plans"
-  short_description: "Draft lean, verifiable implementation plans."
-  default_prompt: "Use $writing-plans to draft a lean implementation plan with goals, task-list steps, and a completion checklist."
+  short_description: "Draft, execute, and track lean verifiable plans."
+  default_prompt: "Use $writing-plans to draft, execute, or track the requested plan with bounded tasks, acceptance evidence, and finite completion checks."

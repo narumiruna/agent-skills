@@ -1,73 +1,50 @@
 # Logging with Loguru
 
-Use loguru for small apps and CLIs where the application owns process startup and logging configuration. Avoid forcing loguru into reusable libraries that should let callers configure logging.
+Use Loguru when an app or CLI owns process startup and logging configuration. Reusable libraries should normally emit stdlib logging records instead.
 
-## Installation
+## Install and Configure
 
 ```bash
 uv add loguru
 ```
 
-## Basic Usage
+Configure sinks once near the application entry point:
 
 ```python
-from loguru import logger
-
-# Simple logging
-logger.info("Application started")
-logger.debug("Processing item {item_id}", item_id=42)
-logger.warning("Low disk space: {free} MB", free=512)
-err = "Connection refused"
-logger.error("Failed to connect: {error}", error=err)
-```
-
-## Configure Output
-
-```python
-from loguru import logger
 import sys
 
-# Remove default handler
-logger.remove()
+from loguru import logger
 
-# Add custom handler with format
+logger.remove()
 logger.add(
     sys.stderr,
-    format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {message}",
+    format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {message} | {extra}",
     level="INFO",
 )
-
-# Add file handler with rotation
-logger.add(
-    "logs/app.log",
-    rotation="500 MB",
-    retention="10 days",
-    level="DEBUG",
-)
 ```
 
-Configure loguru once near the CLI or application entry point. Avoid adding sinks from functions that may be called repeatedly.
+Add file or external sinks only when the application requires them. Consider retention, sensitive fields, destination approval, and duplicate setup.
 
-## Exception Logging
+## Context
+
+Bind structured context so it is present in `{extra}` (or use `serialize=True` for JSON):
+
+```python
+request_logger = logger.bind(user_id=123, action="login")
+request_logger.info("User action")
+```
+
+## Exceptions
+
+Log and propagate unexpected exceptions unless the caller deliberately owns recovery:
 
 ```python
 from loguru import logger
 
-@logger.catch
+
+@logger.catch(reraise=True)
 def risky_function(x: int) -> float:
-    """Automatically log exceptions with full traceback."""
-    return 1 / x  # Will log if x is 0
+    return 1 / x
 ```
 
-## Structured Logging
-
-```python
-from loguru import logger
-
-logger.info(
-    "User action",
-    user_id=123,
-    action="login",
-    ip_address="192.168.1.1",
-)
-```
+For an intentionally handled exception, use an explicit `try`/`except`, log with `logger.exception(...)`, and return or raise according to the documented recovery behavior.

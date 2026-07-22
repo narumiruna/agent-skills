@@ -1,4 +1,4 @@
 interface:
   display_name: "Marp Authoring"
-  short_description: "Write Marp/Marpit slides with minimal lookup."
-  default_prompt: "Use $authoring-marp-slides to write or revise this Marp/Marpit deck and route to the right authoring references."
+  short_description: "Author and validate focused Marp slide decks."
+  default_prompt: "Use $authoring-marp-slides to write or revise this Marp deck, load only the needed authoring references, and report rendered validation honestly."

@@ -1,39 +1,31 @@
 ---
 name: authoring-marp-slides
-description: Use when you need Marp/Marpit Markdown authoring rules, directives, layouts, or theme guidance and want the minimal reading path for slide writing.
+description: Write, revise, structure, or validate Marp/Marpit Markdown slides, including directives, layouts, themes, templates, and rendered-deck checks. Use for slide authoring when palette or illustration design is not the primary task.
 ---
 
-# Marp Authoring Entry
+# Marp Authoring
 
-## Overview
-Thin entry skill for Marp/Marpit authoring. Core principle: route directly to the authoring references and load color or SVG skills only when needed.
+Load only the authoring detail the deck needs.
 
-## When to Use
-- Writing Marp/Marpit slides (syntax, directives, layouts)
-- Looking for theme features or authoring best practices
-- You already have colors and no SVG diagram work
-
-## Quick Reference
-| Goal | Read |
+| Need | Read or use |
 | --- | --- |
-| Syntax & directives | references/syntax-guide.md |
-| Layout patterns | references/patterns.md |
-| Complex layouts | references/advanced-layouts.md |
-| Themes | references/themes.md |
-| QA checklist | references/best-practices.md |
+| Directives and syntax | `references/syntax-guide.md` |
+| Common layouts | `references/patterns.md` |
+| Complex layouts | `references/advanced-layouts.md` |
+| Theme behavior | `references/themes.md` |
+| Content and QA guidance | `references/best-practices.md` |
+| Source validation | `scripts/validate_marpit.sh <deck.md>` |
+| Render and visual checks | `references/preview-workflow.md` |
+| Starting point | `assets/templates/` |
+| Known-good patterns | `assets/examples/` |
 
-## Example
-Prompt: "Need a split layout with a code block." → Read `syntax-guide.md`, then `advanced-layouts.md`.
+## Workflow
 
-## Assets
-- `assets/templates/` - Starter Marp templates
-- `assets/examples/` - Slide examples and patterns
-- `assets/icons/` - Common slide icons
+1. Inspect the request, existing deck, theme, assets, output target, and repository conventions.
+2. Start from the nearest template or preserve the current structure. Define valid Marp frontmatter and repository-relative asset paths.
+3. Author a clear slide sequence with consistent hierarchy and layouts. Use `bg` syntax for full-slide or split-layout visuals; keep logos, icons, and other small visuals inline.
+4. Load color or SVG guidance only when the task requires new palette or illustration work.
+5. Resolve this skill directory and validate exactly one deck with `bash "$SKILL_DIR/scripts/validate_marpit.sh" path/to/deck.md`. Then follow `references/preview-workflow.md` when rendering is available and inspect the title, densest slide, and every image/SVG slide.
+6. Return the deck artifact first, followed by checks performed and any rendering, font, asset, or environment caveat.
 
-## Common Mistakes
-- Opening unrelated color or SVG references before the authoring path requires them
-- Opening color or SVG modules for authoring-only tasks
-
-## Red Flags
-- "I'll just skim everything first"
-- "Maybe the SVG rules are part of authoring"
+Do not claim visual validation from Markdown inspection alone. Do not commit, publish, or convert formats unless requested.

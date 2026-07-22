@@ -1,6 +1,8 @@
 # Event Reference
 
-Use this file when you need exact event differences instead of the higher-level workflow in `SKILL.md`.
+> Deprecated, version-sensitive snapshot. Verify every event, field, matcher, and output contract against the installed Codex version and current official documentation before use.
+
+Use this file only when historical event differences help interpret or migrate an existing hook.
 
 ## Common Inputs
 

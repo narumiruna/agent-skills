@@ -1,4 +1,4 @@
 interface:
   display_name: "Grilling Designs"
-  short_description: "Interrogate designs until assumptions are clear."
-  default_prompt: "Use $grilling-designs to grill my design one question at a time until the major risks are clear."
+  short_description: "Resolve design decisions one hard question at a time."
+  default_prompt: "Use $grilling-designs to stress-test this design one evidence-informed decision at a time until no major branch remains unresolved."

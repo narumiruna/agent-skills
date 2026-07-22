@@ -1,36 +1,14 @@
-# References Index
+# Slide Deck Reference Index
 
-Navigation hub for creating-slide-decks reference files. Use this to pick the smallest set of docs needed.
+Use focused skills rather than loading every reference.
 
-## Table of Contents
+| Need | Route |
+| --- | --- |
+| Marp syntax, layouts, themes, preview | `authoring-marp-slides` |
+| Semantic palette and contrast | `designing-slide-colors` |
+| Conventional structured diagram | `creating-mermaid-diagrams` |
+| Bespoke vector illustration | `creating-svg-illustrations` |
+| Cross-cutting render problem | `troubleshooting-common.md` |
+| Mermaid versus SVG decision | `decision-guide.md` |
 
-- [Pick by Task](#pick-by-task)
-- [Module References](#module-references)
-- [Validation and Preview](#validation-and-preview)
-- [Examples and Outputs](#examples-and-outputs)
-- [Decision Guide](#decision-guide)
-
-## Pick by Task
-
-- **Design slide colors** → `designing-slide-colors`
-- **Write slides (no diagrams)** → `authoring-marp-slides`
-- **Make a diagram (SVG)** → `creating-svg-illustrations`
-
-## Module References
-
-- **Color design**: `../../designing-slide-colors/references/index.md`
-- **Marpit authoring**: `../../authoring-marp-slides/references/index.md`
-- **SVG illustration**: `../../creating-svg-illustrations/references/index.md`
-
-## Validation and Preview
-
-- **Preview workflow**: `authoring-marp-slides`
-- **Common troubleshooting**: `troubleshooting-common.md`
-
-## Examples and Outputs
-
-- **Output examples**: `output-examples.md`
-
-## Decision Guide
-
-- **Decision flow**: `decision-guide.md`
+Load one immediate reference, then add troubleshooting only after a concrete failure. Source validation and rendered inspection are separate evidence.

@@ -1,41 +1,24 @@
 ---
 name: grilling-designs
-description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to get grilled on a design, stress-test a plan, or mentions "grill me".
+description: Interview the user one decision at a time to stress-test a plan or design until goals, constraints, assumptions, tradeoffs, risks, and verification are explicit. Use only when the user asks to be grilled or names “grilling designs.”
 ---
 
 # Grilling Designs
 
-## Purpose
+Build a live decision tree from the user's goal, constraints, stakeholders, flows, dependencies, risks, and success criteria.
 
-Grill a user's plan or design with a one-question-at-a-time interview until decisions, dependencies, assumptions, tradeoffs, and verification are explicit.
+## Loop
 
-## Operating Loop
+1. Resolve answers available from repository files, callers, configuration, docs, tests, or commands before questioning the user.
+2. Select the highest-leverage unresolved decision that unlocks later branches.
+3. Ask exactly one question with:
+   - **Question:** the one decision needed next.
+   - **Options:** a numbered list of credible choices.
+   - **Recommended answer:** the option you recommend and the deciding rationale.
+4. Incorporate the answer, resolve dependent branches, and repeat. If it conflicts with evidence or an earlier decision, state the conflict and ask the smallest clarifying question.
 
-1. Build the current decision tree from the user's plan: goal, constraints, stakeholders, flows, dependencies, risks, and success criteria.
-2. Before asking, answer anything discoverable from the repository by reading relevant files, searching callers/config/docs, and inspecting tests or commands.
-3. Ask exactly one question at a time. Pick the highest-leverage unresolved decision whose answer unblocks later branches.
-4. For each question, include:
-   - `Question:` the single thing the user must answer next.
-   - `Options:` a numbered list of likely answers the user can choose from.
-   - `Recommended answer:` the option number you would choose, with enough rationale to be useful.
-5. After each user answer, update the shared understanding, resolve dependent branches, and ask the next question.
-6. If an answer conflicts with repository evidence or an earlier decision, call out the conflict and ask the smallest clarifying question.
+Prioritize goal/success, constraints/non-goals, architecture facts, interfaces/data/state ownership, failure/security/migration/rollout/observability, then test and verification criteria.
 
-## Question Priority
+Do not draft a plan while major branches remain. When the user requests a plan after the interview, use `writing-plans` with the agreed decisions.
 
-Prefer questions that resolve, in order:
-
-1. Goal and success criteria.
-2. Constraints, non-goals, and hard requirements.
-3. Existing architecture and codebase facts.
-4. Interfaces, data model, state ownership, and control flow.
-5. Failure modes, security, migration, rollout, and observability.
-6. Test and verification criteria.
-
-## Pairing With Writing Plans
-
-Do not draft a plan while the interview is still resolving major branches. If the user asks to create or update a plan document after grilling, load `writing-plans` and follow its file/output rules using the agreed decisions.
-
-## Stop Condition
-
-Stop only when no major unresolved branch remains. End with the agreed decisions, remaining risks or unknowns, and the recommended next step.
+Stop when no major unresolved branch remains. Return the agreed decisions, remaining risks or unknowns, and the recommended next action.

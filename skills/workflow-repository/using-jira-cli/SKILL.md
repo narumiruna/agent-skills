@@ -1,171 +1,34 @@
 ---
 name: using-jira-cli
-description: Use when interacting with Jira through ankitpokhrel/jira-cli (`jira`), including setup, authentication, issue queries, issue creation or edits, transitions, comments, worklogs, epics, sprints, releases, projects, boards, and script-friendly output.
+description: Inspect Jira or prepare and perform precisely authorized Jira mutations with ankitpokhrel/jira-cli (`jira`), including issues, comments, worklogs, epics, sprints, releases, projects, boards, and script-friendly output.
 ---
 
-# Jira CLI
+# Using Jira CLI
 
-## Overview
+Use read-only discovery freely. Jira creates, edits, transitions, assignments, comments, worklogs, links, sprint/epic changes, and deletes are external writes and require approval for the exact target and content unless already supplied.
 
-Use `jira` for Jira work from the terminal. Prefer read-only discovery first, script-friendly output for agents, and explicit confirmation before changing Jira state.
+## Establish Context
 
-## Safety Rules
-
-- Do not print or store Jira tokens. Use `JIRA_API_TOKEN`, `.netrc`, keychain, or the user's existing shell setup.
-- Check the installed command help when flags matter: `jira --help`, then `jira <resource> <command> --help`.
-- Prefer non-interactive output in agent runs when the command supports it: `--plain`, `--raw`, `--csv`, `--no-headers`, and `--columns`.
-- Prefer `--no-input` only when all required write parameters are known.
-- Before create/edit/move/assign/delete/comment/worklog/link operations, show the exact command and ask for confirmation unless the user already authorized that exact mutation.
-- Always confirm before `jira issue delete`, even if the user asked generally.
-
-## Setup Check
-
-```sh
-command -v jira
-jira version
-jira me
-```
-
-If `jira` is not installed, tell the user to install JiraCLI first and point them to https://github.com/ankitpokhrel/jira-cli/wiki/Installation.
-
-If `jira` is installed but not configured:
-
-```sh
-export JIRA_API_TOKEN=...     # never echo the value
-jira init                     # Cloud or Local setup
-```
-
-For on-prem Personal Access Token auth, set:
-
-```sh
-export JIRA_AUTH_TYPE=bearer
-export JIRA_API_TOKEN=...
-```
-
-For multiple Jira configs, use one of:
-
-```sh
-JIRA_CONFIG_FILE=./jira-config.yaml jira issue list --plain
-jira issue list -c ./jira-config.yaml --plain
-```
+1. Check `command -v jira`, `jira version`, and `jira me` without exposing token values.
+2. Identify the Jira instance and config file before querying or mutating. For multiple configs, use the confirmed `JIRA_CONFIG_FILE` or `-c` path consistently.
+3. If setup is missing, do not run interactive `jira init` in an agent shell. Ask the user to complete it or follow a verified non-interactive setup path. Use `JIRA_API_TOKEN`, `.netrc`, keychain, or existing secure configuration; never print, persist, or place secrets in command arguments.
+4. Read installed help for version-sensitive syntax: `jira --help`, then `jira <resource> <command> --help`.
 
 ## Read Workflow
 
-1. Identify context with read-only commands:
-   ```sh
-   jira project list
-   jira board list
-   jira me
-   ```
-2. Search issues with filters or JQL:
-   ```sh
-   jira issue list --plain --columns key,status,assignee,summary --no-headers
-   jira issue list -a"user@example.com" -s"In Progress" --plain
-   jira issue list -q "summary ~ cli" --plain
-   jira issue list --raw
-   ```
-3. Inspect the ticket before proposing changes:
-   ```sh
-   jira issue view ISSUE-1
-   jira issue view ISSUE-1 --comments 5
-   ```
+- Discover project, board, user, status, field, or sprint context before assuming names or IDs.
+- Use explicit issue keys for detail views.
+- Prefer non-interactive, script-friendly output only when the installed command supports it: `--plain`, `--raw`, `--csv`, `--no-headers`, or `--columns`.
+- Avoid commands that open an interactive issue browser; add the supported plain/raw form or use a narrower view.
 
-## Write Workflow
+Read `references/commands.md` only for the relevant resource's common command shapes, then verify flags against installed help.
 
-Use explicit issue keys and quote values with spaces. Prefix issue titles/summaries with the project name when known: `[<project_name>] <title/summary>`.
+## Mutation Workflow
 
-Examples:
-- Known project name: `[skills] add using-jira-cli skill`
-- Unknown project name: `add using-jira-cli skill`
+1. Read the current target and discover valid field/status values.
+2. Prepare the exact Jira instance/config, issue or container IDs, operation, summary/body/comment/worklog text, transition, assignment, and other changed fields. Do not impose a project-name summary prefix or description template unless the user or repository requires it.
+3. If any target or content is not already authorized, show the exact mutation and ask for approval. Always require exact approval for deletion.
+4. After approval, use non-interactive flags only when every required parameter is known. Quote values and provide long content through a template or stdin rather than unsafe shell interpolation.
+5. Re-read the affected issue or resource and report its resulting key, status, assignee, fields, or comment/worklog evidence. A zero exit code alone is not sufficient verification.
 
-For issue descriptions, use this compact template unless the user provides another one:
-
-```md
-## Summary
-<what changes>
-
-## Acceptance Criteria
-- [ ] <done condition>
-
-## Optional
-- Context: <why now>
-- Scope: <in/out of scope>
-- Links: <related issue, PR, doc>
-```
-
-```sh
-# Create
-jira issue create -tTask -s"Summary" -b"Description" --no-input
-jira issue create -tStory -s"Story summary" -PEPIC-42 --no-input
-
-# Edit
-jira issue edit ISSUE-1 -s"New summary" --no-input
-jira issue edit ISSUE-1 --label -old-label --label new-label --no-input
-
-# Assign / unassign
-jira issue assign ISSUE-1 "user@example.com"
-jira issue assign ISSUE-1 x
-
-# Transition
-jira issue move ISSUE-1 "In Progress"
-jira issue move ISSUE-1 Done -RFixed -a"user@example.com"
-
-# Comments and worklogs
-jira issue comment add ISSUE-1 "Comment body"
-echo "Long comment" | jira issue comment add ISSUE-1
-jira issue worklog add ISSUE-1 "2h" --comment "What changed" --no-input
-```
-
-Use templates or stdin for longer descriptions/comments:
-
-```sh
-jira issue create --template ./issue-template.md
-jira issue comment add ISSUE-1 --template - < ./comment.md
-```
-
-## Planning / Agile Commands
-
-```sh
-# Epics
-jira epic list --table --plain
-jira epic list EPIC-1 --plain
-jira epic create -n"Epic name" -s"Epic summary" --no-input
-jira epic add EPIC-1 ISSUE-1 ISSUE-2
-jira epic remove ISSUE-1 ISSUE-2
-
-# Sprints
-jira sprint list --table --plain
-jira sprint list --current --plain
-jira sprint list SPRINT_ID -a"user@example.com" --plain
-jira sprint add SPRINT_ID ISSUE-1 ISSUE-2
-
-# Releases, projects, boards
-jira release list
-jira release list --project KEY
-jira project list
-jira board list
-```
-
-## Output Patterns For Scripts
-
-```sh
-# Stable tabular extraction
-jira issue list --plain --columns key,status,assignee,summary --no-headers
-
-# Machine-readable extraction
-jira issue list --raw
-jira issue list --csv
-
-# Count examples
-jira issue list --created month --plain --columns created --no-headers
-jira sprint list --table --plain --columns id,name --no-headers
-```
-
-## Common Mistakes
-
-- Letting `jira issue list` open the interactive UI during an automated agent run.
-- Adding output flags to commands that do not support them; `project list`, `board list`, and `release list` do not accept `--plain` in current JiraCLI.
-- Mutating the wrong Jira instance because `JIRA_CONFIG_FILE` or `-c` was omitted.
-- Assuming status, resolution, priority, issue type, or custom field names; discover them with `jira ... --help`, existing tickets, or Jira config first.
-- Using unquoted shell arguments for statuses or summaries with spaces.
-- Adding token values to chat, logs, shell history, or repository files.
+Do not broaden one approved mutation into related edits. If Jira returns an unexpected prompt, target, schema, or permission requirement, stop without guessing.

@@ -1,103 +1,67 @@
 # Color Design Output Examples
 
-Complete examples of expected outputs for slide color design.
+Use these as evidence patterns, not fixed templates. Recalculate every ratio if a value changes.
 
-Format structure: see `color-design/output-template.md`.
-
-## Example 1: Dark Technical Palette
+## Dark Technical Example
 
 ```markdown
 ## Color Strategy
 
-**Strategy**: Dark Technical
-**Reasoning**: Code-heavy presentation for developer audience, projector environment, need high contrast for code readability
+Dark Technical — starting point for a code-heavy deck in a controlled-light room; projector behavior remains untested.
 
 ## Color Palette
 
-* Background: #1E1E1E — Main slide background (VS Code dark)
-* Surface: #252526 — Code blocks, diagram containers
-* Primary: #569CD6 — Titles, headings (VS Code blue)
-* Secondary: #4EC9B0 — Section dividers, icons (cyan)
-* Accent: #F4BF75 — Important callouts, highlights (amber)
-* Text Primary: #D4D4D4 — Body text, code
-* Text Secondary: #858585 — Captions, metadata
+- Background: `#1E1E1E` — slide field
+- Surface: `#252526` — code and diagram containers
+- Primary: `#569CD6` — headings and primary connectors
+- Secondary: `#4EC9B0` — secondary diagram structure
+- Accent: `#F4BF75` — limited callouts
+- Text Primary: `#D4D4D4` — body text
+- Text Secondary: `#858585` — metadata only where its pairing passes
 
-## Usage Guidelines
+## Usage
 
-**Title slides**:
-- Background: #1E1E1E
-- Title: Primary (#569CD6)
-- Subtitle: Text Secondary (#858585)
+- Body: Text Primary on Background
+- Code: Text Primary on Surface
+- Diagrams: Surface fills, Primary connectors, Accent highlights
 
-**Content slides**:
-- Background: #1E1E1E
-- Headings: Primary (#569CD6)
-- Body text: Text Primary (#D4D4D4)
-- Code blocks: Surface background (#252526)
+## Validation
 
-**Diagrams**:
-- Container fills: Surface (#252526)
-- Borders/strokes: Secondary (#4EC9B0)
-- Highlights: Accent (#F4BF75)
-- Arrows: Primary (#569CD6)
-
-## Validation Checklist
-
-- [x] Contrast ratio Text Primary/Background = 11.25:1 (exceeds WCAG AAA)
-- [x] Contrast ratio Primary/Background = 5.65:1 (meets WCAG AA, close to AAA)
-- [x] Palette limited to 7 colors
-- [ ] Verify the exported deck on the target projector; do not infer projector performance from contrast ratios alone
-- [x] Consistent with VS Code theme (familiar to developers)
+- [x] Text Primary/Background: `11.25:1` (meets 7:1 AAA)
+- [x] Primary/Background: `5.65:1` (meets 4.5:1 AA for normal text)
+- [ ] Calculate Text Secondary on every assigned background
+- [ ] Inspect the exported deck on the target projector
 ```
 
-## Example 2: Light Professional Palette
+## Light Professional Example
 
 ```markdown
 ## Color Strategy
 
-**Strategy**: Light Professional
-**Reasoning**: Business presentation for mixed audience (technical + management), formal setting, printed handouts
+Light Professional — starting point for a formal mixed-content deck and handout; print and venue output remain untested.
 
 ## Color Palette
 
-* Background: #FAFAFA — Main slide background (off-white, print-friendly)
-* Surface: #FFFFFF — Panels, cards
-* Primary: #2E75B6 — Titles, headings (corporate blue)
-* Secondary: #5B9BD5 — Subheadings (lighter blue)
-* Accent: #F39C12 — Highlights, callouts (orange)
-* Text Primary: #2C2C2C — Body text (near-black)
-* Text Secondary: #666666 — Captions
+- Background: `#FAFAFA` — slide field
+- Surface: `#FFFFFF` — panels
+- Primary: `#2E75B6` — headings
+- Secondary: `#5B9BD5` — supporting emphasis
+- Accent: `#F39C12` — limited callouts
+- Text Primary: `#2C2C2C` — body text
+- Text Secondary: `#666666` — captions
 
-## Usage Guidelines
+## Usage
 
-**Title slides**:
-- Background: #FAFAFA
-- Title: Primary (#2E75B6)
-- Subtitle: Text Secondary (#666666)
+- Body: Text Primary on Background or Surface
+- Headings: Primary on Background
+- Visuals: Primary main series, Secondary comparison, Accent highlight
 
-**Content slides**:
-- Background: #FAFAFA
-- Headings: Primary (#2E75B6)
-- Body text: Text Primary (#2C2C2C)
-- Important items: Accent (#F39C12)
+## Validation
 
-**Charts/Diagrams**:
-- Main elements: Primary (#2E75B6)
-- Secondary elements: Secondary (#5B9BD5)
-- Highlights: Accent (#F39C12)
-- Backgrounds: Surface (#FFFFFF)
-
-## Validation Checklist
-
-- [x] Contrast ratio Text Primary/Background = 13.38:1 (exceeds WCAG AAA)
-- [x] Contrast ratio Primary/Background = 4.64:1 (meets WCAG AA)
-- [x] Palette limited to 7 colors
-- [ ] Verify a representative print and the exported deck on the target projector
-- [x] Professional, conservative appearance suitable for business
+- [x] Text Primary/Background: `13.38:1` (meets 7:1 AAA)
+- [x] Primary/Background: `4.64:1` (meets 4.5:1 AA for normal text)
+- [ ] Calculate remaining assigned pairings
+- [ ] Inspect a representative print and exported deck in the target venue
 ```
 
-## See Also
-
-- `index.md` - Reference navigation hub
-- `color-design/output-template.md` - Color design output template
-- `color-palettes.md` - Palette index
+See `color-design/output-template.md` for required handoff content.

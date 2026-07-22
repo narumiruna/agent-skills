@@ -12,6 +12,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
+DEPRECATED = ROOT / "deprecated"
+
+
+def all_skill_markdown() -> list[Path]:
+    return sorted([*SKILLS.glob("*/*/SKILL.md"), *DEPRECATED.glob("*/SKILL.md")])
 
 
 def load_module(path: Path, name: str) -> ModuleType:
@@ -24,9 +29,67 @@ def load_module(path: Path, name: str) -> ModuleType:
 
 
 def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
-    for skill_md in sorted((SKILLS / "deprecated").glob("*/SKILL.md")):
+    deprecated = sorted(DEPRECATED.glob("*/SKILL.md"))
+    assert len(deprecated) == 4
+    for skill_md in deprecated:
         frontmatter = skill_md.read_text().split("---", 2)[1]
         assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
+
+
+def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
+    skill_markdown = all_skill_markdown()
+    assert len(skill_markdown) == 32
+    readme = (ROOT / "README.md").read_text()
+
+    for skill_md in skill_markdown:
+        frontmatter = skill_md.read_text().split("---", 2)[1]
+        name_line = next(
+            line for line in frontmatter.splitlines() if line.startswith("name: ")
+        )
+        name = name_line.removeprefix("name: ")
+        assert name == skill_md.parent.name, skill_md
+
+        metadata_path = skill_md.parent / "agents/openai.yaml"
+        metadata = metadata_path.read_text()
+        assert f"${name}" in metadata, metadata_path
+        assert f"| `{name}` |" in readme, skill_md
+
+
+def test_material_trigger_surfaces_are_semantically_aligned() -> None:
+    readme = (ROOT / "README.md").read_text()
+    svg_skill = (
+        SKILLS / "slides-visuals/creating-svg-illustrations/SKILL.md"
+    ).read_text()
+    svg_metadata = (
+        SKILLS / "slides-visuals/creating-svg-illustrations/agents/openai.yaml"
+    ).read_text()
+    ui_skill = (SKILLS / "ui-ux-design/designing-user-interfaces/SKILL.md").read_text()
+    ui_metadata = (
+        SKILLS / "ui-ux-design/designing-user-interfaces/agents/openai.yaml"
+    ).read_text()
+
+    assert "documents, and other static artifacts" in svg_skill
+    assert "target artifact" in svg_metadata
+    assert "SVG diagrams and illustrations for target artifacts" in readme
+    assert "Apple-derived philosophy" in ui_skill
+    assert "Apple-derived philosophy" in ui_metadata
+    assert "Apple-derived, platform-adapted UI work" in readme
+
+
+def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> None:
+    redundant_headings = {
+        "## Overview",
+        "## Use When",
+        "## When to Use",
+        "## Common Mistakes",
+        "## Common Failures",
+        "## Red Flags",
+    }
+
+    for skill_md in all_skill_markdown():
+        body = skill_md.read_text().split("---", 2)[2]
+        headings = set(body.splitlines())
+        assert redundant_headings.isdisjoint(headings), skill_md
 
 
 def test_active_skills_are_grouped_one_category_deep() -> None:
@@ -36,7 +99,10 @@ def test_active_skills_are_grouped_one_category_deep() -> None:
 
 
 def test_openai_short_descriptions_fit_supported_ui_length() -> None:
-    for metadata_path in sorted(SKILLS.glob("**/agents/openai.yaml")):
+    metadata_paths = [
+        skill_md.parent / "agents/openai.yaml" for skill_md in all_skill_markdown()
+    ]
+    for metadata_path in metadata_paths:
         description_line = next(
             line
             for line in metadata_path.read_text().splitlines()
@@ -251,3 +317,74 @@ def test_slide_image_guidance_preserves_inline_images() -> None:
     slide_skill = (SKILLS / "slides-visuals/creating-slide-decks/SKILL.md").read_text()
     assert "for all images" not in slide_skill
     assert "inline" in slide_skill
+
+
+def test_external_and_destructive_workflows_require_exact_authorization() -> None:
+    uv_skill = (SKILLS / "python/managing-python-with-uv/SKILL.md").read_text()
+    pr_skill = (
+        SKILLS / "workflow-repository/resolving-pr-review-comments/SKILL.md"
+    ).read_text()
+    jira_skill = (SKILLS / "workflow-repository/using-jira-cli/SKILL.md").read_text()
+    atuin_skill = (DEPRECATED / "cleaning-atuin-history/SKILL.md").read_text()
+
+    assert "exact package/version, repository or index, and artifacts" in uv_skill
+    assert "does not by itself authorize public replies" in pr_skill
+    assert "push remote" in pr_skill and "reply text" in pr_skill
+    assert "approval for the exact target and content" in jira_skill
+    assert "do not run interactive `jira init`" in jira_skill
+    assert "approved candidate IDs" in atuin_skill
+    assert "Do not invoke `cleanup-typos`" in atuin_skill
+    assert "`atuin store push`" in atuin_skill and "`atuin sync`" in atuin_skill
+
+
+def test_slide_color_checks_never_claim_unperformed_validation() -> None:
+    output_template = (
+        SKILLS
+        / "slides-visuals/designing-slide-colors/references/color-design/output-template.md"
+    ).read_text()
+
+    assert "Mark all checklist items" not in output_template
+    assert "Check an item only after performing it" in output_template
+    assert "Do not describe a palette as projector-" in output_template
+
+
+def test_visual_creation_does_not_imply_commit_authority() -> None:
+    mermaid = (SKILLS / "slides-visuals/creating-mermaid-diagrams/SKILL.md").read_text()
+    slide_decks = (SKILLS / "slides-visuals/creating-slide-decks/SKILL.md").read_text()
+
+    assert "Commit source `.mmd`" not in mermaid
+    assert "does not authorize a Git commit" in mermaid
+    assert "does not authorize committing" in slide_decks
+
+
+def test_logging_and_peewee_examples_preserve_runtime_semantics() -> None:
+    loguru = (
+        SKILLS / "python/configuring-python-logging/references/loguru.md"
+    ).read_text()
+    peewee = (SKILLS / "python/using-peewee-orm/SKILL.md").read_text()
+
+    assert "@logger.catch(reraise=True)" in loguru
+    assert "{extra}" in loguru
+    assert "db_proxy.obj" not in peewee
+    assert "MODELS = [User]" in peewee
+    assert "with db.connection_context():\n    with db.atomic():" in peewee
+    assert "try:\n                db.drop_tables" in peewee
+    assert "finally:\n                db.close()" in peewee
+
+
+def test_relative_markdown_links_resolve() -> None:
+    markdown_paths = [ROOT / "README.md"]
+    for skill_md in all_skill_markdown():
+        markdown_paths.extend(skill_md.parent.rglob("*.md"))
+
+    for markdown_path in sorted(set(markdown_paths)):
+        for target in re.findall(
+            r"(?<!!)\[[^\]]*\]\(([^)]+)\)", markdown_path.read_text()
+        ):
+            relative_target = target.strip().split("#", 1)[0]
+            if not relative_target or "://" in relative_target:
+                continue
+            assert (markdown_path.parent / relative_target).exists(), (
+                markdown_path,
+                relative_target,
+            )

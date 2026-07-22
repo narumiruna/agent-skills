@@ -1,4 +1,4 @@
 interface:
   display_name: "Code Review"
-  short_description: "Review code changes for correctness, risk, and maintainability."
-  default_prompt: "Use $reviewing-code to review the provided diff, pull request, patch, commit, or source files, return actionable findings, and hand confirmed code-path hardening work off when fixes are requested."
+  short_description: "Review changes for concrete correctness and risk."
+  default_prompt: "Use $reviewing-code to review the requested change, lead with verified findings, and distinguish residual risk from confirmed defects."

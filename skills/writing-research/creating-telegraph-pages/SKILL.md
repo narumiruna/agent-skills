@@ -1,74 +1,46 @@
 ---
 name: creating-telegraph-pages
-description: Create and publish public Telegra.ph articles through the official Telegraph API, including account setup, content conversion to Telegraph nodes, credential handling, and publication verification. Use when the user asks to create, publish, or post a page or article on telegra.ph.
+description: Prepare and publish one explicitly authorized public Telegra.ph article through the official Telegraph API, including safe node conversion, optional account setup, credential handling, and page verification.
 ---
 
 # Creating Telegraph Pages
 
-Publish structured articles with the bundled `scripts/telegraph.py` helper. Treat page creation as an external write: verify the final title, author details, and content before publishing unless the user's request already makes them explicit.
+Use the bundled `scripts/telegraph.py` by absolute path. A page is a public external write. An exact request authorizes one page only when final title, content, and any byline/link are explicit; otherwise present those fields for approval before publishing. Account creation is a separate external-state change.
 
-Resolve `scripts/telegraph.py` against this skill directory before running it, then use its absolute path throughout:
+## Prepare
+
+1. Preserve the user's language and wording unless editing was requested. Reject secrets, private data, and local-only asset links.
+2. Convert the body to a temporary JSON array of Telegraph nodes. Text may be a string; elements use `tag`, optional `attrs`, and optional `children`.
+3. Allow only `a`, `aside`, `b`, `blockquote`, `br`, `code`, `em`, `figcaption`, `figure`, `h3`, `h4`, `hr`, `i`, `iframe`, `img`, `li`, `ol`, `p`, `pre`, `s`, `strong`, `u`, `ul`, or `video`. Attributes are string-valued `href` or `src`. Convert larger Markdown headings to `h3`/`h4` and keep encoded content at or below 64 KB.
+4. Verify the final title, byline, links, node structure, and one-page publication scope.
+
+## Credentials and Account Boundary
+
+Prefer `TELEGRAPH_ACCESS_TOKEN` from the user's secure environment. Never place a token in arguments, repository files, captured output, logs, or the response.
+
+If no account exists, obtain separate approval for account creation, short name, and a new secret-file path. Then run:
 
 ```shell
-CREATING_TELEGRAPH_PAGES_SKILL_DIR="/absolute/path/to/creating-telegraph-pages"
+uv run --no-project python "$SKILL_DIR/scripts/telegraph.py" create-account \
+  --short-name '<approved-name>' \
+  --token-file '<approved-secret-path>'
 ```
 
-## Workflow
+The helper refuses overwrite, uses owner-only permissions, and redacts token/auth URL output. Do not read the token through a captured-output tool or create replacement accounts to avoid credential recovery.
 
-1. Prepare the article.
-   - Preserve the user's wording and language unless editing was requested.
-   - Confirm ambiguous title, byline, links, or publication intent before the external write.
-   - Do not publish secrets, private data, or local-only asset paths.
+## Publish and Verify
 
-2. Convert the body to a JSON array of Telegraph nodes in a temporary file. Use strings for text and objects shaped as `{"tag": "p", "children": ["Text"]}` for elements.
-   - Use only `a`, `aside`, `b`, `blockquote`, `br`, `code`, `em`, `figcaption`, `figure`, `h3`, `h4`, `hr`, `i`, `iframe`, `img`, `li`, `ol`, `p`, `pre`, `s`, `strong`, `u`, `ul`, or `video`.
-   - Use only `tag`, `attrs`, and `children` object fields. Attribute names must be `href` or `src`, and attribute values must be strings.
-   - Keep the encoded content at or below 64 KB.
-   - Convert Markdown headings to `h3` or `h4`; Telegraph does not support `h1` or `h2` nodes.
+With exact publication authorization and `SKILL_DIR` resolved to this skill directory:
 
-3. Obtain an access token.
-   - Prefer an existing token supplied through `TELEGRAPH_ACCESS_TOKEN`.
-   - Never place the token in a command argument, committed file, tool output, log, or response.
-   - If the user has no account, ask before creating one because it changes external state. Also agree on a new secret-file path, then run:
+```shell
+uv run --no-project python "$SKILL_DIR/scripts/telegraph.py" create-page \
+  --title '<approved-title>' \
+  --author-name '<approved-author>' \
+  /tmp/telegraph-content.json
+```
 
-     ```shell
-     uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-account \
-       --short-name '<account-name>' \
-       --token-file '<user-approved-secret-path>'
-     ```
+Omit optional author fields unless approved. Inject the token through the execution environment; if loading an approved token file, do so without printing it.
 
-   - The helper refuses to overwrite an existing file, stores the token with owner-only permissions, and omits `access_token` and `auth_url` from its output. Do not read the token with a tool that captures output or create repeated accounts to avoid managing one.
+Require an `https://telegra.ph/...` result, then fetch or open the public page and verify title, byline, links, and content structure. Report the URL and any unavailable check. Remove sensitive temporary drafts after successful publication.
 
-4. Publish only after the content is ready:
-
-   ```shell
-   uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
-     --title '<title>' \
-     --author-name '<author>' \
-     /tmp/telegraph-content.json
-   ```
-
-   Omit `--author-name` or add `--author-url` when appropriate. Inject `TELEGRAPH_ACCESS_TOKEN` through the execution environment; do not write the literal token into shell history. If using the restricted token file, load it without printing it:
-
-   ```shell
-   TOKEN_FILE='<user-approved-secret-path>'
-   TELEGRAPH_ACCESS_TOKEN="$(cat "$TOKEN_FILE")" \
-     uv run --no-project python "$CREATING_TELEGRAPH_PAGES_SKILL_DIR/scripts/telegraph.py" create-page \
-       --title '<title>' \
-       /tmp/telegraph-content.json
-   ```
-
-5. Verify the result.
-   - Check that the command returned an `https://telegra.ph/...` URL.
-   - Open or fetch the public page when tools permit and verify the title, byline, links, and content structure.
-   - Report the published URL and any verification limitation.
-   - Remove temporary content files after successful publication when they contain sensitive drafts.
-
-## Failure Handling
-
-- Preserve API errors exactly enough to diagnose them, but never echo the token.
-- On `ACCESS_TOKEN_INVALID`, stop and request a valid token; do not create a replacement account automatically.
-- On content validation errors, fix the unsupported node or attribute before retrying.
-- Do not repeatedly retry ambiguous or rate-related API errors; report the failure and retain the prepared content for a later attempt.
-
-Use the [official Telegraph API documentation](https://telegra.ph/api) for methods or fields not covered by the helper.
+On invalid credentials, stop and request a valid token. Fix deterministic node validation errors before one retry; do not repeatedly retry ambiguous, rate, or service errors. Preserve enough error detail to diagnose without revealing secrets.

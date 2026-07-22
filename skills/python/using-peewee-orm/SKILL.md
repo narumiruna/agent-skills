@@ -1,127 +1,76 @@
 ---
 name: using-peewee-orm
-description: Use when working with Peewee ORM patterns, especially DatabaseProxy setup, scoped connection/transaction handling, and SQLite-based tests.
+description: Design, wire, or test Peewee ORM models with deferred database binding, scoped connections, explicit transactions, and isolated SQLite fixtures. Use for `DatabaseProxy`, model lifecycle, transaction boundaries, or Peewee-backed tests.
 ---
 
 # Python Peewee
 
-## Overview
+Bind models at an application or test boundary; keep connection lifetime, transaction lifetime, and schema lifecycle explicit.
 
-Use Peewee with `DatabaseProxy`, scoped connection handling, explicit transactions, and isolated SQLite tests. Core principle: initialize the database at the boundary, then keep models and tests deterministic.
-
-## Use When
-
-- Defining Peewee models or a shared `BaseModel`.
-- Wiring `DatabaseProxy` for app and test databases.
-- Choosing `connection_context()` vs `atomic()`.
-- Writing SQLite-backed fixtures for model tests.
-
-## Quick Reference
-
-| Need | Pattern |
-| --- | --- |
-| Deferred database binding | `DatabaseProxy()` |
-| Model base class | `class BaseModel(Model)` with `Meta.database` |
-| Scoped connection | `with db.connection_context():` |
-| Transactional writes | `with db.atomic():` |
-| SQLite tests | temporary `SqliteDatabase` fixture |
-
-## Workflow
-
-1. Define one `DatabaseProxy` and one `BaseModel` for the model graph.
-2. Initialize the proxy once at the app/test boundary.
-3. Use `connection_context()` to open and close connections for scoped work.
-4. Use `atomic()` around write units that must commit or roll back together.
-5. In tests, bind the proxy to an isolated SQLite database and create/drop tables inside the fixture.
-
-## Setup
-
-### DatabaseProxy & BaseModel
+## Model Setup
 
 ```python
-from peewee import DatabaseProxy, Model
+from peewee import DatabaseProxy, Model, SqliteDatabase
 
 db_proxy = DatabaseProxy()
+
 
 class BaseModel(Model):
     class Meta:
         database = db_proxy
-```
 
-### Initialize DB
-
-```python
-from peewee import SqliteDatabase
 
 db = SqliteDatabase("app.db", pragmas={"foreign_keys": 1})
 db_proxy.initialize(db)
 ```
 
-## Connections and Transactions
+Define one proxy and base model for a connected model graph. Do not bind production credentials or open a production connection at import time.
 
-### Read (no transaction)
+## Lifecycle Rules
 
-```python
-with db_proxy.obj.connection_context():
-    rows = MyModel.select().limit(100)
-```
-
-### Write (atomic)
-
-```python
-with db_proxy.obj.atomic():
-    a.save()
-    b.save()
-```
-
-### Combined
+- Use `db.connection_context()` when a function owns a scoped open/close boundary.
+- Use `db.atomic()` for multiple statements that must commit or roll back as one invariant. A transaction is not a substitute for deciding who owns the connection.
+- Pass or retain the initialized database handle at the boundary instead of reaching through private proxy internals.
+- Initialize the proxy before querying. Avoid process-long connections unless the application architecture deliberately owns them.
+- Do not run schema changes, table deletion, migrations, or writes against an external or production database without explicit authorization for that target and operation.
 
 ```python
-db = db_proxy.obj
+with db.connection_context():
+    rows = list(User.select().limit(100))
+
 with db.connection_context():
     with db.atomic():
-        ...
+        account.debit(amount)
+        ledger.record(account, amount)
 ```
 
-Use `connection_context()` for scoped connections (open/close).
-Use `atomic()` for atomic writes (BEGIN/COMMIT/ROLLBACK).
+## Isolated SQLite Tests
 
-## SQLite Test Fixture
+Keep one deterministic model list and guarantee cleanup:
 
 ```python
 import pytest
 from peewee import SqliteDatabase
 
+MODELS = [User]
+
+
 @pytest.fixture
-def test_db(tmp_path):
-    db = SqliteDatabase(str(tmp_path / "test.db"))
+def test_db():
+    db = SqliteDatabase(":memory:", pragmas={"foreign_keys": 1})
     db_proxy.initialize(db)
-    with db.connection_context():
-        db.create_tables([MyModel])
-    yield db
-    with db.connection_context():
-        db.drop_tables([MyModel])
+    try:
+        db.connect()
+        db.create_tables(MODELS)
+        yield db
+    finally:
+        if not db.is_closed():
+            try:
+                db.drop_tables(MODELS, safe=True)
+            finally:
+                db.close()
 ```
 
-Use in function-based pytest tests:
+The fixture owns one open connection across the test, so test transactions may use `test_db.atomic()` inside that lifetime. Test successful commits and rollback behavior for multi-statement invariants. Do not reuse an application database or depend on table state from another test.
 
-```python
-def test_create_user(test_db):
-    with test_db.atomic():
-        user = User.create(name="Ada")
-
-    assert User.get_by_id(user.id).name == "Ada"
-```
-
-## Common Mistakes
-
-- Querying models before `db_proxy.initialize(db)` has run.
-- Holding one global open connection for the whole process when scoped connections would be clearer.
-- Using `atomic()` as a substitute for opening a connection in code paths that also need explicit connection lifetime.
-- Reusing a persistent app database in tests.
-
-## Red Flags
-
-- Tests that depend on table state from previous tests.
-- Peewee models bound directly to a production database in module import code.
-- Write operations performed without a transaction boundary.
+Finish by reporting the binding boundary, connection and transaction ownership, schema-test lifecycle, and checks run.

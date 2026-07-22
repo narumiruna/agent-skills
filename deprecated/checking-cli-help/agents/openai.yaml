@@ -1,4 +1,4 @@
 interface:
-  display_name: "Checking CLI Help"
-  short_description: "Decide when to inspect command help."
-  default_prompt: "Use $checking-cli-help to decide whether to check help before running this command."
+  display_name: "Checking CLI Help (Deprecated)"
+  short_description: "Decide when exact command help is needed."
+  default_prompt: "Use $checking-cli-help to decide whether this exact command is understood well enough to run or needs focused help inspection first."

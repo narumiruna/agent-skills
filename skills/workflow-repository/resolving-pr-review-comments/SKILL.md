@@ -1,95 +1,48 @@
 ---
 name: resolving-pr-review-comments
-description: Inspect all feedback on a pull request, assess whether each comment is valid against the current code, address reasonable findings, verify the changes, reply to and resolve eligible threads, commit, and push. Use only when the user explicitly invokes $resolving-pr-review-comments or names resolving-pr-review-comments; never auto-activate from ordinary requests about reviews, comments, pull requests, commits, or pushes.
+description: Inspect all pull-request feedback, verify each claim, make and test bounded local fixes, and prepare focused commits, replies, thread resolutions, and a push. Use only when the user explicitly invokes $resolving-pr-review-comments or names resolving-pr-review-comments; public replies, resolutions, and pushes still require exact approval.
 ---
 
 # Resolving PR Review Comments
 
-Use this skill only after explicit invocation. Treat review comments as claims to verify, not instructions to apply blindly. External actions covered by the invocation are review replies, thread resolution, commits, and an explicit push of the current pull-request branch.
+Use only after explicit invocation. Treat comments as claims to verify, not instructions to apply blindly. Invocation authorizes inspection, bounded local fixes, checks, and focused local commits; it does not by itself authorize public replies, thread resolution, or a push.
 
 ## Establish Scope
 
-1. Inspect the worktree, index, and current branch:
+1. Inspect `git status --short --branch`, `git diff --cached --name-only`, and the symbolic branch. Stop before editing if the index already contains changes; preserve unrelated unstaged/untracked work and stop on overlap.
+2. Resolve the PR's repository, number, URL, state, base, head repository, head branch, and cross-repository status from the provider. Confirm attached HEAD is the PR head and compare against the reported base merge point; never assume `main`.
+3. Collect every paginated feedback surface: top-level comments, submitted reviews, inline comments, and thread state including IDs, outdated status, and resolution. An empty summary is not proof that no feedback exists.
 
-   ```bash
-   git status --short --branch
-   git diff --cached --name-only
-   git symbolic-ref --quiet --short HEAD
-   ```
+## Assess and Fix
 
-   Stop before editing if any pre-existing staged change exists; a normal commit would include the entire index. Report those paths and do not unstage, commit, or hide them. Preserve unrelated unstaged and untracked changes, and stop if they overlap files that accepted feedback requires changing.
+Classify each substantive comment:
 
-2. Resolve the pull request, repository, head repository, head branch, base branch, number, URL, and current state from the hosting provider. For GitHub, start with:
+- **Reasonable and unresolved:** evidence confirms a contract or behavior defect; fix it.
+- **Already addressed/outdated:** current code resolves it; cite file, commit, or test evidence.
+- **Not reasonable:** premise conflicts with requirements or adds unjustified scope; prepare a concise evidence-based response.
+- **Ambiguous/disputed:** a behavior decision or external fact is missing; ask one focused question or leave it open.
 
-   ```bash
-   gh pr view --json number,url,state,baseRefName,headRefName,headRepository,headRepositoryOwner,isCrossRepository
-   ```
+For accepted findings, add a focused failing check before a non-trivial fix when practical, correct the shared cause, scan directly affected sibling paths, run focused checks and the repository gate, then inspect the complete diff. Do not implement preference-only comments as correctness fixes or resolve a thread just to clear the queue.
 
-3. Confirm that HEAD is attached and that the checked-out branch is the pull-request head. Stop rather than editing or pushing another or detached branch accidentally.
-4. Compare the pull request against the merge base of its reported base branch. Do not assume the base is `main`.
+## Commit Locally
 
-## Read All Feedback
+1. Split unrelated fixes into coherent commits.
+2. Stage only intended paths and verify `git diff --cached --name-only` before each commit. Stop if the index contains anything else.
+3. Ground each Conventional Commit message in the staged diff. Do not create empty commits.
+4. Record commit IDs and verification evidence for the corresponding comments.
 
-Collect every feedback surface, not only the summary shown by `gh pr view`:
+## Approval Bundle for External Writes
 
-- top-level pull-request or issue comments
-- submitted reviews and their bodies
-- inline review comments
-- review threads, including resolution and outdated state
+Prepare, then obtain approval for the exact external actions unless the user has already approved those exact details:
 
-On GitHub, use paginated REST endpoints for issue comments, reviews, and inline comments, plus the GraphQL `reviewThreads` connection for thread IDs, `isResolved`, `isOutdated`, and all thread comments. Paginate beyond the first page. Do not treat an empty top-level comment list as proof that no inline feedback exists.
+- push remote and `HEAD:refs/heads/<verified-pr-head>` refspec
+- reply text mapped to comment or thread IDs
+- thread IDs to resolve, with why each is eligible
 
-Ignore non-actionable service messages such as quota notices, but do not silently omit substantive feedback. Re-query after pushing because comments can arrive while work is in progress.
+Do not treat approval to execute this workflow, edit code, or commit as approval of that bundle. Revise the bundle if later work changes its content.
 
-## Assess Each Comment
+After approval, validate the branch with `git check-ref-format`, match the push URL to the PR head repository, and push only the explicit refspec. Never use a no-refspec or force push unless separately authorized. Verify remote head with `git ls-remote` before posting approved replies and resolving approved eligible threads.
 
-Trace each concern against the current HEAD, pull-request intent, repository instructions, tests, and relevant callers.
+## Final Verification
 
-Classify it as one of:
-
-- **Reasonable and unresolved:** the issue reproduces or the current change violates a documented contract; fix it.
-- **Already addressed or outdated:** current code resolves the concern; gather concrete file, commit, or test evidence.
-- **Not reasonable:** the suggestion conflicts with requirements, relies on a false premise, or adds unjustified scope; prepare a concise evidence-based reply instead of changing code.
-- **Ambiguous or disputed:** a behavior decision or external information is missing; ask one focused question or leave the thread open.
-
-Do not implement preference-only suggestions as correctness fixes. Do not mark a thread resolved merely to clear the review queue.
-
-## Address Reasonable Feedback
-
-1. Add the smallest regression test or failing executable check before a non-trivial code fix when practical.
-2. Fix the shared cause, then scan directly affected sibling paths for the same defect.
-3. Keep changes bounded to accepted feedback. Preserve unrelated local work.
-4. Run focused checks, then the repository's normal verification gate.
-5. Inspect the final diff and verify that it contains only intended changes.
-
-## Commit and Push
-
-1. Group changes into coherent commit boundaries. If comments require unrelated fixes, use separate focused commits.
-2. Stage only intended paths. Before each commit, verify that every path in `git diff --cached --name-only` belongs to that commit; stop if the index contains anything else.
-3. Write Conventional Commit messages grounded in each staged diff. Do not add attribution trailers. If no file change is needed, do not create an empty commit.
-4. Resolve a single push remote whose push URL matches the pull request's head repository, and validate the reported head branch with `git check-ref-format --branch`. Confirm any configured upstream with `git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}'`; stop if the remote or destination is missing, mismatched, or ambiguous.
-5. Push only HEAD to the verified pull-request branch with an explicit refspec:
-
-   ```bash
-   git push "$verified_remote" "HEAD:refs/heads/$verified_pr_head"
-   ```
-
-   Never use a no-refspec push, rely on `push.default` or `remote.*.push`, or force-push unless the user separately and explicitly requests it.
-6. Compare local HEAD with `git ls-remote --exit-code "$verified_remote" "refs/heads/$verified_pr_head"` before replying or resolving threads.
-
-## Reply and Resolve
-
-- Reply to each addressed thread with the commit ID, concise fix summary, and verification evidence.
-- For already-addressed or declined feedback, reply with concrete evidence or rationale.
-- Mark an inline thread resolved only after the fix is pushed or the concern is conclusively addressed. Leave ambiguous or genuinely disputed threads open.
-- Top-level comments and review bodies may not have a resolvable thread; acknowledge them when a response is warranted.
-
-Finally, re-query all feedback surfaces and verify:
-
-- every reasonable comment is addressed
-- every eligible thread is resolved
-- intentionally open threads are reported with the reason
-- local HEAD equals the verified pull-request remote head
-- the worktree contains no unintended changes
-
-Report the pull-request URL, commits pushed, resolved and remaining thread counts, checks run, and any feedback deliberately not implemented.
+Re-query all feedback surfaces after any push and verify reasonable comments are addressed, approved eligible threads are resolved, intentionally open threads have reasons, local and remote heads match, and no unintended worktree changes exist. Report the PR URL, local and pushed commits, checks, resolved/open counts, and declined feedback. If external approval is pending, report the prepared bundle and stop before public mutation.

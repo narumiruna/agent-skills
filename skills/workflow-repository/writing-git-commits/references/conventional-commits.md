@@ -2,8 +2,6 @@
 
 ## Format
 
-Use this structure:
-
 ```text
 <type>[optional scope][!]: <description>
 
@@ -12,81 +10,34 @@ Use this structure:
 [optional footer(s)]
 ```
 
-- Start with a lowercase type such as `feat`, `fix`, `docs`, or `refactor`.
-- Add an optional scope in parentheses when it clarifies which area changed.
-- Place `!` immediately before `:` to mark a breaking change in the title.
-- Put the description immediately after `: `.
-- Separate the body from the title with one blank line.
-- Separate footers from the body with one blank line.
+Use a lowercase type. Add a short noun-like scope only when it clarifies the affected area. Put `!` immediately before `:` for a breaking title. Separate title, body, and footers with blank lines.
 
 ## Common Types
 
-- `feat`: add a new feature or capability
-- `fix`: patch a bug or incorrect behavior
-- `docs`: change documentation only
-- `refactor`: restructure code without intended behavior change
-- `perf`: improve performance
-- `test`: add or update tests
-- `build`: change build tooling or packaging
-- `ci`: change CI configuration or automation
-- `style`: change formatting without behavior impact
-- `chore`: maintenance work that does not fit the above
-- `revert`: revert an earlier change
+- `feat`: new capability
+- `fix`: incorrect behavior or regression
+- `docs`: documentation only
+- `refactor`: structure with no intended behavior change
+- `perf`: performance improvement
+- `test`: tests only
+- `build`: build or packaging
+- `ci`: CI automation
+- `style`: formatting only
+- `chore`: maintenance not better described above
+- `revert`: an earlier change is reverted
 
-If one change honestly fits several types, prefer splitting it into multiple commits.
+Split a change when unrelated intents honestly require different types.
 
-## Scope Guidance
+## Body, Footers, and Breaking Changes
 
-Use a short noun-like scope only when it adds signal:
+Use the body for why, constraints, edge cases, or tradeoffs the title cannot carry. Use footers only for real repository-supported trailers, such as `Refs: #123`.
 
-- `feat(api): add webhook retry configuration`
-- `fix(parser): reject trailing commas in strict mode`
-
-Avoid broad or unstable scopes such as `misc`, `stuff`, or full file paths unless the repo already standardizes on them.
-
-## Body And Footers
-
-Use the body for context the title cannot carry:
-
-- why the change was needed
-- what constraint or edge case shaped the implementation
-- what tradeoff or follow-up the reader should know
-
-Footers follow git-trailer style. Common examples:
-
-- `Refs: #123`
-- `Reviewed-by: Z`
-- `Co-authored-by: Name <email@example.com>`
-
-`BREAKING CHANGE:` is a special footer token and must be uppercase.
-
-## Breaking Changes
-
-Mark a breaking change with either:
-
-- `!` in the title, such as `feat(api)!: remove v1 session endpoint`
-- a footer, such as `BREAKING CHANGE: session tokens now expire after 15 minutes`
-- or both
-
-Use a `BREAKING CHANGE:` footer when the impact or migration path needs more than the title can say.
-
-## Examples
+Mark breaking behavior with `!`, a `BREAKING CHANGE:` footer, or both. Use the footer when impact or migration guidance needs explanation:
 
 ```text
-docs: correct spelling of changelog
+feat(api)!: remove v1 session endpoint
+
+BREAKING CHANGE: clients must migrate to the v2 session endpoint.
 ```
 
-```text
-fix: prevent racing of requests
-
-Introduce a request id and track the latest request so stale responses
-can be ignored safely.
-
-Refs: #123
-```
-
-```text
-feat!: drop support for Node 6
-
-BREAKING CHANGE: use JavaScript features not available in Node 6.
-```
+Repository instructions own attribution and other local trailer policies.

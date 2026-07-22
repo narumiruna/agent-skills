@@ -1,4 +1,4 @@
 interface:
   display_name: "Designing User Interfaces"
-  short_description: "Design clear, accessible, complete interfaces."
-  default_prompt: "Use $designing-user-interfaces to design, review, or implement this interface with bounded scope, preserving product behavior while applying Apple-derived philosophy through the target platform's conventions."
+  short_description: "Design accessible interfaces without false simplicity."
+  default_prompt: "Use $designing-user-interfaces to apply Apple-derived philosophy through the target platform while preserving capability, agency, accessibility, and evidence-backed behavior."

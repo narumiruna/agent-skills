@@ -40,10 +40,10 @@ Repository path: `skills/python/`
 
 | Skill | Use it for |
 | --- | --- |
-| `managing-python-with-uv` | uv-based projects, scripts, dependencies, quality gates, and packaging. |
-| `building-typer-clis` | Typer command structure, options, and multi-command apps. |
-| `configuring-python-logging` | stdlib logging and loguru configuration choices. |
-| `using-peewee-orm` | Peewee patterns, scoped transactions, and SQLite tests. |
+| `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
+| `building-typer-clis` | Building, wiring, extending, and testing thin Typer CLIs. |
+| `configuring-python-logging` | Python logging backend, boundary, sink, context, and exception choices. |
+| `using-peewee-orm` | Peewee binding, connection, transaction, and isolated test lifecycles. |
 
 ### Writing & Research
 
@@ -51,11 +51,11 @@ Repository path: `skills/writing-research/`
 
 | Skill | Use it for |
 | --- | --- |
-| `writing-plans` | Lean implementation plans with executable task lists and completion checks. |
-| `grilling-designs` | One-question-at-a-time plan and design grilling. |
-| `applying-imrad` | IMRaD fit checks, drafting, transformation, and review. |
-| `researching-gourmet-venues` | Evidence-based dining research with scoring and audit files. |
-| `creating-telegraph-pages` | Publishing structured public articles to Telegra.ph. |
+| `writing-plans` | Drafting, executing, and tracking lean plans with acceptance evidence. |
+| `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
+| `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
+| `researching-gourmet-venues` | Auditable city dining research with scope-checked evidence and scores. |
+| `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
 
 ### Learning & Explanation
 
@@ -63,7 +63,7 @@ Repository path: `skills/learning-explanation/`
 
 | Skill | Use it for |
 | --- | --- |
-| `explaining-step-by-step` | Progressive, source-grounded explanations of concepts, issues, PRs, code, systems, and decisions. |
+| `explaining-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
 
 ### UI/UX Design
 
@@ -71,7 +71,7 @@ Repository path: `skills/ui-ux-design/`
 
 | Skill | Use it for |
 | --- | --- |
-| `designing-user-interfaces` | HIG-informed, accessible interfaces that preserve agency and useful capability. |
+| `designing-user-interfaces` | Apple-derived, platform-adapted UI work without false simplicity. |
 
 ### Slides & Visuals
 
@@ -79,11 +79,11 @@ Repository path: `skills/slides-visuals/`
 
 | Skill | Use it for |
 | --- | --- |
-| `creating-slide-decks` | End-to-end Marp/Marpit slide creation. |
-| `authoring-marp-slides` | Marp/Marpit directives, layouts, and authoring rules. |
-| `designing-slide-colors` | Slide palettes and color-system workflows. |
-| `creating-svg-illustrations` | SVG diagrams and illustrations for decks. |
-| `creating-mermaid-diagrams` | Mermaid flowcharts, sequence diagrams, ER diagrams, and more. |
+| `creating-slide-decks` | Complete Marp decks with coordinated narrative, colors, visuals, and rendering. |
+| `authoring-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
+| `designing-slide-colors` | Semantic slide palettes with usage rules and measured contrast evidence. |
+| `creating-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
+| `creating-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
 
 ### Workflow & Repository Maintenance
 
@@ -91,18 +91,18 @@ Repository path: `skills/workflow-repository/`
 
 | Skill | Use it for |
 | --- | --- |
-| `creating-agent-skills` | Creating concise, valid, discoverable agent skills. |
-| `reviewing-code` | Read-only code review with conditional handoff for authorized code-path hardening. |
-| `resolving-pr-review-comments` | Explicitly invoked PR feedback assessment, fixes, replies, commits, and pushes. |
-| `hardening-code-paths` | Finding, fixing, and verifying plausible edge cases and failure modes in code paths. |
-| `naming-agent-skills` | Predictable, searchable skill names. |
-| `using-jira-cli` | Jira setup, queries, mutations, epics, sprints, releases, projects, and boards. |
-| `applying-tdd` | TDD red-green-refactor workflow for non-trivial code changes. |
-| `writing-git-commits` | Focused Conventional Commits from real diffs. |
-| `syncing-main-branch` | Explicitly invoked clean switch to `main` and protected fast-forward update. |
-| `managing-git-worktrees` | Safe Git worktree creation, repair, removal, pruning, and branch cleanup. |
-| `maintaining-memory-md` | Creates repository `MEMORY.md` on the first durable `GOTCHA` or `TASTE`, then keeps entries concise and current. |
-| `writing-agents-md` | Creating or reviewing concise, evidence-backed repository `AGENTS.md` guidance. |
+| `creating-agent-skills` | Creating, optimizing, and reviewing lean, discoverable agent skills. |
+| `reviewing-code` | Evidence-led read-only review with conditional authorized hardening handoff. |
+| `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
+| `hardening-code-paths` | Confirming, fixing, and verifying plausible code-path failure modes. |
+| `naming-agent-skills` | Choosing, reviewing, standardizing, or safely applying skill names. |
+| `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
+| `applying-tdd` | Practical red-green-refactor for non-trivial behavior changes. |
+| `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
+| `syncing-main-branch` | Explicit, state-preserving switch to `main` and fast-forward-only update. |
+| `managing-git-worktrees` | Loss-aware worktree creation, repair, removal, pruning, and branch cleanup. |
+| `maintaining-memory-md` | Reads and maintains verified, concise repository gotchas and preferences. |
+| `writing-agents-md` | Creating or reviewing lean, scoped, evidence-backed `AGENTS.md` guidance. |
 
 ## 🗄️ Deprecated Skills
 
@@ -110,7 +110,7 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 
 | Skill | Notes |
 | --- | --- |
-| `checking-cli-help` | Deciding whether to inspect `--help`, built-in `help`, or `man`. |
-| `cleaning-atuin-history` | Preview-first cleanup planning for noisy Atuin shell history. |
-| `building-codex-hooks` | Codex CLI hooks and `hooks.json` behavior. |
-| `writing-work-logs` | Explicitly invoked work logs from repository evidence. |
+| `checking-cli-help` | Legacy decision rule for focused command-help inspection. |
+| `cleaning-atuin-history` | Legacy Atuin audit and exact-approval cleanup preparation. |
+| `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |
+| `writing-work-logs` | Legacy explicit-only Git-evidence work logs. |

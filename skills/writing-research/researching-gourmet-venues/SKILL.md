@@ -1,129 +1,42 @@
 ---
 name: researching-gourmet-venues
-description: Use when creating or updating city-based gourmet research outputs that require multi-source evidence, standardized scoring, and structured audit files.
+description: Create or update auditable city-based food research with multi-source evidence, scope-checked rankings, standardized scoring, and synchronized candidate, recommendation, and exclusion files.
 ---
 
-# Gourmet Research
+# Researching Gourmet Venues
 
-## Overview
-Template-first workflow for traceable, comparable, auditable food recommendations across cities. Keep evidence, scores, and decisions synchronized.
+Keep evidence, scores, and decisions traceable across a six-file city research pack.
 
-## Core Rules (Non-Negotiable)
-- If the user has not specified an **output language**, ask once at project start and record it in `overview.md`.
-- Use **gourmet/<city-slug>/** with 6 files: `overview.md`, `inbox.md`, `candidates.md`, `notes.md`, `top-places.md`, `excluded.md`.
-- **Never fabricate** sources, ratings, or claims. Use `unknown` when missing.
-- Prefer **original-language place names** (not translated) unless the user requests otherwise.
-- **Preserve audit trail**: never delete candidates; mark `rejected` and record why in `excluded.md`.
-- Default **minimum sources = 4**. If the locale is information-sparse, allow **3** only when you record `evidence: limited` with the reason and attempted sources.
+## Initialize
 
-## Template-First Workflow (Summary)
-1. **Initialize**: Ask for output language + city, then copy templates from `assets/templates/` into the city folder.
-2. **Normalize**: Update language/city placeholders in the copied files before research begins.
-2. **Discovery**: Capture raw ideas in `inbox.md`, then move top candidates into `candidates.md` with `status: inbox`.
-3. **Evidence**: For each candidate, write a full evidence block in `notes.md` with sources + practical constraints.
-4. **Score**: Apply the 50-point rubric and justify each component in `notes.md`.
-5. **Decide**: Promote to Top Picks (>=35), Backups (30-34), or reject (<30).
-6. **Publish**: Update `top-places.md` and `excluded.md` to match decisions.
-7. **Verify**: Ensure no `inbox` statuses remain and required sections exist.
+1. Resolve city and output language. Ask once only when language is unspecified, then record it in `overview.md`.
+2. Copy `assets/templates/` into `gourmet/<city-slug>/` to create `overview.md`, `inbox.md`, `candidates.md`, `notes.md`, `top-places.md`, and `excluded.md`; replace placeholders before research.
+3. Preserve original-language venue names unless the user requests translation.
 
-## Ranking Retrieval (When user asks for “highest score”)
-Before extracting any “top N” list, **confirm the scope**:
-- **Geography**: requested city, administrative region, island group, or subarea boundaries.
-- **Category**: overall vs cuisine category.
-- **Source URL**: must match the user’s intent exactly.
+Never fabricate sources, ratings, hours, or claims. Use `unknown`. Never delete a candidate: mark it `rejected` and record the reason in `excluded.md`.
 
-**Checklist (must pass):**
-1. URL and page title match the requested geography and category.
-2. Exclude outlying islands, suburbs, or neighboring regions when the requested boundary omits them.
-3. Record any source-specific area identifiers used to enforce the boundary.
-4. Handle consent, language, or location modals so list items actually render.
+## Research and Score
 
-If static scraping fails or content is blocked, use available browser automation, close blocking modals in the appropriate locale, and then extract items.
+1. Capture raw discoveries in `inbox.md`, then move viable entries to `candidates.md` with status.
+2. Build a `notes.md` evidence block for each candidate with practical constraints. Aim for four independent source roles where available: official channel, maps/aggregator, local reviews, and guide/editorial.
+3. In an information-sparse locale, use three sources only after recording `evidence: limited`, why, and attempted sources.
+4. When repeated service complaints, hygiene/safety concerns, tourist-trap claims, extreme queues, inconsistent ratings, or unclear access appear, add a focused negative-review section and reflect it in scoring.
+5. Score and justify each component: Taste/Quality, Value, Convenience, Consistency, and Risk (0–10 each; higher Risk score means lower practical risk).
+6. Classify totals: Top Pick ≥35, Backup 30–34, Reject <30 or a hard safety/tourist-trap exclusion.
+7. Synchronize status and score across `notes.md`, `candidates.md`, `top-places.md`, and `excluded.md`. Leave no unresolved `inbox` status in the final pack.
 
-## Evidence & Negative Review Rules
-- Sources must include: **Maps + local reviews + guide/editorial + official channel** (where available).
-- **Negative review analysis is conditional**: perform a focused negative review pass when risk signals appear in any source.
-  - **Risk signals**: repeated service complaints, hygiene/safety concerns, tourist-trap claims, extreme queue issues, inconsistent ratings, unclear hours/reservations.
-  - If triggered: add a **Negative reviews** subsection in `notes.md`, adjust Risk/Consistency/Value as needed, and sync scores/status across files.
+## Ranking Retrieval
 
-## Locale-Specific Source Suggestions (Optional)
-| Locale | Local reviews | Aggregator | Guides/editorial |
-| --- | --- | --- | --- |
-| Japan | Tabelog, Retty | Google Maps | Michelin, local food media |
-| Korea | Naver Map, Kakao Map | Google Maps | Michelin, local food media |
-| Taiwan | Google Maps, iPeen | OpenRice | Local food media |
-| Hong Kong | OpenRice | Google Maps | Michelin, local food media |
-| Singapore | OpenRice | Google Maps | Michelin, local food media |
-| Europe | Google Maps | Tripadvisor | Michelin, local city guides |
-| North America | Google Maps, Yelp | Tripadvisor | Eater, local food media |
-| Latin America | Google Maps | Tripadvisor | Local city guides |
-| SEA (general) | Google Maps | Tripadvisor | Local food media |
+Before returning “highest score” or top-N results, confirm:
 
-## Scoring (50-Point Rubric)
-- Taste/Quality (0-10)
-- Value (0-10)
-- Convenience (0-10)
-- Consistency (0-10)
-- Risk (0-10, higher = lower risk)
+- exact geographic boundary, including suburbs, islands, or neighboring regions
+- overall versus cuisine/category scope
+- source URL/page title and any area identifier
 
-Thresholds:
-- **Top Picks**: >=35
-- **Backups**: 30-34
-- **Reject**: <30 (or hard exclusion: hygiene/safety/tourist-trap evidence)
+Handle consent, language, or location gates so list items actually render. If static extraction fails, use available browser tooling; do not substitute a nearby ranking scope. Record exclusions needed to enforce the requested boundary.
 
-## Roles (Optional, Compact)
-- **Research**: find sources + capture evidence.
-- **Verify**: resolve conflicts, confirm practical constraints.
-- **Score**: apply rubric + justify.
-- **Synthesize**: finalize top-places + dining strategy.
+## Verification
 
-## Quick Reference
-| Item | Rule |
-| --- | --- |
-| City path | `gourmet/<city-slug>/` |
-| Files | overview/inbox/candidates/notes/top-places/excluded |
-| Min sources | 4 (3 only with `evidence: limited`) |
-| Output language | Ask if not specified |
-| Place names | Prefer original language |
-| Score tiers | >=35 Top, 30-34 Backup, <30 Reject |
+Check all six files exist; language and original-name policy are recorded; claims and ratings have sources or `unknown`; limited evidence and negative-review triggers are documented; score arithmetic and thresholds are correct; and every candidate appears consistently in recommendation or exclusion outputs.
 
-## Example (Evidence Block)
-```markdown
-### Sakura Teahouse
-**Official**: https://example.com
-**Maps**: 4.4/5 (820 reviews) - https://maps.app.goo.gl/...
-**Local reviews**: 3.7/5 (420 reviews) - https://tabelog.com/...
-**Guide/editorial**: https://guide.example.com/...
-**Notes**: quiet seating, popular seasonal desserts
-**Practical**: reservations recommended, closed Tue
-**Score**: Taste 8 / Value 7 / Convenience 6 / Consistency 7 / Risk 7 = **35/50**
-```
-
-## Common Mistakes
-- Skipping templates and mixing content across files.
-- Skipping `inbox.md` and dumping raw ideas into candidates.
-- Translating place names instead of using the original language.
-- Using only one review platform.
-- Pulling the wrong ranking scope (category vs overall, islands included).
-- Changing scores without updating candidates/top-places/excluded.
-- Ignoring unclear hours or reservation policies.
-
-## Rationalization Table
-| Excuse | Reality |
-| --- | --- |
-| "It’s just one city; I can skip templates." | Templates prevent drift and keep outputs comparable. |
-| "Inbox is optional; I can put everything in candidates." | `inbox.md` keeps raw capture separate and reduces noise. |
-| "There aren’t 4 sources; I’ll guess." | Use `unknown` and mark `evidence: limited`. Never guess. |
-| "I’ll translate names for clarity." | Keep original-language names unless the user asks. |
-| "This ranking page is close enough." | Scope mismatch invalidates the answer. Confirm URL and geography. |
-| "Negative reviews are optional." | Required when risk signals appear. |
-
-## Red Flags — Stop and Fix
-- Candidates deleted instead of rejected.
-- Scores updated in notes but not in candidates/top-places.
-- Missing output language decision.
-- Uncited claims or ratings.
-
-## References
-- `references/repo-spec.md`
-- `assets/templates/`
+Return the requested recommendations first, then source coverage, score rationale, practical caveats, and any unresolved evidence gap.

@@ -1,6 +1,8 @@
 # Minimal Examples
 
-Use these as starting points. Expand only after the minimal contract works.
+> Deprecated, version-sensitive examples. Verify config paths, events, fields, and output contracts against current Codex documentation before adapting them.
+
+Use these to interpret or migrate an existing hook; expand only after a current minimal contract works.
 
 ## SessionStart: add context on startup or resume
 

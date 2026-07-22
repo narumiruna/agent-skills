@@ -1,4 +1,4 @@
 interface:
   display_name: "MEMORY.md Keeper"
-  short_description: "Create and maintain concise repository MEMORY.md notes."
-  default_prompt: "Use $maintaining-memory-md to check repository MEMORY.md without creating it merely because it is missing; when the first qualifying GOTCHA or TASTE emerges, create repository-root MEMORY.md and record it."
+  short_description: "Maintain verified repository gotchas and preferences."
+  default_prompt: "Use $maintaining-memory-md to read repository memory and create or revise only a qualifying, concise, sanitized GOTCHA or TASTE entry."

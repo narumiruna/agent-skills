@@ -1,4 +1,4 @@
 interface:
   display_name: "Creating Telegraph Pages"
-  short_description: "Publish structured articles to Telegra.ph"
-  default_prompt: "Use $creating-telegraph-pages to publish this article as a Telegra.ph page."
+  short_description: "Prepare and publish one authorized Telegra.ph page."
+  default_prompt: "Use $creating-telegraph-pages to prepare and publish this one explicitly authorized Telegra.ph article with safe credentials and public-page verification."
