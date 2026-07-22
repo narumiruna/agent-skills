@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 32
+    assert len(skill_markdown) == 33
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
