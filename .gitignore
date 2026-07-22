@@ -15,7 +15,6 @@ htmlcov/
 .env
 .envrc
 notes/
-docs/
 vendor/
 
 # Editor/OS noise
