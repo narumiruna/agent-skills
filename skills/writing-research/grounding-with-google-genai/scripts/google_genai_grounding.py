@@ -2,6 +2,7 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #   "google-genai>=2.3.0",
+#   "python-dotenv>=1.0.0",
 # ]
 # ///
 """Run one stateless Google GenAI grounding request and emit evidence as JSON."""
@@ -19,6 +20,14 @@ from urllib.parse import urlsplit
 
 DEFAULT_MODEL = "gemini-3.5-flash"
 MAX_URLS = 20
+
+
+def load_api_key() -> str | None:
+    """Load a local .env file without overriding the process environment."""
+    from dotenv import load_dotenv
+
+    load_dotenv(override=False)
+    return os.environ.get("GEMINI_API_KEY")
 
 
 def _validate_url(url: str) -> str:
@@ -222,7 +231,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ValueError as exc:
         parser.error(str(exc))
 
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = load_api_key()
     if not api_key:
         parser.error("GEMINI_API_KEY must be set in the environment")
 

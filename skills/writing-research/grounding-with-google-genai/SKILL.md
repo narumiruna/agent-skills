@@ -15,7 +15,7 @@ Use the bundled `scripts/google_genai_grounding.py` by absolute path. Default to
 
 ## Run One Request
 
-Resolve `SKILL_DIR` to this skill directory and require `GEMINI_API_KEY` in the environment. Never print, log, place in arguments, or write the key to repository files.
+Resolve `SKILL_DIR` to this skill directory and require `GEMINI_API_KEY` in the process environment or a discoverable `.env` file. The script loads `.env` with `python-dotenv` without overriding an existing environment value. Never print, log, place in arguments, or write the key to repository files.
 
 Run Google Search grounding:
 

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 from pathlib import Path
+from types import ModuleType
 
 import pytest
 
@@ -59,6 +61,23 @@ class FakeInteraction:
             ],
             "usage": {"total_tokens": 42},
         }
+
+
+def test_load_api_key_loads_dotenv_before_reading_environment(monkeypatch):
+    grounding = load_script()
+    dotenv = ModuleType("dotenv")
+    calls = []
+
+    def load_dotenv(*, override):
+        calls.append(override)
+        monkeypatch.setenv("GEMINI_API_KEY", "loaded-from-dotenv")
+
+    dotenv.load_dotenv = load_dotenv
+    monkeypatch.setitem(sys.modules, "dotenv", dotenv)
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+
+    assert grounding.load_api_key() == "loaded-from-dotenv"
+    assert calls == [False]
 
 
 def test_search_request_uses_required_default_model_and_is_stateless():
