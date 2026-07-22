@@ -2,36 +2,38 @@
 
 Follow global defaults; this file defines only repo-specific additions and overrides.
 
-## Documentation Boundaries
+## Scope and Documentation
 
-- Use `docs/guides/gpt-5.6.md` as the primary guide.
-- `README.md` owns external positioning, installation flows, and skill discovery.
-- This file owns maintainer workflow. Do not duplicate README product messaging or step-by-step install instructions here.
-- When install recipes or supported paths change, update `README.md`, `AGENTS.md`, and `justfile` together.
+- Use `docs/guides/gpt-5.6.md` as the primary model guide when creating or revising skills and other agent-facing prompts. Use another versioned guide only when the task targets that model version.
+- `README.md` owns external positioning, installation flows, and skill discovery; this file owns maintainer workflow. Do not duplicate product messaging or installation walkthroughs here.
+- Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger. Update install documentation and executable recipes only in the files that own the affected flow.
 
 ## Repository Layout
 
 - Active skills live in `skills/<category>/<skill-name>/SKILL.md`; category directories are organizational only.
 - Deprecated skills live in `deprecated/<skill-name>/SKILL.md`, outside the active `skills/` tree, and are excluded from standard discovery.
 - Optional supporting material stays inside the skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
-- Slides and visual examples live under `examples/`.
-
-## Commands
-
-- `just` is non-mutating by default and only lists available recipes.
-- `prek run -a` is the default repository-wide verification gate before a PR.
-- Rebuild slide outputs after changing content under `examples/slides/`.
+- Source slides and visual examples live under `examples/`. Treat ignored `build/` content as generated output; do not hand-edit or commit it.
+- Treat `skills/` as the active source of truth. `.agents/skills` is an ignored local discovery symlink, not a second copy to edit.
 
 ## Editing Rules
 
-- Use lowercase kebab-case for skill directories.
-- Name the required entry file exactly `SKILL.md`.
+- Use lowercase kebab-case for skill directories and name every required entry file exactly `SKILL.md`.
+- Keep a skill's frontmatter description, `agents/openai.yaml` metadata, and README catalog entry aligned when its trigger or purpose changes.
 - Keep examples repository-relative and executable when practical.
-- Do not reintroduce root-level marketplace or plugin metadata assumptions unless the corresponding files actually exist in the repo.
+- Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows actually exist.
+
+## Verification
+
+- `just` is non-mutating by default and lists available recipes.
+- Run `uv run --no-project --with pytest pytest` for the repository test suite; use a targeted test path during iteration when appropriate.
+- Run changed bundled scripts through a representative path when the test suite does not exercise their main workflow.
+- Run `prek run -a` as the repository-wide formatting and lint gate. Before a PR, both the test suite and this gate must pass or the failure must be reported.
+- Changes under `examples/slides/` are rendered by `.github/workflows/marp-to-pages.yml`; verify source assets and include the generated preview or screenshots in the PR.
 
 ## Pull Requests
 
 - Summarize what changed and why.
 - List affected paths.
-- Include verification steps with command output summary.
+- Include verification commands with an outcome summary and disclose any skipped or failing check.
 - Add screenshots or rendered output links for slide visual changes.
