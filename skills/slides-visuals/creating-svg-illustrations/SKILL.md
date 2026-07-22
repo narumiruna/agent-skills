@@ -18,7 +18,7 @@ Start with `references/core-rules.md`; load only the extra detail the artifact n
 ## Workflow
 
 1. Inspect the target slide or document, required dimensions, surrounding palette, and renderer.
-2. Create the smallest editable SVG that communicates the idea. Use a correct `viewBox`, explicit text styles, consistent geometry, and accessible title/description where the visual carries meaning.
+2. Create the smallest editable SVG that communicates the idea. Use a correct `viewBox`, explicit text styles, consistent geometry, and SVG title/description where the visual carries meaning. When embedding, also provide descriptive host-level alt text or an adjacent semantic equivalent as required by `references/embedding.md`; internal SVG metadata alone is not sufficient.
 3. Keep assets portable: avoid embedded fonts, unexplained emoji, unnecessary filters, and base64 content unless the output must be self-contained.
 4. Validate with `svglint` when available, then open or embed the SVG in the target artifact and inspect clipping, scaling, contrast, text, and relative paths.
 5. Return the SVG artifact first, followed by validation performed and any renderer or font caveat.

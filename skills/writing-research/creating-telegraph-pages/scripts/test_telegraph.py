@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from unittest.mock import patch
+from urllib.parse import parse_qs
 
 import pytest
 
@@ -31,7 +32,7 @@ def test_create_page_posts_validated_content_and_returns_page():
     )
 
     with patch("telegraph.urlopen", return_value=response) as urlopen:
-        page = telegraph.create_page("token", "Hello", content, "Author", None)
+        page = telegraph.create_page("token", "Hello", content, "Author", "")
 
     request = urlopen.call_args.args[0]
     form = request.data.decode()
@@ -39,6 +40,43 @@ def test_create_page_posts_validated_content_and_returns_page():
     assert "access_token=token" in form
     assert "title=Hello" in form
     assert "content=%5B" in form
+
+
+def test_create_page_cli_can_clear_account_author_defaults(tmp_path):
+    content_file = tmp_path / "content.json"
+    content_file.write_text('["Text"]')
+    response = FakeResponse(
+        {"ok": True, "result": {"url": "https://telegra.ph/Anonymous-01-01"}}
+    )
+
+    with (
+        patch.dict(os.environ, {"TELEGRAPH_ACCESS_TOKEN": "token"}, clear=True),
+        patch("telegraph.urlopen", return_value=response) as urlopen,
+    ):
+        telegraph.main(
+            [
+                "create-page",
+                "--title",
+                "Anonymous",
+                "--author-name",
+                "",
+                "--author-url",
+                "",
+                str(content_file),
+            ]
+        )
+
+    request = urlopen.call_args.args[0]
+    form = parse_qs(request.data.decode(), keep_blank_values=True)
+    assert form["author_name"] == [""]
+    assert form["author_url"] == [""]
+
+
+def test_create_page_cli_requires_explicit_byline_fields():
+    with pytest.raises(SystemExit):
+        telegraph.build_parser().parse_args(
+            ["create-page", "--title", "Hello", "content.json"]
+        )
 
 
 def test_rejects_unsupported_tags_before_request():
@@ -253,7 +291,18 @@ def test_cli_rejects_deeply_nested_json_before_request(tmp_path):
         patch("telegraph.urlopen") as urlopen,
         pytest.raises(ValueError, match="nesting is too deep"),
     ):
-        telegraph.main(["create-page", "--title", "Hello", str(content_file)])
+        telegraph.main(
+            [
+                "create-page",
+                "--title",
+                "Hello",
+                "--author-name",
+                "",
+                "--author-url",
+                "",
+                str(content_file),
+            ]
+        )
 
     urlopen.assert_not_called()
 
@@ -261,4 +310,15 @@ def test_cli_rejects_deeply_nested_json_before_request(tmp_path):
 def test_cli_requires_token_from_environment():
     with patch.dict(os.environ, {}, clear=True):
         with pytest.raises(SystemExit, match="TELEGRAPH_ACCESS_TOKEN"):
-            telegraph.main(["create-page", "--title", "Hello", "content.json"])
+            telegraph.main(
+                [
+                    "create-page",
+                    "--title",
+                    "Hello",
+                    "--author-name",
+                    "",
+                    "--author-url",
+                    "",
+                    "content.json",
+                ]
+            )

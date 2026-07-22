@@ -32,7 +32,9 @@ Tech Talk · 2026-01-09
 
 ## Data Flow
 
-<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="data-flow-title data-flow-desc">
+  <title id="data-flow-title">Request data flow</title>
+  <desc id="data-flow-desc">A request travels from the user through the API and service to the database.</desc>
   <!-- User -->
   <rect x="20" y="70" width="100" height="60" fill="#252526" stroke="#569CD6" stroke-width="2" rx="4"/>
   <text x="70" y="105" font-size="14" fill="#D4D4D4" text-anchor="middle">User</text>

@@ -39,6 +39,8 @@ Your Name · Date
 
 # Optional Overlay Title
 
+**Diagram summary:** Describe the relationships or sequence shown in the background.
+
 ---
 
 ## Diagram with Explanation
@@ -46,6 +48,8 @@ Your Name · Date
 ![bg right fit](diagrams/architecture.svg)
 
 # System Design
+
+**Diagram summary:** Describe how the listed components connect and exchange data.
 
 **Components:**
 - Component A
@@ -89,6 +93,8 @@ def process_data(input_data):
 
 # Detailed Analysis
 
+**Diagram summary:** Describe the detail shown in the left-side visual.
+
 More space for text when you need to explain complex concepts.
 
 The diagram takes 60% on the left, leaving 40% for your explanation.
@@ -102,14 +108,16 @@ The diagram takes 60% on the left, leaving 40% for your explanation.
 
 # Transformation
 
+**Comparison summary:** Describe the material change between the left and right visuals.
+
 ---
 
 ## Key Takeaways
 
-1. **Always use bg syntax** for diagrams and large images
-2. **Use fit modifier** to auto-size images
-3. **Regular syntax** only for tiny inline icons
-4. **Split layouts** work great with bg syntax
+1. **Use bg syntax** for full-slide and split-layout visuals
+2. **Add an adjacent semantic equivalent** for meaningful backgrounds
+3. **Use descriptive alt text** for meaningful inline images
+4. **Verify the exported accessibility tree**
 
 ---
 

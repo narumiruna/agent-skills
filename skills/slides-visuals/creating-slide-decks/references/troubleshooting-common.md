@@ -15,7 +15,7 @@
 4. Embed and export once; a standalone browser preview may not match the deck renderer.
 
 ```markdown
-![width:800px](diagrams/flow.svg)
+![Request flow diagram width:800px](diagrams/flow.svg)
 ```
 
 ## Exported Text Loses Contrast

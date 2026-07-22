@@ -44,15 +44,15 @@ Common directives: `theme`, `paginate`, `size`, `class`, `backgroundColor`, `col
 Prefer background image syntax; it avoids manual resizing.
 
 ```markdown
-![bg fit](assets/diagram.svg)
+## Request flow: client → gateway → service
+
 ![bg right:45% fit](assets/architecture.svg)
-![bg left:40% fit](assets/photo.jpg)
 ```
 
-Use regular image sizing only for small inline images:
+A meaningful background needs an adjacent semantic equivalent because CSS backgrounds do not expose reliable alt text. Use descriptive host-level alt text for inline images:
 
 ```markdown
-![w:600](assets/logo.svg)
+![Company logo w:600](assets/logo.svg)
 ```
 
 ## Code
@@ -76,9 +76,11 @@ Use Markdown tables only for small comparisons. For dense data, simplify or use 
 
 ## Validation
 
-Resolve `scripts/validate_marpit.sh` against the `authoring-marp-slides` skill directory, then run the local syntax check by absolute path:
+Resolve `scripts/check_marpit_structure.sh` against the `authoring-marp-slides` skill directory and run its limited structural precheck:
 
 ```shell
 AUTHORING_MARP_SLIDES_SKILL_DIR="/absolute/path/to/authoring-marp-slides"
-bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/validate_marpit.sh" deck.md
+bash "$AUTHORING_MARP_SLIDES_SKILL_DIR/scripts/check_marpit_structure.sh" deck.md
 ```
+
+The precheck does not parse YAML or Marp syntax. Export with the actual Marp renderer as described in `preview-workflow.md`, verify directives took effect, and report strict-YAML, renderer, and visual evidence separately.

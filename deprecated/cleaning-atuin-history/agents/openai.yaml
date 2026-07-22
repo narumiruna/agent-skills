@@ -1,4 +1,4 @@
 interface:
   display_name: "Atuin Cleanup (Deprecated)"
-  short_description: "Audit Atuin history and prepare exact cleanup steps."
-  default_prompt: "Use $cleaning-atuin-history to audit duplicate and typo candidates, then prepare exact destructive and remote operations for separate approval."
+  short_description: "Audit Atuin history with transactional cleanup disabled."
+  default_prompt: "Use $cleaning-atuin-history to audit duplicates and typo candidates, keep cleanup-typos disabled, and prepare only fixed-scope dedup or user-run inspector steps."

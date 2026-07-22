@@ -21,13 +21,13 @@ http://localhost:8080/<deck>.md
 
 Jump to a slide with `#N`, for example `deck.md#5`.
 
-## Export Check
+## Renderer and Export Check
 
 ```bash
 marp examples/slides/deck.md -o /tmp/deck.html
 ```
 
-Inspect the title slide, the densest slide, and every slide that uses images or SVGs.
+Unlike the bundled structural precheck, this invokes the Marp renderer and confirms whether it accepted the source and produced output. It does not prove strict YAML validity: malformed or ignored directives may still export. Inspect whether frontmatter directives took effect, plus the title slide, densest slide, every image/SVG slide, and the accessibility tree or equivalent when meaningful visuals are present.
 
 ## Common Fixes
 

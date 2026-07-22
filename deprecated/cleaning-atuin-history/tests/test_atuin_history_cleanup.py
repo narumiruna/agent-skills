@@ -206,30 +206,88 @@ def test_duplicates_section_keeps_dedup_apply_command() -> None:
         for index in range(4)
     ]
 
-    duplicates = MODULE.analyze_duplicates(entries, before_value="now", dupkeep=3)
+    cutoff = "2026-01-02T03:04:05+00:00"
+    duplicates = MODULE.analyze_duplicates(entries, before_value=cutoff, dupkeep=3)
     lines = MODULE.format_duplicates_section(duplicates)
 
-    assert "- Preview: atuin history dedup --dry-run --before now --dupkeep 3" in lines
-    assert "- Apply: atuin history dedup --before now --dupkeep 3" in lines
-
-
-def test_parse_cli_args_supports_cleanup_typos() -> None:
-    args = MODULE.parse_cli_args(
-        [
-            "cleanup-typos",
-            "--before",
-            "now",
-            "--max-typos",
-            "5",
-            "--backup-dir",
-            "/tmp/backup",
-        ]
+    assert (
+        "- Preview: atuin history dedup --dry-run "
+        "--before 2026-01-02T03:04:05+00:00 --dupkeep 3" in lines
+    )
+    assert (
+        "- Apply: atuin history dedup "
+        "--before 2026-01-02T03:04:05+00:00 --dupkeep 3" in lines
     )
 
-    assert args.command == "cleanup-typos"
-    assert args.before == "now"
-    assert args.max_typos == 5
-    assert args.backup_dir == "/tmp/backup"
+
+def test_audit_resolves_now_before_building_dedup_commands(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fixed_cutoff = datetime(2026, 1, 2, 3, 4, 5, tzinfo=UTC)
+    entries = [
+        make_entry(
+            str(index),
+            offset_seconds=index,
+            exit_code=0,
+            command="gst",
+            cwd="/tmp/repo",
+            session=f"session-{index}",
+        )
+        for index in range(4)
+    ]
+    stats = {
+        "rows_total": 4,
+        "rows_analyzed": 4,
+        "rows_skipped_unparsed_timestamp": 0,
+        "rows_excluded_after_before": 0,
+    }
+    monkeypatch.setattr(MODULE, "parse_before", lambda value: fixed_cutoff)
+    monkeypatch.setattr(
+        MODULE, "resolve_db_path", lambda value: Path("/tmp/history.db")
+    )
+    monkeypatch.setattr(
+        MODULE,
+        "load_history_entries",
+        lambda path, cutoff: (entries, stats),
+    )
+
+    report = MODULE.audit_history(
+        None,
+        dupkeep=3,
+        before="now",
+        typo_window_seconds=300,
+        max_typos=10,
+    )
+
+    preview = report["duplicates"]["preview_command"]
+    apply = report["duplicates"]["apply_command"]
+    assert "--before 2026-01-02T03:04:05+00:00" in preview
+    assert "--before 2026-01-02T03:04:05+00:00" in apply
+    assert "--before now" not in preview
+    assert "--before now" not in apply
+
+
+def test_cli_rejects_disabled_cleanup_typos_before_mutation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        MODULE,
+        "cleanup_typos",
+        lambda *args, **kwargs: pytest.fail("disabled cleanup must not execute"),
+    )
+
+    with pytest.raises(SystemExit):
+        MODULE.main(
+            [
+                "cleanup-typos",
+                "--before",
+                "now",
+                "--max-typos",
+                "5",
+                "--backup-dir",
+                "/tmp/backup",
+            ]
+        )
 
 
 def test_cleanup_plan_uses_fast_path_for_unique_match() -> None:

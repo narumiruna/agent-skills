@@ -230,8 +230,16 @@ def build_parser():
     page = commands.add_parser("create-page", help="Publish a Telegraph page")
     page.add_argument("content", type=Path, help="JSON file containing Telegraph nodes")
     page.add_argument("--title", required=True)
-    page.add_argument("--author-name")
-    page.add_argument("--author-url")
+    page.add_argument(
+        "--author-name",
+        required=True,
+        help="Approved author name, or an empty string to suppress the account default",
+    )
+    page.add_argument(
+        "--author-url",
+        required=True,
+        help="Approved author URL, or an empty string to suppress the account default",
+    )
     return parser
 
 

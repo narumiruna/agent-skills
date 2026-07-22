@@ -23,6 +23,8 @@ Tech Presentation · 2026-01-13
 
 # System Architecture
 
+**Diagram summary:** Requests pass from clients through the gateway to application services and storage.
+
 *Full-page background with overlay title*
 
 ---
@@ -32,6 +34,8 @@ Tech Presentation · 2026-01-13
 ![bg right fit](diagrams/workflow.svg)
 
 # Process Workflow
+
+**Diagram summary:** The request moves through validation and processing before a result returns to the user.
 
 **Key Steps:**
 1. User initiates request
@@ -50,7 +54,7 @@ Tech Presentation · 2026-01-13
 
 # Component Diagram
 
-The diagram on the left shows our microservices architecture with three main components:
+**Diagram summary:** The microservices architecture contains three main components:
 
 - API Gateway
 - Service Mesh
@@ -63,6 +67,8 @@ The diagram on the left shows our microservices architecture with three main com
 ![bg right:40% fit](diagrams/detail.svg)
 
 # Detailed View
+
+**Diagram summary:** The detailed view expands the selected component into its inputs, processing stage, and outputs.
 
 When you need more space for text, use a custom ratio.
 
@@ -81,15 +87,17 @@ When you need more space for text, use a custom ratio.
 
 # Before → After
 
+**Comparison summary:** The revised flow removes the intermediate handoff and reduces the path from four steps to three.
+
 ---
 
 ## With Small Icon (Exception)
 
-![width:60px](../icons/check.svg) Feature completed
+<img src="../icons/check.svg" width="60" alt="" aria-hidden="true"> Feature completed
 
-![width:60px](../icons/warning.svg) Needs attention
+<img src="../icons/warning.svg" width="60" alt="" aria-hidden="true"> Needs attention
 
-![width:60px](../icons/info.svg) Additional info
+<img src="../icons/info.svg" width="60" alt="" aria-hidden="true"> Additional info
 
 *Only use regular syntax for tiny inline icons*
 
@@ -101,11 +109,11 @@ When you need more space for text, use a custom ratio.
 
 # Key Takeaway
 
-Always use `![bg fit]` syntax for diagrams
-- No manual sizing needed
-- Consistent appearance
-- Auto-scales perfectly
-- Better split layouts
+Use `bg fit` for full-slide or split-layout diagrams
+- Provide an adjacent semantic equivalent for meaningful backgrounds
+- Keep descriptive host-level alt text for inline images
+- Let Marp control background sizing
+- Verify the exported accessibility tree
 
 ---
 

@@ -18,8 +18,8 @@ Never fabricate sources, ratings, hours, or claims. Use `unknown`. Never delete 
 ## Research and Score
 
 1. Capture raw discoveries in `inbox.md`, then move viable entries to `candidates.md` with status.
-2. Build a `notes.md` evidence block for each candidate with practical constraints. Aim for four independent source roles where available: official channel, maps/aggregator, local reviews, and guide/editorial.
-3. In an information-sparse locale, use three sources only after recording `evidence: limited`, why, and attempted sources.
+2. Build a `notes.md` evidence block for each candidate with practical constraints. Require four independent source roles by default: official channel, maps/aggregator, local reviews, and guide/editorial.
+3. In an information-sparse locale, use three sources only after recording `evidence: limited`, why, and attempted sources. Do not score or publish a recommendation with fewer sources outside this exception.
 4. When repeated service complaints, hygiene/safety concerns, tourist-trap claims, extreme queues, inconsistent ratings, or unclear access appear, add a focused negative-review section and reflect it in scoring.
 5. Score and justify each component: Taste/Quality, Value, Convenience, Consistency, and Risk (0–10 each; higher Risk score means lower practical risk).
 6. Classify totals: Top Pick ≥35, Backup 30–34, Reject <30 or a hard safety/tourist-trap exclusion.

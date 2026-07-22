@@ -81,7 +81,7 @@ Engineering Team · 2026-01-09
 - **Service Mesh**: Inter-service communication
 - **Data Layer**: PostgreSQL + Redis caching
 
-![width:900px](diagrams/architecture.svg)
+![System architecture width:900px](diagrams/architecture.svg)
 
 ---
 

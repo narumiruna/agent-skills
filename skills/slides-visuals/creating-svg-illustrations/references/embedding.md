@@ -1,35 +1,37 @@
 # Embedding SVG in Marp/Marpit
 
-## Preferred: Background Image Syntax
+Accessibility belongs to the host document as well as the SVG. Internal `<title>` and `<desc>` help when SVG is opened directly, but do not reliably replace host-level alternatives for external images or CSS backgrounds.
+
+## Inline Images
+
+Give meaningful inline images descriptive host-level alt text. Marp directives can share the alt field:
 
 ```markdown
-![bg fit](assets/diagram.svg)
+![System architecture w:800](assets/architecture.svg)
+![Company logo w:160](assets/logo.svg)
+```
+
+Use empty alt text only for a truly decorative image whose meaning is already present in nearby content.
+
+## Background Images
+
+Marp background syntax is useful for full-slide and split layouts, but a CSS background has no reliable image alternative:
+
+```markdown
 ![bg right:45% fit](assets/architecture.svg)
-![bg left:40% fit](assets/process.svg)
 ```
 
-Use this for full-slide or split-layout diagrams. It keeps sizing in Marp instead of hard-coding it in SVG.
+When a background diagram carries meaning, provide an adjacent semantic equivalent in the slide's heading, body, caption, speaker notes included in the accessible deliverable, or another documented text alternative. Do not rely on the `bg`, `fit`, or sizing directives as alt text.
 
-## Inline Image
+## Verification
 
-Use only for small logos or icons.
+- Inspect the exported accessibility tree or equivalent output, not only the source Markdown.
+- Confirm meaningful inline images expose their descriptive alt text.
+- Confirm every meaningful background diagram has an adjacent semantic equivalent.
+- Check that decorative images do not create redundant announcements.
 
-```markdown
-![w:320](assets/logo.svg)
-```
+## Paths and Sizing
 
-## Path Rules
-
-- Paths are relative to the slide Markdown file.
-- Do not use absolute local paths.
-- Keep SVG assets near the deck, for example `examples/slides/assets/system-map.svg`.
-
-## Sizing Rules
-
-- Let `viewBox` define the SVG's internal bounds.
-- Let Marp control displayed size with `bg`, `fit`, `cover`, or `w:`.
-- If content appears tiny, shrink the SVG `viewBox` to the actual content.
-
-## Production Option
-
-Inline base64 only when the deck must be a single self-contained Markdown file. Otherwise keep SVG as a normal file.
+- Resolve paths relative to the slide Markdown file; do not use absolute local paths.
+- Let `viewBox` define SVG content bounds and Marp control display size with `bg`, `fit`, `cover`, or `w:`.
+- Keep SVG assets near the deck. Use base64 only when a self-contained artifact is required.

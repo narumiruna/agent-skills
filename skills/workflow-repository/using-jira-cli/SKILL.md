@@ -5,7 +5,7 @@ description: Inspect Jira or prepare and perform precisely authorized Jira mutat
 
 # Using Jira CLI
 
-Use read-only discovery freely. Jira creates, edits, transitions, assignments, comments, worklogs, links, sprint/epic changes, and deletes are external writes and require approval for the exact target and content unless already supplied.
+Use read-only discovery freely. Jira creates, edits, transitions, assignments, comments, worklogs, links, sprint/epic changes, and deletes are external writes and require authorization for the exact operation, target, and content. Supplying values for a draft does not authorize execution.
 
 ## Establish Context
 
@@ -27,7 +27,7 @@ Read `references/commands.md` only for the relevant resource's common command sh
 
 1. Read the current target and discover valid field/status values.
 2. Prepare the exact Jira instance/config, issue or container IDs, operation, summary/body/comment/worklog text, transition, assignment, and other changed fields. Do not impose a project-name summary prefix or description template unless the user or repository requires it.
-3. If any target or content is not already authorized, show the exact mutation and ask for approval. Always require exact approval for deletion.
+3. If the exact operation, target, and content have not already been explicitly authorized for execution, show the complete mutation and ask for approval. Treat requests to draft, explain, review, or prepare Jira content as read-only. Always require exact approval for deletion.
 4. After approval, use non-interactive flags only when every required parameter is known. Quote values and provide long content through a template or stdin rather than unsafe shell interpolation.
 5. Re-read the affected issue or resource and report its resulting key, status, assignee, fields, or comment/worklog evidence. A zero exit code alone is not sufficient verification.
 
