@@ -14,6 +14,7 @@ Review the requested change, not the entire codebase. Treat the task as read-onl
 3. Trace changed behavior through relevant callers, contracts, state, errors, and downstream consumers. Report issues introduced, worsened, or made reachable by the change; separate directly relevant pre-existing problems.
 4. Check, where plausible:
    - correctness, boundaries, state transitions, retries, concurrency, partial failure, and cleanup
+   - where repeated work without progress stops, and its worst-case time, resources, cost, and side effects
    - interfaces, schemas, migrations, jobs, caches, feature flags, permissions, and configuration
    - trust boundaries, authn/authz, validation, injection, secrets, logging, and sensitive data
    - repeated work, I/O, queries, blocking, leaks, and expected scale
