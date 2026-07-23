@@ -505,6 +505,18 @@ def test_slide_image_guidance_preserves_inline_images() -> None:
     assert "inline" in slide_skill
 
 
+def test_worktree_default_storage_root_is_user_home() -> None:
+    worktree_skill = (
+        SKILLS / "workflow-repository/managing-git-worktrees/SKILL.md"
+    ).read_text()
+
+    assert "default the storage root to `$HOME/.worktrees`" in worktree_skill
+    assert (
+        "<root>/<main-name>-<branch-with-slashes-replaced-by-hyphens>" in worktree_skill
+    )
+    assert "default to a sibling" not in worktree_skill
+
+
 def test_external_and_destructive_workflows_require_exact_authorization() -> None:
     uv_skill = (SKILLS / "python/managing-python-with-uv/SKILL.md").read_text()
     pr_skill = (

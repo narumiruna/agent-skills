@@ -13,7 +13,7 @@ Inspect before mutation. Keep worktree operations separate from commits, pushes,
 2. Parse `git worktree list --porcelain -z`; the first record identifies the main worktree. If it is bare or stale, request a storage root or repair it before deriving paths.
 3. Resolve the requested branch, path, and start point. Never assume the default branch name.
 
-For a new path, default to a sibling `<main-name>-<branch-with-slashes-replaced-by-hyphens>`. Stop on an existing path or normalization collision rather than inventing a suffix.
+For a new path, default the storage root to `$HOME/.worktrees`; if `$HOME` is unset or unusable, request an explicit root. Create the root if absent, then use `<root>/<main-name>-<branch-with-slashes-replaced-by-hyphens>`. Stop on an existing path or normalization collision rather than inventing a suffix.
 
 ## Create or Attach
 
