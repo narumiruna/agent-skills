@@ -71,8 +71,8 @@ Repository path: `skills/ui-ux-design/`
 
 | Skill | Use it for |
 | --- | --- |
-| `designing-user-interfaces` | Apple-derived, platform-adapted UI work without false simplicity. |
-| `redesigning-user-interfaces` | Evidence-backed, approval-gated redesigns of existing interfaces. |
+| `designing-user-interfaces` | Design and review clear, accessible, platform-adapted user interfaces. |
+| `designing-user-experiences` | Plan new and existing digital workflows through an approval-gated UX process. |
 
 ### Slides & Visuals
 
