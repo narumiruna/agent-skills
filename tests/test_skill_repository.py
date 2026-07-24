@@ -217,17 +217,20 @@ def test_material_trigger_surfaces_are_semantically_aligned() -> None:
     assert "SVG diagrams and illustrations for target artifacts" in readme
     assert "Apple-derived philosophy" in ui_skill
     assert "Apple-derived philosophy" in ui_metadata
-    assert "Apple-derived, platform-adapted UI work" in readme
+    assert "Design and review clear, accessible, platform-adapted" in readme
 
 
-def test_redesigning_user_interfaces_requires_approval_before_implementation() -> None:
-    redesign_dir = SKILLS / "ui-ux-design/redesigning-user-interfaces"
-    skill = (redesign_dir / "SKILL.md").read_text()
-    metadata = (redesign_dir / "agents/openai.yaml").read_text()
+def test_designing_user_experiences_supports_new_and_existing_products() -> None:
+    experience_dir = SKILLS / "ui-ux-design/designing-user-experiences"
+    skill = (experience_dir / "SKILL.md").read_text()
+    metadata = (experience_dir / "agents/openai.yaml").read_text()
     readme = (ROOT / "README.md").read_text()
     proposal, implementation = skill.split("## Implement After Approval", 1)
 
-    assert "existing interface" in skill
+    assert not (SKILLS / "ui-ux-design/redesigning-user-interfaces").exists()
+    assert "new or existing digital products" in skill
+    assert "### New Product" in skill
+    assert "### Existing Product" in skill
     assert "Wait for explicit approval" in proposal
     assert "Do not edit product files" in proposal
     assert "loading, empty, success, error, disabled, and partial" in proposal
@@ -237,8 +240,8 @@ def test_redesigning_user_interfaces_requires_approval_before_implementation() -
     assert "responsive" in implementation
     assert "accessibility" in implementation
     assert "user-facing documentation" in implementation
-    assert "$redesigning-user-interfaces" in metadata
-    assert "approval-gated redesigns of existing interfaces" in readme
+    assert "$designing-user-experiences" in metadata
+    assert "new and existing digital workflows" in readme
 
 
 def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> None:

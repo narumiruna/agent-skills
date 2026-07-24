@@ -1,0 +1,4 @@
+interface:
+  display_name: "Designing User Experiences"
+  short_description: "Plan new or redesigned digital user experiences."
+  default_prompt: "Use $designing-user-experiences to analyze the goals and constraints for this new or existing digital product, propose an evidence-backed UX design with acceptance criteria, and wait for approval before implementation."
