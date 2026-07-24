@@ -1,0 +1,4 @@
+interface:
+  display_name: "Redesigning User Interfaces"
+  short_description: "Plan approval-gated redesigns of existing interfaces."
+  default_prompt: "Use $redesigning-user-interfaces to analyze this existing interface, propose an evidence-backed redesign with acceptance criteria, and wait for approval before implementation."

@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 33
+    assert len(skill_markdown) == 34
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -220,6 +220,27 @@ def test_material_trigger_surfaces_are_semantically_aligned() -> None:
     assert "Apple-derived, platform-adapted UI work" in readme
 
 
+def test_redesigning_user_interfaces_requires_approval_before_implementation() -> None:
+    redesign_dir = SKILLS / "ui-ux-design/redesigning-user-interfaces"
+    skill = (redesign_dir / "SKILL.md").read_text()
+    metadata = (redesign_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+    proposal, implementation = skill.split("## Implement After Approval", 1)
+
+    assert "existing interface" in skill
+    assert "Wait for explicit approval" in proposal
+    assert "Do not edit product files" in proposal
+    assert "loading, empty, success, error, disabled, and partial" in proposal
+    assert "unknown configuration fields" in skill
+    assert "Cancellation must have no side effects" in implementation
+    assert "atomically" in implementation
+    assert "responsive" in implementation
+    assert "accessibility" in implementation
+    assert "user-facing documentation" in implementation
+    assert "$redesigning-user-interfaces" in metadata
+    assert "approval-gated redesigns of existing interfaces" in readme
+
+
 def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> None:
     redundant_headings = {
         "## Overview",
@@ -239,7 +260,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 27
+    assert len(categorized) == 28
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 
