@@ -114,5 +114,6 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `cleaning-atuin-history` | Legacy Atuin audit and exact-approval cleanup preparation. |
 | `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |
 | `writing-work-logs` | Legacy explicit-only Git-evidence work logs. |
+| `redesigning-user-interfaces` | Replaced by `designing-user-experiences`; retained as a compatibility reference. |
 | `naming-agent-skills` | Merged into `creating-agent-skills`; retained as a compatibility reference. |
 | `researching-gourmet-venues` | Rarely used city dining workflow retained as a compatibility reference. |

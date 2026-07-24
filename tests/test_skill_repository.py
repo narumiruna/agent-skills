@@ -30,7 +30,7 @@ def load_module(path: Path, name: str) -> ModuleType:
 
 def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
     deprecated = sorted(DEPRECATED.glob("*/SKILL.md"))
-    assert len(deprecated) == 6
+    assert len(deprecated) == 7
     for skill_md in deprecated:
         frontmatter = skill_md.read_text().split("---", 2)[1]
         assert "\nmetadata:\n  internal: true\n" in f"\n{frontmatter}\n", skill_md
@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 34
+    assert len(skill_markdown) == 35
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -222,12 +222,23 @@ def test_material_trigger_surfaces_are_semantically_aligned() -> None:
 
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:
     experience_dir = SKILLS / "ui-ux-design/designing-user-experiences"
+    deprecated_redesign_dir = DEPRECATED / "redesigning-user-interfaces"
     skill = (experience_dir / "SKILL.md").read_text()
     metadata = (experience_dir / "agents/openai.yaml").read_text()
+    deprecated_skill = (deprecated_redesign_dir / "SKILL.md").read_text()
+    deprecated_metadata = (deprecated_redesign_dir / "agents/openai.yaml").read_text()
     readme = (ROOT / "README.md").read_text()
+    active_catalog, deprecated_catalog = readme.split("## 🗄️ Deprecated Skills", 1)
     proposal, implementation = skill.split("## Implement After Approval", 1)
 
     assert not (SKILLS / "ui-ux-design/redesigning-user-interfaces").exists()
+    assert deprecated_redesign_dir.is_dir()
+    assert "metadata:\n  internal: true" in deprecated_skill
+    assert "designing-user-experiences" in deprecated_skill
+    assert "Deprecated" in deprecated_metadata
+    assert "$redesigning-user-interfaces" in deprecated_metadata
+    assert "| `redesigning-user-interfaces` |" not in active_catalog
+    assert "| `redesigning-user-interfaces` |" in deprecated_catalog
     assert "new or existing digital products" in skill
     assert "### New Product" in skill
     assert "### Existing Product" in skill

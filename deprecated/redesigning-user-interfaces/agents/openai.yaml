@@ -1,0 +1,4 @@
+interface:
+  display_name: "Redesigning User Interfaces (Deprecated)"
+  short_description: "Use the replacement UX design workflow."
+  default_prompt: "Use $redesigning-user-interfaces as a deprecated compatibility reference; follow $designing-user-experiences for current approval-gated redesign work."
