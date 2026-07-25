@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 34
+    assert len(skill_markdown) == 35
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -220,6 +220,36 @@ def test_material_trigger_surfaces_are_semantically_aligned() -> None:
     assert "Design and review clear, accessible, platform-adapted" in readme
 
 
+def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
+    skill_dir = SKILLS / "ui-ux-design/iterating-ui-improvements"
+    skill = (skill_dir / "SKILL.md").read_text()
+    metadata = (skill_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+
+    assert "Chrome DevTools" in skill
+    assert "Do not substitute another browser tool silently" in skill
+    assert "multiple targets remain plausible" in skill
+    assert "clean Git worktree" in skill
+    assert all(mode in skill for mode in ("`substantial`", "`exhaustive`", "`fixed N`"))
+    assert "no iteration limit by default" in skill
+    assert "one highest-value, coherent improvement theme" in skill
+    assert "stop without creating an empty commit" in skill
+    assert "one focused Conventional Commit" in skill
+    normalized_skill = skill.lower()
+    assert normalized_skill.index("re-verify") < normalized_skill.index(
+        "stage only the paths"
+    )
+    assert (
+        "restore only the current iteration's uncommitted tracked changes"
+        in normalized_skill
+    )
+    assert "Do not push, open a pull request" in skill
+    assert "mutate remote services" in skill
+    assert "commit ID" in skill and "stopping reason" in skill
+    assert "$iterating-ui-improvements" in metadata
+    assert "DevTools audit-fix-commit loops" in readme
+
+
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:
     experience_dir = SKILLS / "ui-ux-design/designing-user-experiences"
     skill = (experience_dir / "SKILL.md").read_text()
@@ -263,7 +293,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 28
+    assert len(categorized) == 29
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 

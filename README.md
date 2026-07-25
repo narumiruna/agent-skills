@@ -73,6 +73,7 @@ Repository path: `skills/ui-ux-design/`
 | --- | --- |
 | `designing-user-interfaces` | Design and review clear, accessible, platform-adapted user interfaces. |
 | `designing-user-experiences` | Plan new and existing digital workflows through an approval-gated UX process. |
+| `iterating-ui-improvements` | Run autonomous DevTools audit-fix-commit loops for evidence-backed UI improvements. |
 
 ### Slides & Visuals
 
