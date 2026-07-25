@@ -95,6 +95,7 @@ Repository path: `skills/workflow-repository/`
 | --- | --- |
 | `creating-agent-skills` | Creating, naming, renaming, optimizing, and reviewing lean, discoverable agent skills. |
 | `reviewing-code` | Evidence-led read-only review with conditional authorized hardening handoff. |
+| `running-panel-review-loops` | Iterative multi-model code review, verified fixes, and evidence-based acceptance. |
 | `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
 | `hardening-code-paths` | Confirming, fixing, and verifying plausible code-path failure modes. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
