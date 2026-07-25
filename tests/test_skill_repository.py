@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 35
+    assert len(skill_markdown) == 36
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -265,6 +265,33 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
     assert "Explicitly invoked DevTools audit-fix-commit loops" in readme
 
 
+def test_running_panel_review_loops_has_evidence_based_stopping_rules() -> None:
+    skill_dir = SKILLS / "workflow-repository/running-panel-review-loops"
+    skill = (skill_dir / "SKILL.md").read_text()
+    metadata = (skill_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+
+    frontmatter = skill.split("---", 2)[1]
+    assert "panel loop" in frontmatter
+    assert "multi-model code-review consensus" in frontmatter
+    assert "Default to review-only" in skill
+    assert "Apply fixes only when the user explicitly requests" in skill
+    assert "at least two independent reviewer instances" in skill
+    assert "at least two distinct models" in skill
+    assert "Reject a requested panel size below two" in skill
+    assert "Do not simulate a panel" in skill
+    assert "8.2/10 acceptance threshold" in skill
+    assert "at least two valid scored reviews" in skill
+    assert "never let an average score override a blocking issue" in skill
+    assert "Resolve disagreements through evidence rather than majority vote" in skill
+    assert "Re-review the complete updated diff" in skill
+    assert "Do not reuse stale scores" in skill
+    assert "complete reviewed snapshot pass" in skill
+    assert "Push only when explicitly authorized" in skill
+    assert "$running-panel-review-loops" in metadata
+    assert "Iterative multi-reviewer code review" in readme
+
+
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:
     experience_dir = SKILLS / "ui-ux-design/designing-user-experiences"
     skill = (experience_dir / "SKILL.md").read_text()
@@ -308,7 +335,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 29
+    assert len(categorized) == 30
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 
