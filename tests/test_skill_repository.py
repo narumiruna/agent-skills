@@ -226,11 +226,15 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
     metadata = (skill_dir / "agents/openai.yaml").read_text()
     readme = (ROOT / "README.md").read_text()
 
+    frontmatter = skill.split("---", 2)[1]
     assert "Chrome DevTools" in skill
+    assert "Use only when the user explicitly invokes" in frontmatter
     assert "Do not substitute another browser tool silently" in skill
     assert "multiple targets remain plausible" in skill
     assert "clean Git worktree" in skill
+    assert "attached symbolic branch" in skill
     assert all(mode in skill for mode in ("`substantial`", "`exhaustive`", "`fixed N`"))
+    assert "applies to the active finding threshold" in skill
     assert "no iteration limit by default" in skill
     assert "one highest-value, coherent improvement theme" in skill
     assert "stop without creating an empty commit" in skill
@@ -243,11 +247,14 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
         "restore only the current iteration's uncommitted tracked changes"
         in normalized_skill
     )
+    assert "Do not bypass hooks with `--no-verify`" in skill
+    assert "re-inspect the index and worktree" in skill
     assert "Do not push, open a pull request" in skill
     assert "mutate remote services" in skill
     assert "commit ID" in skill and "stopping reason" in skill
     assert "$iterating-ui-improvements" in metadata
-    assert "DevTools audit-fix-commit loops" in readme
+    assert "explicitly" in metadata.lower()
+    assert "Explicitly invoked DevTools audit-fix-commit loops" in readme
 
 
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:
