@@ -239,6 +239,9 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
     assert "one highest-value, coherent improvement theme" in skill
     assert "stop without creating an empty commit" in skill
     assert "one focused Conventional Commit" in skill
+    assert "record the staged tree" in skill
+    assert "compare the committed tree" in skill
+    assert "against the committed content" in skill
     normalized_skill = skill.lower()
     assert normalized_skill.index("re-verify") < normalized_skill.index(
         "stage only the paths"
@@ -249,6 +252,11 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
     )
     assert "Do not bypass hooks with `--no-verify`" in skill
     assert "re-inspect the index and worktree" in skill
+    assert "recovery commit" in skill
+    assert "Before every exit" in skill
+    assert "processes started by this run" in skill
+    assert "their child watchers" in skill
+    assert "Preserve a target that was already running" in skill
     assert "Do not push, open a pull request" in skill
     assert "mutate remote services" in skill
     assert "commit ID" in skill and "stopping reason" in skill
