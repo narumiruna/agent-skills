@@ -1,0 +1,4 @@
+interface:
+  display_name: "Iterating UI Improvements"
+  short_description: "Explicitly run DevTools audit-fix-commit UI loops."
+  default_prompt: "Explicitly invoke $iterating-ui-improvements to audit the target interface with Chrome DevTools, plan and implement one evidence-backed improvement at a time, validate it, and create focused local commits until the selected stopping condition is met."
