@@ -274,16 +274,22 @@ def test_running_panel_review_loops_has_evidence_based_stopping_rules() -> None:
     frontmatter = skill.split("---", 2)[1]
     assert "panel loop" in frontmatter
     assert "multi-model code-review consensus" in frontmatter
-    assert "at least two independent reviewer instances or models" in skill
+    assert "Default to review-only" in skill
+    assert "Apply fixes only when the user explicitly requests" in skill
+    assert "at least two independent reviewer instances" in skill
+    assert "at least two distinct models" in skill
+    assert "Reject a requested panel size below two" in skill
     assert "Do not simulate a panel" in skill
     assert "8.2/10 acceptance threshold" in skill
+    assert "at least two valid scored reviews" in skill
     assert "never let an average score override a blocking issue" in skill
     assert "Resolve disagreements through evidence rather than majority vote" in skill
     assert "Re-review the complete updated diff" in skill
     assert "Do not reuse stale scores" in skill
+    assert "complete reviewed snapshot pass" in skill
     assert "Push only when explicitly authorized" in skill
     assert "$running-panel-review-loops" in metadata
-    assert "Iterative multi-model code review" in readme
+    assert "Iterative multi-reviewer code review" in readme
 
 
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:

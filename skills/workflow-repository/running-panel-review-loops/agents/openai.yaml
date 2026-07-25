@@ -1,4 +1,4 @@
 interface:
   display_name: "Panel Review Loops"
-  short_description: "Run iterative multi-model code-review consensus loops."
-  default_prompt: "Use $running-panel-review-loops to run independent code-review panels, verify and address confirmed findings, and re-review the updated diff until the acceptance or stopping condition is met."
+  short_description: "Run iterative multi-reviewer code-review consensus loops."
+  default_prompt: "Use $running-panel-review-loops to run independent code-review panels, verify their findings, apply only explicitly requested fixes, and re-review the updated diff until the acceptance or stopping condition is met."
