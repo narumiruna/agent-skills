@@ -13,7 +13,7 @@ Resolve the repository root and inspect `MEMORY.md` at the start of repository w
 - **TASTE:** the user expresses a durable preference that will change future repository work.
 - **CONVENTIONS:** repository evidence proves a stable, repository-specific pattern in code, structure, naming, testing, or workflow that will change future work.
 
-Do not record transient status, task history, broad summaries, speculation, generic best practices, or secrets. Do not duplicate conventions already stated in `AGENTS.md` or authoritative documentation. If a convention should govern all contributors, update its authoritative owner instead of `MEMORY.md`. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
+Do not record transient status, task history, broad summaries, speculation, generic best practices, or secrets. Do not duplicate conventions already stated in `AGENTS.md` or authoritative documentation. If a convention should govern all contributors, recommend updating its authoritative owner unless that file is already within the user's requested scope; do not record it in `MEMORY.md`. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
 
 ## Create or Update
 
