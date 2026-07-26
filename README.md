@@ -94,6 +94,7 @@ Repository path: `skills/workflow-repository/`
 | Skill | Use it for |
 | --- | --- |
 | `creating-agent-skills` | Creating, naming, renaming, optimizing, and reviewing lean, discoverable agent skills. |
+| `scoring-agent-skills` | Scoring or comparing agent skills with a consistent evidence-based quality rubric. |
 | `reviewing-code` | Evidence-led read-only review, including edge-case audits and PR preflight, with authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
 | `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |

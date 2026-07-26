@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Skill Scoring"
+  short_description: "Score agent skills with a consistent evidence rubric."
+  default_prompt: "Use $scoring-agent-skills to score the requested agent skills across trigger clarity, workflow actionability, safety boundaries, verification rigor, and leanness, with direct evidence and clearly stated assessment limits."
