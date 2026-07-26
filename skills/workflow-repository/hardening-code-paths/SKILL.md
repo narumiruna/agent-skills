@@ -14,26 +14,15 @@ When the user does not provide files, a commit, or a diff, inspect `git status -
 ## Loop
 
 1. Infer intended behavior from the user request, code, tests, docs, and sibling flows; state assumptions, but only ask when the rule is ambiguous.
-2. Trace the real flow end to end, including callers, sibling routes, cleanup paths, and stored state.
-3. Proactively inspect plausible edge cases for that flow; skip generic checklists that cannot occur.
-4. Establish that each candidate violates intended behavior, then add the smallest regression test or executable check that fails before the fix when practical. If the failure cannot be verified, report the risk as unverified instead of changing behavior.
-5. Fix or harden each confirmed bug at the shared root path, not only the reported symptom.
-6. Run the narrow check, then scan sibling callers/routes for the same pattern.
-7. Repeat while each fix exposes a concrete adjacent edge case.
-8. Run the repo's normal verification gate before final response.
-
-## Edge-Case Families
-
-Consider these only when relevant:
-
-- empty, single, duplicate, huge, unsorted, missing, null, undefined, NaN, malformed, or wrong-type inputs
-- inclusive/exclusive bounds, off-by-one behavior, overflow, divide-by-zero, and precision loss
-- trust boundaries: HTTP, WebSocket, CLI args, files, environment, database rows, external APIs
-- path containment, authz/authn, tenant ownership, unsafe deserialization, and sensitive logging
-- stale state, reconnect/disconnect, cancellation, retries, idempotency, races, and partial failure
-- timeout, cleanup, file handles, sockets, locks, transactions, subscriptions, and memory growth
-- time zones, DST, clock skew, expiry windows, ordering assumptions, and eventual consistency
-- response shape, schema migration, backward compatibility, packaging/runtime/config mismatches
+2. Trace the real flow end to end, including callers, sibling routes, cleanup paths, stored state, and representation changes.
+3. Load [the edge-case checklist](references/edge-case-checklist.md) and select only domains reachable in this flow.
+4. Build a bounded risk matrix across the few dimensions most likely to interact: representative inputs, operations, before/during/after states, lifecycle events, and representations. Prioritize security, data loss, corruption, hangs, and broken core behavior; avoid exhaustive Cartesian products and unsupported platform speculation.
+5. Establish that each candidate violates intended behavior, then add the smallest regression test or executable check that fails before the fix when practical. If the failure cannot be verified, report the risk as unverified instead of changing behavior.
+6. Fix or harden each confirmed bug at the shared root path, not only the reported symptom.
+7. Run the narrow check, then scan sibling callers/routes for the same pattern.
+8. Perform one fresh pass over the resulting diff for opposite bounds, equivalent encodings, stale or cancelled state at asynchronous boundaries, cleanup, and whether the regression test would fail if the bug returned.
+9. Repeat only while the fix exposes a concrete adjacent case in the same failure class; stop before materially different behavior or scope.
+10. Run the repo's normal verification gate before final response.
 
 ## Fix Rules
 

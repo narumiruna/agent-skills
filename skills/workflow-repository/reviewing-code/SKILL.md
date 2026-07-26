@@ -1,6 +1,6 @@
 ---
 name: reviewing-code
-description: Review diffs, pull requests, commits, patches, or source files for correctness, security, performance, maintainability, tests, and integration risk. Use for read-only review; when fixes are also requested, hand confirmed failure-mode findings to hardening-code-paths when available.
+description: Review diffs, pull requests, commits, patches, or source files for correctness, security, performance, maintainability, tests, and integration risk. Use for read-only review, including edge-case audits, PR preflight, and reviewer simulation; when fixes are also requested, hand confirmed failure-mode findings to hardening-code-paths when available.
 ---
 
 # Reviewing Code
