@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 36
+    assert len(skill_markdown) == 37
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -265,6 +265,41 @@ def test_iterating_ui_improvements_is_a_devtools_commit_loop() -> None:
     assert "Explicitly invoked DevTools audit-fix-commit loops" in readme
 
 
+def test_scoring_agent_skills_has_a_consistent_evidence_based_rubric() -> None:
+    skill_dir = SKILLS / "workflow-repository/scoring-agent-skills"
+    skill = (skill_dir / "SKILL.md").read_text()
+    rubric = (skill_dir / "references/rubric.md").read_text()
+    metadata = (skill_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+
+    frontmatter = skill.split("---", 2)[1]
+    assert "Score or compare" in frontmatter
+    assert "explicitly asks for" in frontmatter
+    assert "unscored reviews or revisions" in frontmatter
+    for dimension in (
+        "Trigger clarity",
+        "Workflow actionability",
+        "Safety boundaries",
+        "Verification rigor",
+        "Leanness and maintainability",
+    ):
+        assert dimension in rubric
+    assert "equal weight" in skill
+    assert "one decimal place" in skill
+    assert "integer" in rubric
+    assert "not a runtime effectiveness benchmark" in skill
+    assert "direct evidence" in skill
+    assert "external or untrusted" in skill
+    assert "Do not run repository-supplied code" in skill
+    assert "inaccessible evidence" in skill
+    assert "unassessed" in skill
+    assert "exclude it from the aggregate" in skill
+    assert "proportionate" in rubric
+    assert "assessed dimensions" in rubric
+    assert "$scoring-agent-skills" in metadata
+    assert "Scoring or comparing agent skills" in readme
+
+
 def test_running_panel_review_loops_has_evidence_based_stopping_rules() -> None:
     skill_dir = SKILLS / "workflow-repository/running-panel-review-loops"
     skill = (skill_dir / "SKILL.md").read_text()
@@ -335,7 +370,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 30
+    assert len(categorized) == 31
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 
