@@ -6,7 +6,6 @@
 - In this sandbox, `~/.cache/uv` may be read-only; when running one-off `uv run --with ...` tools, set `UV_CACHE_DIR=/tmp/uv-cache` first for more reliable behavior.
 - In this sandbox, the first run of skill metadata tools like `uv run --with pyyaml` may still need temporary network access if the local cache does not already contain the package, so `uv` can fetch `PyYAML`.
 - IMRaD now only lives under `skills/writing-research/applying-imrad/`; there are no remaining `imrad-*` legacy skill names in the repo to update.
-- Root document ownership is fixed as `README.md` for external-facing docs and `AGENTS.md` for maintainer-facing docs; standard skill installation uses `npx skills add`, while `justfile` contains repository maintenance recipes only.
 - `atuin search --delete` deletes every history row matching the query under the active search semantics; do not treat preview uniqueness or local substring counts as proof of single-row safety.
 - `atuin search -i` can panic inside Codex's filesystem sandbox because Atuin fails to create its log file on a read-only path; run interactive inspector deletions with escalated permissions.
 - For Atuin cleanup automation, snapshot `history.db` with SQLite's backup API instead of a raw file copy so live-database state and WAL pages stay consistent.
@@ -16,4 +15,6 @@
 - Prefer preserving a skill's original user intent when naming or renaming skills; do not force `<verb-ing>-<object>` if it changes the meaning.
 - Prefer retaining explicit-invocation skills that act as useful mode shortcuts even when the model can infer the behavior; specifically keep `explaining-step-by-step` for requesting progressive explanations.
 - `writing-git-commits` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
-- `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA` or durable `TASTE` emerges, it should create the repository-root file without extra confirmation and revise stale or similar entries in place.
+- `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA`, durable `TASTE`, or evidence-backed entry under `CONVENTIONS` emerges, it should create the repository-root file without extra confirmation and revise stale or similar entries in place.
+
+## CONVENTIONS
