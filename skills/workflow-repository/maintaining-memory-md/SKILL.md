@@ -1,6 +1,6 @@
 ---
 name: maintaining-memory-md
-description: Read and maintain concise repository-root MEMORY.md notes for verified gotchas and durable user preferences. Use at repository-conversation start, when MEMORY.md is mentioned or may be stale, or when a qualifying memory emerges.
+description: Read and maintain concise repository-root MEMORY.md notes for verified gotchas, durable user preferences, and established repository conventions. Use at repository-conversation start, when MEMORY.md is mentioned or may be stale, or when a qualifying memory emerges.
 ---
 
 # Maintaining MEMORY.md
@@ -11,8 +11,9 @@ Resolve the repository root and inspect `MEMORY.md` at the start of repository w
 
 - **GOTCHA:** repository evidence proves a reusable trap or failure mode and its cause, recovery, or avoidance is known.
 - **TASTE:** the user expresses a durable preference that will change future repository work.
+- **CONVENTIONS:** repository evidence proves a stable, repository-specific pattern in code, structure, naming, testing, or workflow that will change future work.
 
-Do not record transient status, task history, broad summaries, speculation, or secrets. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
+Do not record transient status, task history, broad summaries, speculation, generic best practices, or secrets. Do not duplicate conventions already stated in `AGENTS.md` or authoritative documentation. If a convention should govern all contributors, update its authoritative owner instead of `MEMORY.md`. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
 
 ## Create or Update
 
@@ -24,6 +25,8 @@ Do not record transient status, task history, broad summaries, speculation, or s
 ## GOTCHA
 
 ## TASTE
+
+## CONVENTIONS
 ```
 
 - Add one concise bullet under the matching section. Revise a similar, stale, wrong, or contradicted entry instead of appending a duplicate.
@@ -32,6 +35,7 @@ Do not record transient status, task history, broad summaries, speculation, or s
 ```markdown
 - Symptom: <failure>. Cause: <reason>. Fix: <future action>.
 - Prefer <choice> when <context>; avoid <alternative> because <reason>.
+- Use <pattern> for <context>; repository evidence: <concise evidence>.
 ```
 
-After editing, reread the file to verify both headings, placement, deduplication, and absence of sensitive or task-log content. Report the entry created or revised; do not claim memory was updated when writes were unavailable.
+After editing, reread the file to verify all three headings, placement, deduplication, and absence of sensitive or task-log content. Report the entry created or revised; do not claim memory was updated when writes were unavailable.
