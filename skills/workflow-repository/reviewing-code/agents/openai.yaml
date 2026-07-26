@@ -1,4 +1,4 @@
 interface:
   display_name: "Code Review"
-  short_description: "Review changes for concrete correctness and risk."
-  default_prompt: "Use $reviewing-code to review the requested change, lead with verified findings, and distinguish residual risk from confirmed defects."
+  short_description: "Review changes, edge cases, and integration risks."
+  default_prompt: "Use $reviewing-code to review the requested change or run a read-only edge-case preflight, lead with verified findings, and distinguish residual risk from confirmed defects."
