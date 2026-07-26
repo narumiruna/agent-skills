@@ -1,6 +1,6 @@
 # Agent Skill Scoring Rubric
 
-Assign an integer score from 1 to 10 for every dimension. Use these shared anchors:
+Assign an integer score from 1 to 10 for every assessable dimension. Use these shared anchors:
 
 | Score | Meaning |
 | --- | --- |
@@ -49,10 +49,16 @@ Lower the score for duplicated trigger sections, generic background, decorative 
 
 ## Overall score
 
-Use equal weighting:
+Use equal weighting across assessed dimensions. With complete evidence:
 
 ```text
 overall = (trigger + workflow + safety + verification + leanness) / 5
 ```
 
-Display the result to one decimal place. Do not round or normalize individual dimension scores, apply a curve, or convert repository test results into bonus points.
+When review-environment limitations make a dimension materially unassessable, do not convert that uncertainty into a low score. Mark the dimension `unassessed`, exclude it from the aggregate, and calculate a provisional overall from the assessed dimensions:
+
+```text
+provisional overall = sum(assessed dimension scores) / count(assessed dimensions)
+```
+
+Report coverage such as `4/5 dimensions`, the unavailable evidence, and confidence. Do not rank or directly compare aggregate scores with different coverage. Display a full or provisional result to one decimal place; do not round or normalize individual scores, apply a curve, or convert repository test results into bonus points.

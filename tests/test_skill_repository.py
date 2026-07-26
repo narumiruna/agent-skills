@@ -274,6 +274,8 @@ def test_scoring_agent_skills_has_a_consistent_evidence_based_rubric() -> None:
 
     frontmatter = skill.split("---", 2)[1]
     assert "Score or compare" in frontmatter
+    assert "explicitly asks for" in frontmatter
+    assert "unscored reviews or revisions" in frontmatter
     for dimension in (
         "Trigger clarity",
         "Workflow actionability",
@@ -287,7 +289,13 @@ def test_scoring_agent_skills_has_a_consistent_evidence_based_rubric() -> None:
     assert "integer" in rubric
     assert "not a runtime effectiveness benchmark" in skill
     assert "direct evidence" in skill
+    assert "external or untrusted" in skill
+    assert "Do not run repository-supplied code" in skill
+    assert "inaccessible evidence" in skill
+    assert "unassessed" in skill
+    assert "exclude it from the aggregate" in skill
     assert "proportionate" in rubric
+    assert "assessed dimensions" in rubric
     assert "$scoring-agent-skills" in metadata
     assert "Scoring or comparing agent skills" in readme
 
