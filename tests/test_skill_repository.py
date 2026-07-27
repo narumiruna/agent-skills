@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 37
+    assert len(skill_markdown) == 38
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -327,6 +327,38 @@ def test_running_panel_review_loops_has_evidence_based_stopping_rules() -> None:
     assert "Iterative multi-reviewer code review" in readme
 
 
+def test_improving_codebase_architecture_is_evidence_led_and_bounded() -> None:
+    skill_dir = SKILLS / "workflow-repository/improving-codebase-architecture"
+    skill = (skill_dir / "SKILL.md").read_text()
+    reference = (skill_dir / "references/architecture-assessment.md").read_text()
+    metadata = (skill_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+
+    frontmatter = skill.split("---", 2)[1]
+    assert "existing codebase" in frontmatter
+    assert "module boundaries" in frontmatter
+    assert "Use only when" not in frontmatter
+    assert (
+        "Treat review, assessment, diagnosis, and planning requests as read-only"
+        in skill
+    )
+    assert "Improvement, refactoring, or implementation requests authorize" in skill
+    assert "recent change history" in skill
+    assert "at most three candidates" in skill
+    assert "evidence paths" in skill
+    assert "actual callers" in skill
+    assert "deletion test" in skill
+    assert "Preserve externally observable behavior and existing contracts" in skill
+    assert "characterization or regression coverage" in skill
+    assert "repository gate" in skill
+    assert "public API" in skill and "ask one focused question" in skill
+    assert "pass-through" in reference
+    assert "Locality" in reference and "Leverage" in reference
+    assert "$improving-codebase-architecture" in metadata
+    assert "Improve module boundaries" in metadata
+    assert "Evidence-led codebase architecture assessment" in readme
+
+
 def test_designing_user_experiences_supports_new_and_existing_products() -> None:
     experience_dir = SKILLS / "ui-ux-design/designing-user-experiences"
     skill = (experience_dir / "SKILL.md").read_text()
@@ -370,7 +402,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 31
+    assert len(categorized) == 32
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 
