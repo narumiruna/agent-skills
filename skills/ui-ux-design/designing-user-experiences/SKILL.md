@@ -31,14 +31,16 @@ Label assumptions, unknowns, and product decisions that require confirmation. Fo
 
 ## Shape the Proposal
 
-Organize the experience around user goals rather than internal settings or data structures. Prioritize a small set of frequent and important actions while applying these constraints:
+Organize the experience around user goals rather than internal settings or data structures. Prioritize a small set of frequent and important actions while applying these constraints. Treat primary, secondary, advanced, destructive, and similar classifications as analysis and prioritization inputs, not as required sections, menus, pages, or navigation levels.
 
 - Keep consequential current or proposed state visible where it informs a decision.
-- Place secondary, advanced, and risky controls behind labeled, predictable progressive disclosure without hiding critical information or the only route to a capability.
+- Keep seven or fewer options from the same related group together at one information-architecture level by default. Express differences in frequency through ordering, labels, or visual hierarchy rather than an extra advanced section, page, menu, or navigation level.
+- Starting with the eighth option, quantity may justify grouping or another level but does not require it. Split only when the workflow and scanability improve, and explain the improvement.
+- Use labeled, predictable progressive disclosure when secondary or advanced complexity warrants it; do not infer disclosure from classification alone or hide critical information or the only route to a capability.
 - Keep navigation shallow with clear return, cancel, and exit paths.
 - Offer a small set of meaningful defaults or presets when supported, while retaining expert customization.
 - Preview the concrete effect of consequential choices. Distinguish previewing, confirming, cancelling, saving, and applying through labels, state, and feedback.
-- Reduce steps without removing safeguards for destructive or hard-to-reverse actions.
+- Reduce steps without removing safeguards for destructive or hard-to-reverse actions. The option-count threshold limits unnecessary information-architecture depth, not confirmation dialogs, risk warnings, or other required safety flows.
 - Maintain consistent terminology, navigation, confirmations, and cancellation behavior.
 - Adapt hierarchy and interaction to supported widths, content sizes, localization, inputs, and assistive technology. Avoid ambiguous truncation, inaccessible overflow, hidden critical information, and disruptive layout shifts.
 
