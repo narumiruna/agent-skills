@@ -25,10 +25,10 @@ Follow global defaults; this file defines only repo-specific additions and overr
 
 ## Verification
 
+- This repository does not use automated tests. Do not add or maintain repository tests, and do not apply TDD to repository changes.
 - `just` is non-mutating by default and lists available recipes.
-- Run `uv run --no-project --with pytest pytest` for the repository test suite; use a targeted test path during iteration when appropriate.
-- Run changed bundled scripts through a representative path when the test suite does not exercise their main workflow.
-- Run `prek run -a` as the repository-wide formatting and lint gate. Before a PR, both the test suite and this gate must pass or the failure must be reported.
+- Run changed bundled scripts through a representative path.
+- Run `prek run -a` as the repository-wide formatting and lint gate. Before a PR, this gate must pass or the failure must be reported.
 - Changes under `examples/slides/` are rendered by `.github/workflows/marp-to-pages.yml`; verify source assets and include the generated preview or screenshots in the PR.
 
 ## Pull Requests
