@@ -96,10 +96,11 @@ Repository path: `skills/workflow-repository/`
 | `creating-agent-skills` | Creating, naming, renaming, optimizing, and reviewing lean, discoverable agent skills. |
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `scoring-agent-skills` | Scoring or comparing agent skills numerically with a consistent evidence-based quality rubric. |
-| `reviewing-code` | Evidence-led read-only review, including edge-case audits and PR preflight, with authorized hardening handoff. |
+| `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
+| `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
 | `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
-| `hardening-code-paths` | Confirming, fixing, and verifying plausible code-path failure modes. |
+| `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `applying-tdd` | Practical red-green-refactor for non-trivial behavior changes. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
