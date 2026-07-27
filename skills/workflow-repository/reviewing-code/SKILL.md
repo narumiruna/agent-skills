@@ -1,11 +1,11 @@
 ---
 name: reviewing-code
-description: Review diffs, pull requests, commits, patches, or source files for correctness, security, performance, maintainability, tests, and integration risk. Use for read-only review, including edge-case audits, PR preflight, and reviewer simulation; when fixes are also requested, hand confirmed failure-mode findings to hardening-code-paths when available.
+description: Review diffs, pull requests, commits, patches, or source files for correctness, baseline security, performance, maintainability, tests, and integration risk. Use for ordinary read-only review, edge-case audits, PR preflight, and reviewer simulation; use auditing-code-security when security is the primary objective, and hardening-code-paths to fix confirmed failure modes.
 ---
 
 # Reviewing Code
 
-Review the requested change, not the entire codebase. Treat the task as read-only unless fixes are requested.
+Review the requested change, not the entire codebase. Treat the task as read-only unless fixes are requested. Keep this as an ordinary code review with a security baseline; when security is the primary objective or acceptance criterion, use `auditing-code-security` instead of expanding this workflow into a full security audit.
 
 ## Workflow
 
@@ -16,13 +16,13 @@ Review the requested change, not the entire codebase. Treat the task as read-onl
    - correctness, boundaries, state transitions, retries, concurrency, partial failure, and cleanup
    - where repeated work without progress stops, and its worst-case time, resources, cost, and side effects
    - interfaces, schemas, migrations, jobs, caches, feature flags, permissions, and configuration
-   - trust boundaries, authn/authz, validation, injection, secrets, logging, and sensitive data
+   - security baseline: affected assets and trust boundaries; authn/authz and tenant or object ownership; source-to-sink validation and injection; secrets, logging, and sensitive data; dependency and configuration exposure
    - repeated work, I/O, queries, blocking, leaks, and expected scale
    - tests for changed behavior and concrete error paths; maintainability only where it creates real cost or risk
 5. Run focused checks when feasible. Passing checks support but do not prove correctness.
 6. Stop after the relevant diff, directly affected contracts/callers, and focused evidence are covered. Distinguish confirmed findings, inferred risks, and unverified areas.
 
-When fixes are requested, confirm the finding first, then use `hardening-code-paths` for bounded edge-case or failure-mode work. Do not hand off speculative or preference-only comments. Return to review the resulting diff and evidence.
+When fixes are requested, confirm the finding first, then use `hardening-code-paths` for bounded edge-case or failure-mode work. Do not hand off speculative or preference-only comments. Use `auditing-code-security` first when a security alert needs threat-focused reachability analysis. Return to review the resulting diff and evidence.
 
 ## Findings
 

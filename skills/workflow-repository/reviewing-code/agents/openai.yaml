@@ -1,4 +1,4 @@
 interface:
   display_name: "Code Review"
-  short_description: "Review changes, edge cases, and integration risks."
-  default_prompt: "Use $reviewing-code to review the requested change or run a read-only edge-case preflight, lead with verified findings, and distinguish residual risk from confirmed defects."
+  short_description: "Review changes with baseline security and integration checks."
+  default_prompt: "Use $reviewing-code for an ordinary read-only review with baseline security checks; use $auditing-code-security for a security audit when security is the primary objective."

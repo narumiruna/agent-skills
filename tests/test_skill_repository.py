@@ -38,7 +38,7 @@ def test_deprecated_skills_are_hidden_from_standard_discovery() -> None:
 
 def test_every_skill_name_metadata_and_catalog_inventory_is_complete() -> None:
     skill_markdown = all_skill_markdown()
-    assert len(skill_markdown) == 38
+    assert len(skill_markdown) == 39
     readme = (ROOT / "README.md").read_text()
 
     for skill_md in skill_markdown:
@@ -300,6 +300,82 @@ def test_scoring_agent_skills_has_a_consistent_evidence_based_rubric() -> None:
     assert "Scoring or comparing agent skills" in readme
 
 
+def test_auditing_code_security_is_security_first_and_bounded() -> None:
+    skill_dir = SKILLS / "workflow-repository/auditing-code-security"
+    skill = (skill_dir / "SKILL.md").read_text()
+    reference = (skill_dir / "references/security-audit-checklist.md").read_text()
+    metadata = (skill_dir / "agents/openai.yaml").read_text()
+    readme = (ROOT / "README.md").read_text()
+    reviewing = (SKILLS / "workflow-repository/reviewing-code/SKILL.md").read_text()
+    reviewing_metadata = (
+        SKILLS / "workflow-repository/reviewing-code/agents/openai.yaml"
+    ).read_text()
+    hardening = (
+        SKILLS / "workflow-repository/hardening-code-paths/SKILL.md"
+    ).read_text()
+    hardening_metadata = (
+        SKILLS / "workflow-repository/hardening-code-paths/agents/openai.yaml"
+    ).read_text()
+
+    frontmatter = skill.split("---", 2)[1]
+    assert "security audit" in frontmatter.lower()
+    assert "security is the primary" in frontmatter
+    assert "read-only" in skill
+    assert "repository-wide" in skill and "explicitly" in skill
+    for threat_element in (
+        "assets",
+        "attacker capabilities",
+        "entry points",
+        "trust boundaries",
+        "sensitive data flows",
+    ):
+        assert threat_element in skill
+    assert "already configured" in skill
+    assert "environment" in skill and "available" in skill
+    assert "Do not install" in skill
+    assert "lockfiles" in skill and "configuration" in skill
+    assert "scanner output" in skill and "unverified" in skill
+    assert "external or live targets" in skill
+    assert "exact authorization" in skill
+    for severity in ("Critical", "Major", "Minor"):
+        assert severity in skill
+    for finding_field in (
+        "attack prerequisites",
+        "affected assets",
+        "file and line evidence",
+        "impact",
+        "actionable remediation",
+        "confidence",
+    ):
+        assert finding_field in skill
+    assert "defense-in-depth" in skill
+    assert "uncovered scope" in skill
+    assert "hardening-code-paths" in skill
+    assert "source-to-sink" in reference
+    assert "false positive" in reference
+    assert "reachable attack surface" in reference
+    assert "mechanical checklist" in reference
+    assert "$auditing-code-security" in metadata
+    assert "read-only" in metadata
+    assert "security-first" in metadata
+    assert not (skill_dir / "scripts").exists()
+    assert not (skill_dir / "assets").exists()
+    assert "Evidence-led, security-first, read-only code audits" in readme
+
+    assert "ordinary read-only review" in reviewing.split("---", 2)[1]
+    assert "security is the primary objective" in reviewing
+    assert "auditing-code-security" in reviewing
+    assert "security baseline" in reviewing
+    assert "security audit" in reviewing_metadata.lower()
+    assert "confirmed security findings" in hardening
+    assert "shared trust boundary" in hardening
+    assert "original attack conditions" in hardening
+    assert "auditing-code-security" in hardening
+    assert "confirmed security finding" in hardening.split("---", 2)[1]
+    assert "security findings" in hardening_metadata.lower()
+    assert "verified security findings" in readme
+
+
 def test_running_panel_review_loops_has_evidence_based_stopping_rules() -> None:
     skill_dir = SKILLS / "workflow-repository/running-panel-review-loops"
     skill = (skill_dir / "SKILL.md").read_text()
@@ -402,7 +478,7 @@ def test_skill_bodies_avoid_repeating_trigger_and_generic_cleanup_sections() -> 
 def test_active_skills_are_grouped_one_category_deep() -> None:
     categorized = sorted(SKILLS.glob("*/*/SKILL.md"))
     assert categorized == sorted(SKILLS.glob("**/SKILL.md"))
-    assert len(categorized) == 32
+    assert len(categorized) == 33
     assert len({skill_md.parent.name for skill_md in categorized}) == len(categorized)
 
 

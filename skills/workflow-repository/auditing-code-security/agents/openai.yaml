@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Security Audit"
+  short_description: "Run security-first, read-only audits with verified evidence."
+  default_prompt: "Use $auditing-code-security to run a security-first, read-only audit of the requested code scope, verify tool alerts against reachable paths, and report evidence-backed findings without changing code."
