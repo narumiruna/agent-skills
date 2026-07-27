@@ -21,3 +21,6 @@ vendor/
 *.swp
 .DS_Store
 .markdownlint-cli2.yaml
+
+# Project
+third_party/
