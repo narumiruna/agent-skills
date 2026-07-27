@@ -20,7 +20,7 @@ For each candidate, trace the complete source-to-sink path:
 4. Which sink or security decision is reached, under what attack prerequisites, and with what affected asset and impact?
 5. Does a test, safe local reproduction, specification, or framework contract confirm the claim?
 
-Reject a scanner alert as a false positive or report it as unverified when the source is not attacker-controlled, the sink is unreachable, the vulnerable feature is unused, a real guard blocks the path, the dependency is absent from the runtime artifact, or the claimed consequence does not follow. Do not dismiss an alert merely because a nearby layer appears to validate; verify the actual ordering and all equivalent routes.
+Apply confirmation criteria by alert type. For data-flow alerts, reject the alert as a false positive or report it as unverified when the source is not attacker-controlled, the sink is unreachable, a real guard blocks the path, or the claimed consequence does not follow. For dependency alerts, require the affected version and feature in a relevant runtime, build, CI, or release execution path. For secret alerts, determine whether credential-like material or sensitive data crosses its intended trust boundary without reproducing or using it. For configuration alerts, verify that the reported setting is actually executed or deployed. Do not require attacker-controlled input or runtime shipping when direct exposure or a build, CI, or release path is the security issue; do not dismiss a data-flow alert merely because a nearby layer appears to validate without checking actual ordering and equivalent routes.
 
 ## Identity, sessions, and authorization
 
@@ -62,7 +62,7 @@ Reject a scanner alert as a false positive or report it as unverified when the s
 
 ## Dependencies, supply chain, configuration, and deployment
 
-- Direct and transitive dependency findings verified against the resolved version, vulnerable feature, runtime artifact, and reachable application path
+- Direct and transitive dependency findings verified against the resolved version, vulnerable feature, and relevant runtime, build, CI, or release execution path
 - Lockfile integrity, source and registry provenance, install or build scripts, generated artifacts, update policy, and compromised maintainer risk where supported by evidence
 - CI and release token permissions, untrusted pull-request execution, artifact provenance, cache poisoning, secret exposure, and deployment approval boundaries
 - Debug or development modes, default credentials, permissive CORS, public binding, proxy trust, unsafe feature flags, exposed management endpoints, and weak production defaults
@@ -72,7 +72,7 @@ Reject a scanner alert as a false positive or report it as unverified when the s
 
 - Prefer repository-configured commands and already available scanners; do not install a preferred tool just to complete the checklist.
 - Record what was actually scanned, relevant exclusions, tool and ruleset versions when available, network or registry freshness, and command failures.
-- For SAST, inspect the reported source, sanitizers, control flow, and sink. For dependency tools, verify resolved and shipped versions plus feature reachability. For secret tools, determine validity without disclosing the value. For configuration tools, compare findings with the deployed path rather than templates alone.
+- For SAST, inspect the reported source, sanitizers, control flow, and sink. For dependency tools, verify the resolved version, affected feature, and relevant runtime, build, CI, or release path. For secret tools, determine exposure without disclosing or using the value. For configuration tools, compare findings with the executed or deployed path rather than templates alone.
 - Treat passing tools as evidence only for the rules, files, dependency data, and configuration they covered. Name meaningful gaps and unavailable checks.
 
 ## Classification check
