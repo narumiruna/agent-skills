@@ -41,18 +41,42 @@ Assess whether important claims and outcomes require direct, relevant evidence. 
 
 Apply this proportionately: an explanatory skill need not require a test suite, but it should ground claims in available sources and distinguish evidence from inference. Lower the score for unverified completion claims, stale evidence, vague “test it” language, or checks that cannot prove the stated outcome.
 
+## Incremental knowledge value
+
+Assess how much task-relevant guidance the skill adds beyond the declared target-model baseline. Reward non-obvious decision rules and trade-offs, real-world failure modes, current version or repository constraints, critical ordering, and concise reminders with evidence or a concrete failure rationale.
+
+Label representative passages rather than every paragraph:
+
+- **Domain delta:** specialized facts, decisions, constraints, or failure handling that materially extends the baseline.
+- **Justified activation:** likely familiar knowledge whose brief reminder has evidence or a concrete failure rationale for improving reliable application.
+- **Redundancy candidate:** generic background, basic tutorials, routine operations, repeated rules, or decorative examples with no identified behavioral value.
+
+Use these dimension-specific landmarks together with the shared anchors; use intermediate scores when the evidence falls between them:
+
+| Score | Incremental-value landmark |
+| --- | --- |
+| 10 | Substantive guidance is concentrated domain delta or justified activation, with no material redundancy found. |
+| 8 | Strong task-specific value with only localized baseline restatement. |
+| 6 | Useful specialized guidance is materially diluted by generic or routine content. |
+| 4 | The body is mostly baseline explanation or tutorial content with little non-obvious guidance. |
+| 2 | It provides effectively no task-relevant increment or materially mischaracterizes baseline knowledge. |
+
+Do not mark concise disambiguation, current facts, safety or authorization boundaries, output contracts, stopping conditions, or evidence-backed error prevention as redundant solely because the model may know them. Static inspection supports only an inferred increment; representative baseline-versus-skill evaluations can establish an observed gain.
+
 ## Leanness and maintainability
 
 Assess whether every instruction earns its context cost. Look for one clear purpose, low repetition, outcome-focused constraints, direct on-demand resource routing, aligned metadata, bounded examples, and stable guidance rather than incidental implementation detail.
 
 Lower the score for duplicated trigger sections, generic background, decorative examples, unjustified files, repeated approval language, oversized unstructured bodies, or version-sensitive facts without a verification path. Do not penalize necessary complexity merely because a high-risk workflow is longer.
 
+Judge organization and context economy separately from novelty: a concise generic skill can be lean but low in incremental value, while a necessarily detailed fragile workflow can score well in both.
+
 ## Overall score
 
 Use equal weighting across assessed dimensions. With complete evidence:
 
 ```text
-overall = (trigger + workflow + safety + verification + leanness) / 5
+overall = (trigger + workflow + safety + verification + incremental value + leanness) / 6
 ```
 
 When review-environment limitations make a dimension materially unassessable, do not convert that uncertainty into a low score. Mark the dimension `unassessed`, exclude it from the aggregate, and calculate a provisional overall from the assessed dimensions:
@@ -61,4 +85,4 @@ When review-environment limitations make a dimension materially unassessable, do
 provisional overall = sum(assessed dimension scores) / count(assessed dimensions)
 ```
 
-Report coverage such as `4/5 dimensions`, the unavailable evidence, and confidence. Do not rank or directly compare aggregate scores with different coverage. Display a full or provisional result to one decimal place; do not round or normalize individual scores, apply a curve, or convert repository test results into bonus points.
+Report coverage such as `5/6 dimensions`, the unavailable evidence, and confidence. Do not rank or directly compare aggregate scores with different coverage, or compare this six-dimension aggregate directly with historical five-dimension scores. Display a full or provisional result to one decimal place; do not round or normalize individual scores, apply a curve, or convert repository test results into bonus points.

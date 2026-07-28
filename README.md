@@ -95,7 +95,7 @@ Repository path: `skills/workflow-repository/`
 | --- | --- |
 | `creating-agent-skills` | Creating, naming, renaming, optimizing, and reviewing lean, discoverable agent skills. |
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
-| `scoring-agent-skills` | Scoring or comparing agent skills numerically with a consistent evidence-based quality rubric. |
+| `scoring-agent-skills` | Scoring or comparing agent skills numerically with a six-dimension rubric that includes incremental knowledge value. |
 | `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
