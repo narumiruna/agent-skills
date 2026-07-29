@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing Roadmaps"
+  short_description: "Create, revise, and review strategic roadmaps."
+  default_prompt: "Use $writing-roadmap to create, revise, or review an evidence-grounded strategic roadmap with traceable outcomes, milestones, metrics, risks, and decisions."

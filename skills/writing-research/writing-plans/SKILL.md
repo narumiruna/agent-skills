@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Draft, execute, and track lean, verifiable plans for non-trivial work involving sequencing, tradeoffs, assumptions, unknowns, risks, or completion criteria. Use for implementation plans, roadmaps, migrations, refactors, PR splits, checklists, or execution of an existing plan; skip small obvious tasks.
+description: Draft, execute, and track lean, verifiable implementation plans for non-trivial work involving sequencing, tradeoffs, assumptions, unknowns, risks, or completion criteria. Use for migrations, refactors, PR splits, task checklists, or execution of an existing plan; use writing-roadmap for strategic product or system direction and phased outcomes; skip small obvious tasks.
 ---
 
 # Writing Plans
