@@ -11,7 +11,9 @@ A roadmap expresses strategic direction and sequencing, not a promise of deliver
 
 Inspect provided material and relevant repository evidence before drafting. Establish the audience, scope, planning horizon, and current baseline. Ask at most one question when a missing answer would materially change the roadmap; otherwise proceed with explicit assumptions or unknowns.
 
-Separate verified current state, approved commitments, and proposed direction. Do not invent capabilities, dates, targets, owners, capacity, dependencies, or certainty. Deliver in the requested medium; when none is specified, return Markdown in chat rather than guessing a file path.
+Separate verified current state, approved commitments, and proposed direction. Do not invent capabilities, dates, targets, owners, capacity, dependencies, or certainty.
+
+Save a created or revised roadmap to the repository unless the user requests chat-only output. Default to `docs/roadmaps/YYYY-MM-DD_<topic>-roadmap.md`; derive a concise lowercase kebab-case topic, create the directory when needed, and update an existing roadmap in place.
 
 ## Use the Required Structure
 
