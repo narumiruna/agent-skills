@@ -1,4 +1,4 @@
 interface:
   display_name: "Applying TDD"
-  short_description: "Drive behavior changes with TDD when practical."
-  default_prompt: "Use $applying-tdd to prove the focused failure, make the smallest passing change, and refactor safely when a red-first cycle is practical."
+  short_description: "Scope TDD by source and test-data boundaries."
+  default_prompt: "Use $applying-tdd to enforce the ecosystem's production-scope and test-isolation boundaries, then apply red-green-refactor only to eligible observable behavior."
