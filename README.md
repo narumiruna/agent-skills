@@ -103,7 +103,7 @@ Repository path: `skills/workflow-repository/`
 | `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
 | `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
-| `applying-tdd` | Practical red-green-refactor for non-trivial behavior changes. |
+| `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `syncing-main-branch` | Explicit, state-preserving switch to `main` and fast-forward-only update. |
 | `managing-git-worktrees` | Loss-aware worktree creation, repair, removal, pruning, and branch cleanup. |
