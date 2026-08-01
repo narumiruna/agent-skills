@@ -1,6 +1,6 @@
 ---
 name: writing-roadmap
-description: Create, revise, or review outcome-oriented product and system roadmaps that connect vision and current state to measurable objectives, themes, phased milestones, technical health, risks, dependencies, success metrics, non-goals, and decision history. Use for strategic roadmap artifacts; use writing-plans for task-level implementation plans, checklists, or execution tracking.
+description: Create, revise, or review concise, outcome-oriented product and system roadmaps with phased milestone checkboxes, evidence-based progress, and optional detail for context, risks, dependencies, technical health, metrics, and decisions. Use for strategic direction and milestone tracking; use writing-plans for executable task planning and implementation tracking.
 ---
 
 # Writing Roadmaps
@@ -15,51 +15,75 @@ Separate verified current state, approved commitments, and proposed direction. D
 
 Save a created or revised roadmap to the repository unless the user requests chat-only output. Default to `docs/roadmaps/YYYY-MM-DD_<topic>-roadmap.md`; derive a concise lowercase kebab-case topic, create the directory when needed, and update an existing roadmap in place.
 
-## Use the Required Structure
+## Start with the Lean Template
 
-Keep these sections in order. When evidence is unavailable, state the gap and its consequence instead of filling it with generic claims.
-
-1. **Vision** — One clear statement of the durable purpose and desired future state.
-2. **Objectives** — A small set of near- to mid-term outcomes supporting the vision. Make them measurable when baselines, targets, and horizons are known.
-3. **Current State** — Evidence-backed capabilities, constraints, limitations, and key challenges that explain why the roadmap is needed.
-4. **Guiding Principles** — Decision rules that resolve likely prioritization or tradeoff questions; avoid generic values that change no decision.
-5. **Roadmap Themes** — Outcome-oriented strategic pillars spanning related initiatives. Do not use teams, components, or feature lists as themes unless they genuinely express strategy.
-6. **Phases and Milestones** — Sequential stages that move from the current state toward the objectives. Adapt the phase count and names to the evidence; use Foundation, Expansion, Maturity, and Evolution only when they accurately describe the progression.
-7. **Technical Health** — Stability, performance, security, scalability, maintainability, observability, and technical-debt needs relevant to delivery.
-8. **Risks and Dependencies** — Material uncertainties, blockers, sequencing constraints, and external or internal prerequisites, with mitigations or decisions needed when known.
-9. **Success Metrics** — Quantifiable indicators tied to objectives. Include baseline, target, horizon, and measurement source only when grounded.
-10. **Non-Goals** — Explicit exclusions that prevent scope drift or false expectations.
-11. **Decisions and Changes** — Significant decisions and roadmap revisions with their rationale and impact. State that no prior record was supplied rather than inventing history.
-
-Format every phase consistently:
+Use this structure unless the user requests another format. Keep entries brief and expand only where evidence, rationale, or a decision needs explanation.
 
 ```markdown
+# <Topic> Roadmap
+
+## Vision
+
+<Durable purpose and desired future state.>
+
+## Objectives
+
+- **<Outcome>** — Success: <grounded measure and horizon, or a material unknown/TBD.>
+
+## Current State
+
+- <Verified baseline, constraint, or challenge that explains the roadmap.>
+
+## Roadmap
+
 ### Phase N: <outcome-focused name>
 
-**Milestones:**
+- [ ] <Observable delivered capability, validated assumption, or consequential decision.>
 
-- <observable delivered capability, validated assumption, or consequential decision>
-
-**Outcome:** <the state this phase establishes and what it unlocks>
+**Outcome:** <State this phase establishes and what it unlocks.>
 ```
 
-Milestones describe verifiable results, not activities such as “work on,” “improve,” or “explore” without a decision criterion. Add dates or calendar ranges only when the user supplies them or evidence supports them.
+Adapt the phase count and names to the evidence. Milestones must describe verifiable strategic results, not activities such as “work on,” “improve,” or “explore” without a decision criterion. Add dates or calendar ranges only when supplied or supported by evidence.
+
+## Add Detail Only When Useful
+
+Add only sections that materially improve a decision or explain the roadmap:
+
+- **Guiding Principles** — Decision rules for real prioritization or tradeoff questions.
+- **Roadmap Themes** — Strategic pillars connecting initiatives across phases; not team, component, or feature lists.
+- **Success Metrics** — A fuller objective-linked view when baseline, target, horizon, or measurement source needs explanation.
+- **Technical Health** — Cross-cutting stability, performance, security, scalability, maintainability, observability, or debt context; still place required work in the relevant phase.
+- **Risks and Dependencies** — Material uncertainty, blockers, sequencing constraints, and prerequisites, paired with mitigation, a needed decision, or a monitoring signal when known.
+- **Non-Goals** — Exclusions needed to prevent likely scope drift or false expectations.
+- **Assumptions and Unknowns** — Unresolved evidence gaps that affect direction or confidence.
+- **Decisions and Changes** — Significant decisions or revisions with rationale and impact.
+
+Omit optional sections that would be empty or generic. When evidence is unavailable, state a material gap and its consequence briefly; do not fabricate detail to fill the template.
+
+## Track Milestone Progress
+
+Use Markdown task checkboxes for milestones only:
+
+- `- [ ]` means the milestone is planned, underway, or otherwise not yet verified complete.
+- `- [x]` means evidence verifies the stated outcome. Add a concise evidence link or note when completion is not obvious from repository state.
+- Preserve known checkbox state during revisions. Never infer completion from activity alone; reopen a milestone if later evidence invalidates it.
+- Add a brief status label such as `_(In progress)_` only when the distinction is useful. Do not invent percentages.
+
+Checkboxes track strategic milestone outcomes, not implementation tasks. Use `writing-plans` when a milestone must be decomposed into executable work.
 
 ## Check Strategic Coherence
 
 Before handoff, verify that:
 
-- Vision → objectives → themes → milestones → metrics form a traceable chain.
+- Vision → objectives → milestones → success measures form a traceable chain; include themes only when they clarify that chain.
 - Each phase has a distinct outcome, logical dependencies, and a credible transition to the next phase.
 - Technical-health work appears in the phases that need it rather than becoming an unsequenced side list.
-- Risks distinguish uncertainty from dependency and pair material items with mitigation, a decision, or a monitoring signal when possible.
-- Metrics measure outcomes rather than output volume, and unsupported targets remain explicit unknowns.
-- Non-goals draw meaningful boundaries, while the decision log preserves significant changes without rewriting history.
-
-Lead with the completed roadmap or review verdict. Follow it only with material assumptions, evidence gaps, or decisions still required.
+- Material risks distinguish uncertainty from dependency and include mitigation, a decision, or a monitoring signal when possible.
+- Measures reflect outcomes rather than output volume, and unsupported targets remain explicit unknowns.
+- Optional sections earn their space, meaningful boundaries are clear, and significant prior decisions are preserved without inventing history.
 
 ## Revise and Hand Off
 
-When revising a roadmap, preserve prior significant decisions and append the change, rationale, and impact; update affected objectives, phases, risks, metrics, and non-goals so the document remains internally consistent.
+When revising, preserve verified milestone status and prior significant decisions, then update affected objectives, phases, risks, measures, and boundaries so the roadmap remains internally consistent.
 
-If the user asks to turn an approved phase or milestone into executable work, use `writing-plans` for the implementation plan. Keep the roadmap strategic and do not replace its outcomes with task checkboxes.
+Lead with the completed roadmap or review verdict. Follow only with material assumptions, evidence gaps, or decisions still required.
