@@ -107,7 +107,7 @@ Repository path: `skills/workflow-repository/`
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `syncing-main-branch` | Explicit, state-preserving switch to `main` and fast-forward-only update. |
 | `managing-git-worktrees` | Loss-aware worktree creation, repair, removal, pruning, and branch cleanup. |
-| `maintaining-memory-md` | Reads and maintains verified, concise repository gotchas, preferences, and conventions. |
+| `maintaining-memory-md` | Reads, maintains, and conservatively curates verified repository gotchas, preferences, and conventions. |
 | `writing-agents-md` | Creating or reviewing lean, scoped, evidence-backed `AGENTS.md` guidance. |
 
 ## 🗄️ Deprecated Skills
