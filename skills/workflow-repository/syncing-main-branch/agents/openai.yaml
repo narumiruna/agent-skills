@@ -1,6 +1,0 @@
-interface:
-  display_name: "Sync Main Branch"
-  short_description: "Safely switch to and fast-forward local main."
-  default_prompt: "Use $syncing-main-branch to preserve current state, switch this repository to main, and fast-forward only from its verified upstream."
-policy:
-  allow_implicit_invocation: false

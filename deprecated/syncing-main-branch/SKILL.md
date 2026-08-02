@@ -1,11 +1,13 @@
 ---
 name: syncing-main-branch
-description: Switch a clean Git worktree to local `main` and fast-forward it from its configured upstream without losing branches, commits, or local files. Use only when the user explicitly invokes $syncing-main-branch or names syncing-main-branch.
+description: Deprecated internal workflow for switching a clean Git worktree to local `main` and fast-forwarding it from its configured upstream without losing branches, commits, or local files. Use only when the user explicitly invokes $syncing-main-branch or names syncing-main-branch.
+metadata:
+  internal: true
 ---
 
-# Syncing Main Branch
+# Syncing Main Branch (Deprecated Reference)
 
-Use only after explicit invocation. Operate on the current repository and preserve the branch, commits, and files being left.
+This workflow is excluded from active discovery but retained for explicit local compatibility. Operate on the current repository and preserve the branch, commits, and files being left.
 
 ## Workflow
 
