@@ -1,4 +1,4 @@
 interface:
   display_name: "MEMORY.md Keeper"
-  short_description: "Maintain verified gotchas, preferences, and conventions."
-  default_prompt: "Use $maintaining-memory-md to read repository memory and create or revise only a qualifying, concise, sanitized entry under GOTCHA, TASTE, or CONVENTIONS."
+  short_description: "Maintain and conservatively curate repository memory."
+  default_prompt: "Use $maintaining-memory-md to maintain qualifying repository memory, applying lightweight curation during ordinary work and a conservative full review when curation is requested or staleness is suspected."

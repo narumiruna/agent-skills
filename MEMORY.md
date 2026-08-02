@@ -15,6 +15,6 @@
 - Prefer preserving a skill's original user intent when naming or renaming skills; do not force `<verb-ing>-<object>` if it changes the meaning.
 - Prefer retaining explicit-invocation skills that act as useful mode shortcuts even when the model can infer the behavior; specifically keep `explaining-step-by-step` for requesting progressive explanations.
 - `writing-git-commits` should rely on the repo-level `AGENTS.md` for the Git baseline; `SKILL.md` should keep only the flow and judgment from diff to commit message, while less common Conventional Commits details belong in `references/`.
-- `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA`, durable `TASTE`, or evidence-backed entry under `CONVENTIONS` emerges, it should create the repository-root file without extra confirmation and revise stale or similar entries in place.
+- `maintaining-memory-md` should check at conversation start without creating `MEMORY.md` merely because it is missing; when the first qualifying `GOTCHA`, durable `TASTE`, or evidence-backed entry under `CONVENTIONS` emerges, it should create the repository-root file without extra confirmation. On every inspection or update, lightly curate provable defects; when explicitly asked to curate or concrete evidence suggests staleness, review every entry and conservatively retain and report unverified entries unless contrary evidence exists.
 
 ## CONVENTIONS

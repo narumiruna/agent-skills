@@ -1,6 +1,6 @@
 ---
 name: maintaining-memory-md
-description: Read and maintain concise repository-root MEMORY.md notes for verified gotchas, durable user preferences, and established repository conventions. Use at repository-conversation start, when MEMORY.md is mentioned or may be stale, or when a qualifying memory emerges.
+description: Read, maintain, and curate concise repository-root MEMORY.md notes for verified gotchas, durable user preferences, and established repository conventions. Use at repository-conversation start, when MEMORY.md is mentioned, when its curation or cleanup is requested, when concrete evidence suggests it may be stale, or when a qualifying memory emerges.
 ---
 
 # Maintaining MEMORY.md
@@ -13,7 +13,18 @@ Resolve the repository root and inspect `MEMORY.md` at the start of repository w
 - **TASTE:** the user expresses a durable preference that will change future repository work.
 - **CONVENTIONS:** repository evidence proves a stable, repository-specific pattern in code, structure, naming, testing, or workflow that will change future work.
 
-Do not record transient status, task history, broad summaries, speculation, generic best practices, or secrets. Do not duplicate conventions already stated in `AGENTS.md` or authoritative documentation. If a convention should govern all contributors, recommend updating its authoritative owner unless that file is already within the user's requested scope; do not record it in `MEMORY.md`. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
+Do not record transient status, task history, broad summaries, speculation, generic best practices, or secrets. Do not add conventions already stated in `AGENTS.md` or authoritative documentation. If a convention should govern all contributors, recommend updating its authoritative owner unless that file is already within the user's requested scope; do not add a new memory entry for it. During curation, retain an existing entry that is the sole record until its authoritative update is completed, then remove the duplicate. Sanitize any reusable lesson involving credentials, tokens, private endpoints, proprietary data, or personal information.
+
+## Curate
+
+Perform lightweight curation whenever inspecting or updating memory. Using the evidence already gathered, merge, revise, remove, or sanitize entries that are demonstrably duplicated, misplaced, contradicted, stale, non-qualifying, or sensitive. Do not broaden a lightweight pass into a repository-wide audit.
+
+Perform full curation when the user explicitly requests it or concrete evidence suggests `MEMORY.md` may be stale. Check every entry against current repository evidence, authoritative guidance, and later explicit user preferences:
+
+- Keep entries that remain correct and qualifying.
+- Merge or rewrite entries that remain useful but are inaccurate, misplaced, or overlapping.
+- Remove or safely rewrite entries proven wrong, stale, superseded, duplicated, non-qualifying, or sensitive.
+- Leave an entry unchanged when it cannot currently be reverified and no evidence contradicts it. Report it as unverified; absence of evidence is not evidence that it is stale.
 
 ## Create or Update
 
@@ -38,4 +49,4 @@ Do not record transient status, task history, broad summaries, speculation, gene
 - Use <pattern> for <context>; repository evidence: <concise evidence>.
 ```
 
-After editing, reread the file to verify all three headings, placement, deduplication, and absence of sensitive or task-log content. Report the entry created or revised; do not claim memory was updated when writes were unavailable.
+After editing, reread the file to verify all three headings, placement, deduplication, and absence of sensitive or task-log content. For an ordinary update or lightweight pass, report only entries actually changed. For full curation, summarize kept, merged or revised, removed or sanitized, and unverified entries. Do not claim edits or verification that were not completed.
