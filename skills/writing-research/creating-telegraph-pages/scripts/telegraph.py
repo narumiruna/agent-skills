@@ -42,6 +42,33 @@ ALLOWED_NODE_FIELDS = {"tag", "attrs", "children"}
 MAX_CONTENT_BYTES = 64 * 1024
 
 
+def _default_token_file():
+    config_home = os.environ.get("XDG_CONFIG_HOME")
+    if config_home:
+        return Path(config_home).expanduser() / "telegraph" / "access-token"
+    return Path.home() / ".config" / "telegraph" / "access-token"
+
+
+def _load_access_token(token_file=None):
+    token = os.environ.get("TELEGRAPH_ACCESS_TOKEN", "").strip()
+    if token:
+        return token
+
+    token_file = Path(token_file) if token_file is not None else _default_token_file()
+    try:
+        token = token_file.read_text(encoding="utf-8").strip()
+    except FileNotFoundError as error:
+        raise ValueError(
+            "Set TELEGRAPH_ACCESS_TOKEN or provide an access-token file "
+            f"(default: {token_file})"
+        ) from error
+    except OSError as error:
+        raise ValueError(f"Unable to read access-token file: {token_file}") from error
+    if not token:
+        raise ValueError(f"Access-token file is empty: {token_file}")
+    return token
+
+
 def validate_content(content):
     if not isinstance(content, list):
         raise ValueError("Content must be a JSON array of Telegraph nodes")
@@ -231,6 +258,15 @@ def build_parser():
     page.add_argument("content", type=Path, help="JSON file containing Telegraph nodes")
     page.add_argument("--title", required=True)
     page.add_argument(
+        "--token-file",
+        type=Path,
+        help=(
+            "Existing access-token file; defaults to "
+            "$XDG_CONFIG_HOME/telegraph/access-token or "
+            "~/.config/telegraph/access-token when TELEGRAPH_ACCESS_TOKEN is unset"
+        ),
+    )
+    page.add_argument(
         "--author-name",
         required=True,
         help="Approved author name, or an empty string to suppress the account default",
@@ -250,9 +286,10 @@ def main(argv=None):
             args.short_name, args.token_file, args.author_name, args.author_url
         )
     else:
-        token = os.environ.get("TELEGRAPH_ACCESS_TOKEN")
-        if not token:
-            raise SystemExit("TELEGRAPH_ACCESS_TOKEN is required for create-page")
+        try:
+            token = _load_access_token(args.token_file)
+        except ValueError as error:
+            raise SystemExit(str(error)) from error
         with args.content.open(encoding="utf-8") as content_file:
             content = json.load(content_file)
         result = create_page(

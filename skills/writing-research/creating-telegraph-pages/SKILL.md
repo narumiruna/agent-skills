@@ -16,9 +16,9 @@ Use the bundled `scripts/telegraph.py` by absolute path. A page is a public exte
 
 ## Credentials and Account Boundary
 
-Prefer `TELEGRAPH_ACCESS_TOKEN` from the user's secure environment. Never place a token in arguments, repository files, captured output, logs, or the response.
+Resolve credentials without exposing them: use a non-empty `TELEGRAPH_ACCESS_TOKEN`, then an explicit trusted `--token-file`, then `$XDG_CONFIG_HOME/telegraph/access-token` (or `~/.config/telegraph/access-token`). Before proposing account creation, check whether the environment variable is set or the default file is readable without printing either value. Do not mistake an unset environment variable for a missing account. Never place a token in arguments, repository files, captured output, logs, or the response.
 
-If no account exists, obtain separate approval for account creation, short name, and a new secret-file path. Then run:
+Only when no usable token exists, obtain separate approval for account creation, short name, and a new secret-file path. Then run:
 
 ```shell
 uv run --no-project python "$SKILL_DIR/scripts/telegraph.py" create-account \
@@ -40,7 +40,9 @@ uv run --no-project python "$SKILL_DIR/scripts/telegraph.py" create-page \
   /tmp/telegraph-content.json
 ```
 
-Pass the approved byline values explicitly. To suppress account-default identity, include `--author-name '' --author-url ''`; omitting these fields can publish the account's default author name or URL. Inject the token through the execution environment and load an approved token file without printing it.
+The helper automatically uses the standard token file when the environment variable is unset. For another existing token file, add `--token-file '<trusted-secret-path>'`; the helper reads it internally so its contents do not enter captured output.
+
+Pass the approved byline values explicitly. To suppress account-default identity, include `--author-name '' --author-url ''`; omitting these fields can publish the account's default author name or URL.
 
 Require an `https://telegra.ph/...` result, then fetch or open the public page and verify title, byline, links, and content structure. Report the URL and any unavailable check. Remove sensitive temporary drafts after successful publication.
 
