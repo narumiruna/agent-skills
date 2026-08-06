@@ -1,4 +1,0 @@
-interface:
-  display_name: "Applying IMRaD"
-  short_description: "Fit-check, review, transform, or draft IMRaD."
-  default_prompt: "Use $applying-imrad to choose the right IMRaD mode, preserve strict section boundaries, and keep every claim traceable to evidence or explicit assumptions."

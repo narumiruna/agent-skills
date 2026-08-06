@@ -1,4 +1,0 @@
-interface:
-  display_name: "Mermaid Diagrams"
-  short_description: "Create editable Mermaid diagrams and optional SVGs."
-  default_prompt: "Use $creating-mermaid-diagrams to create or revise this diagram, preserve editable Mermaid source, and render SVG only if the consumer needs it."

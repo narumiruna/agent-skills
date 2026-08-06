@@ -1,4 +1,0 @@
-interface:
-  display_name: "Using Jira CLI"
-  short_description: "Inspect Jira and perform exact authorized mutations."
-  default_prompt: "Use $using-jira-cli to inspect the confirmed Jira instance or prepare and verify the exact Jira mutation I authorize."

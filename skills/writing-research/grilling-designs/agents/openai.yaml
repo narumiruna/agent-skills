@@ -1,4 +1,0 @@
-interface:
-  display_name: "Grilling Designs"
-  short_description: "Resolve design decisions one hard question at a time."
-  default_prompt: "Use $grilling-designs to stress-test this design one evidence-informed decision at a time until no major branch remains unresolved."

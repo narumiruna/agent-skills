@@ -1,4 +1,0 @@
-interface:
-  display_name: "Code Review"
-  short_description: "Review changes with baseline security and integration checks."
-  default_prompt: "Use $reviewing-code for an ordinary read-only review with baseline security checks; use $auditing-code-security for a security audit when security is the primary objective."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Skill Scoring"
-  short_description: "Create numerical agent skill quality scorecards."
-  default_prompt: "Use $scoring-agent-skills to numerically score or compare the requested agent skills across trigger clarity, workflow actionability, safety boundaries, verification rigor, incremental knowledge value, and leanness, with direct evidence and clearly stated assessment limits."

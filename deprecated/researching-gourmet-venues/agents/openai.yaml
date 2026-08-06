@@ -1,4 +1,0 @@
-interface:
-  display_name: "Gourmet Venue Research (Deprecated)"
-  short_description: "Use the legacy gourmet research workflow."
-  default_prompt: "Use $researching-gourmet-venues as a deprecated compatibility reference to create or update a traceable city dining research pack with scope-checked sources, synchronized scores, and caveats."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Creating Slide Decks"
-  short_description: "Create coherent, validated Marp decks and visuals."
-  default_prompt: "Use $creating-slide-decks to build or revise this complete Marp deck with a coherent narrative, palette, visuals, and rendered checks."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "SVG Illustrations"
-  short_description: "Create accessible, portable SVG illustrations."
-  default_prompt: "Use $creating-svg-illustrations to create or revise this SVG for the target artifact and report source and visual validation separately."

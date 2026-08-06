@@ -1,4 +1,0 @@
-interface:
-  display_name: "Managing Git Worktrees"
-  short_description: "Manage worktrees without losing data or commits."
-  default_prompt: "Use $managing-git-worktrees to inspect and perform this worktree lifecycle task while preserving local data, refs, and detached commits."

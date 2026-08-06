@@ -1,4 +1,0 @@
-interface:
-  display_name: "Applying TDD"
-  short_description: "Scope TDD by source and test-data boundaries."
-  default_prompt: "Use $applying-tdd to enforce the ecosystem's production-scope and test-isolation boundaries, then apply red-green-refactor only to eligible observable behavior."

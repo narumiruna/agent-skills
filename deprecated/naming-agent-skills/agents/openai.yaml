@@ -1,4 +1,0 @@
-interface:
-  display_name: "Naming Agent Skills (Deprecated)"
-  short_description: "Use the merged skill-naming reference."
-  default_prompt: "Use $naming-agent-skills as a deprecated compatibility reference; prefer $creating-agent-skills for current naming, review, and authorized rename work."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Writing AGENTS.md"
-  short_description: "Write lean, scoped, evidence-backed agent guidance."
-  default_prompt: "Use $writing-agents-md to create or review concise repository guidance with grounded commands, clear authority, and verifiable completion."

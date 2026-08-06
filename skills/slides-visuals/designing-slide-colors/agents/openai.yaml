@@ -1,4 +1,0 @@
-interface:
-  display_name: "Slide Color Design"
-  short_description: "Design semantic slide palettes with contrast evidence."
-  default_prompt: "Use $designing-slide-colors to design or validate this slide palette, define semantic roles, calculate actual pairings, and leave unperformed checks open."

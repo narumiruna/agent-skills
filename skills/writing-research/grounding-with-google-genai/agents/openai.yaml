@@ -1,4 +1,0 @@
-interface:
-  display_name: "Google GenAI Grounding"
-  short_description: "Grounded research with Google GenAI tools"
-  default_prompt: "Use $grounding-with-google-genai to answer this request with Google Search, Google Maps, or URL Context grounding."
