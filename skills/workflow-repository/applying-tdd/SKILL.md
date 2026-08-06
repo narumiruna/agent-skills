@@ -11,7 +11,7 @@ Use tests as executable behavior specifications, not as a coverage ritual.
 
 Before writing a test:
 
-1. Load [test boundaries](references/test-boundaries.md) and apply the matching ecosystem's production-scope and test-isolation rules. For a listed ecosystem, only eligible production paths may enter TDD, and tests may use only the permitted test-owned inputs, unless more-specific repository instructions replace that row.
+1. Load [test boundaries](references/test-boundaries.md), resolve the repository's actual production and test layouts from its manifests, package configuration, imports, runner configuration, and established paths, then apply the matching ecosystem fallback only where that evidence is insufficient. More-specific repository instructions override the fallback.
 2. Partition eligible work by observable behavior rather than by file.
 3. Apply TDD to a work unit only when all are true:
    - it changes a contract observable at a stable boundary

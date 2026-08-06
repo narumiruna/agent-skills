@@ -42,9 +42,9 @@ Impact and implications
 
 <!-- _class: lead -->
 
-![Visual evidence of transformation width:800px](diagrams/impact.svg)
+## Evidence
 
-**Visual evidence** of transformation
+**Replace this text with verified visual or quantitative evidence.**
 
 ---
 

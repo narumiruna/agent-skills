@@ -17,13 +17,13 @@ Tech Presentation · 2026-01-13
 
 ---
 
-## Full-Page Diagram
+## Full-Page Background
 
-![bg fit](diagrams/architecture.svg)
+![bg fit](../icons/info.svg)
 
-# System Architecture
+# Information
 
-**Diagram summary:** Requests pass from clients through the gateway to application services and storage.
+**Visual summary:** A blue information icon demonstrates a fitted full-page background.
 
 *Full-page background with overlay title*
 
@@ -31,11 +31,11 @@ Tech Presentation · 2026-01-13
 
 ## Split Layout: Image Right
 
-![bg right fit](diagrams/workflow.svg)
+![bg right fit](../icons/check.svg)
 
-# Process Workflow
+# Completed Workflow
 
-**Diagram summary:** The request moves through validation and processing before a result returns to the user.
+**Visual summary:** A green check icon reinforces the completed state.
 
 **Key Steps:**
 1. User initiates request
@@ -50,25 +50,25 @@ Tech Presentation · 2026-01-13
 
 ## Split Layout: Image Left
 
-![bg left fit](diagrams/components.svg)
+![bg left fit](../icons/warning.svg)
 
-# Component Diagram
+# Review Required
 
-**Diagram summary:** The microservices architecture contains three main components:
+**Visual summary:** A warning icon marks three components that need review:
 
-- API Gateway
-- Service Mesh
-- Data Layer
+- Input validation
+- Processing state
+- Error recovery
 
 ---
 
 ## Custom Split Ratio
 
-![bg right:40% fit](diagrams/detail.svg)
+![bg right:40% fit](../icons/info.svg)
 
 # Detailed View
 
-**Diagram summary:** The detailed view expands the selected component into its inputs, processing stage, and outputs.
+**Visual summary:** An information icon occupies the narrower visual region.
 
 When you need more space for text, use a custom ratio.
 
@@ -82,12 +82,12 @@ When you need more space for text, use a custom ratio.
 
 ## Side-by-Side Comparison
 
-![bg left:50% fit](diagrams/before.svg)
-![bg right:50% fit](diagrams/after.svg)
+![bg left:50% fit](../icons/warning.svg)
+![bg right:50% fit](../icons/check.svg)
 
 # Before → After
 
-**Comparison summary:** The revised flow removes the intermediate handoff and reduces the path from four steps to three.
+**Comparison summary:** The warning state on the left becomes a completed state on the right.
 
 ---
 

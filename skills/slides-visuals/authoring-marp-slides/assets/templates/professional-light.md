@@ -50,9 +50,9 @@ Your Name · Date
 
 ## Process Overview
 
-![bg fit](diagrams/workflow.svg)
-
-**Three-step process**: Streamlined approach to success
+1. Establish the current state
+2. Apply the proposed change
+3. Verify the outcome
 
 ---
 

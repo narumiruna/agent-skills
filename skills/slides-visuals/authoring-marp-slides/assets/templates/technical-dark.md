@@ -45,11 +45,13 @@ def hello_world():
 
 ---
 
-## Diagram Example
+## Architecture Overview
 
-![bg fit](diagrams/architecture.svg)
-
-**Architecture overview**: System components and data flow
+| Component | Responsibility |
+| --- | --- |
+| Gateway | Validate and route requests |
+| Service | Apply domain behavior |
+| Store | Persist durable state |
 
 ---
 

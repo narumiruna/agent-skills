@@ -9,16 +9,16 @@ Preserve editable Mermaid source. Render a static asset only when the consumer r
 
 ## Route by Structure
 
-| Type | Best for | Reference | Example |
-| --- | --- | --- | --- |
-| Flowchart | processes and decisions | `references/flowchart.md` | `assets/examples/flowchart/basic.mmd` |
-| Sequence | ordered system interactions | `references/sequence.md` | `assets/examples/sequence/basic.mmd` |
-| Class | object models | `references/class.md` | `assets/examples/class/basic.mmd` |
-| State | lifecycle transitions | `references/state.md` | `assets/examples/state/basic.mmd` |
-| ER | data entities and relationships | `references/er.md` | `assets/examples/er/basic.mmd` |
-| Other | Gantt, pie, git, journey, timeline, mindmap, requirement, C4 | `references/other-types.md` | `assets/examples/other/gantt-basic.mmd` |
+| Type | Best for | Basic source |
+| --- | --- | --- |
+| Flowchart | processes and decisions | `assets/examples/flowchart/basic.mmd` |
+| Sequence | ordered system interactions | `assets/examples/sequence/basic.mmd` |
+| Class | object models | `assets/examples/class/basic.mmd` |
+| State | lifecycle transitions | `assets/examples/state/basic.mmd` |
+| ER | data entities and relationships | `assets/examples/er/basic.mmd` |
+| Other | Gantt, pie, git, journey, timeline, mindmap, requirement, C4 | `assets/examples/other/gantt-basic.mmd` |
 
-Load only the matching reference.
+Read `references/types.md` only for type-specific decisions or syntax beyond the basic source.
 
 ## Workflow
 

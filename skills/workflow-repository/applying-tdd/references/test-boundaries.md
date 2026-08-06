@@ -1,24 +1,31 @@
 # Test Boundaries
 
-These are explicit policy defaults for this skill, not claims that every project in an ecosystem uses the same layout. More-specific repository instructions may replace a row. Otherwise, apply a listed row exactly; do not substitute another production root because the project uses a different layout.
+These are conservative policy fallbacks, not claims that every project in an ecosystem uses the same layout. Resolve the repository's established source and test roots first; more-specific repository instructions override this reference.
 
 A work unit enters TDD only when:
 
-1. its production path matches the ecosystem row
+1. its production path belongs to a repository-established source root or, when that cannot be established, the matching fallback below
 2. it passes the behavior gate in `SKILL.md`
-3. its test uses only the permitted test-owned inputs
+3. its test uses only repository-established or fallback test-owned inputs
 
-For an unlisted ecosystem, use the general behavior gate until an explicit row is added.
+For an unlisted ecosystem, use the general behavior gate and repository evidence rather than inventing a layout.
+
+## Resolve Source and Test Layouts
+
+1. Find the nearest package, module, or workspace boundary from the ecosystem manifest.
+2. Inspect build/package configuration, exports, imports, source-control patterns, test scripts, and runner configuration for the paths actually used by the project.
+3. Prefer consistent existing production and test paths over ecosystem convention. Do not force a `src/` layout onto a flat-layout project.
+4. Use the table's fallback only for the part of the layout that remains unresolved.
 
 ## Boundary List
 
 | Ecosystem | Project boundary | Production behavior eligible for TDD | Test placement and owned inputs |
 | --- | --- | --- | --- |
-| Python | Nearest ancestor containing `pyproject.toml`, `setup.cfg`, or `setup.py` | Behavior and packaged runtime resources under `src/`; exclude generated and vendored code | Tests under `tests/`; inline builders, `tests/fixtures/`, temporary paths, mocks, and fakes |
-| Rust | Nearest ancestor whose `Cargo.toml` defines a package; evaluate each workspace member separately | Behavior and packaged runtime resources under `src/`; exclude generated and vendored code | Unit and documentation tests attached to `src/`; integration tests and fixtures under `tests/`; temporary paths, mocks, and fakes |
+| Python | Nearest ancestor containing `pyproject.toml`, `setup.cfg`, or `setup.py` | Runtime package/module roots declared by build configuration or established imports. Fallback: `src/` when present, otherwise top-level import packages; exclude tooling, generated, and vendored code | Paths discovered from test configuration and established tests. Fallback: `tests/`; inline builders, fixtures under the resolved test root, temporary paths, mocks, and fakes |
+| Rust | Nearest ancestor whose `Cargo.toml` defines a package; evaluate each workspace member separately | Behavior and packaged runtime resources under Cargo-established source targets; fallback: `src/`; exclude generated and vendored code | Unit and documentation tests attached to source targets; integration tests and fixtures under `tests/`; temporary paths, mocks, and fakes |
 | Go | Nearest ancestor containing `go.mod`; evaluate each workspace module separately | Non-test, non-generated `.go` files in packages selected by `go list ./...`; exclude `vendor/` and `testdata/` | Colocated `*_test.go`; the target package's `testdata/`, `t.TempDir()`, mocks, fakes, and local in-process test servers |
-| TypeScript | Nearest ancestor containing `package.json`; evaluate each monorepo member separately | Runtime source under `src/` using `.ts`, `.tsx`, `.mts`, or `.cts`; exclude declarations, generated code, tests, fixtures, and mocks | Files discovered by the configured runner; conservative fallback: `tests/**/*.test.{ts,tsx,mts,cts}`; test-owned fixtures, temporary paths, mocks, and fakes |
-| JavaScript | Nearest ancestor containing `package.json`; evaluate each monorepo member separately | Runtime source under `src/` using `.js`, `.jsx`, `.mjs`, or `.cjs`; exclude generated code, tests, fixtures, and mocks | Files discovered by the configured runner; conservative fallback: `tests/**/*.test.{js,jsx,mjs,cjs}`; test-owned fixtures, temporary paths, mocks, and fakes |
+| TypeScript | Nearest ancestor containing `package.json`; evaluate each monorepo member separately | Runtime roots established by `tsconfig`, package exports, build configuration, or imports. Fallback: `src/` when present, otherwise package-owned runtime files; exclude declarations, tooling, generated code, tests, fixtures, and mocks | Files discovered by the configured runner; fallback: `tests/**/*.test.{ts,tsx,mts,cts}`; test-owned fixtures, temporary paths, mocks, and fakes |
+| JavaScript | Nearest ancestor containing `package.json`; evaluate each monorepo member separately | Runtime roots established by package exports, build configuration, or imports. Fallback: `src/` when present, otherwise package-owned runtime files; exclude tooling, generated code, tests, fixtures, and mocks | Files discovered by the configured runner; fallback: `tests/**/*.test.{js,jsx,mjs,cjs}`; test-owned fixtures, temporary paths, mocks, and fakes |
 
 ## Isolation Rules
 
@@ -27,13 +34,13 @@ For an unlisted ecosystem, use the general behavior gate until an explicit row i
 - If eligible behavior normally reads data from outside its production path, recreate the smallest representative input in a permitted fixture location or per-test temporary workspace, then pass or inject it.
 - Tests may import ordinary dependencies, but replace external side effects with controlled test doubles or local in-process substitutes.
 - Test code must not open or assert against real manifests, lockfiles, tool configuration, scripts, migrations, examples, benchmarks, build output, user files, host environment values, network services, or databases. Build and test tools may still read their own configuration to compile and discover tests.
-- A production change outside the listed path is outside TDD. Tests may still be added in the listed test location for eligible production behavior.
+- A production change outside the resolved eligible roots is outside TDD. Tests may still be added in the resolved test location for eligible production behavior.
 
 ## Ecosystem-Specific Rules
 
 ### Python
 
-Test `src/package/config.py` with data under `tests/fixtures/` or generated in a temporary directory. Do not read the project's real `pyproject.toml` as test data.
+For a `src/` layout, test `src/package/config.py` with data under the resolved test fixture root or generated in a temporary directory. For a flat layout, use the package root established by build configuration or imports. Do not read the project's real `pyproject.toml` as test data.
 
 ### Rust
 
@@ -68,7 +75,7 @@ Always run relevant existing tests or a focused smoke check plus the repository 
 
 ## Convention Basis
 
-The `src/` restrictions for Python, TypeScript, and JavaScript are deliberate skill policy defaults. Python's `src` layout is documented but not universal; JavaScript and TypeScript have no single mandatory source layout. Rust and Go locations follow their toolchains more directly. Test discovery must still be verified against the active runner.
+Source layouts are repository facts, not universal ecosystem rules. Python may use `src/` or a flat package layout; JavaScript and TypeScript have no single mandatory source root. Rust and Go expose stronger toolchain conventions, but workspace and target boundaries still require inspection. Test discovery must be verified against the active runner.
 
 - [Python `src` layout versus flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)
 - [Cargo package layout](https://doc.rust-lang.org/cargo/guide/project-layout.html)

@@ -32,9 +32,9 @@ def example():
 
 ## Image or Diagram
 
-![Description of the diagram width:600px](diagrams/example.svg)
+> Add a repository-relative image only after its asset exists.
 
-**Caption**: Visible semantic equivalent for the visual
+**Caption:** Include a visible semantic equivalent for a meaningful visual.
 
 ---
 

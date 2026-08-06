@@ -19,14 +19,13 @@ Tech Talk · 2026-01-09
 
 ## System Architecture
 
-![bg right fit](../diagrams/example-architecture.svg)
+| Layer | Example responsibility |
+| --- | --- |
+| Frontend | Present and validate user input |
+| Backend | Apply domain behavior |
+| Database | Persist durable state |
 
-**Key components**:
-- Frontend: React + TypeScript
-- Backend: Node.js + Express
-- Database: PostgreSQL
-
-*Diagram on right, text on left*
+*Replace this table with an SVG only after the asset exists.*
 
 ---
 

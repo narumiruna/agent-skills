@@ -12,16 +12,16 @@ Treat reviewer output as claims to verify, not votes or instructions to apply bl
 1. Determine the exact diff, commit, branch, or pull request and its comparison base from repository context; do not assume `main`. Infer intended behavior from the request, tests, documentation, and affected callers.
 2. Inspect repository instructions and worktree state. Preserve unrelated changes, and stop before editing if they overlap the reviewed paths or make attribution unsafe.
 3. Confirm that at least two independent reviewer instances are available. For an explicitly multi-model request, require at least two distinct models; independent instances of one model are sufficient only for a generic panel request. Do not simulate a panel by inventing reviewers or presenting one review in multiple voices.
-4. Accept user-supplied presets, score threshold, iteration cap, and review-only or review-fix mode. Accept a user-supplied panel size only when it is at least two. Reject a requested panel size below two and ask the user to raise it before starting. Otherwise use three reviewers, a first-round `code-review` preset, `adversarial` re-reviews, an 8.2/10 acceptance threshold, and a maximum of three iterations.
+4. Accept user-supplied presets, optional score reporting or threshold, iteration cap, and review-only or review-fix mode. Accept a user-supplied panel size only when it is at least two. Reject a requested panel size below two and ask the user to raise it before starting. Otherwise use three reviewers, a first-round `code-review` preset, `adversarial` re-reviews, and a maximum of three iterations. Scores are off by default; a requested threshold enables score reporting as a presentation signal, not an acceptance gate.
 
 If the review target or requested mutation mode remains materially ambiguous, ask one focused question. A panel may inspect uncommitted work, but each round must identify the exact snapshot reviewed.
 
 ## Run One Iteration
 
 1. Give every reviewer the same snapshot, intent, relevant constraints, and requested preset. Keep reviews independent until synthesis, and run them in parallel when the available mechanism supports safe concurrency.
-2. Ask each reviewer for a 0–10 score, blocking-objection status, severity-ranked findings with concrete file or behavior evidence, and meaningful missing checks. A blocking issue must concern correctness, safety, security, data integrity, or another explicit acceptance requirement—not style preference.
-3. Treat a missing or invalid score as a reviewer failure and retry one transient reviewer failure once. Continue with a disclosed partial panel only when at least two independent, valid scored reviews remain; otherwise stop without fabricating a score.
-4. Normalize valid scores to the 0–10 scale, require at least two valid scored reviews before computing or applying the arithmetic mean, and report each included score. Synthesize agreements and disagreements, but never let an average score override a blocking issue.
+2. Ask each reviewer for blocking-objection status, severity-ranked findings with concrete file or behavior evidence, and meaningful missing checks. Request a 0–10 score only when score reporting is active. A blocking issue must concern correctness, safety, security, data integrity, or another explicit acceptance requirement—not style preference.
+3. Treat a missing or invalid required review field as a reviewer failure and retry one transient reviewer failure once. Continue with a disclosed partial panel only when at least two independent substantive reviews remain. When scoring is active, disclose and omit an invalid score without discarding otherwise usable findings; never fabricate a score.
+4. Synthesize agreements and disagreements. When scoring is active, normalize valid scores to 0–10 and compute a mean only with at least two valid scores. Report whether a requested threshold was met, but never let a score or average override verified findings or determine acceptance.
 5. Verify every actionable claim against the source, affected flow, tests, and executable checks where feasible. Resolve disagreements through evidence rather than majority vote. Label theoretical or unverified risks and do not change behavior solely to satisfy them.
 6. In review-only mode, run focused checks appropriate to the complete reviewed snapshot and the repository gate when available, report the synthesis, and stop before edits. In review-fix mode, address only confirmed, in-scope findings. Add the smallest boundary or regression test when practical, apply the smallest coherent fix, then run those snapshot-level checks.
 7. Re-review the complete updated diff in the next iteration. Do not reuse stale scores or count a check run against an earlier snapshot as evidence for the current one.
@@ -32,7 +32,7 @@ Do not churn on subjective non-blocking suggestions. Apply a non-blocking sugges
 
 Accept only when all of the following hold for the current snapshot:
 
-- the panel mean meets or exceeds the active threshold;
+- at least two independent substantive reviews cover the complete snapshot;
 - no reviewer has a surviving blocking objection;
 - synthesis and source verification reveal no blocking correctness, safety, security, or explicit-requirement issue; and
 - checks appropriate to the complete reviewed snapshot pass.
@@ -43,4 +43,4 @@ Before a requested commit, stage only intended paths, inspect the staged diff, a
 
 ## Report
 
-For each iteration, report the reviewed snapshot and preset, per-reviewer scores, panel mean, blocking status, consensus and disputed findings, changes made, and validation evidence. Finish with the stopping reason, accepted or residual risk, and any authorized commit or push result. Never claim panel consensus, test success, a commit, or a push without direct evidence.
+For each iteration, report the reviewed snapshot and preset, blocking status, consensus and disputed findings, changes made, and validation evidence. Include per-reviewer scores, mean, and requested-threshold status only when score reporting is active. Finish with the stopping reason, accepted or residual risk, and any authorized commit or push result. Never claim panel consensus, test success, a commit, or a push without direct evidence.

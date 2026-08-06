@@ -46,5 +46,3 @@ A compact form:
 - A ratio proves only the measured foreground/background pairing at the stated threshold.
 - Explain color purposes concretely; avoid aesthetic-only rationales such as “looks modern.”
 - Omit code, chart, semantic, or other usage guidance when the deck does not contain it.
-
-See `../output-examples.md` for representative outputs, not mandatory response templates.
