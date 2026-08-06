@@ -1,21 +1,21 @@
-# Codebase Memory CLI Command Shapes
+# Codebase Memory CLI Command Reference
 
-These shapes were verified with `codebase-memory-mcp 0.9.0`. Check `codebase-memory-mcp cli <tool> --help` because flags and output schemas may change.
+Verified with `codebase-memory-mcp 0.9.0` and its release documentation. Run `codebase-memory-mcp --version` and `codebase-memory-mcp cli <tool> --help`; installed schemas override this reference.
 
-## Invocation and Input
+## Invocation Contract
 
 ```sh
-codebase-memory-mcp --version
 codebase-memory-mcp --help
+codebase-memory-mcp --version
 codebase-memory-mcp cli <tool> --help
 codebase-memory-mcp cli <tool> --flag value
 codebase-memory-mcp cli <tool> --args-file /tmp/codebase-memory-args.json
 printf '%s\n' '{"project":"my-project"}' | codebase-memory-mcp cli index_status
 ```
 
-Do not use the deprecated positional raw-JSON form. Normal tool output is JSON on stdout; informational initialization logs are written to stderr. Bare `codebase-memory-mcp` starts the MCP stdio server and is forbidden by this skill.
+Use flags for scalar values and stdin or `--args-file` JSON for arrays. Positional raw JSON still works in v0.9.0 but emits a deprecation warning. Tool results are JSON on stdout; initialization logs are written to stderr. Bare `codebase-memory-mcp` starts the MCP stdio server.
 
-## Projects and Indexing
+## Project Identity and Indexing
 
 ```sh
 codebase-memory-mcp cli list_projects
@@ -26,30 +26,41 @@ codebase-memory-mcp cli index_repository \
   --name my-project
 ```
 
-`--name` is optional; use it to avoid collisions or make worktree identity explicit.
+Match `list_projects` output against `root_path` and, for Git worktrees, its `git.canonical_root`, `git.worktree_root`, branch, and `head_sha`. `index_status` in v0.9.0 reports identity and indexed Git state but not index mode or working-tree freshness. `--name` is optional; use an unambiguous value to avoid path- or worktree-derived collisions.
 
 Index modes from installed help:
 
-- `fast`: filtered files, type-aware LSP call/usage resolution, no similarity or semantic edges.
+- `fast`: filtered files and type-aware per-file/cross-file call and usage resolution; no similarity or semantic edges.
 - `moderate`: filtered files plus similarity and semantic edges.
-- `full`: all files plus similarity and semantic edges.
-- `cross-repo-intelligence`: match routes and channels across projects; pass `--target-projects` as an array.
+- `full`: all normally indexable files plus similarity and semantic edges; safety exclusions and unsupported paths can still limit coverage.
+- `cross-repo-intelligence`: route/channel matching across specified projects; pass `target_projects` as an array.
 
-All modes perform per-file and cross-file type-aware LSP resolution. `--persistence true` writes `.codebase-memory/graph.db.zst` into the target repository; omit it unless that artifact is explicitly wanted.
+```sh
+printf '%s\n' '{
+  "repo_path": "/absolute/path/to/repository",
+  "mode": "cross-repo-intelligence",
+  "name": "orders-service",
+  "target_projects": ["billing-service", "notifications-service"]
+}' | codebase-memory-mcp cli index_repository
+```
 
-## Focused Discovery
+Every index is stored in the local codebase-memory cache. `--persistence true` additionally writes `.codebase-memory/graph.db.zst` in the repository for sharing; omit it during ordinary discovery. Inspect `status`, `excluded`, `skipped_count` or `skipped`, node/edge counts, and any degraded result before trusting coverage.
 
-Keyword or natural-language BM25 search:
+## Symbol Search
+
+BM25 keyword search:
 
 ```sh
 codebase-memory-mcp cli search_graph \
   --project my-project \
   --query 'extension loader' \
+  --label Function \
+  --file-pattern 'src/*' \
   --limit 20 \
   --offset 0
 ```
 
-Identifier or structural search:
+Identifier search:
 
 ```sh
 codebase-memory-mcp cli search_graph \
@@ -60,9 +71,9 @@ codebase-memory-mcp cli search_graph \
   --limit 20
 ```
 
-A supplied `--query` ignores `--name-pattern`. Responses include `total` and `has_more`; increase `offset` by `limit` until complete when exhaustive coverage is required.
+`--query` is whitespace-tokenized BM25 search and can be broad; it ignores `--name-pattern` when both are supplied. Use `--qn-pattern` for qualified-name matching. Responses expose `total` and `has_more`; increase `offset` by `limit` until complete when exhaustive coverage is required.
 
-Semantic search needs a `moderate` or `full` index. Use structured input so `semantic_query` remains an array:
+Semantic search requires `moderate` or `full` and an array:
 
 ```sh
 printf '%s\n' '{
@@ -72,23 +83,23 @@ printf '%s\n' '{
 }' | codebase-memory-mcp cli search_graph
 ```
 
-Each semantic keyword is scored independently, and semantic matches appear separately under `semantic_results`.
+The keywords are combined as an all-keyword semantic match. Read `semantic_results` and its scores separately. With no structural query or filters, ordinary `results`/`total` can describe a broad graph listing rather than semantic matches.
 
-## Tracing and Source
+## Trace and Source
 
 ```sh
 codebase-memory-mcp cli trace_path \
   --project my-project \
-  --function-name OrderHandler \
+  --function-name my-project.pkg.orders.OrderHandler \
   --direction inbound \
   --depth 3 \
   --mode calls \
   --risk-labels true \
-  --include-tests false
+  --include-tests true
 
 codebase-memory-mcp cli trace_path \
   --project my-project \
-  --function-name OrderHandler \
+  --function-name my-project.pkg.orders.OrderHandler \
   --direction outbound \
   --depth 3 \
   --mode data_flow \
@@ -100,11 +111,9 @@ codebase-memory-mcp cli get_code_snippet \
   --include-neighbors true
 ```
 
-Trace modes are `calls`, `data_flow`, and `cross_service`. Cross-service mode follows HTTP, async, data-flow, and available cross-repository edges. When test callers matter, set `--include-tests true` explicitly.
+Trace modes are `calls`, `data_flow`, and `cross_service`. Cross-service mode follows available HTTP, async, data-flow, and cross-repository edges. Tests are excluded by default. The optional risk labels classify proximity by hop distance; they are not a domain-specific risk assessment.
 
 ## Schema, Cypher, and Architecture
-
-Inspect the actual graph before writing Cypher:
 
 ```sh
 codebase-memory-mcp cli get_graph_schema --project my-project
@@ -114,17 +123,14 @@ codebase-memory-mcp cli query_graph \
   --query "MATCH (n:Function) WHERE n.name = 'OrderHandler' RETURN n.name, n.qualified_name, n.file_path LIMIT 20" \
   --max-rows 20
 
-codebase-memory-mcp cli get_architecture \
-  --project my-project \
-  --aspects overview
-
-codebase-memory-mcp cli get_architecture \
-  --project my-project \
-  --path packages/orders \
-  --aspects all
+printf '%s\n' '{
+  "project": "my-project",
+  "path": "packages/orders",
+  "aspects": ["overview"]
+}' | codebase-memory-mcp cli get_architecture
 ```
 
-`query_graph` has no offset pagination; constrain Cypher and `--max-rows`. `search_graph` is the better choice for paginated browsing.
+Build Cypher only from labels, properties, and edge types returned by `get_graph_schema`. `query_graph` supports a read-only openCypher subset, has no CLI offset, and defaults up to a 100,000-row ceiling; include Cypher `LIMIT` and `--max-rows`. Prefer `search_graph` for paginated browsing. Scope architecture by path and request only needed aspects to control output size.
 
 ## Literal Search and Change Impact
 
@@ -133,6 +139,7 @@ codebase-memory-mcp cli search_code \
   --project my-project \
   --pattern 'ORDER_NOT_FOUND' \
   --file-pattern '*.ts' \
+  --path-filter '^src/' \
   --mode compact \
   --context 2 \
   --limit 20
@@ -148,8 +155,8 @@ codebase-memory-mcp cli detect_changes \
   --depth 2
 ```
 
-`search_code` modes are `compact`, `full`, and `files`. It reports grep and enriched-result totals but has no offset; narrow the path or file pattern, or raise the limit.
+`search_code` searches indexed files only. Modes are `compact`, `full`, and `files`; results report grep and enriched totals but provide no offset, so narrow `file_pattern`/`path_filter` or raise the limit. In v0.9.0, `detect_changes --scope all` maps current changes, while `--since <ref>` compares `<ref>...HEAD`. Deduplicate repeated `changed_files`, and verify the paths directly before treating `changed_count` or impacted symbols as complete.
 
-## Non-Discovery Tools
+## Stateful or Sensitive Tools
 
-The CLI also exposes `delete_project`, `manage_adr`, and `ingest_traces`. These mutate stored state or may ingest sensitive runtime data. Do not use them during ordinary discovery. If explicitly requested, inspect the installed tool help, confirm the exact project and payload, execute only the approved operation, and verify the resulting state.
+`delete_project` removes cached graph data. `manage_adr` mutates stored architectural decisions. `ingest_traces` mutates graph state and can expose sensitive runtime metadata. Inspect installed help and verify the exact project and payload before an explicitly scoped use. During ordinary discovery, use none of them except `delete_project` to remove a uniquely named index created in the same task.
