@@ -13,8 +13,8 @@ Read [the command reference](references/commands.md) only when selecting index m
 
 ## Establish a Trustworthy Index
 
-1. Check `command -v codebase-memory-mcp`, `codebase-memory-mcp --version`, and `codebase-memory-mcp cli <tool> --help`. If the binary is missing, continue with repository tools and report the lost graph coverage; do not block ordinary discovery on installation.
-2. Run `list_projects`. Select a project by its exact `root_path`; for worktrees also verify the reported canonical root, worktree root, branch, and HEAD rather than trusting the derived name.
+1. Run `list_projects` directly without preliminary availability, version, or help checks. If the command is unavailable, continue with repository tools and report the lost graph coverage; do not block ordinary discovery on installation.
+2. Select a project by its exact `root_path`; for worktrees also verify the reported canonical root, worktree root, branch, and HEAD rather than trusting the derived name.
 3. For a match, run `index_status` and compare its root and indexed HEAD with the target repository. Re-index before relying on graph evidence when the root or HEAD differs, when uncommitted source being explored is newer than the index, or when the required index mode cannot be established. In v0.9.0, status does not report the mode or prove working-tree freshness.
 4. For a new or stale project, run `index_repository` with an absolute path and an unambiguous name. Default to `fast`; use `moderate` only for semantic/similarity search, `full` only when relevant files filtered by ordinary modes must be included, and `cross-repo-intelligence` only for repositories within the requested scope.
 5. Inspect the indexing result. Treat `degraded`, skipped files, exclusions, a mismatched root, or an unexpected node count as coverage limits, not a successful complete index. Omit `--persistence` unless a repository artifact was explicitly requested.
@@ -55,6 +55,6 @@ curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/i
 
 Verify the installed path and version afterward; do not start the server.
 
-Prefer flags for scalar values and stdin JSON or `--args-file` for arrays and complex input. Positional raw JSON is deprecated. Parse stdout as JSON; initialization and progress logs can appear on stderr. Trust installed help over remembered flags or this version-qualified reference.
+Prefer flags for scalar values and stdin JSON or `--args-file` for arrays and complex input. Positional raw JSON is deprecated. Parse stdout as JSON; initialization and progress logs can appear on stderr. If a command reports a schema mismatch, consult its installed help instead of relying on remembered flags or this version-qualified reference.
 
 Conclude with the matched root/project, known index mode and freshness, decisive symbols and file/line evidence, relevant impact paths, material fallbacks, and coverage limits. Do not claim an unknown reused-index mode or complete coverage.

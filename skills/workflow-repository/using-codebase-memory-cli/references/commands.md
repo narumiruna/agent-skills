@@ -1,13 +1,10 @@
 # Codebase Memory CLI Command Reference
 
-Verified with `codebase-memory-mcp 0.9.0` and its release documentation. Run `codebase-memory-mcp --version` and `codebase-memory-mcp cli <tool> --help`; installed schemas override this reference.
+Verified with `codebase-memory-mcp 0.9.0` and its release documentation. Do not run availability, version, or help commands as routine preflight; invoke the required tool directly. Installed schemas override this reference.
 
 ## Invocation Contract
 
 ```sh
-codebase-memory-mcp --help
-codebase-memory-mcp --version
-codebase-memory-mcp cli <tool> --help
 codebase-memory-mcp cli <tool> --flag value
 codebase-memory-mcp cli <tool> --args-file /tmp/codebase-memory-args.json
 printf '%s\n' '{"project":"my-project"}' | codebase-memory-mcp cli index_status
