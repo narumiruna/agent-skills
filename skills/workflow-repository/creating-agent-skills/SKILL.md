@@ -27,7 +27,6 @@ For naming-only output, lead with the recommendation and deciding reason. For mu
 2. Choose or review the name with the naming criteria above.
 3. Keep only justified contents:
    - `SKILL.md` for trigger metadata and post-trigger workflow.
-   - `agents/openai.yaml` when the target ecosystem uses UI metadata.
    - `references/` for detail loaded only on demand.
    - `scripts/` for deterministic repeated operations.
    - `assets/` for material copied into or used by outputs.
