@@ -1,63 +1,60 @@
 ---
 name: using-codebase-memory-cli
-description: Index and explore codebases with the `codebase-memory-mcp` command-line interface for graph-first symbol search, call and data-flow tracing, source snippets, architecture, Cypher queries, and change impact. Use proactively for non-trivial code discovery, architecture exploration, relationship tracing, or change-impact analysis whenever the CLI is installed, and whenever the user or repository requests codebase-memory; never start or use an MCP server.
+description: Use `codebase-memory-mcp` in CLI-only mode for graph-first codebase indexing, symbol search, call and data-flow tracing, source snippets, architecture, Cypher, and change impact. Always prefer it over grep, glob, or file search for code discovery whenever the CLI is installed, even when the user does not name it, and use it whenever the user or repository requests codebase-memory. Fall back only for literal/config searches, non-code or unsupported paths, or insufficient graph results; never start or configure the MCP server.
 ---
 
 # Using Codebase Memory CLI
 
-Use codebase-memory proactively as the default discovery path for unfamiliar or non-trivial code. Prefer its graph over grep, globbing, or broad file reads for symbols, relationships, architecture, and impact analysis, even when the user does not name the tool. Skip it for a known small file, a literal or configuration search, or when the CLI is unavailable and installation has not been authorized.
+Always prefer codebase-memory CLI graph tools over grep, glob, or file search for code discovery when the CLI is installed, even if the user does not name the tool. Use the graph to locate structure and relationships before broad repository search. It is discovery evidence, not a replacement for source, tests, history, or runtime evidence.
 
-Do not start the MCP server, call MCP graph tools, or configure an agent to use them. Every graph operation must have the form `codebase-memory-mcp cli <tool> ...`; never run bare `codebase-memory-mcp`, because that starts the stdio server.
+Run graph tools only as `codebase-memory-mcp cli <tool> ...`. `codebase-memory-mcp` with no arguments starts the stdio server; never run it. Do not call MCP graph tools or configure an agent to use them.
 
-## Install When Missing
+Read [the command reference](references/commands.md) only when selecting index modes, constructing structured input, or using a less common tool.
 
-When `command -v codebase-memory-mcp` fails, offer the upstream installer instead of silently abandoning graph discovery:
+## Establish a Trustworthy Index
+
+1. Check `command -v codebase-memory-mcp`, `codebase-memory-mcp --version`, and `codebase-memory-mcp cli <tool> --help`. If the binary is missing, continue with repository tools and report the lost graph coverage; do not block ordinary discovery on installation.
+2. Run `list_projects`. Select a project by its exact `root_path`; for worktrees also verify the reported canonical root, worktree root, branch, and HEAD rather than trusting the derived name.
+3. For a match, run `index_status` and compare its root and indexed HEAD with the target repository. Re-index before relying on graph evidence when the root or HEAD differs, when uncommitted source being explored is newer than the index, or when the required index mode cannot be established. In v0.9.0, status does not report the mode or prove working-tree freshness.
+4. For a new or stale project, run `index_repository` with an absolute path and an unambiguous name. Default to `fast`; use `moderate` only for semantic/similarity search, `full` only when relevant files filtered by ordinary modes must be included, and `cross-repo-intelligence` only for repositories within the requested scope.
+5. Inspect the indexing result. Treat `degraded`, skipped files, exclusions, a mismatched root, or an unexpected node count as coverage limits, not a successful complete index. Omit `--persistence` unless a repository artifact was explicitly requested.
+
+## Discovery Priority
+
+Use this order and stop when evidence is sufficient:
+
+1. `search_graph` — find functions, methods, classes, interfaces, routes, variables, or other symbols. Start with `--query` for BM25 keywords or `--name-pattern`/`--qn-pattern` for identifiers; add label and file filters where useful. Do not combine `--query` with `--name-pattern`, because the query wins. Paginate until `has_more` is false when completeness matters.
+2. `trace_path` — find inbound callers, outbound callees, parameter data flow, or cross-service traversal. Resolve a short or duplicated name through `search_graph`, then pass the returned `qualified_name`; include tests explicitly when they matter.
+3. `get_code_snippet` — inspect the selected symbol's source and optional neighbors by qualified name.
+4. `query_graph` — express a relationship or aggregation the focused tools cannot. Run `get_graph_schema` first and constrain the read-only Cypher result.
+5. `get_architecture` — obtain a compact, preferably path-scoped project summary after focused evidence, not instead of it.
+
+For semantic discovery, use `search_graph` only on a known `moderate` or `full` index. Pass `semantic_query` as an array and evaluate `semantic_results`; ordinary `results` and `total` are separate and can be broad without a structural filter. For a diff or Git range, use `detect_changes` to identify changed files and candidate impacted symbols before following the priority order on important paths.
+
+Example chain:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+codebase-memory-mcp cli search_graph --project my-project --name-pattern '.*OrderHandler.*'
+codebase-memory-mcp cli trace_path --project my-project --function-name OrderHandler --direction inbound
+codebase-memory-mcp cli get_code_snippet --project my-project --qualified-name my-project.pkg.orders.OrderHandler
 ```
 
-Downloading and executing a remote script requires explicit user approval. The upstream command defaults to automatic agent configuration, which conflicts with this CLI-only workflow; for an approved installation, preserve the installer but disable that configuration:
+Verify critical claims in the reported source lines and relevant tests or runtime behavior. Missing edges do not prove that no relationship exists. Re-index when later traversal must reflect source changes, and report stale index state, ambiguity, exclusions, skipped files, or unresolved edges instead of inferring through them.
+
+## Fallback and Boundaries
+
+Leave the graph-tool priority only when searching string literals, error messages, or configuration values; searching non-code files such as Dockerfiles, shell scripts, or configs; or when graph tools return insufficient results. Prefer CLI `search_code` for exact text or regex in indexed files before repository search. Use `rg`, `find`, globbing, or targeted reads only for non-code, generated, ignored, excluded, changed-but-unindexed, unsupported, or still-unresolved paths. State the material fallback and why it was needed.
+
+Ordinary discovery authorizes an index in the tool's local cache without `--persistence`; it does not authorize repository artifacts or unrelated repositories. `--persistence` additionally writes into the repository. Existing-index deletion, ADR mutation, trace ingestion, cross-repository expansion, native `install`/`update`/`config`, agent integration, and server/UI setup require explicit scope or authorization. A uniquely named temporary index created during the current task may be deleted during cleanup; never delete a pre-existing or reused index without exact approval.
+
+Installation expands scope. Only with explicit approval to download and execute the upstream script, use its binary-only mode because the default configures detected agents:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash -s -- --skip-config
 ```
 
-After installation, verify `command -v codebase-memory-mcp` and `codebase-memory-mcp --version`, then continue without starting the server.
+Verify the installed path and version afterward; do not start the server.
 
-## Establish the Index
+Prefer flags for scalar values and stdin JSON or `--args-file` for arrays and complex input. Positional raw JSON is deprecated. Parse stdout as JSON; initialization and progress logs can appear on stderr. Trust installed help over remembered flags or this version-qualified reference.
 
-1. Run `command -v codebase-memory-mcp`, `codebase-memory-mcp --version`, and the narrowest relevant help: `codebase-memory-mcp cli <tool> --help`.
-2. Run `codebase-memory-mcp cli list_projects` and match the target by `root_path`, not only by project name.
-3. Run `index_status` for an existing project. Compare its root and Git HEAD with the target repository; re-index when it is absent or stale. If semantic search is required and the existing index mode is unknown, re-index with an explicit semantic-capable mode.
-4. Use `index_repository` with an explicit repository path. Prefer `fast` for ordinary structural discovery, `moderate` when semantic search is needed with filtered files, and `full` only when excluded files or complete semantic coverage justify the extra work. Do not enable persistence unless a repository artifact was requested.
-
-Read [references/commands.md](references/commands.md) when choosing flags, structured input, index modes, or a less common tool.
-
-## Discover Graph-First
-
-Use this order, stopping when the required evidence is sufficient:
-
-1. `search_graph` to locate functions, methods, classes, interfaces, routes, channels, or other symbols. Start with `--query`; use `--name-pattern` or `--qn-pattern` for regex-like identifier matching. Do not combine `--query` with `--name-pattern`, because the query takes precedence.
-2. `trace_path` to find inbound callers, outbound callees, parameter data flow, or cross-service paths. Resolve ambiguous short names with search results before trusting a trace.
-3. `get_code_snippet` with the returned `qualified_name` to inspect exact source and optional immediate neighbors.
-4. `query_graph` only for relationships or aggregations the focused tools cannot express. Run `get_graph_schema` first and build Cypher from the reported labels, properties, and edge types.
-5. `get_architecture` for a high-level or path-scoped view, not as a substitute for focused symbol evidence.
-
-Use `search_graph` pagination while `has_more` is true when completeness matters. Semantic queries require a `moderate` or `full` index and an array of keywords.
-
-Treat graph results as discovery evidence rather than infallible source truth. For critical behavior, verify the reported file, lines, snippet, and relevant tests or runtime evidence. Report unresolved ambiguity, filtered paths, stale index state, or missing edges instead of filling gaps by inference.
-
-## Fallback and Change Impact
-
-- Use CLI `search_code` for literals, error text, regexes, and exact source patterns that are a poor fit for symbol search.
-- Fall back to repository `rg`, `find`, or file reads for non-code files, generated or excluded paths, or when graph results remain insufficient. State why the fallback was needed.
-- Use `detect_changes` to identify symbols affected by the working tree or a requested Git range. Re-index before relying on subsequent graph exploration if source has changed since the index was built.
-
-## CLI and Safety Boundaries
-
-Prefer flags for simple values and piped JSON or `--args-file` for arrays and complex values. Positional raw JSON is deprecated. Parse stdout as JSON; initialization logs may appear on stderr. Inspect installed help rather than assuming remembered flags or schemas.
-
-Indexing without persistence is an expected local operation for an authorized discovery task. `delete_project`, persisted indexing, ADR updates, and trace ingestion are state-changing or potentially sensitive operations: perform them only when explicitly requested, after checking their installed help and exact target. Do not run `install`, agent integration setup, or server configuration as part of this workflow.
-
-Conclude with the project and index mode used, the relevant symbols and file/line evidence, any fallback performed, and material coverage limits. Do not leave a temporary test index behind unless the user wants to reuse it.
+Conclude with the matched root/project, known index mode and freshness, decisive symbols and file/line evidence, relevant impact paths, material fallbacks, and coverage limits. Do not claim an unknown reused-index mode or complete coverage.
