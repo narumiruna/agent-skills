@@ -1,11 +1,11 @@
 ---
 name: using-codebase-memory-cli
-description: Use `codebase-memory-mcp` in CLI-only mode for graph-first codebase indexing, symbol search, call and data-flow tracing, source snippets, architecture, Cypher, and change impact. Use proactively for unfamiliar or non-trivial code discovery, relationship tracing, architecture analysis, or impact work when the CLI is installed, and whenever the user or repository requests codebase-memory; use ordinary repository tools for known-file, literal/config-only, or unsupported-path searches. Never start or configure the MCP server.
+description: Use `codebase-memory-mcp` in CLI-only mode for graph-first codebase indexing, symbol search, call and data-flow tracing, source snippets, architecture, Cypher, and change impact. Always prefer it over grep, glob, or file search for code discovery whenever the CLI is installed, even when the user does not name it, and use it whenever the user or repository requests codebase-memory. Fall back only for literal/config searches, non-code or unsupported paths, or insufficient graph results; never start or configure the MCP server.
 ---
 
 # Using Codebase Memory CLI
 
-Use the graph to locate structure and relationships before broad file search or reading. It is discovery evidence, not a replacement for source, tests, history, or runtime evidence.
+Always prefer codebase-memory CLI graph tools over grep, glob, or file search for code discovery when the CLI is installed, even if the user does not name the tool. Use the graph to locate structure and relationships before broad repository search. It is discovery evidence, not a replacement for source, tests, history, or runtime evidence.
 
 Run graph tools only as `codebase-memory-mcp cli <tool> ...`. `codebase-memory-mcp` with no arguments starts the stdio server; never run it. Do not call MCP graph tools or configure an agent to use them.
 
@@ -19,23 +19,31 @@ Read [the command reference](references/commands.md) only when selecting index m
 4. For a new or stale project, run `index_repository` with an absolute path and an unambiguous name. Default to `fast`; use `moderate` only for semantic/similarity search, `full` only when relevant files filtered by ordinary modes must be included, and `cross-repo-intelligence` only for repositories within the requested scope.
 5. Inspect the indexing result. Treat `degraded`, skipped files, exclusions, a mismatched root, or an unexpected node count as coverage limits, not a successful complete index. Omit `--persistence` unless a repository artifact was explicitly requested.
 
-## Query from Narrow to Broad
+## Discovery Priority
 
-Stop when evidence is sufficient:
+Use this order and stop when evidence is sufficient:
 
-- For a diff or Git range, use `detect_changes` to identify changed files and candidate impacted symbols, then inspect the important paths.
-- Use `search_graph --query` for BM25 keyword discovery. Use `--name-pattern` or `--qn-pattern` for identifier matching, with label and file filters where useful; do not combine `--query` with `--name-pattern`, because the query wins. Paginate until `has_more` is false when completeness matters.
-- Use semantic search only on a known `moderate` or `full` index. Pass `semantic_query` as an array and evaluate `semantic_results`; ordinary `results` and `total` are separate and can be broad when no structural filter was supplied.
-- Use `trace_path` for inbound callers, outbound callees, parameter data flow, or cross-service traversal. Resolve a short or duplicated name through `search_graph`, then pass the returned `qualified_name`; include tests explicitly when they matter.
-- Use `get_code_snippet` with that qualified name to inspect the symbol's source and optional neighbors.
-- Use `query_graph` only when focused tools cannot express the relationship or aggregation. Run `get_graph_schema` first and constrain the read-only Cypher result.
-- Use path-scoped `get_architecture` for a compact overview after focused evidence, not instead of it.
+1. `search_graph` — find functions, methods, classes, interfaces, routes, variables, or other symbols. Start with `--query` for BM25 keywords or `--name-pattern`/`--qn-pattern` for identifiers; add label and file filters where useful. Do not combine `--query` with `--name-pattern`, because the query wins. Paginate until `has_more` is false when completeness matters.
+2. `trace_path` — find inbound callers, outbound callees, parameter data flow, or cross-service traversal. Resolve a short or duplicated name through `search_graph`, then pass the returned `qualified_name`; include tests explicitly when they matter.
+3. `get_code_snippet` — inspect the selected symbol's source and optional neighbors by qualified name.
+4. `query_graph` — express a relationship or aggregation the focused tools cannot. Run `get_graph_schema` first and constrain the read-only Cypher result.
+5. `get_architecture` — obtain a compact, preferably path-scoped project summary after focused evidence, not instead of it.
+
+For semantic discovery, use `search_graph` only on a known `moderate` or `full` index. Pass `semantic_query` as an array and evaluate `semantic_results`; ordinary `results` and `total` are separate and can be broad without a structural filter. For a diff or Git range, use `detect_changes` to identify changed files and candidate impacted symbols before following the priority order on important paths.
+
+Example chain:
+
+```sh
+codebase-memory-mcp cli search_graph --project my-project --name-pattern '.*OrderHandler.*'
+codebase-memory-mcp cli trace_path --project my-project --function-name OrderHandler --direction inbound
+codebase-memory-mcp cli get_code_snippet --project my-project --qualified-name my-project.pkg.orders.OrderHandler
+```
 
 Verify critical claims in the reported source lines and relevant tests or runtime behavior. Missing edges do not prove that no relationship exists. Re-index when later traversal must reflect source changes, and report stale index state, ambiguity, exclusions, skipped files, or unresolved edges instead of inferring through them.
 
 ## Fallback and Boundaries
 
-Use CLI `search_code` for exact text or regex within indexed files. Use `rg`, `find`, and targeted reads for non-code, generated, ignored, excluded, changed-but-unindexed, or unsupported files, or when graph results are insufficient. State the material fallback and why it was needed.
+Leave the graph-tool priority only when searching string literals, error messages, or configuration values; searching non-code files such as Dockerfiles, shell scripts, or configs; or when graph tools return insufficient results. Prefer CLI `search_code` for exact text or regex in indexed files before repository search. Use `rg`, `find`, globbing, or targeted reads only for non-code, generated, ignored, excluded, changed-but-unindexed, unsupported, or still-unresolved paths. State the material fallback and why it was needed.
 
 Ordinary discovery authorizes an index in the tool's local cache without `--persistence`; it does not authorize repository artifacts or unrelated repositories. `--persistence` additionally writes into the repository. Existing-index deletion, ADR mutation, trace ingestion, cross-repository expansion, native `install`/`update`/`config`, agent integration, and server/UI setup require explicit scope or authorization. A uniquely named temporary index created during the current task may be deleted during cleanup; never delete a pre-existing or reused index without exact approval.
 
