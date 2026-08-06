@@ -28,7 +28,7 @@ Create a discoverable, executable skill for one-shot Google GenAI research with 
 
 ## Completion Checklist
 
-- [x] Skill frontmatter, UI metadata, README catalog, CLI defaults, and tests agree on scope and model.
+- [x] Skill frontmatter, README catalog, CLI defaults, and tests agree on scope and model.
 - [x] All three grounding modes are exercised without leaking the API key.
 - [x] Focused tests, full pytest, validator, and lint gate pass.
 - [x] Completed plan is archived under `docs/plans/archived/`.

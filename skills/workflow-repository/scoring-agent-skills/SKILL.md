@@ -11,7 +11,7 @@ Produce a comparable quality scorecard, not a vague impression or a runtime capa
 
 1. Resolve the requested skill set. For “every skill,” use the repository's active discovery tree unless the user explicitly includes deprecated or external skills.
 2. Establish the target-model baseline from the user's request, the repository's model-specific guide, or the execution environment, in that order. If none identifies one, use a “general capable model” baseline and disclose that low-confidence assumption.
-3. Inspect applicable repository instructions, the model-specific prompting guide, each `SKILL.md`, UI metadata, catalog entry, and directly linked resources relevant to a score.
+3. Inspect applicable repository instructions, the model-specific prompting guide, each `SKILL.md`, catalog entry, and directly linked resources relevant to a score.
 4. For the trusted current repository, run its established non-destructive validators when feasible. For an external or untrusted repository, default to source inspection or a trusted validator. Do not run repository-supplied code unless it is sandboxed and the user explicitly authorizes the exact command.
 5. Treat structural checks, link integrity, metadata presence, and test results as supporting evidence. They do not by themselves prove prompt quality, incremental value, or task success.
 6. Before scoring, read [the rubric](references/rubric.md) and assign an integer from 1 to 10 for each assessable dimension. Apply the same anchors to every skill and assess each dimension proportionately to what the skill can do.

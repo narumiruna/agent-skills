@@ -36,7 +36,7 @@ Prefer `analyzing-test-results` over `parse-json`, and `adding-message-timestamp
 
 Distinguish a naming recommendation from a requested repository rename. Do not edit files when the user asked only for names or review.
 
-For an authorized rename, use the skill-maintenance workflow and update the directory, frontmatter `name`, UI metadata/default prompt, catalog, links, examples, tests, and other exact-name references as one bounded change. Preserve compatibility notes when external consumers depend on the old name, then run repository validation.
+For an authorized rename, use the skill-maintenance workflow and update the directory, frontmatter `name`, catalog, links, examples, tests, and other exact-name references as one bounded change. Preserve compatibility notes when external consumers depend on the old name, then run repository validation.
 
 ## Output
 

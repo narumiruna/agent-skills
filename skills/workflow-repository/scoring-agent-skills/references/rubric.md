@@ -19,7 +19,7 @@ Use the full range when evidence supports it. Intermediate differences must refl
 
 ## Trigger clarity
 
-Assess whether frontmatter states both what the skill does and when it should activate. Check specificity, collision risk with sibling skills, explicit-invocation requirements where needed, and alignment among name, description, UI metadata, and catalog text.
+Assess whether frontmatter states both what the skill does and when it should activate. Check specificity, collision risk with sibling skills, explicit-invocation requirements where needed, and alignment among name, description, and catalog text.
 
 Lower the score for vague domain labels, trigger rules hidden only in the body, materially overlapping descriptions without routing, or mismatched discovery surfaces.
 

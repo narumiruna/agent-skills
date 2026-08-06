@@ -1,6 +1,6 @@
 ---
 name: creating-agent-skills
-description: Create, name, rename, revise, or review agent skills for reliable triggering, lean instructions, justified resources, aligned UI metadata, repository discovery, and validation. Use for new skills, naming decisions, authorized repository renames, skill scaffolding, workflow-to-skill conversion, prompt optimization, or skill audits.
+description: Create, name, rename, revise, or review agent skills for reliable triggering, lean instructions, justified resources, repository discovery, and validation. Use for new skills, naming decisions, authorized repository renames, skill scaffolding, workflow-to-skill conversion, prompt optimization, or skill audits.
 ---
 
 # Creating Agent Skills
@@ -17,7 +17,7 @@ Name the task and trigger the skill represents, not its implementation.
 - Preserve the original user intent rather than forcing `<verb-ing>-<object>` when another pattern better expresses the meaning or matches the repository's established convention.
 - Inspect sibling names and exact-name references. Compare a small candidate set for specificity, searchability, future stability, and collision risk, then lead with one recommendation and its deciding reason.
 
-A naming recommendation does not authorize a repository rename. Do not edit files when the user asked only for names or review. For an authorized rename, update the directory, frontmatter `name`, UI metadata and default prompt, catalog, links, examples, tests, and other exact-name references as one bounded change; preserve a compatibility note when external consumers depend on the old name.
+A naming recommendation does not authorize a repository rename. Do not edit files when the user asked only for names or review. For an authorized rename, update the directory, frontmatter `name`, catalog, links, examples, tests, and other exact-name references as one bounded change; preserve a compatibility note when external consumers depend on the old name.
 
 For naming-only output, lead with the recommendation and deciding reason. For multiple skills, use a current/recommended/reason table and include only conflicts or compatibility work that affects adoption.
 
@@ -38,9 +38,8 @@ For naming-only output, lead with the recommendation and deciding reason. For mu
    - State each instruction once. Prefer outcome, constraints, approval boundaries, evidence, and stopping criteria over prescribed routine steps.
    - Keep examples only when they encode a requirement or prevent a demonstrated error.
    - Link each resource directly and say when to load or run it; do not duplicate its detail in `SKILL.md`.
-6. Write aligned UI metadata. For OpenAI metadata, quote strings; include `interface.display_name`, `short_description`, and a `default_prompt` that explicitly names `$skill-name`. Add policy, icons, colors, or dependencies only when needed.
-7. Update the repository's catalog or installation surfaces only when its discovery model requires it.
-8. Validate syntax and structure with the repository's documented validator, run representative bundled scripts, and forward-test subtle workflows. Run the repository gate when required and report unavailable checks honestly.
+6. Update the repository's catalog or installation surfaces only when its discovery model requires it.
+7. Validate syntax and structure with the repository's documented validator, run representative bundled scripts, and forward-test subtle workflows. Run the repository gate when required and report unavailable checks honestly.
 
 ## Completion Criteria
 
@@ -48,5 +47,5 @@ For naming-only output, lead with the recommendation and deciding reason. For mu
 - Body content is useful only after the skill has triggered.
 - No repeated instruction groups, generic background, decorative examples, or unjustified resources.
 - Local edits and checks proceed when requested; external, destructive, costly, or scope-expanding actions retain explicit approval boundaries.
-- Frontmatter, UI metadata, catalog text, and resource links agree.
+- Frontmatter, catalog text, and resource links agree.
 - Validation evidence and material caveats are reported.

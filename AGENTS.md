@@ -19,7 +19,7 @@ Follow global defaults; this file defines only repo-specific additions and overr
 ## Editing Rules
 
 - Use lowercase kebab-case for skill directories and name every required entry file exactly `SKILL.md`.
-- Keep a skill's frontmatter description, `agents/openai.yaml` metadata, and README catalog entry aligned when its trigger or purpose changes.
+- Keep a skill's frontmatter description and README catalog entry aligned when its trigger or purpose changes.
 - Keep examples repository-relative and executable when practical.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows actually exist.
 
