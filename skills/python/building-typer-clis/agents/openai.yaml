@@ -1,4 +1,0 @@
-interface:
-  display_name: "Building Typer CLIs"
-  short_description: "Build current Typer CLIs without grammar regressions."
-  default_prompt: "Use $building-typer-clis to preserve command grammar while building this Typer CLI with Annotated parameters, deliberate callbacks and exits, supported entry points, and current CliRunner tests."

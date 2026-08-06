@@ -1,6 +1,0 @@
-interface:
-  display_name: "Work Logs (Deprecated)"
-  short_description: "Write concise Git-evidence work logs."
-  default_prompt: "Use $writing-work-logs to summarize the explicitly requested date range from this repository's Git evidence."
-policy:
-  allow_implicit_invocation: false

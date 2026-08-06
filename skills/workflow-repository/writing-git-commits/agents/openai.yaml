@@ -1,4 +1,0 @@
-interface:
-  display_name: "Writing Git Commits"
-  short_description: "Draft, validate, or create focused Conventional Commits."
-  default_prompt: "Use $writing-git-commits to inspect the selected diff and draft, validate, or create the focused Conventional Commit requested."

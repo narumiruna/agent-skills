@@ -1,6 +1,0 @@
-interface:
-  display_name: "Resolve PR Review Comments"
-  short_description: "Verify PR feedback and prepare bounded resolutions."
-  default_prompt: "Use $resolving-pr-review-comments to inspect all PR feedback, fix and verify reasonable findings locally, then prepare exact public actions for approval."
-policy:
-  allow_implicit_invocation: false

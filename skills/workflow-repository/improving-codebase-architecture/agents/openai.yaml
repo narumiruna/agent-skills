@@ -1,4 +1,0 @@
-interface:
-  display_name: "Improving Codebase Architecture"
-  short_description: "Improve module boundaries with evidence and safe refactoring."
-  default_prompt: "Use $improving-codebase-architecture to assess structural friction, rank evidence-backed module improvements, and safely implement only the scope I authorize."

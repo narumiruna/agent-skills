@@ -1,4 +1,0 @@
-interface:
-  display_name: "Atuin Cleanup (Deprecated)"
-  short_description: "Audit Atuin history with transactional cleanup disabled."
-  default_prompt: "Use $cleaning-atuin-history to audit duplicates and typo candidates, keep cleanup-typos disabled, and prepare only fixed-scope dedup or user-run inspector steps."

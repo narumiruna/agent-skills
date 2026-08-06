@@ -1,4 +1,0 @@
-interface:
-  display_name: "Python Logging"
-  short_description: "Choose and configure Python logging boundaries."
-  default_prompt: "Use $configuring-python-logging to choose the appropriate logging backend, configure it at the correct boundary, and verify representative records."

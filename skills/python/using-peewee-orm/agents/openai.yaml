@@ -1,4 +1,0 @@
-interface:
-  display_name: "Python Peewee"
-  short_description: "Wire Peewee lifecycle, transactions, and isolated tests."
-  default_prompt: "Use $using-peewee-orm to define the Peewee binding, connection, transaction, and SQLite test lifecycle for this task."

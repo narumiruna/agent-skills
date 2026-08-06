@@ -1,4 +1,0 @@
-interface:
-  display_name: "Creating and Naming Agent Skills"
-  short_description: "Create, name, rename, and review lean agent skills."
-  default_prompt: "Use $creating-agent-skills to create, name, rename, optimize, or review this skill for reliable triggering, low naming overlap, lean instructions, aligned metadata, and validation."

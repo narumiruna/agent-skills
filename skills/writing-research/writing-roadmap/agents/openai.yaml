@@ -1,4 +1,0 @@
-interface:
-  display_name: "Writing Roadmaps"
-  short_description: "Create concise, progress-trackable strategic roadmaps."
-  default_prompt: "Use $writing-roadmap to create, revise, or review a concise, evidence-grounded strategic roadmap with milestone checkboxes, adding detailed sections only when they are useful."
