@@ -5,9 +5,25 @@ description: Index and explore codebases with the `codebase-memory-mcp` command-
 
 # Using Codebase Memory CLI
 
-Use codebase-memory proactively as the default discovery path for unfamiliar or non-trivial code. Prefer its graph over grep, globbing, or broad file reads for symbols, relationships, architecture, and impact analysis, even when the user does not name the tool. Skip it for a known small file, a literal or configuration search, or when `command -v codebase-memory-mcp` shows that the CLI is unavailable.
+Use codebase-memory proactively as the default discovery path for unfamiliar or non-trivial code. Prefer its graph over grep, globbing, or broad file reads for symbols, relationships, architecture, and impact analysis, even when the user does not name the tool. Skip it for a known small file, a literal or configuration search, or when the CLI is unavailable and installation has not been authorized.
 
 Do not start the MCP server, call MCP graph tools, or configure an agent to use them. Every graph operation must have the form `codebase-memory-mcp cli <tool> ...`; never run bare `codebase-memory-mcp`, because that starts the stdio server.
+
+## Install When Missing
+
+When `command -v codebase-memory-mcp` fails, offer the upstream installer instead of silently abandoning graph discovery:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+```
+
+Downloading and executing a remote script requires explicit user approval. The upstream command defaults to automatic agent configuration, which conflicts with this CLI-only workflow; for an approved installation, preserve the installer but disable that configuration:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash -s -- --skip-config
+```
+
+After installation, verify `command -v codebase-memory-mcp` and `codebase-memory-mcp --version`, then continue without starting the server.
 
 ## Establish the Index
 
