@@ -1,71 +1,76 @@
 ---
 name: designing-user-experiences
-description: Design or redesign end-to-end user experiences for new or existing digital products through an approval-gated workflow. Use for substantial work on user goals, information architecture, navigation, workflows, system states, or interaction behavior that requires a proposal before implementation.
+description: Design, review, or implement accessible user interfaces and end-to-end digital experiences, including screens, components, navigation, information architecture, workflows, system states, and interaction behavior. Use bounded surface mode for focused UI work; substantial cross-surface or product-level experience changes require an approved proposal before implementation.
 ---
 
 # Designing User Experiences
 
-Ground the experience in the product's actual users, workflows, platform, design system, and constraints. Do not transplant another product's labels, visual patterns, or information architecture. Treat unsupported claims about users, frequency, risk, or platform behavior as assumptions rather than facts.
+Minimize cognitive load without sacrificing capability, agency, context, or recovery. Ground decisions in the product's actual users, workflows, platform, design system, and constraints. Apply Apple-derived principles through target-platform conventions rather than copying platform-specific controls or metrics.
 
-## Establish the Experience Context
+Do not invent research, business rules, capabilities, defaults, frequency, risk, success claims, or implementation constraints. Label assumptions and unknowns; preserve current behavior where evidence is incomplete.
 
-Choose the applicable context, then gather enough evidence to support the proposal.
+## Route by Scope and Request
 
-### New Product
+- **Bounded surface:** a screen, component, form, dashboard, local navigation area, or contained workflow whose behavior and ownership are already understood. Follow the requested Proposal, Review, or Implementation mode without imposing an extra approval gate.
+- **Substantial experience:** product-level information architecture, navigation model, multi-surface workflow, state model, capability classification, or redesign with material behavior, compatibility, persistence, or recovery decisions. Produce a proposal first and do not edit product files until the user explicitly approves it.
+- **Autonomous audit-fix-commit loop:** use `iterating-ui-improvements` only when the user explicitly invokes that workflow.
 
-1. Inspect available product briefs, user research, requirements, domain rules, platform conventions, technical constraints, and accessibility requirements.
-2. Identify the intended user groups, the jobs they need to complete, and the evidence or assumptions behind those choices.
-3. Inventory proposed capabilities and classify them as primary, secondary, advanced, destructive, or deferred. Do not invent research, business rules, or implementation constraints.
-4. Evaluate proposed flows by expected frequency, importance, complexity, risk, and reversibility. Mark unvalidated expectations for later testing.
-5. Define the intended state model, dependencies, cancellation and recovery paths, and measurable outcomes without implying that unbuilt behavior already exists.
+Ask one focused question only when a missing product decision blocks safe work. Otherwise preserve uncertain behavior and identify the unresolved decision.
 
-### Existing Product
+## Establish Context
 
-1. Inspect the relevant interface, code, tests, user-facing documentation, stored formats, supported screen sizes and inputs, and accessibility conventions.
-2. Identify the primary user groups, the jobs they are trying to complete, and the current paths to those outcomes.
-3. Inventory features and classify them as primary, secondary, advanced, destructive, or compatibility-only. Preserve unknown capabilities until their ownership and use are understood.
-4. Evaluate affected flows by evidence-backed frequency, importance, complexity, risk, and reversibility.
-5. Map current state, transitions, dependencies, cancellation and recovery paths, then identify avoidable steps, inconsistent behavior, unclear state, and usability failures.
+For a new product, inspect available briefs, research, requirements, domain rules, platform conventions, technical constraints, and accessibility requirements. Identify intended user groups, jobs, proposed capabilities, dependencies, cancellation and recovery paths, and measurable outcomes without implying that unbuilt behavior exists.
 
-Label assumptions, unknowns, and product decisions that require confirmation. For existing products, preserve current behavior where evidence is incomplete.
+For an existing product, inspect the relevant interface, code, tests, user-facing documentation, stored formats, supported widths and inputs, accessibility conventions, and design system. Identify current users and jobs, inventory capabilities before simplifying, and map current paths, states, dependencies, cancellation, recovery, and compatibility requirements.
 
-## Shape the Proposal
+Classify capabilities and information by task necessity, evidence-backed frequency and importance, consequence if missed, complexity, risk, reversibility, and the search, memory, navigation, or recovery cost of hiding them:
 
-Organize the experience around user goals rather than internal settings or data structures. Prioritize a small set of frequent and important actions while applying these constraints. Treat primary, secondary, advanced, destructive, and similar classifications as analysis and prioritization inputs, not as required sections, menus, pages, or navigation levels.
+| Class | Presentation |
+| --- | --- |
+| Primary | Direct, labeled, and prominent |
+| Supporting | Visible with lower emphasis near its object |
+| Contextual | Revealed for the relevant item, role, state, or step |
+| Advanced | Labeled progressive disclosure or dedicated view |
+| Safety/status | Visible at the relevant time; interrupt only when necessary |
+| Redundant/irrelevant | Remove only after proving no capability, cue, status, or recovery path is lost |
 
-- Keep consequential current or proposed state visible where it informs a decision.
-- Group options by user intent, dependency, decision sequence, and comparison needs. Express differences in frequency through ordering, labels, or visual hierarchy before adding another section, page, menu, or navigation level.
-- Split or disclose a group only when evidence shows that the resulting task structure and scanability outweigh the added navigation and memory cost. Option count alone neither requires nor forbids another level.
-- Use labeled, predictable progressive disclosure when secondary or advanced complexity warrants it; do not infer disclosure from classification alone or hide critical information or the only route to a capability.
-- Keep navigation shallow with clear return, cancel, and exit paths.
-- Offer a small set of meaningful defaults or presets when supported, while retaining expert customization.
-- Preview the concrete effect of consequential choices. Distinguish previewing, confirming, cancelling, saving, and applying through labels, state, and feedback.
-- Reduce steps without removing safeguards for destructive or hard-to-reverse actions. Information-architecture grouping does not replace confirmation dialogs, risk warnings, or other required safety flows.
-- Maintain consistent terminology, navigation, confirmations, and cancellation behavior.
-- Adapt hierarchy and interaction to supported widths, content sizes, localization, inputs, and assistive technology. Avoid ambiguous truncation, inaccessible overflow, hidden critical information, and disruptive layout shifts.
+Classification informs prioritization; it does not automatically require sections, pages, menus, or navigation levels.
 
-Present:
+## Shape the Experience
 
-1. The evidence-backed findings, assumptions, and capability classification.
-2. The proposed information architecture and primary, secondary, advanced, destructive, and recovery flows.
-3. Intended loading, empty, success, error, disabled, and partial states, including where status and actionable feedback appear.
-4. Concrete acceptance criteria for behavior, responsiveness, keyboard and focus operation, screen readers, contrast, compatibility when applicable, tests, and documentation.
-5. The main decisions, trade-offs, risks, validation needs, unresolved questions, and—when changing an existing product—compatibility and migration requirements.
+1. Put the user's primary job first and preserve exit, cancel, undo, and recovery.
+2. Organize around user intent, dependency, decision sequence, and comparison needs rather than internal settings or data structures. Keep navigation and ownership shallow, terminology consistent, and handoffs clear.
+3. Use reading order, grouping, spacing, typography, alignment, and contrast before decorative containers or color.
+4. Keep consequential state, primary actions, required input, permission boundaries, destructive consequences, unsaved-work risk, and error recovery visible when they affect a decision.
+5. Prefer clear labels, standard controls, persistent context, and familiar patterns over hidden gestures, hover-only actions, unexplained icons, or recall-heavy navigation. Do not transplant another product's labels, patterns, or information architecture without product evidence.
+6. Use labeled, stable, shallow progressive disclosure for secondary or advanced capability only when its scanability benefit outweighs added navigation and memory cost. Never hide the sole accessible route to a core action.
+7. Offer a small set of meaningful defaults or presets when supported while retaining expert customization.
+8. Preview consequential choices and distinguish previewing, confirming, cancelling, saving, and applying through labels, state, and feedback. Never style a destructive action as the default or remove safeguards for hard-to-reverse actions.
+9. Keep routine status near its object and reserve interruptions for critical, actionable, unexpected, or hard-to-reverse events.
+10. Preserve recognizable hierarchy across supported widths, content extremes, text scaling, localization, right-to-left layout, permissions, and inputs.
+11. Never make color, sound, motion, gesture, pointer, or position the sole carrier of meaning or access. Support relevant keyboard and focus behavior, assistive technology, target size, contrast, reflow, non-color cues, and reduced motion.
+12. Audit both overload and false simplicity. Reject cleanup that increases search, navigation depth, repeated effort, uncertainty, context loss, hidden dependencies, or inaccessible interaction.
 
-Do not edit product files, tests, stored data, or user-facing documentation during this proposal phase. Wait for explicit approval of the proposal before implementation; requested revisions update the proposal and do not imply approval.
+## Propose or Review
 
-## Implement After Approval
+For a proposal, present the evidence-backed findings and assumptions, capability classification, proposed architecture and flows, loading/empty/success/error/disabled/partial states, acceptance criteria, trade-offs, risks, validation needs, unresolved decisions, and compatibility or migration requirements. Keep the structure proportional to scope.
 
-Implement only the approved scope and preserve unrelated behavior.
+For a review, lead with prioritized findings tied to user effort, risk, evidence, accessibility, or platform convention. Give each material finding a concrete correction and preserve sound existing behavior.
 
-- For existing products, keep backward compatibility, existing workflows, stored user data, and unknown configuration fields unless the approved proposal includes a verified migration path.
-- Apply confirmed changes atomically and provide immediate success feedback. Cancellation must have no side effects.
-- On failure, retain the previous valid state and show an actionable error that explains what failed and how to recover or retry.
-- Keep primary actions, consequential status, validation, unsaved-work risk, and recovery paths visible at the relevant time.
-- Preserve capability through stable progressive disclosure rather than deletion or ambiguous hiding.
-- Verify responsive layouts without overflow or harmful shifts across supported sizes, inputs, content extremes, and text scaling.
-- Support keyboard navigation, logical focus order and restoration, screen-reader semantics and announcements, non-color cues, appropriate contrast, and reduced motion where relevant.
-- Add or update tests for affected primary flows, previews, confirmations, cancellations, navigation, failures, responsive behavior, accessibility, and compatibility where applicable. Test only states and environments the product supports.
-- Update user-facing documentation to describe the final behavior and any approved migration.
+For substantial experience work, requested revisions update the proposal and do not imply implementation approval.
 
-Exercise the affected loading, empty, success, error, disabled, and partial states. Report what changed, validation evidence, approved deviations, and any scenarios that could not be verified; for existing products, also report preserved compatibility.
+## Implement Within Authority
+
+Implement a bounded surface only when implementation was requested. Implement a substantial experience only after explicit proposal approval. Preserve unrelated behavior, content meaning, data semantics, permissions, stored data, unknown configuration fields, and compatibility unless the authorized scope includes a verified migration.
+
+- Apply confirmed changes atomically; cancellation has no side effects.
+- On failure, retain the previous valid state and provide actionable recovery or retry guidance.
+- Keep primary actions, status, validation, unsaved-work risk, and recovery visible at the relevant time.
+- Preserve selection, drafts, context, and capability across navigation and progressive disclosure.
+- Add or update proportionate tests and documentation for affected behavior when the repository uses them.
+
+Exercise directly affected layouts, content densities, inputs, permissions, transitions, cancellation, failures, and loading, empty, success, error, disabled, or partial states that the product supports. Verify responsive behavior and accessibility with direct evidence; do not invent states merely to complete a checklist or claim environments that were not tested.
+
+Stop when the requested surface or approved experience and its affected states are addressed. Report the result first, checks performed, preserved compatibility, material trade-offs, assumptions, and unverified scenarios.
+
+Use `references/apple-hig.md` for deeper HIG-derived or Apple-platform decisions, `references/preferences.md` for adjustable visual defaults, and `references/cases.md` for comparable patterns. Product evidence, platform conventions, and accessibility override preferences.
