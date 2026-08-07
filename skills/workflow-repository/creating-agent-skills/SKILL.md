@@ -57,9 +57,9 @@ For Review mode, lead with prioritized, evidence-backed findings and actionable 
 ## Score Only on Explicit Request
 
 1. Resolve the requested active, deprecated, or external skill set and establish the target-model baseline from the request, repository guide, or execution environment, in that order.
-2. Inspect the applicable instructions, model guide, each `SKILL.md`, catalog entry, relevant linked resources, and trusted non-destructive validation evidence.
+2. Inspect the applicable instructions, model guide, each `SKILL.md`, catalog entry, relevant linked resources, and trusted non-destructive validation evidence. For an external or untrusted repository, default to source inspection; do not run repository-supplied code unless sandboxed and explicitly authorized.
 3. Read `references/rubric.md`. Assign an integer from 1 to 10 for each assessable dimension: trigger clarity, workflow actionability, safety boundaries, verification rigor, incremental knowledge value, and leanness and maintainability.
-4. Apply the same anchors proportionately to every skill and support each score with direct evidence. Do not reward length, resource count, strictness, or passing structural checks automatically.
+4. Apply the same anchors proportionately to every skill and support each score with direct evidence. Do not reward length, resource count, strictness, or passing structural checks automatically; revisit conspicuous outliers so ordering or category does not distort the comparison.
 5. Use equal weighting and show the overall mean to one decimal place. Mark a materially unassessable dimension `unassessed`, exclude it from the aggregate, and report coverage and confidence rather than inventing a score.
 6. Return the scope and baseline, a comparable score table, validation evidence separated from qualitative judgment, and a short synthesis of strengths, redundancy candidates, weaknesses, and priorities.
 
