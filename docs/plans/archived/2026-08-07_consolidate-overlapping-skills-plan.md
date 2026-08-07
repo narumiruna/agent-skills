@@ -8,7 +8,7 @@ Consolidate two overlapping active-skill pairs while preserving their distinct o
 - [x] Expand `creating-agent-skills` with an explicitly requested scoring mode, move its rubric into the maintained skill, retire `scoring-agent-skills` to `deprecated/`, and align the README catalogs; verified both active and deprecated skills with `quick_validate.py`, the rubric at its new linked path, the removed active directory, and focused catalog/reference inspection.
 - [x] Expand `designing-user-experiences` with bounded interface proposal, review, and implementation modes while retaining proposal approval for substantial end-to-end work; move the UI references into the maintained skill, retire `designing-user-interfaces` to `deprecated/`, and align the README catalogs; verified both skills with `quick_validate.py`, all three relocated references, explicit bounded/substantial routing, and focused preservation review.
 - [x] Run repository-wide skill validation and formatting checks, inspect the complete diff for trigger collisions and lost requirements, and verify the intended inventory of 32 active and 9 deprecated skills; verified 41/41 skill directories with `quick_validate.py`, all `prek run -a` hooks, resource links, exact catalog inventories, source-size policy, and `git diff --check`.
-- [ ] Push the branch to `origin`, create a pull request against the verified default branch, and verify the remote branch and pull-request state.
+- [x] Push the branch to `origin`, create a pull request against the verified default branch, and verify the remote branch and pull-request state; verified `origin` maps to `narumiruna/skills`, `main` is the default base, the pushed OID matched local HEAD, and PR #123 opened at `https://github.com/narumiruna/skills/pull/123`.
 
 ## Risks
 
@@ -25,4 +25,4 @@ Consolidate two overlapping active-skill pairs while preserving their distinct o
 - [x] `scoring-agent-skills` and `designing-user-interfaces` are absent from active discovery and retained under `deprecated/` as internal compatibility references; verified by directory checks and valid frontmatter with `metadata.internal: true`.
 - [x] README catalog text, frontmatter, resource links, and active/deprecated counts agree; verified exact set equality for 32 active and 9 deprecated entries, matching directory/frontmatter names, internal deprecated metadata, and all linked resources.
 - [x] `prek run -a`, skill validation, link/inventory checks, and `git diff --check` pass; verified all hooks, 41 valid skills, resource-link resolution, catalog equality, and a clean diff check.
-- [ ] The branch is pushed and an open pull request targets the repository's verified default branch.
+- [x] The branch is pushed and an open pull request targets the repository's verified default branch; verified remote OID equality and PR #123 against `main`.
