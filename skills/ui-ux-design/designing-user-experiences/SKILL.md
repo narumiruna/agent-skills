@@ -13,7 +13,6 @@ Do not invent research, business rules, capabilities, defaults, frequency, risk,
 
 - **Bounded surface:** a screen, component, form, dashboard, local navigation area, or contained workflow whose behavior and ownership are already understood. Follow the requested Proposal, Review, or Implementation mode without imposing an extra approval gate.
 - **Substantial experience:** product-level information architecture, navigation model, multi-surface workflow, state model, capability classification, or redesign with material behavior, compatibility, persistence, or recovery decisions. Produce a proposal first and do not edit product files until the user explicitly approves it.
-- **Autonomous audit-fix-commit loop:** use `iterating-ui-improvements` only when the user explicitly invokes that workflow.
 
 Ask one focused question only when a missing product decision blocks safe work. Otherwise preserve uncertain behavior and identify the unresolved decision.
 

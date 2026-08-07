@@ -1,11 +1,13 @@
 ---
 name: iterating-ui-improvements
-description: Iteratively audit and improve an existing web interface with Chrome DevTools by planning, implementing, validating, and locally committing one evidence-backed UI/UX improvement at a time. Use only when the user explicitly invokes `$iterating-ui-improvements` or names it to request an autonomous audit-fix-commit loop.
+description: Deprecated internal reference for iteratively auditing and improving an existing web interface through an explicit Chrome DevTools audit-fix-commit loop.
+metadata:
+  internal: true
 ---
 
-# Iterating UI Improvements
+# Iterating UI Improvements (Deprecated Reference)
 
-Use only after explicit invocation. That invocation authorizes an audit-fix-commit loop with in-scope local edits, validation, and local commits; it does not authorize remote or destructive actions.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility. Use only after explicit invocation. That invocation authorizes an audit-fix-commit loop with in-scope local edits, validation, and local commits; it does not authorize remote or destructive actions.
 
 ## Establish the Run
 

@@ -73,7 +73,6 @@ Repository path: `skills/ui-ux-design/`
 | Skill | Use it for |
 | --- | --- |
 | `designing-user-experiences` | Design, review, or implement bounded interfaces and approval-gated end-to-end digital experiences. |
-| `iterating-ui-improvements` | Explicitly invoked DevTools audit-fix-commit loops for evidence-backed UI improvements. |
 
 ### Slides & Visuals
 
@@ -123,3 +122,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `designing-user-interfaces` | Merged into `designing-user-experiences`; retained as a compatibility reference. |
 | `researching-gourmet-venues` | Rarely used city dining workflow retained as a compatibility reference. |
 | `syncing-main-branch` | Legacy explicit-only main-branch synchronization workflow. |
+| `iterating-ui-improvements` | Legacy explicit-only DevTools audit-fix-commit loop. |
