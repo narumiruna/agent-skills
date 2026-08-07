@@ -1,11 +1,13 @@
 ---
 name: building-typer-clis
-description: Build, extend, package, migrate, or test Python CLIs with Typer, including command grammar, typed arguments and options, callbacks and context, command groups, prompts, completion, entry points, and current CliRunner behavior. Use when Typer is chosen or an existing Typer CLI needs changes.
+description: Deprecated internal reference for building, extending, packaging, migrating, or testing Python CLIs with Typer, including command grammar, typed parameters, callbacks, completion, entry points, and CliRunner behavior.
+metadata:
+  internal: true
 ---
 
-# Building Typer CLIs
+# Building Typer CLIs (Deprecated Reference)
 
-Preserve the public invocation grammar while keeping Typer commands as thin adapters between typed terminal input and ordinary Python functions.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility. Preserve the public invocation grammar while keeping Typer commands as thin adapters between typed terminal input and ordinary Python functions.
 
 ## Load Focused Guidance
 

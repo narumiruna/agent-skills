@@ -1,11 +1,13 @@
 ---
 name: configuring-python-logging
-description: Choose, configure, or review Python logging for libraries, services, apps, and CLIs, especially when deciding between stdlib logging and Loguru or defining handlers, levels, context, and exception behavior.
+description: Deprecated internal reference for choosing, configuring, or reviewing Python logging for libraries, services, apps, and CLIs, including stdlib logging, Loguru, handlers, levels, context, and exception behavior.
+metadata:
+  internal: true
 ---
 
-# Python Logging
+# Python Logging (Deprecated Reference)
 
-Choose the logging boundary before choosing syntax.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility. Choose the logging boundary before choosing syntax.
 
 ## Decision
 

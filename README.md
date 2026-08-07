@@ -41,9 +41,6 @@ Repository path: `skills/python/`
 | Skill | Use it for |
 | --- | --- |
 | `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
-| `building-typer-clis` | Typer command grammar, typed parameters, callbacks, packaging, completion, and current tests. |
-| `configuring-python-logging` | Python logging backend, boundary, sink, context, and exception choices. |
-| `using-peewee-orm` | Peewee binding, connection, transaction, and isolated test lifecycles. |
 
 ### Writing & Research
 
@@ -123,3 +120,6 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `researching-gourmet-venues` | Rarely used city dining workflow retained as a compatibility reference. |
 | `syncing-main-branch` | Legacy explicit-only main-branch synchronization workflow. |
 | `iterating-ui-improvements` | Legacy explicit-only DevTools audit-fix-commit loop. |
+| `building-typer-clis` | Legacy Typer-specific CLI workflow retained as a compatibility reference. |
+| `configuring-python-logging` | Legacy Python logging configuration workflow retained as a compatibility reference. |
+| `using-peewee-orm` | Legacy Peewee lifecycle workflow retained as a compatibility reference. |
