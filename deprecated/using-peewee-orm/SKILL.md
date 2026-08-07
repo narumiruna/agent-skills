@@ -1,11 +1,13 @@
 ---
 name: using-peewee-orm
-description: Design, wire, or test Peewee ORM models with deferred database binding, scoped connections, explicit transactions, and isolated SQLite fixtures. Use for `DatabaseProxy`, model lifecycle, transaction boundaries, or Peewee-backed tests.
+description: Deprecated internal reference for designing, wiring, or testing Peewee ORM models with deferred database binding, scoped connections, explicit transactions, and isolated SQLite fixtures.
+metadata:
+  internal: true
 ---
 
-# Python Peewee
+# Python Peewee (Deprecated Reference)
 
-Bind models at an application or test boundary; keep connection lifetime, transaction lifetime, and schema lifecycle explicit.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility. Bind models at an application or test boundary; keep connection lifetime, transaction lifetime, and schema lifecycle explicit.
 
 ## Model Setup
 
