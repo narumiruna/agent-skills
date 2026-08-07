@@ -143,7 +143,7 @@ section::after {
 
 | Area | Skills |
 |---|---|
-| **Python** | `managing-python-with-uv`, `building-typer-clis`, `configuring-python-logging`, `using-peewee-orm` |
+| **Python** | `managing-python-with-uv` |
 | **Writing and research** | `applying-imrad`, `researching-gourmet-venues` |
 | **Slides and visuals** | `creating-slide-decks`, `authoring-marp-slides`, `designing-slide-colors`, `creating-svg-illustrations`, `creating-mermaid-diagrams` |
 | **Workflow maintenance** | `checking-cli-help`, `writing-git-commits`, `maintaining-memory-md`, `writing-agents-md` |
