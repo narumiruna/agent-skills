@@ -32,10 +32,12 @@ Give the agent the context, limits, authority, and evidence needed to finish the
 
 ## Default Sections
 
-Use these sections in this order when creating or restructuring an `AGENTS.md` file.
-Keep every unmarked section.
-Include sections marked `[Optional]` only when they contain useful, project-specific guidance.
-Investigate missing required guidance instead of leaving an empty section or inventing rules.
+Use these sections as a checklist when creating or restructuring an `AGENTS.md` file.
+Check every unmarked section and preserve this relative order among the sections that remain.
+Include a section only when it has verified guidance that an agent needs.
+Omit it after inspection when no such guidance exists instead of leaving it empty or inventing rules.
+Consider sections marked `[Optional]` only when they are relevant to the repository.
+The `[Optional]` marker is a template annotation; remove it from headings included in the final file.
 
 ```markdown
 ## [Optional] Communication
@@ -52,9 +54,7 @@ Investigate missing required guidance instead of leaving an empty section or inv
 
 ## Writing Rules
 
-- Keep documents and conversations concise and clear.
-- Explain things simply enough for a child to understand.
-- Put one sentence on each line.
+- Write `AGENTS.md` in concise plain language, with one enforceable sentence on each line.
 - State the outcome, useful context, hard limits, actions that need approval, and success criteria.
 - Describe a sequence only when its order matters.
 - State each rule once in the smallest scope where it belongs.
