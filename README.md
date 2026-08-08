@@ -94,7 +94,6 @@ Repository path: `skills/workflow-repository/`
 | `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
-| `resolving-pr-review-comments` | Explicit PR feedback assessment and local fixes, with exact approval for public actions. |
 | `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `using-codebase-memory-cli` | Always-preferred CLI-only graph discovery, tracing, architecture, and change-impact analysis before repository search fallback. |
@@ -123,3 +122,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `using-peewee-orm` | Legacy Peewee lifecycle workflow retained as a compatibility reference. |
 | `managing-git-worktrees` | Legacy loss-aware Git worktree lifecycle workflow retained as a compatibility reference. |
 | `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |
+| `resolving-pr-review-comments` | Legacy explicit PR feedback workflow retained as a compatibility reference. |
