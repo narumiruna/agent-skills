@@ -1,21 +1,28 @@
 ---
 name: writing-plans
-description: Draft, execute, and track lean, verifiable implementation plans for non-trivial work involving sequencing, tradeoffs, assumptions, unknowns, risks, or completion criteria. Use for migrations, refactors, PR splits, task checklists, or execution of an existing plan; use writing-roadmap for strategic product or system direction and phased outcomes; skip small obvious tasks.
+description: Draft, execute, or track lean, verifiable implementation plans for non-trivial migrations, refactors, PR splits, task checklists, and other work with sequencing, tradeoffs, unknowns, or risks; use writing-roadmap for strategic direction and skip small obvious tasks.
 ---
 
 # Writing Plans
 
-A plan request authorizes creating or revising the plan artifact, not implementing it. Execute only when the user requests execution or an active workflow already authorizes the planned work.
+A plan request authorizes creating or revising the plan artifact, not implementation.
+Execute the plan only when the user requests it or an active workflow already authorizes the work.
 
-## Start
+## Ground the Plan
 
-Inspect local evidence before asking a question. State only assumptions or unknowns that affect execution or validation, and ask at most one question when proceeding would otherwise require a risky guess.
+Inspect relevant repository evidence before asking questions.
+Identify the scope, dependencies, constraints, unknowns, risks, and acceptance evidence.
+Ask at most one question only when proceeding would require a risky guess.
+State only assumptions and unknowns that affect execution or validation.
 
-Save a drafted plan to the repository unless the user requests chat-only output. Default to `docs/plans/YYYY-MM-DD_<topic>-plan.md`; derive a concise lowercase kebab-case topic and create the directory when needed. Update an existing plan in place during execution.
+Save a drafted plan to the repository unless the user requests chat-only output.
+Use `docs/plans/YYYY-MM-DD_<topic>-plan.md` by default, with a concise lowercase kebab-case topic.
+Create the directory when needed, and update an existing plan in place during execution.
 
-## Shape
+## Structure the Plan
 
-Always include `Goal`, `Plan`, and `Completion Checklist`. Add only useful sections from:
+Always include `Goal`, `Plan`, and `Completion Checklist`.
+Add only useful optional sections from this list:
 
 ```markdown
 ## Context
@@ -28,25 +35,39 @@ Always include `Goal`, `Plan`, and `Completion Checklist`. Add only useful secti
 ## Rollback / Recovery
 ```
 
-Use Architecture for boundaries, ownership, data flow, APIs, state, permissions, storage, or deployment. Use Tech Stack for tool/runtime/package choices. Include rollback/recovery for production data, migrations, infrastructure, releases, or public APIs.
+Use `Architecture` for boundaries, ownership, data flow, APIs, state, permissions, storage, or deployment.
+Use `Tech Stack` for tool, runtime, and package choices.
+Include `Rollback / Recovery` for production data, migrations, infrastructure, releases, or public APIs.
 
-## Plan Items
+## Write Executable Tasks
 
-Use Markdown tasks. Each item must name one executable action, object, expected result, and acceptance evidence in the same item:
+Use Markdown task checkboxes.
+Each task must name one action, its object, the expected result, and acceptance evidence.
 
 ```markdown
 - [ ] Update `src/auth.ts` to reject expired tokens; verify with `npm test -- auth`.
 ```
 
-Order dependencies explicitly. Convert important unknowns into early discovery tasks. Avoid vague, combined, or open-ended items such as “improve quality,” “handle edge cases,” or “monitor forever.” End with finite completion checks proving the whole outcome through files, commands, tests, review/deployment state, or explicit user acceptance.
+Order tasks by dependency.
+Turn material unknowns into early discovery tasks.
+Avoid vague, combined, or open-ended tasks such as “improve quality,” “handle edge cases,” or “monitor forever.”
+End with finite completion checks tied to files, commands, tests, review or deployment state, or explicit user acceptance.
 
-## Execution and Completion
+## Execute and Track
 
-- After each task's acceptance method passes, immediately change `- [ ]` to `- [x]` and add evidence when repository state does not make it obvious.
-- Leave failed or unavailable checks open. Mark an inapplicable item `- [x] Not applicable: <reason>`.
-- If later work invalidates evidence, reopen the item and reverify it.
-- Track the current saved plan only; do not inspect or alter unrelated plans. For a chat-only plan, show each updated checkbox and its evidence in chat.
+- Check a task only after its acceptance method passes.
+- Add concise evidence when completion is not obvious from repository state.
+- Leave failed or unavailable checks open.
+- Mark an inapplicable task as `- [x] Not applicable: <reason>`.
+- Reopen a task when later work invalidates its evidence.
+- Track only the current saved plan, and do not inspect or alter unrelated plans.
+- Show updated checkboxes and evidence in chat when the plan is chat-only.
 
-Complete only when every task and completion check is checked, important unknowns are resolved or explicitly accepted, risks are mitigated/accepted/moved to follow-up, and required handoff or release work is done. Do not infer completion from implementation alone.
+Declare completion only when every task and completion check is checked, material unknowns are resolved or accepted, risks have a clear disposition, and required handoff or release work is done.
+Do not infer completion from implementation alone.
 
-After a complete execution of a saved plan, archive that plan under `docs/plans/archived/` and report the path. Do not create an archive file for a chat-only plan. Do not archive with missing evidence or overwrite an existing archived filename; stop and report that conflict.
+## Archive Completed Plans
+
+Move a fully executed saved plan to `docs/plans/archived/`, then report its path.
+Do not archive a chat-only plan or any plan with missing evidence.
+Stop and report the conflict instead of overwriting an existing archived filename.
