@@ -1,74 +1,94 @@
 ---
 name: creating-agent-skills
-description: Create, name, rename, revise, review, score, or compare agent skills for reliable triggering, actionable workflows, safe boundaries, verification rigor, incremental knowledge value, leanness, and repository discovery. Use for skill scaffolding, maintenance, prompt optimization, audits, or explicitly requested numerical scorecards.
+description: Create, name, rename, revise, or review agent skills for clear triggers, safe workflows, strong checks, lean content, and easy discovery, and score or numerically compare skills only when the user explicitly asks.
 ---
 
 # Creating Agent Skills
 
-Create or assess a skill another agent can select and apply without unnecessary context. A review or scoring request is read-only unless the user also requests revisions.
+Create or check a skill that another agent can find and use with little extra context.
+A review or score request is read-only unless the user also asks for changes.
 
-## Select the Mode
+## Writing Rules
 
-| Request | Mode |
-| --- | --- |
-| Create, revise, optimize, or convert a workflow | Build |
-| Choose or change a skill name | Name or rename |
-| Review or audit without numerical ratings | Review |
-| Rate, score, or numerically compare skills | Score |
+- Keep documents concise and clear.
+- Put one sentence on each line.
 
-Use Score mode only when the user explicitly requests ratings, numerical scores, a rubric, or a scored comparison. Do not turn an ordinary review into a scorecard.
+## Choose the Mode
 
-## Name and Rename
+- Use Build to create, revise, optimize, or convert a workflow.
+- Use Name or Rename to choose or change a skill name.
+- Use Review to check a skill without numerical ratings.
+- Use Score to give numerical ratings only when the user explicitly asks for them.
 
-Name the task and trigger the skill represents, not its implementation.
+Do not turn a normal review into a scorecard.
 
-- Read the skill's actual description and workflow, then identify the triggering action, object or domain, and any necessary product qualifier.
-- Use lowercase kebab-case with meaningful digits and single hyphens; use no leading or trailing hyphen. Keep the directory and frontmatter `name` identical and respect the target framework's length limit.
-- Prefer two to four specific words. Avoid vague terms such as `helper`, `utils`, `tools`, `assistant`, `magic`, `smart`, or `general`, and avoid product or organization names unless the trigger is genuinely product-specific.
-- Preserve the original user intent rather than forcing `<verb-ing>-<object>` when another pattern better expresses the meaning or matches the repository's established convention.
-- Inspect sibling names and exact-name references. Compare a small candidate set for specificity, searchability, future stability, and collision risk, then lead with one recommendation and its deciding reason.
+## Name or Rename
 
-A naming recommendation does not authorize a repository rename. Do not edit files when the user asked only for names or review. For an authorized rename, update the directory, frontmatter `name`, catalog, links, examples, tests, and other exact-name references as one bounded change; preserve a compatibility note when external consumers depend on the old name.
+Name the task and trigger that the skill represents instead of naming its implementation.
 
-For naming-only output, lead with the recommendation and deciding reason. For multiple skills, use a current/recommended/reason table and include only conflicts or compatibility work that affects adoption.
+- Read the description and workflow to find the action, subject, domain, and any needed product name.
+- Prefer two to four lowercase kebab-case words, with meaningful digits only when needed.
+- Use single hyphens, and do not put a hyphen at either end.
+- Keep the directory name and frontmatter `name` the same, and follow the framework's length limit.
+- Avoid vague words such as `helper`, `utils`, `tools`, `assistant`, `magic`, `smart`, and `general`.
+- Use a product or organization name only when the trigger truly depends on it.
+- Preserve the user's meaning instead of forcing a `<verb-ing>-<object>` pattern.
+- Check nearby names and exact-name references, then compare a few choices for clarity, searchability, lasting value, and conflicts.
+- Lead with one recommended name and its main reason.
+
+A naming recommendation does not give permission to rename files.
+Do not edit files when the user asks only for names or a review.
+For an approved rename, update the directory, frontmatter, catalog, links, examples, checks, and other exact-name references in one focused change.
+Keep a compatibility note when outside users still depend on the old name.
+For one skill, lead with the recommended name and reason; for several skills, use a current, recommended, and reason table.
+List only conflicts or compatibility work that affects use.
 
 ## Build or Review
 
-1. Inspect the target repository's instructions, skill root, sibling skills, catalog, validators, and applicable model-specific prompting guide. Infer the destination and ask one question only when purpose, trigger, or location is materially ambiguous.
-2. Choose or review the name with the naming criteria above.
-3. Keep only justified contents:
-   - `SKILL.md` for trigger metadata and post-trigger workflow.
-   - `references/` for detail loaded only on demand.
-   - `scripts/` for deterministic repeated operations.
-   - `assets/` for material copied into or used by outputs.
-   Do not add per-skill README, changelog, installation, or quick-reference files unless the target framework explicitly requires them.
-4. Use an official scaffold when the target repository provides one, then edit the generated files. Keep changes within the skill and required discovery/catalog surfaces.
-5. Write or assess `SKILL.md`:
-   - Put `name` and a what-and-when description in YAML frontmatter; use only supported optional fields.
-   - Put trigger conditions in `description`, not a body “when to use” section.
-   - State each instruction once. Prefer outcome, constraints, approval boundaries, evidence, and stopping criteria over prescribed routine steps.
-   - Keep examples only when they encode a requirement or prevent a demonstrated error.
-   - Link each resource directly and say when to load or run it; do not duplicate its detail in `SKILL.md`.
-6. Update the repository's catalog or installation surfaces only when its discovery model requires it.
-7. Validate syntax and structure with the repository's documented validator, run representative bundled scripts, and forward-test subtle workflows. Run the repository gate when required and report unavailable checks honestly.
-
-For Review mode, lead with prioritized, evidence-backed findings and actionable corrections. Do not edit unless revisions were requested.
+1. Read the repository rules, skill folders, nearby skills, catalog, validators, and the model guide that applies.
+2. Ask one question only when the purpose, trigger, or location is too unclear to choose safely.
+3. Check the name with the rules above.
+4. Keep only files with a clear job.
+   - Use `SKILL.md` for the trigger and the instructions followed after the skill triggers.
+   - Use `references/` for details loaded only when needed.
+   - Use `scripts/` for repeated work that must follow the same steps.
+   - Use `assets/` for material copied into or used by outputs.
+   - Do not add a skill README, changelog, installation guide, or quick reference unless the framework requires it.
+5. Use the repository's official scaffold when one exists, and keep edits inside the skill and required discovery files.
+6. Write or check `SKILL.md` with the following rules.
+   - Put `name` and a clear what-and-when `description` in supported YAML frontmatter.
+   - Put trigger conditions in `description` instead of a body section about when to use the skill.
+   - State each instruction once, with the result, hard limits, approval needs, required evidence, and stopping point.
+   - Keep an example only when it proves a requirement or prevents a known mistake.
+   - Link each resource directly, say when to use it, and do not copy its details into `SKILL.md`.
+7. Update catalog or installation files only when the repository uses them for discovery.
+8. Run the documented checker, realistic examples for changed scripts, practical tests for subtle workflows, and the required repository gate.
+9. Report every unavailable or failing check honestly.
+10. In Review mode, lead with the most important findings, show evidence, and give a clear fix for each one.
+11. Make requested local edits and safe checks without extra approval.
+12. Ask before external writes, destructive or costly actions, or a large increase in scope.
 
 ## Score Only on Explicit Request
 
-1. Resolve the requested active, deprecated, or external skill set and establish the target-model baseline from the request, repository guide, or execution environment, in that order.
-2. Inspect the applicable instructions, model guide, each `SKILL.md`, catalog entry, relevant linked resources, and trusted non-destructive validation evidence. For an external or untrusted repository, default to source inspection; do not run repository-supplied code unless sandboxed and explicitly authorized.
-3. Read `references/rubric.md`. Assign an integer from 1 to 10 for each assessable dimension: trigger clarity, workflow actionability, safety boundaries, verification rigor, incremental knowledge value, and leanness and maintainability.
-4. Apply the same anchors proportionately to every skill and support each score with direct evidence. Do not reward length, resource count, strictness, or passing structural checks automatically; revisit conspicuous outliers so ordering or category does not distort the comparison.
-5. Use equal weighting and show the overall mean to one decimal place. Mark a materially unassessable dimension `unassessed`, exclude it from the aggregate, and report coverage and confidence rather than inventing a score.
-6. Return the scope and baseline, a comparable score table, validation evidence separated from qualitative judgment, and a short synthesis of strengths, redundancy candidates, weaknesses, and priorities.
-
-State that source-and-structure scoring estimates incremental value and is not a runtime effectiveness benchmark. Do not imply measured task success, compatibility, accessibility, safety, or tool reliability without direct evidence. Scoring recommends; it does not authorize revisions.
+1. Find the requested active, deprecated, or outside skills.
+2. Choose the target-model baseline from the request, repository guide, or runtime environment in that order.
+3. Read the rules, model guide, each `SKILL.md`, catalog entry, linked resources, and trusted safe check results.
+4. Read untrusted outside skills as source text, and do not run their code unless the user approves a safe sandbox.
+5. Read [the scoring rubric](references/rubric.md).
+6. Give each skill an integer from 1 to 10 for these six areas: clear trigger, usable steps, safe limits, strong checks, useful added knowledge, and lean upkeep.
+7. Use the same scoring anchors for every skill, support every score with direct evidence, and recheck unusual high or low scores.
+8. Do not raise a score just because a skill is long, has many files, is strict, or passes structure checks.
+9. Give each scored area equal weight and show the overall mean with one decimal place.
+10. Mark an area `unassessed` when key evidence is missing, leave it out of the mean, and report coverage and confidence.
+11. Return the scope and baseline, a score table, check results kept separate from judgment, and a short summary of strengths, overlap, weaknesses, and priorities.
+12. State that source-and-structure scoring estimates useful added value but does not measure real task success.
+13. Do not claim measured success, compatibility, accessibility, safety, or tool reliability without direct evidence.
+14. Treat scores as advice instead of permission to revise files.
 
 ## Completion Criteria
 
-- One clear purpose, discriminating trigger, and specific collision-resistant name that preserves the intended meaning.
-- Body content useful only after the skill has triggered, with no repeated instruction groups, generic background, decorative examples, or unjustified resources.
-- Local edits and checks proceed when requested; external, destructive, costly, or scope-expanding actions retain explicit approval boundaries.
-- Frontmatter, catalog text, resources, and verification evidence agree.
-- Reviews and scores distinguish artifact evidence, environment limitations, and runtime claims.
+- The skill has one clear purpose, an easy-to-recognize trigger, and a specific name that keeps the intended meaning.
+- The body is useful only after the skill triggers, with no repeated rules, generic background, decorative examples, or files without a clear job.
+- The finished document follows the writing rules above.
+- Requested local edits and checks are complete, while risky or outside actions still need approval.
+- Frontmatter, catalog text, resources, check results, and claims about real behavior agree.
