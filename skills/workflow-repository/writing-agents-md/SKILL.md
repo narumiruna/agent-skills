@@ -1,36 +1,83 @@
 ---
 name: writing-agents-md
-description: Create, review, audit, migrate, or update scoped AGENTS.md repository guidance with evidence-backed commands, concise constraints, explicit authority, instruction precedence, and verifiable completion criteria.
+description: Create, review, audit, migrate, or update scoped AGENTS.md files with clear rules, verified commands, action limits, instruction order, and checks that prove the work is done.
 ---
 
 # Writing AGENTS.md
 
-Write the smallest repository guidance that gives an agent the context, constraints, authority, and evidence needed to finish work safely.
+Write the shortest useful repository guide.
+Give the agent the context, limits, authority, and evidence needed to finish the work safely.
 
 ## Workflow
 
-1. Resolve the target directory and applicable `AGENTS.md` chain. Explicit user instructions outrank repository guidance; the closest scoped file outranks ancestors. Default to one root file and add nested files only for genuinely different subproject rules.
-2. Inspect current guidance, human docs, manifests, task files, CI, and relevant package docs. Verify commands and paths from executable configuration where possible, and identify generated, vendored, migration-sensitive, destructive, external, large-data, or ownership boundaries that change agent behavior.
-3. Keep only correct project-specific rules. Remove stale, repeated, speculative, generic, or misplaced content; keep shared rules in parents and local differences in children.
-4. Check the instruction chain for conflicts, run proportionate checks, and inspect the diff for duplication or scope growth. Label facts that remain unresolved.
-5. For reviews, prioritize wrong commands, stale paths, conflicting scope, unsafe authority, and missing verification. Give each finding a severity, location, evidence, and replacement; if none remain, state that and note material evidence gaps.
+- Find the target directory and every `AGENTS.md` file that applies to it.
+  - Follow explicit user instructions before repository instructions.
+  - Follow the closest scoped file before its parent files.
+  - Use one root file by default.
+  - Add nested files only when a subproject needs different rules.
+- Inspect the current guidance, human docs, configuration, task files, CI, and relevant package docs.
+  - Verify commands and paths from files that tools can run or read.
+  - Find files that are generated or copied from elsewhere.
+  - Find risky migrations, destructive steps, external actions, large data, and ownership rules that change how the agent should work.
+- Keep only correct, project-specific rules.
+  - Remove stale, repeated, guessed, generic, or misplaced content.
+  - Keep shared rules in parent files and local differences in child files.
+- Check the instruction chain for conflicts.
+  - Run checks that match the size and risk of the change.
+  - Inspect the diff for repeated rules or extra scope.
+  - Label facts that you could not verify.
+- For reviews, check wrong commands, stale paths, conflicting scope, unsafe permissions, and missing checks first.
+  - Give each finding a severity, location, evidence, and replacement.
+  - If no findings remain, say so and name any important missing evidence.
+
+## Default Sections
+
+Use these sections in this order when creating or restructuring an `AGENTS.md` file.
+Keep every unmarked section.
+Include sections marked `[Optional]` only when they contain useful, project-specific guidance.
+Investigate missing required guidance instead of leaving an empty section or inventing rules.
+
+```markdown
+## [Optional] Communication
+## Documentation
+## Code style
+## Commands
+## Boundaries
+## [Optional] Security
+## Testing
+## [Optional] Project overview
+## [Optional] Repository structure
+## [Optional] Git and commits
+```
 
 ## Writing Rules
 
-- State the outcome, relevant context, hard constraints, approval boundaries, and success criteria. Prescribe sequence only when order matters.
-- State each rule once at the narrowest scope. Use direct imperatives and concrete paths, commands, conditions, evidence, and stopping points.
-- Include only agent-needed scope, commands, code/test conventions, security or data constraints, and collaboration or release rules. Keep product positioning and human walkthroughs in human docs.
-- Keep examples or response-style rules only when they encode a project requirement or prevent a demonstrated mistake.
-- Name ambiguities that require a question; do not require blanket approval for safe local work.
+- Keep documents and conversations concise and clear.
+- Explain things simply enough for a child to understand.
+- Put one sentence on each line.
+- State the outcome, useful context, hard limits, actions that need approval, and success criteria.
+- Describe a sequence only when its order matters.
+- State each rule once in the smallest scope where it belongs.
+- Use direct wording and exact paths, commands, conditions, evidence, and stopping points.
+- Include only the scope, commands, code and test conventions, security or data limits, and collaboration or release rules that an agent needs.
+- Keep product descriptions and human walkthroughs in human docs.
+- Keep examples or writing-style rules only when they encode a project requirement or prevent a demonstrated mistake.
+- Name unclear points that require a question.
+- Do not require blanket approval for safe local work.
 
 When action policy is needed, keep one compact block:
 
 ```text
-For answer, explanation, review, diagnosis, or planning requests, inspect and report; do not implement unless asked.
-For change, build, or fix requests, make bounded local changes and run relevant non-destructive checks.
-Require confirmation for external writes, destructive or costly actions, and material scope expansion.
+For answer, explanation, review, diagnosis, or planning requests, inspect the relevant materials and report the result.
+Do not make changes unless the request asks for them.
+For change, build, or fix requests, make the requested local changes and run relevant safe checks.
+Ask before writing to external systems, taking destructive or costly actions, or greatly expanding the scope.
 ```
 
-Adapt the policy to repository evidence, naming safe local actions and domain-specific exceptions without repeating it elsewhere.
+Adapt the policy to evidence from the repository.
+Name safe local actions and project-specific exceptions.
+Do not repeat the policy elsewhere.
 
-Add orchestration rules only for workflows the repository uses. For bounded automation, define the stage, allowed tools, evidence, limits, stopping condition, and handoff to judgment or approval.
+Add automation rules only for workflows the repository uses.
+For small automation workflows, define the stage, allowed tools, required evidence, limits, and stopping point.
+State when judgment or approval must take over.
