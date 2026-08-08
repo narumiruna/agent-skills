@@ -1,6 +1,6 @@
 ---
 name: writing-agents-md
-description: Create, review, audit, migrate, or update scoped AGENTS.md files with clear rules, verified commands, action limits, instruction order, and checks that prove the work is done.
+description: Create, review, audit, migrate, or update scoped AGENTS.md files with clear rules, verified commands, action limits, instruction order, and checks that prove the work is done. Use also when verified, durable repository guidance emerges during authorized work and should be captured at the narrowest applicable scope.
 ---
 
 # Writing AGENTS.md
@@ -12,7 +12,8 @@ Give the agent the context, limits, authority, and evidence needed to finish the
 
 - Find the target directory and every `AGENTS.md` file that applies to it.
   - Follow explicit user instructions before repository instructions.
-  - Follow the closest scoped file before its parent files.
+  - Treat each file as applying to its directory subtree, with the closest scoped file before its parent files.
+  - Put shared guidance at the narrowest common parent scope.
   - Use one root file by default.
   - Add nested files only when a subproject needs different rules.
 - Inspect the current guidance, human docs, configuration, task files, CI, and relevant package docs.
@@ -29,6 +30,28 @@ Give the agent the context, limits, authority, and evidence needed to finish the
 - For reviews, check wrong commands, stale paths, conflicting scope, unsafe permissions, and missing checks first.
   - Give each finding a severity, location, evidence, and replacement.
   - If no findings remain, say so and name any important missing evidence.
+
+## Automatic Maintenance
+
+Outside an explicit request to edit `AGENTS.md`, capture guidance only when repository evidence proves a durable, repository-specific rule that will change future agent work.
+Do not record task history, transient status, speculation, generic advice, secrets, or guidance already owned by authoritative documentation.
+Do not create `AGENTS.md` merely because it is absent.
+When qualifying guidance emerges during authorized repository changes, update or create the file at the narrowest applicable directory scope.
+During answer, review, diagnosis, or planning work, report the candidate rule instead of writing it.
+Place the rule in the matching existing section, or add a relevant default section only when the evidence justifies it.
+Prefix each automatically added or materially rewritten rule with `[UNREVIEWED]`:
+
+```markdown
+- [UNREVIEWED] Run `pnpm test:web` after changing this package.
+```
+
+Treat marked rules as active instructions; the marker records user-review status, not uncertainty or reduced authority.
+Remove the marker only at the user's explicit direction.
+Keep it when rewording or merging marked guidance, and do not add it to an equivalent rule the user has already reviewed.
+Merge or revise overlapping marked rules instead of appending duplicates.
+During incidental maintenance, do not silently rewrite or remove an unmarked rule; report contradictory evidence unless the user requested `AGENTS.md` maintenance.
+After editing, reread the applicable instruction chain and verify scope, placement, deduplication, marker preservation, and absence of sensitive or task-log content.
+Report only the automatically maintained rules that changed.
 
 ## Default Sections
 

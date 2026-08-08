@@ -101,7 +101,7 @@ Repository path: `skills/workflow-repository/`
 | `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `maintaining-memory-md` | Reads, maintains, and conservatively curates verified repository gotchas, preferences, and conventions. |
-| `writing-agents-md` | Creating or reviewing lean, scoped, evidence-backed `AGENTS.md` guidance. |
+| `writing-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 
 ## 🗄️ Deprecated Skills
 
