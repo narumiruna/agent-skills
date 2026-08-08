@@ -13,8 +13,11 @@ Follow global defaults; this file contains only repository-specific additions an
 ## Code style
 
 - Use lowercase kebab-case for skill directories and name every required entry file exactly `SKILL.md`.
+- Preserve a skill's original user intent when naming or renaming it; do not force `<verb-ing>-<object>` when that changes the meaning.
+- Retain explicit-invocation skills that provide useful mode shortcuts even when their behavior can be inferred; keep `explaining-step-by-step` active.
 - Keep a skill's frontmatter description and README catalog entry aligned when its trigger or purpose changes.
 - Keep examples repository-relative and executable when practical.
+- For user interfaces, apply Apple-derived design philosophy across platforms while translating platform-specific metrics and controls to target conventions; minimize cognitive load without sacrificing functional completeness, keep critical actions and state visible, and use predictable progressive disclosure for secondary complexity.
 
 ## Commands
 
@@ -26,7 +29,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - For change, build, or fix requests, make the requested in-scope local changes and run relevant safe checks without asking first.
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
 - Run `just bump-version <major|minor|patch>` only when explicitly requested because it fetches tags and creates a local lightweight tag.
-- Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus.
+- Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
 - Treat `skills/` as the active source of truth; `.agents/skills` is an ignored local discovery symlink, not a second copy to edit.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows exist.
@@ -35,6 +38,7 @@ Follow global defaults; this file contains only repository-specific additions an
 
 - This repository has no maintained automated test suite; do not add or maintain repository tests or apply TDD to repository changes.
 - Run changed bundled scripts through a representative path.
+- If one-off `uv run --with ...` validation fails because `~/.cache/uv` is read-only, set `UV_CACHE_DIR=/tmp/uv-cache`; request temporary network access only when an uncached dependency still cannot resolve.
 - Run `prek run -a` as the repository-wide formatting and lint gate, and report any failure before a pull request.
 - Run `git diff --check` and inspect the final diff for unintended scope or repeated guidance.
 - For changes under `examples/slides/`, verify source assets and include the generated preview or screenshots in the pull request.
