@@ -2,8 +2,15 @@
 
 Follow global defaults; this file contains only repository-specific additions and overrides.
 
+## Communication
+
+- Keep conversations concise, clear, and accurate.
+- Explain things simply enough for a child to understand.
+
 ## Documentation
 
+- Keep documents concise, clear, and accurate.
+- Write one sentence per line in prose.
 - Use `docs/guides/gpt-5.6.md` as the primary model guide when creating or revising skills and other agent-facing prompts.
 - Use another versioned model guide only when the task targets that model version.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
