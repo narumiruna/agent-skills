@@ -1,11 +1,13 @@
 ---
 name: managing-git-worktrees
-description: Create, inspect, attach, repair, remove, or prune local Git worktrees while preserving branches, detached commits, and tracked, untracked, ignored, and submodule data. Use for the full worktree lifecycle or optional branch cleanup.
+description: Deprecated internal reference for creating, inspecting, attaching, repairing, removing, or pruning local Git worktrees while preserving branches, commits, files, and submodule data.
+metadata:
+  internal: true
 ---
 
-# Managing Git Worktrees
+# Managing Git Worktrees (Deprecated Reference)
 
-Inspect before mutation. Keep worktree operations separate from commits, pushes, rebases, and unrelated branch changes. Treat dynamic refs and paths as untrusted: validate them, pass them as argv when possible, and quote shell values.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility. Inspect before mutation. Keep worktree operations separate from commits, pushes, rebases, and unrelated branch changes. Treat dynamic refs and paths as untrusted: validate them, pass them as argv when possible, and quote shell values.
 
 ## Inspect
 
