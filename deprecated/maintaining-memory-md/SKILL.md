@@ -1,11 +1,16 @@
 ---
 name: maintaining-memory-md
-description: Read, maintain, and curate concise repository-root MEMORY.md notes for verified gotchas, durable user preferences, and established repository conventions. Use at repository-conversation start, when MEMORY.md is mentioned, when its curation or cleanup is requested, when concrete evidence suggests it may be stale, or when a qualifying memory emerges.
+description: Deprecated internal reference for reading, maintaining, and curating concise repository-root MEMORY.md notes for verified gotchas, durable user preferences, and established repository conventions.
+metadata:
+  internal: true
 ---
 
-# Maintaining MEMORY.md
+# Maintaining MEMORY.md (Deprecated Reference)
 
-Resolve the repository root and inspect `MEMORY.md` at the start of repository work and before non-trivial debugging, design, workflow, or skill maintenance. Missing memory is normal. Current repository evidence always overrides it.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility.
+Resolve the repository root and inspect `MEMORY.md` at the start of repository work and before non-trivial debugging, design, workflow, or skill maintenance.
+Missing memory is normal.
+Current repository evidence always overrides it.
 
 ## Qualifying Entries
 

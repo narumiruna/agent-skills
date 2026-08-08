@@ -100,7 +100,6 @@ Repository path: `skills/workflow-repository/`
 | `using-codebase-memory-cli` | Always-preferred CLI-only graph discovery, tracing, architecture, and change-impact analysis before repository search fallback. |
 | `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
-| `maintaining-memory-md` | Reads, maintains, and conservatively curates verified repository gotchas, preferences, and conventions. |
 | `writing-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 
 ## 🗄️ Deprecated Skills
@@ -123,3 +122,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `configuring-python-logging` | Legacy Python logging configuration workflow retained as a compatibility reference. |
 | `using-peewee-orm` | Legacy Peewee lifecycle workflow retained as a compatibility reference. |
 | `managing-git-worktrees` | Legacy loss-aware Git worktree lifecycle workflow retained as a compatibility reference. |
+| `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |
