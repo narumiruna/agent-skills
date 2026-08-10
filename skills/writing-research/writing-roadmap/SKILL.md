@@ -1,6 +1,6 @@
 ---
 name: writing-roadmap
-description: Create, revise, or review concise, outcome-oriented product and system roadmaps with phased milestone checkboxes, evidence-based progress, and optional detail for context, risks, dependencies, technical health, metrics, and decisions. Use for strategic direction and milestone tracking; use writing-plans for executable task planning and implementation tracking.
+description: Create, revise, review, or archive concise, outcome-oriented product and system roadmaps with phased milestone checkboxes, evidence-based progress, and optional detail for context, risks, dependencies, technical health, metrics, and decisions. Use for strategic direction and milestone tracking; use writing-plans for executable task planning and implementation tracking.
 ---
 
 # Writing Roadmaps
@@ -87,3 +87,9 @@ Before handoff, verify that:
 When revising, preserve verified milestone status and prior significant decisions, then update affected objectives, phases, risks, measures, and boundaries so the roadmap remains internally consistent.
 
 Lead with the completed roadmap or review verdict. Follow only with material assumptions, evidence gaps, or decisions still required.
+
+## Archive Completed Roadmaps
+
+Move a completed saved roadmap to `docs/roadmaps/archived/`, then report its path.
+Treat the roadmap as complete only when every milestone has valid completion evidence and material unknowns, risks, dependencies, and handoff decisions have a clear disposition.
+Do not archive a chat-only roadmap, a roadmap with missing completion evidence, or a roadmap whose archived filename already exists.
