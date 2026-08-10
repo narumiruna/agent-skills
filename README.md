@@ -96,7 +96,6 @@ Repository path: `skills/workflow-repository/`
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
 | `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
-| `using-codebase-memory-cli` | Always-preferred CLI-only graph discovery, tracing, architecture, and change-impact analysis before repository search fallback. |
 | `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `writing-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
@@ -123,3 +122,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `managing-git-worktrees` | Legacy loss-aware Git worktree lifecycle workflow retained as a compatibility reference. |
 | `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |
 | `resolving-pr-review-comments` | Legacy explicit PR feedback workflow retained as a compatibility reference. |
+| `using-codebase-memory-cli` | Legacy CLI-only codebase graph workflow retained as a compatibility reference. |

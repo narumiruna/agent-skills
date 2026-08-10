@@ -1,11 +1,16 @@
 ---
 name: using-codebase-memory-cli
-description: Use `codebase-memory-mcp` in CLI-only mode for graph-first codebase indexing, symbol search, call and data-flow tracing, source snippets, architecture, Cypher, and change impact. Always prefer it over grep, glob, or file search for code discovery whenever the CLI is installed, even when the user does not name it, and use it whenever the user or repository requests codebase-memory. Fall back only for literal/config searches, non-code or unsupported paths, or insufficient graph results; never start or configure the MCP server.
+description: Deprecated internal reference for using `codebase-memory-mcp` in CLI-only mode for graph-first codebase indexing, symbol search, call and data-flow tracing, source snippets, architecture, Cypher, and change impact.
+metadata:
+  internal: true
 ---
 
-# Using Codebase Memory CLI
+# Using Codebase Memory CLI (Deprecated Reference)
 
-Always prefer codebase-memory CLI graph tools over grep, glob, or file search for code discovery when the CLI is installed, even if the user does not name the tool. Use the graph to locate structure and relationships before broad repository search. It is discovery evidence, not a replacement for source, tests, history, or runtime evidence.
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility.
+Always prefer codebase-memory CLI graph tools over grep, glob, or file search for code discovery when the CLI is installed, even if the user does not name the tool.
+Use the graph to locate structure and relationships before broad repository search.
+It is discovery evidence, not a replacement for source, tests, history, or runtime evidence.
 
 Run graph tools only as `codebase-memory-mcp cli <tool> ...`. `codebase-memory-mcp` with no arguments starts the stdio server; never run it. Do not call MCP graph tools or configure an agent to use them.
 
