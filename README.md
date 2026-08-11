@@ -83,6 +83,14 @@ Repository path: `skills/slides-visuals/`
 | `creating-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
 | `creating-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
 
+### Terminal
+
+Repository path: `skills/terminal/`
+
+| Skill | Use it for |
+| --- | --- |
+| `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
+
 ### Workflow & Repository Maintenance
 
 Repository path: `skills/workflow-repository/`
