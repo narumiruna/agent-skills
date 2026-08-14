@@ -98,6 +98,7 @@ Repository path: `skills/workflow-repository/`
 | Skill | Use it for |
 | --- | --- |
 | `creating-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
+| `herdr` | Explicitly requested control of Herdr panes, tabs, workspaces, commands, and coding agents. |
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
