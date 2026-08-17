@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Draft, execute, or track lean, verifiable implementation plans for non-trivial migrations, refactors, PR splits, task checklists, and other work with sequencing, tradeoffs, unknowns, or risks; use writing-roadmap for strategic direction and skip small obvious tasks.
+description: Draft, execute, or track lean, verifiable implementation plans for non-trivial migrations, refactors, PR splits, task checklists, and other work with sequencing, tradeoffs, unknowns, or risks, and delete them when complete; use writing-roadmap for strategic direction and skip small obvious tasks.
 ---
 
 # Writing Plans
@@ -60,7 +60,7 @@ End with finite completion checks tied to files, commands, tests, review or depl
 Declare completion only when every task and completion check is checked, material unknowns are resolved or accepted, risks have a clear disposition, and required handoff or release work is done.
 Do not infer completion from implementation alone.
 
-## Archive Completed Plans
+## Delete Completed Plans
 
-Move a fully executed saved plan to `docs/plans/archived/`, then report its path.
-Do not archive a chat-only plan, a plan with missing evidence, or a plan whose archived filename already exists.
+Delete a fully executed saved plan, then report the deleted path.
+Do not delete a chat-only plan or a plan with missing completion evidence.
