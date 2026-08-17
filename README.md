@@ -48,8 +48,8 @@ Repository path: `skills/writing-research/`
 
 | Skill | Use it for |
 | --- | --- |
-| `writing-roadmap` | Creating, revising, reviewing, and archiving evidence-grounded strategic roadmaps. |
-| `writing-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence. |
+| `writing-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
+| `writing-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
 | `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
 | `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
