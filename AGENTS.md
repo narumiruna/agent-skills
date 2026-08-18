@@ -2,23 +2,25 @@
 
 Follow global defaults; this file contains only repository-specific additions and overrides.
 
-## Communication
+## Communication & Documentation
 
-- Keep conversations concise, clear, and accurate.
-- Explain things simply enough for a child to understand.
-
-## Documentation
-
-- Keep documents concise, clear, and accurate.
-- Write one sentence per line in prose.
+- Lead with the most important relevant information and omit anything unnecessary or repeated.
+- Use clear structure, familiar words, and concise sentences.
+- Explain the main idea simply before adding necessary detail.
+- Keep information accurate.
+- Make documented rules specific and verifiable.
+- In documentation, put each prose sentence on its own source line.
 - Use `docs/guides/gpt-5.6.md` as the primary model guide when creating or revising skills and other agent-facing prompts.
 - Use another versioned model guide only when the task targets that model version.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
 - Update installation documentation and executable recipes only in the files that own the affected flow.
 
-## Code style
+## Code Style
 
+- Follow KISS (Keep It Simple) and YAGNI (You Aren't Gonna Need It).
+- Prefer simple, minimal solutions over unnecessary complexity.
+- Split source files over 1,000 lines along clear responsibility boundaries, or document why they must remain intact.
 - Use lowercase kebab-case for skill directories and name every required entry file exactly `SKILL.md`.
 - Preserve a skill's original user intent when naming or renaming it; do not force `<verb-ing>-<object>` when that changes the meaning.
 - Retain explicit-invocation skills that provide useful mode shortcuts even when their behavior can be inferred; keep `explaining-step-by-step` active.
