@@ -77,7 +77,7 @@ The `[Optional]` marker is a template annotation; remove it from headings includ
 
 ## Writing Rules
 
-- Write `AGENTS.md` in concise plain language, with one enforceable sentence on each line.
+- Organize rules under descriptive `##` section headings and write each rule as a concise, enforceable, one-sentence bullet list item.
 - State the outcome, useful context, hard limits, actions that need approval, and success criteria.
 - Describe a sequence only when its order matters.
 - State each rule once in the smallest scope where it belongs.
