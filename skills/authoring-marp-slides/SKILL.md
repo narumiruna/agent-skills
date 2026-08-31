@@ -28,4 +28,4 @@ Load only the authoring detail the deck needs.
 5. Resolve this skill directory and run the limited structural precheck with `bash "$SKILL_DIR/scripts/check_marpit_structure.sh" path/to/deck.md`. It checks delimiters and `marp: true` but does not parse YAML or Marp syntax. Then follow `references/preview-workflow.md` to export with the actual Marp renderer; inspect whether directives took effect, plus the title, densest slide, and every image/SVG slide. Report structural, strict-YAML, renderer, and visual evidence separately; never infer one from another.
 6. Return the deck artifact first, followed by checks performed and any rendering, font, asset, or environment caveat.
 
-Do not claim visual validation from Markdown inspection alone. Do not commit, publish, or convert formats unless requested.
+Do not claim visual validation from Markdown inspection alone. Temporary renders used only for validation are allowed; do not commit, publish, or deliver another format unless requested.

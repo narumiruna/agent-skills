@@ -7,7 +7,10 @@ Use this when visual inspection is required.
 - `marp` CLI is installed.
 - The deck and assets use repository-relative paths.
 
-## Preview
+## Optional Human Preview
+
+The preview server is long-running and requires a browser, so do not use it as an agent validation command.
+A human can start it with:
 
 ```bash
 marp -s examples/slides
