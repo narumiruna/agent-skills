@@ -5,7 +5,7 @@ description: Create, revise, convert, or validate Mermaid diagrams, including fl
 
 # Mermaid Diagrams
 
-Preserve editable Mermaid source. Render a static asset only when the consumer requires one.
+Preserve editable Mermaid source. Temporary renders used only for validation are allowed; preserve or deliver a static asset only when the consumer requires one.
 
 ## Route by Structure
 

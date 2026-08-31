@@ -5,7 +5,8 @@ description: Draft, execute, or track lean, verifiable implementation plans for 
 
 # Writing Plans
 
-A plan request authorizes creating or revising the plan artifact, not implementation.
+A planning request is read-only by default and does not authorize repository changes or implementation.
+Create or revise a saved plan only when the user explicitly requests a repository artifact.
 Execute the plan only when the user requests it or an active workflow already authorizes the work.
 
 ## Ground the Plan
@@ -13,8 +14,8 @@ Execute the plan only when the user requests it or an active workflow already au
 Inspect relevant repository evidence before asking questions.
 Ask at most one question when proceeding would require a risky guess; otherwise state only assumptions and unknowns that affect execution or validation.
 
-Save a drafted plan to the repository unless the user requests chat-only output.
-Default to `docs/plans/YYYY-MM-DD_<topic>-plan.md` with a concise lowercase kebab-case topic, and update an existing plan in place during execution.
+Return the plan in chat unless the user explicitly requests a repository artifact.
+For a requested saved plan, default to `docs/plans/YYYY-MM-DD_<topic>-plan.md` with a concise lowercase kebab-case topic, and update that plan in place during authorized execution.
 
 ## Structure the Plan
 

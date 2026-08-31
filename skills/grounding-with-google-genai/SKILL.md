@@ -41,7 +41,7 @@ uv run --script "$SKILL_DIR/scripts/google_genai_grounding.py" url \
   --url 'https://example.com/two'
 ```
 
-A request to use this skill authorizes one bounded grounding call. Grounded calls can consume quota or incur charges; retry once only for a clear transient failure or a corrected deterministic input, and do not fan out into extra calls without need.
+An explicit request to use Gemini, Google GenAI, or this skill authorizes one bounded grounding call. If this skill was selected implicitly because web, place, or URL grounding would help, confirm before consuming Google API quota. Retry once only for a clear transient failure or a corrected deterministic input, and do not fan out into extra calls without need.
 
 ## Verify and Answer
 

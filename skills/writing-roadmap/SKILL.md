@@ -5,7 +5,10 @@ description: Create, revise, review, or track concise, outcome-oriented product 
 
 # Writing Roadmaps
 
-A roadmap expresses strategic direction and sequencing, not a promise of delivery dates or an implementation checklist. Creating or revising one authorizes changes to the roadmap artifact only, not implementation of its initiatives. For a review-only request, report findings without rewriting unless asked.
+A roadmap expresses strategic direction and sequencing, not a promise of delivery dates or an implementation checklist.
+A roadmap request is read-only by default and does not authorize repository changes or implementation of its initiatives.
+Create or revise a saved roadmap only when the user explicitly requests a repository artifact.
+For a review-only request, report findings without rewriting unless asked.
 
 ## Ground the Roadmap
 
@@ -13,7 +16,8 @@ Inspect provided material and relevant repository evidence before drafting. Esta
 
 Separate verified current state, approved commitments, and proposed direction. Do not invent capabilities, dates, targets, owners, capacity, dependencies, or certainty.
 
-Save a created or revised roadmap to the repository unless the user requests chat-only output. Default to `docs/roadmaps/YYYY-MM-DD_<topic>-roadmap.md`; derive a concise lowercase kebab-case topic, create the directory when needed, and update an existing roadmap in place.
+Return the roadmap in chat unless the user explicitly requests a repository artifact.
+For a requested saved roadmap, default to `docs/roadmaps/YYYY-MM-DD_<topic>-roadmap.md`; derive a concise lowercase kebab-case topic, create the directory when needed, and update that roadmap in place.
 
 ## Start with the Lean Template
 
