@@ -26,16 +26,11 @@ Follow global defaults; this file contains only repository-specific additions an
 - Keep examples repository-relative and executable when practical.
 - For user interfaces, apply Apple-derived design philosophy across platforms while translating platform-specific metrics and controls to target conventions; minimize cognitive load without sacrificing functional completeness, keep critical actions and state visible, and use predictable progressive disclosure for secondary complexity.
 
-## Commands
-
-- Run `just` to list available recipes without mutating repository state.
-
 ## Boundaries
 
 - For answer, explanation, review, diagnosis, or planning requests, inspect the relevant materials and report without making changes.
 - For change, build, or fix requests, make the requested in-scope local changes and run relevant safe checks without asking first.
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
-- Run `just bump-version <major|minor|patch>` only when explicitly requested because it fetches tags and creates a local lightweight tag.
 - Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
 - Treat `skills/` as the active source of truth; `.agents/skills` is an ignored local discovery symlink, not a second copy to edit.
