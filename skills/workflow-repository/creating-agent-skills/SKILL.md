@@ -12,6 +12,7 @@ A review or score request is read-only unless the user also asks for changes.
 
 - Keep documents concise and clear.
 - Put one sentence on each line.
+- When writing an `AGENTS.md` file, organize rules under descriptive `##` section headings and write each rule as a one-sentence bullet list item.
 
 ## Choose the Mode
 
