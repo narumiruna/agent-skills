@@ -10,7 +10,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Keep information accurate.
 - Make documented rules specific and verifiable.
 - Use `./skills/writing-research/prompting-gpt/references/gpt-5.6.md` as the primary model guide when creating or revising skills and other agent-facing prompts.
-- Use another versioned model guide only when the task targets that model version.
+- Use GPT-5.5 only after GPT-5.6 as supplementary prompt guidance, and use any other versioned model guide only when the task targets that model version.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
 - Update installation documentation and executable recipes only in the files that own the affected flow.
