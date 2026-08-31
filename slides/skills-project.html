@@ -103,12 +103,6 @@
 <p>Use the hosted collection when you just want the skills:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-shell">npx skills add narumiruna/skills
 </code></pre>
-<p>Use local copy-based installs while editing this repository:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-shell">just install-all
-just install managing-python-with-uv
-just clean managing-python-with-uv
-</code></pre>
-<p><code>just</code> by itself is intentionally non-mutating.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" data-background-color="#2563EB" data-color="#F7FAFC" data-class="lead" data-theme="default" lang="POSIX" class="lead" data-marpit-pagination="7" style="--paginate:true;--background-color:#2563EB;--color:#F7FAFC;--class:lead;--theme:default;color:#F7FAFC;background-color:#2563EB;background-image:none;" data-marpit-pagination-total="13">
 <h1 id="design-principle">Design principle</h1>
@@ -128,7 +122,6 @@ just clean managing-python-with-uv
 <h2 id="maintainer-loop">Maintainer loop</h2>
 <ol>
 <li>Author or refine a skill in <code>skills/&lt;name&gt;/</code>.</li>
-<li>Install locally with <code>just install &lt;name&gt;</code> or <code>just install-all</code>.</li>
 <li>Exercise the behavior through Codex using <code>/skills</code> or <code>$skill-name</code>.</li>
 <li>Validate repository changes with <code>prek run -a</code>.</li>
 <li>Rebuild slide outputs after changing <code>examples/slides/</code>.</li>
@@ -154,11 +147,6 @@ just clean managing-python-with-uv
 <td><code>AGENTS.md</code></td>
 <td>contributor workflow and repo editing rules</td>
 <td>product messaging</td>
-</tr>
-<tr>
-<td><code>justfile</code></td>
-<td>executable install and clean recipes</td>
-<td>undocumented side paths</td>
 </tr>
 <tr>
 <td><code>examples/</code></td>
