@@ -54,6 +54,7 @@ Repository path: `skills/writing-research/`
 | `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
 | `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
 | `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
+| `prompting-gpt` | Creating, revising, and reviewing lean GPT prompts using GPT-5.6 as the primary baseline. |
 
 ### Learning & Explanation
 
