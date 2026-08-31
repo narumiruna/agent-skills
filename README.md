@@ -34,81 +34,37 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## 🧰 Skill Catalog
 
-### Python
-
-Repository path: `skills/python/`
+All active skills live directly under `skills/<skill-name>/`.
 
 | Skill | Use it for |
 | --- | --- |
-| `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
-
-### Writing & Research
-
-Repository path: `skills/writing-research/`
-
-| Skill | Use it for |
-| --- | --- |
-| `writing-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
-| `writing-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
-| `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `applying-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
-| `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
-| `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
-| `prompting-gpt` | Creating, revising, and reviewing lean GPT prompts using GPT-5.6 as the primary baseline. |
-
-### Learning & Explanation
-
-Repository path: `skills/learning-explanation/`
-
-| Skill | Use it for |
-| --- | --- |
-| `explaining-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
-
-### UI/UX Design
-
-Repository path: `skills/ui-ux-design/`
-
-| Skill | Use it for |
-| --- | --- |
-| `designing-user-experiences` | Design, review, or implement bounded interfaces and approval-gated end-to-end digital experiences. |
-
-### Slides & Visuals
-
-Repository path: `skills/slides-visuals/`
-
-| Skill | Use it for |
-| --- | --- |
-| `creating-slide-decks` | Complete Marp decks with coordinated narrative, colors, visuals, and rendering. |
+| `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
+| `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `authoring-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
-| `designing-slide-colors` | Semantic slide palettes with usage rules and measured contrast evidence. |
-| `creating-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
-| `creating-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
-
-### Terminal
-
-Repository path: `skills/terminal/`
-
-| Skill | Use it for |
-| --- | --- |
-| `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
-
-### Workflow & Repository Maintenance
-
-Repository path: `skills/workflow-repository/`
-
-| Skill | Use it for |
-| --- | --- |
 | `creating-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
+| `creating-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
+| `creating-slide-decks` | Complete Marp decks with coordinated narrative, colors, visuals, and rendering. |
+| `creating-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
+| `creating-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
+| `designing-slide-colors` | Semantic slide palettes with usage rules and measured contrast evidence. |
+| `designing-user-experiences` | Design, review, or implement bounded interfaces and approval-gated end-to-end digital experiences. |
+| `explaining-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
+| `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
+| `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
+| `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `herdr` | Explicitly requested control of Herdr panes, tabs, workspaces, commands, and coding agents. |
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
-| `auditing-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
+| `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
+| `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
+| `prompting-gpt` | Creating, revising, and reviewing lean GPT prompts using GPT-5.6 as the primary baseline. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
-| `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
-| `applying-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
-| `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `writing-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
+| `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
+| `writing-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
+| `writing-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
 
 ## 🗄️ Deprecated Skills
 
