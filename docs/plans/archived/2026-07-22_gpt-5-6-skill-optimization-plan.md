@@ -1,6 +1,6 @@
 ## Goal
 
-Optimize every active and deprecated skill against `docs/guides/gpt-5.6.md`: remove repeated or low-value prompt content, keep domain-critical constraints, state approval and evidence boundaries precisely, and align each skill's metadata and catalog entry.
+Optimize every active and deprecated skill against `./skills/writing-research/prompting-gpt/references/gpt-5.6.md`: remove repeated or low-value prompt content, keep domain-critical constraints, state approval and evidence boundaries precisely, and align each skill's metadata and catalog entry.
 
 ## Assumptions
 
@@ -10,7 +10,7 @@ Optimize every active and deprecated skill against `docs/guides/gpt-5.6.md`: rem
 
 ## Plan
 
-- [x] Establish a guide-derived audit baseline for all 32 skills and inspect repository ownership, tests, metadata, and relevant references; verified by `find skills deprecated -name SKILL.md` (28 active, 4 deprecated), frontmatter/metadata extraction, repository tests and instructions, and a four-stream per-skill audit against `docs/guides/gpt-5.6.md`.
+- [x] Establish a guide-derived audit baseline for all 32 skills and inspect repository ownership, tests, metadata, and relevant references; verified by `find skills deprecated -name SKILL.md` (28 active, 4 deprecated), frontmatter/metadata extraction, repository tests and instructions, and a four-stream per-skill audit against `./skills/writing-research/prompting-gpt/references/gpt-5.6.md`.
 - [x] Optimize Python and learning skills (`explaining-step-by-step`, `building-typer-clis`, `configuring-python-logging`, `managing-python-with-uv`, `using-peewee-orm`) and align their metadata/catalog wording; verified by diff review, a live Peewee lifecycle example, and the final repository suite (67 passed).
 - [x] Optimize slide, visual, and UI skills (`authoring-marp-slides`, `creating-mermaid-diagrams`, `creating-slide-decks`, `creating-svg-illustrations`, `designing-slide-colors`, `designing-user-interfaces`) and duplicated or misleading bundled guidance; verified by diff review and final tests covering trigger alignment, inline images, false validation claims, commit authority, and resource links (67 passed).
 - [x] Optimize workflow and repository skills (`applying-tdd`, `creating-agent-skills`, `hardening-code-paths`, `maintaining-memory-md`, `managing-git-worktrees`, `naming-agent-skills`, `resolving-pr-review-comments`, `reviewing-code`, `syncing-main-branch`, `using-jira-cli`, `writing-agents-md`, `writing-git-commits`) while preserving explicit-invocation and destructive/external-action boundaries; verified by diff review, 32-skill metadata validation, targeted authorization tests, and independent review. `hardening-code-paths` required no body reduction after audit.
@@ -28,7 +28,7 @@ Optimize every active and deprecated skill against `docs/guides/gpt-5.6.md`: rem
 ## Completion Checklist
 
 - [x] All 32 skill directories have an explicit audited disposition, verified by the 28-active/4-deprecated inventory, per-skill diff review, and independent final review.
-- [x] Repetition and unnecessary prompt scaffolding are reduced without losing required constraints, verified against `docs/guides/gpt-5.6.md`, zero generic trigger/cleanup headings, a 43.4% aggregate `SKILL.md` word reduction, and 67 passing tests.
+- [x] Repetition and unnecessary prompt scaffolding are reduced without losing required constraints, verified against `./skills/writing-research/prompting-gpt/references/gpt-5.6.md`, zero generic trigger/cleanup headings, a 43.4% aggregate `SKILL.md` word reduction, and 67 passing tests.
 - [x] External, destructive, public, or costly actions require precise authorization where applicable, verified by targeted assertions and independent review of PR, Jira, uv publish, Telegraph, worktree, database, and deprecated Atuin paths.
 - [x] Frontmatter and README catalog descriptions remain aligned, verified by all-skill validation, inventory tests, semantic trigger assertions, and manual 32-skill comparison.
 - [x] All documented validation gates pass, verified by `just`, 32/32 skill validation, 67/67 tests, all `prek` hooks, `git diff --check`, relative-link checks, and a passing independent review.
