@@ -121,7 +121,7 @@ section::after {
 
 **Repository contract**
 
-- `skills/<category>/<skill-name>/SKILL.md` is the required entry point.
+- `skills/<skill-name>/SKILL.md` is the required entry point.
 - Optional support files stay beside the skill: `references/`, `scripts/`, `assets/`, `agents/`.
 - `README.md` explains external use and discovery.
 - `AGENTS.md` keeps maintainer workflow separate.
@@ -139,7 +139,7 @@ section::after {
 
 ---
 
-## The collection is organized by job-to-be-done
+## The collection covers common jobs-to-be-done
 
 | Area | Skills |
 |---|---|
@@ -195,7 +195,7 @@ This is especially visible in the slide toolkit: colors, Marp authoring, and SVG
 
 ## Maintainer loop
 
-1. Author or refine a skill in `skills/<category>/<name>/`.
+1. Author or refine a skill in `skills/<name>/`.
 2. Install locally with `just install <name>` or `just install-all`.
 3. Exercise the behavior through Codex using `/skills` or `$skill-name`.
 4. Validate repository changes with `prek run -a`.
