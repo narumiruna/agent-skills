@@ -6,7 +6,7 @@ description: Create, revise, or review prompts and agent instructions for GPT mo
 # Prompting GPT
 
 Produce the smallest prompt that preserves the product contract.
-Use GPT-5.6 guidance as the baseline and retain GPT-5.5 patterns only when they add a requirement that does not conflict with it.
+Use GPT-5.6 guidance as the baseline.
 
 ## Establish the Contract
 
@@ -52,15 +52,16 @@ Use GPT-5.6 guidance as the baseline and retain GPT-5.5 patterns only when they 
 
 - Test representative normal cases plus material ambiguity, missing evidence, denied side effects, tool failure, and stopping behavior when those risks apply.
 - Compare task success, answer completeness, required evidence, total tokens, latency, and cost against the current prompt or a documented baseline.
-- Test the selected reasoning effort and one level lower when migrating from GPT-5.5, unless the application fixes that setting for a documented reason.
+- Test the selected reasoning effort and one level lower when migrating from GPT-5.5 or GPT-5.4, unless the application fixes that setting for a documented reason.
 - Inspect both reduced program output and the final assistant answer when Programmatic Tool Calling is used.
 - Treat fewer tokens, calls, or turns as an improvement only when the output still meets the quality bar.
 - Do not claim improvement without representative evaluation evidence.
 
-For review requests, keep the work read-only and lead with behavior-changing findings tied to exact prompt sections.
+For review-only requests, keep the work read-only and lead with behavior-changing findings tied to exact prompt sections.
 For create or revision requests, return the finished prompt first, then list separate API-setting recommendations, assumptions, and validation gaps only when they affect adoption.
 
 ## Model Guides
 
-Read the [GPT-5.6 guide](references/gpt-5.6.md) when the task depends on Pro mode, persisted reasoning, explicit prompt caching, Programmatic Tool Calling, or other model-specific behavior not resolved here.
-Consult the [GPT-5.5 guide](references/gpt-5.5.md) only for supplementary patterns such as retrieval budgets, personality, preambles, Structured Outputs, or phase handling, and do not let it override GPT-5.6 guidance.
+Read the [GPT-5.6 guide](references/gpt-5.6.md) first for every task.
+Only afterward, consult the [GPT-5.5 guide](references/gpt-5.5.md) for supplementary patterns such as retrieval budgets, personality, preambles, Structured Outputs, or phase handling, and never let it replace or override GPT-5.6 guidance.
+Read the [GPT-5.4 guide](references/gpt-5.4.md) only when the task targets GPT-5.4.
