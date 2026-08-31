@@ -9,7 +9,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Explain the main idea simply before adding necessary detail.
 - Keep information accurate.
 - Make documented rules specific and verifiable.
-- Use `./skills/prompting-gpt/references/gpt-5.6.md` as the primary model guide when creating or revising skills and other agent-facing prompts.
+- Use `./skills/prompting-gpt/references/gpt-5.6.md` as the primary model guide when creating, revising, or reviewing skills and other agent-facing prompts.
 - Use GPT-5.5 only after GPT-5.6 as supplementary prompt guidance, and use any other versioned model guide only when the task targets that model version.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
@@ -33,13 +33,13 @@ Follow global defaults; this file contains only repository-specific additions an
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
 - Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
-- Treat `skills/` as the active source of truth; `.agents/skills` is an ignored local discovery symlink, not a second copy to edit.
+- Treat `skills/` as the active source of truth; `.agents/skills` is a tracked local-discovery symlink to it, not a second copy to edit.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows exist.
 
 ## Testing
 
 - This repository has no maintained automated test suite; do not add or maintain repository tests or apply TDD to repository changes.
-- Run changed bundled scripts through a representative path.
+- Run every changed bundled script through a non-destructive path that exercises the changed behavior; report the command and result, and identify any path that credentials, network access, or unavailable dependencies prevented you from verifying.
 - If one-off `uv run --with ...` validation fails because `~/.cache/uv` is read-only, set `UV_CACHE_DIR=/tmp/uv-cache`; request temporary network access only when an uncached dependency still cannot resolve.
 - Run `prek run -a` as the repository-wide formatting and lint gate, and report any failure before a pull request.
 - Run `git diff --check` and inspect the final diff for unintended scope or repeated guidance.
