@@ -158,16 +158,6 @@ Use the hosted collection when you just want the skills:
 npx skills add narumiruna/skills
 ```
 
-Use local copy-based installs while editing this repository:
-
-```shell
-just install-all
-just install managing-python-with-uv
-just clean managing-python-with-uv
-```
-
-`just` by itself is intentionally non-mutating.
-
 ---
 
 <!-- _class: lead -->
@@ -196,10 +186,9 @@ This is especially visible in the slide toolkit: colors, Marp authoring, and SVG
 ## Maintainer loop
 
 1. Author or refine a skill in `skills/<name>/`.
-2. Install locally with `just install <name>` or `just install-all`.
-3. Exercise the behavior through Codex using `/skills` or `$skill-name`.
-4. Validate repository changes with `prek run -a`.
-5. Rebuild slide outputs after changing `examples/slides/`.
+2. Exercise the behavior through Codex using `/skills` or `$skill-name`.
+3. Validate repository changes with `prek run -a`.
+4. Rebuild slide outputs after changing `examples/slides/`.
 
 ---
 
@@ -209,7 +198,6 @@ This is especially visible in the slide toolkit: colors, Marp authoring, and SVG
 |---|---|---|
 | `README.md` | install flows, external positioning, skill discovery | maintainer-only process detail |
 | `AGENTS.md` | contributor workflow and repo editing rules | product messaging |
-| `justfile` | executable install and clean recipes | undocumented side paths |
 | `examples/` | slide decks and visual examples | skill source text |
 
 ---

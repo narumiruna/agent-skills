@@ -34,8 +34,8 @@
       <g>
         <rect x="414" y="144" width="212" height="112" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="3" filter="url(#shadow-sm)"/>
         <text x="520" y="184" text-anchor="middle" font-size="24" font-weight="700">Install</text>
-        <text x="520" y="214" text-anchor="middle" fill="#64748B">just install-all</text>
-        <text x="520" y="239" text-anchor="middle" fill="#64748B">or npx skills add</text>
+        <text x="520" y="214" text-anchor="middle" fill="#64748B">npx skills add</text>
+        <text x="520" y="239" text-anchor="middle" fill="#64748B">narumiruna/skills</text>
       </g>
 
       <g>
