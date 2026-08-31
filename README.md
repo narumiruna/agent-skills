@@ -53,7 +53,6 @@ All active skills live directly under `skills/<skill-name>/`.
 | `grilling-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `grounding-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
 | `hardening-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
-| `herdr` | Explicitly requested control of Herdr panes, tabs, workspaces, commands, and coding agents. |
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
 | `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
