@@ -19,7 +19,6 @@ Follow global defaults; this file contains only repository-specific additions an
 
 - Follow KISS (Keep It Simple) and YAGNI (You Aren't Gonna Need It).
 - Prefer simple, minimal solutions over unnecessary complexity.
-- Split source files over 1,000 lines along clear responsibility boundaries, or document why they must remain intact.
 - Use lowercase kebab-case for skill directories and name every required entry file exactly `SKILL.md`.
 - Preserve a skill's original user intent when naming or renaming it; do not force `<verb-ing>-<object>` when that changes the meaning.
 - Retain explicit-invocation skills that provide useful mode shortcuts even when their behavior can be inferred; keep `explaining-step-by-step` active.
