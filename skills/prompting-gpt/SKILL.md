@@ -10,7 +10,8 @@ Use GPT-5.6 guidance as the baseline.
 
 ## Establish the Contract
 
-- Inspect the existing prompt, relevant tool descriptions, API settings, representative tasks, and known failures before revising an established workflow.
+- Inspect the existing prompt, relevant skills, `AGENTS.md` files, tool descriptions, API settings, representative tasks, and known failures before revising an established workflow.
+- Identify duplicate or conflicting instructions across those sources and resolve conflicts according to the host's instruction hierarchy, preserving higher-priority requirements.
 - Ask one narrow question only when missing context would materially change the artifact or create meaningful risk.
 - Define the goal, relevant context, success criteria, constraints, evidence requirements, output expectations, and stopping conditions.
 - Describe the required outcome and let the model choose the path unless sequence, method, or approval order is itself a product requirement.
@@ -20,14 +21,15 @@ Use GPT-5.6 guidance as the baseline.
 ## Bound Actions and Tool Use
 
 - State safe autonomous actions and approval boundaries once.
-- Allow in-scope, reversible local work without unnecessary confirmation.
+- Allow in-scope, reversible local work without unnecessary confirmation and carry it through completion or an explicit blocker.
 - Require approval before external writes, destructive or costly actions, purchases, or material scope expansion.
 - Name the exact side effects an authorization permits, and do not infer related mutations.
 - Expose only tools relevant to the task.
 - Put tool-specific purpose, inputs, return shape, side effects, retry safety, and error behavior in the tool description.
 - Keep only cross-tool routing, authorization, evidence, and stopping policy in the main prompt.
-- Use Programmatic Tool Calling only for a bounded stage with predictable processing, named eligible tools, an exact output schema with required evidence, concurrency and retry limits, and no approval-dependent action.
-- Keep semantic judgment, approval decisions, and final validation in direct model or tool flow.
+- Choose tool orchestration by task dependencies, required judgment, and approval boundaries rather than tool availability alone.
+- For multi-agent workflows, define when to delegate independent work, each subagent's scope and expected result, concurrency limits, and who validates and integrates the results.
+- For long-running workflows, define how to preserve completed actions, relevant assumptions, IDs, tool outcomes, blockers, and the next goal across continuation, compaction, or handoffs.
 
 ## Control Evidence and Output
 
@@ -52,8 +54,8 @@ Use GPT-5.6 guidance as the baseline.
 
 - Test representative normal cases plus material ambiguity, missing evidence, denied side effects, tool failure, and stopping behavior when those risks apply.
 - Compare task success, answer completeness, required evidence, total tokens, latency, and cost against the current prompt or a documented baseline.
-- Test the selected reasoning effort and one level lower when migrating from GPT-5.5 or GPT-5.4, unless the application fixes that setting for a documented reason.
-- Inspect both reduced program output and the final assistant answer when Programmatic Tool Calling is used.
+- Tune supported reasoning settings on representative tasks unless the application fixes them, and increase effort only when measured quality gains justify added latency and cost.
+- Run checks appropriate to the change and complete required validation; once those pass, broaden or repeat verification only for new changes, failures, or unresolved concerns.
 - Treat fewer tokens, calls, or turns as an improvement only when the output still meets the quality bar.
 - Do not claim improvement without representative evaluation evidence.
 
@@ -68,3 +70,6 @@ Read the [GPT-5.6 guide](references/gpt-5.6.md) first for every task.
 Only afterward, consult the [GPT-5.5 guide](references/gpt-5.5.md) for supplementary patterns such as retrieval budgets, personality, preambles, Structured Outputs, or phase handling, and never let it replace or override GPT-5.6 guidance.
 Read the [GPT-5.4 guide](references/gpt-5.4.md) only when the task targets GPT-5.4.
 Read the [GPT-6 Astra guide](references/gpt-6-astra.md) only when the task targets GPT-6 Astra.
+
+Use the target model guide for API compatibility, supported settings, and migration steps.
+For Programmatic Tool Calling, read the [routing and validation guidance](references/gpt-5.6.md#programmatic-tool-calling) and confirm support in the target model guide before adoption.
