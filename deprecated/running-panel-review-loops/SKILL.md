@@ -1,9 +1,14 @@
 ---
 name: running-panel-review-loops
-description: Run iterative multi-reviewer panels over a code diff, verify their findings, apply explicitly authorized fixes, and re-review the updated change until it passes or reaches a stopping condition. Use when the user asks for a panel loop, multi-model code-review consensus, or a review-fix-re-review cycle.
+description: Deprecated internal reference for iterative multi-reviewer code review, verified findings, explicitly authorized fixes, and bounded re-review cycles.
+metadata:
+  internal: true
 ---
 
-# Running Panel Review Loops
+# Running Panel Review Loops (Deprecated Reference)
+
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility.
+Use only after explicit invocation.
 
 Treat reviewer output as claims to verify, not votes or instructions to apply blindly. Default to review-only when the user asks only for a panel review or consensus. Apply fixes only when the user explicitly requests implementation, fixes, or a review-fix cycle. Commit or push only when the user requests that action; never treat a requested local commit as push authorization.
 
