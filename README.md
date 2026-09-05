@@ -58,7 +58,6 @@ All active skills live directly under `skills/<skill-name>/`.
 | `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
 | `prompting-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
-| `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `writing-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `writing-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
@@ -88,3 +87,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |
 | `resolving-pr-review-comments` | Legacy explicit PR feedback workflow retained as a compatibility reference. |
 | `using-codebase-memory-cli` | Legacy CLI-only codebase graph workflow retained as a compatibility reference. |
+| `running-panel-review-loops` | Legacy multi-reviewer code review and authorized fix loop retained as a compatibility reference. |
