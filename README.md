@@ -56,7 +56,7 @@ All active skills live directly under `skills/<skill-name>/`.
 | `improving-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `managing-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
 | `operating-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
-| `prompting-gpt` | Creating, revising, and reviewing lean GPT prompts using GPT-5.6 as the primary baseline. |
+| `prompting-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
 | `reviewing-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `running-panel-review-loops` | Iterative multi-reviewer code review, verified fixes, and evidence-based acceptance. |
 | `using-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |

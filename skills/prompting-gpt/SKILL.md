@@ -1,12 +1,18 @@
 ---
 name: prompting-gpt
-description: Create, revise, or review prompts and agent instructions for GPT models using GPT-5.6 as the primary baseline and GPT-5.5 as supporting guidance, including outcome contracts, tool routing, action boundaries, evidence rules, stopping conditions, response style, and representative evaluation.
+description: Create, revise, or review prompts and agent instructions using the user-specified model or otherwise the detected runtime model to select a matching reference, with general principles only when the model is unknown or not covered.
 ---
 
 # Prompting GPT
 
 Produce the smallest prompt that preserves the product contract.
-Use GPT-5.6 guidance as the baseline.
+
+## Select Model Guidance
+
+- Use the model explicitly specified by the user; otherwise, detect the current model from trusted runtime metadata, such as `PI_MODEL` when provided by the host.
+- Do not infer model identity from the assistant's self-description or substitute an application's configured model for the runtime model.
+- If the selected model is covered by a [model reference](#model-guides), read that guide first, accepting aliases or families only when the guide explicitly covers them.
+- If detection fails or no reference covers the selected model, use only the general principles below, without loading another model's guide or assuming its API capabilities.
 
 ## Establish the Contract
 
@@ -36,7 +42,7 @@ Use GPT-5.6 guidance as the baseline.
 - Define which claims need support, what evidence is sufficient, and how to report missing or conflicting evidence.
 - Add a finite retrieval budget for grounded workflows, and permit another search only when a required fact, source, or comparison is still missing.
 - Do not turn missing evidence into a factual negative.
-- When API settings are available, use `text.verbosity` for the default detail level and prompt prose only for task-specific length, structure, audience, and required content.
+- When the target API supports a verbosity setting, use it for the default detail level and prompt prose only for task-specific length, structure, audience, and required content.
 - For short answers, preserve the conclusion, necessary evidence, material caveats, and next action before trimming background or repetition.
 - Define tone through observable writing choices instead of broad labels such as “friendly” or “professional.”
 - Request a visible preamble only when a streaming, multi-step workflow benefits from progress feedback.
@@ -66,10 +72,12 @@ For create or revision requests, return the finished prompt first, then list sep
 
 When updating model references, consult the [official latest-model documentation](https://developers.openai.com/api/docs/guides/latest-model) to find current model, migration, and prompting guides.
 
-Read the [GPT-5.6 guide](references/gpt-5.6.md) first for every task.
-Only afterward, consult the [GPT-5.5 guide](references/gpt-5.5.md) for supplementary patterns such as retrieval budgets, personality, preambles, Structured Outputs, or phase handling, and never let it replace or override GPT-5.6 guidance.
-Read the [GPT-5.4 guide](references/gpt-5.4.md) only when the task targets GPT-5.4.
-Read the [GPT-6 Astra guide](references/gpt-6-astra.md) only when the task targets GPT-6 Astra.
+Available references:
 
-Use the target model guide for API compatibility, supported settings, and migration steps.
-For Programmatic Tool Calling, read the [routing and validation guidance](references/gpt-5.6.md#programmatic-tool-calling) and confirm support in the target model guide before adoption.
+- [GPT-5.4](references/gpt-5.4.md)
+- [GPT-5.5](references/gpt-5.5.md)
+- [GPT-5.6](references/gpt-5.6.md)
+- [GPT-6 Astra](references/gpt-6-astra.md)
+
+Use the selected guide for model-specific prompting, API compatibility, supported settings, and migration steps.
+For Programmatic Tool Calling, confirm support in the selected guide before consulting the [routing and validation guidance](references/gpt-5.6.md#programmatic-tool-calling).
