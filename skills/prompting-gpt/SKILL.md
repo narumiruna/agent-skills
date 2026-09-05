@@ -65,3 +65,4 @@ For create or revision requests, return the finished prompt first, then list sep
 Read the [GPT-5.6 guide](references/gpt-5.6.md) first for every task.
 Only afterward, consult the [GPT-5.5 guide](references/gpt-5.5.md) for supplementary patterns such as retrieval budgets, personality, preambles, Structured Outputs, or phase handling, and never let it replace or override GPT-5.6 guidance.
 Read the [GPT-5.4 guide](references/gpt-5.4.md) only when the task targets GPT-5.4.
+Read the [GPT-6 Astra guide](references/gpt-6-astra.md) only when the task targets GPT-6 Astra.
